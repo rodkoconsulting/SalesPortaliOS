@@ -7,21 +7,114 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C33A58A41CBD90E300644ED3 /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A58A21CBD90E300644ED3 /* Locksmith.swift */; };
+		C33A58A51CBD90E300644ED3 /* LocksmithRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A58A31CBD90E300644ED3 /* LocksmithRequest.swift */; };
+		C37F4A471CF34DAA00665ED0 /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A461CF34DAA00665ED0 /* License.swift */; };
+		C37F4A4F1CF352C300665ED0 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A4E1CF352C300665ED0 /* SyncService.swift */; };
+		C37F4A511CF3750400665ED0 /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A501CF3750400665ED0 /* SwiftSpinner.swift */; };
+		C37F4A541CF377A900665ED0 /* Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A531CF377A900665ED0 /* Inventory.swift */; };
+		C37F4A561CF377EA00665ED0 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A551CF377EA00665ED0 /* AccountService.swift */; };
+		C37F4A581CF3787F00665ED0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A571CF3787F00665ED0 /* Constants.swift */; };
+		C37F4A601CF390FF00665ED0 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A5F1CF390FF00665ED0 /* DatabaseService.swift */; };
+		C37F4A621CF3913C00665ED0 /* DatabaseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A611CF3913C00665ED0 /* DatabaseOperation.swift */; };
+		C37F4A641CF3986400665ED0 /* InventoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A631CF3986400665ED0 /* InventoryService.swift */; };
+		C37F4A661CF399B700665ED0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A651CF399B700665ED0 /* Extensions.swift */; };
+		C37F4A6A1CF39A8300665ED0 /* ColumnData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A691CF39A8300665ED0 /* ColumnData.swift */; };
+		C37F4A6C1CF39B5600665ED0 /* DataSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A6B1CF39B5600665ED0 /* DataSettings.swift */; };
+		C37F4A6E1CF39B8B00665ED0 /* GridSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A6D1CF39B8B00665ED0 /* GridSettings.swift */; };
+		C37F4A701CF39B9F00665ED0 /* GridFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A6F1CF39B9F00665ED0 /* GridFilter.swift */; };
+		C37F4A721CF39BAB00665ED0 /* ColumnSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A711CF39BAB00665ED0 /* ColumnSettings.swift */; };
+		C37F4A771CF3A17F00665ED0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C37F4A751CF3A0BB00665ED0 /* libsqlite3.tbd */; };
+		C37F4A791CF3A2CC00665ED0 /* XuniCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C37F4A781CF3A2CC00665ED0 /* XuniCoreKit.framework */; };
+		C37F4A7B1CF3A2E700665ED0 /* XuniFlexGridKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C37F4A7A1CF3A2E700665ED0 /* XuniFlexGridKit.framework */; };
+		C37F4A7D1CF3A47100665ED0 /* GridDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A7C1CF3A47100665ED0 /* GridDataSource.swift */; };
+		C37F4A7F1CF3A48100665ED0 /* GridColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A7E1CF3A48100665ED0 /* GridColumn.swift */; };
+		C37F4A811CF3A49A00665ED0 /* DataExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A801CF3A49A00665ED0 /* DataExport.swift */; };
+		C3AE55441CC175A1000859E7 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AE55431CC175A1000859E7 /* Account.swift */; };
+		C3AE55521CC18404000859E7 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE55491CC18404000859E7 /* FMDatabase.m */; };
+		C3AE55531CC18404000859E7 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE554B1CC18404000859E7 /* FMResultSet.m */; };
+		C3AE55541CC18404000859E7 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE554D1CC18404000859E7 /* FMDatabaseQueue.m */; };
+		C3AE55551CC18404000859E7 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE554F1CC18404000859E7 /* FMDatabaseAdditions.m */; };
+		C3AE55561CC18404000859E7 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE55511CC18404000859E7 /* FMDatabasePool.m */; };
+		C3EAC00F1CF8846A0054D031 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC00E1CF8846A0054D031 /* MainTabBarController.swift */; };
+		C3EAC0111CF8A8510054D031 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC0101CF8A8510054D031 /* InventoryViewController.swift */; };
+		C3EAC0131CF8A9610054D031 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC0121CF8A9610054D031 /* FiltersViewController.swift */; };
+		C3EAC0151CF8A9820054D031 /* FiltersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC0141CF8A9820054D031 /* FiltersTableViewCell.swift */; };
+		C3EAC0171CF8A9A00054D031 /* DateFiltersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC0161CF8A9A00054D031 /* DateFiltersTableViewCell.swift */; };
+		C3EAC0191CF8A9A80054D031 /* BoolFiltersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC0181CF8A9A80054D031 /* BoolFiltersTableViewCell.swift */; };
+		C3EAC01B1CF8B6C10054D031 /* ColumnsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC01A1CF8B6C10054D031 /* ColumnsViewController.swift */; };
+		C3EAC01D1CF8B6DC0054D031 /* ColumnsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC01C1CF8B6DC0054D031 /* ColumnsTableViewCell.swift */; };
+		C3EAC01F1CF8CB400054D031 /* InventorySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC01E1CF8CB3F0054D031 /* InventorySettingsViewController.swift */; };
+		C3EAC0211CF8CB9C0054D031 /* InventorySettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC0201CF8CB9C0054D031 /* InventorySettingsTableViewCell.swift */; };
 		C3ED0A8A1CBBECCF00B9520E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED0A891CBBECCF00B9520E /* AppDelegate.swift */; };
-		C3ED0A8C1CBBECCF00B9520E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED0A8B1CBBECCF00B9520E /* ViewController.swift */; };
 		C3ED0A8F1CBBECCF00B9520E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3ED0A8D1CBBECCF00B9520E /* Main.storyboard */; };
 		C3ED0A911CBBECCF00B9520E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3ED0A901CBBECCF00B9520E /* Assets.xcassets */; };
 		C3ED0A941CBBECCF00B9520E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3ED0A921CBBECCF00B9520E /* LaunchScreen.storyboard */; };
+		C3ED0A9D1CBBEE1500B9520E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED0A9C1CBBEE1500B9520E /* LoginViewController.swift */; };
+		C3ED0AA01CBC277D00B9520E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED0A9F1CBC277D00B9520E /* Credentials.swift */; };
+		C3ED0AA21CBC27E200B9520E /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED0AA11CBC27E200B9520E /* ErrorCode.swift */; };
+		C3ED0AAC1CBD8D7400B9520E /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED0AAB1CBD8D7400B9520E /* ApiService.swift */; };
+		C3ED0AAE1CBD8DEC00B9520E /* ApiOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED0AAD1CBD8DEC00B9520E /* ApiOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C33A58A21CBD90E300644ED3 /* Locksmith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locksmith.swift; sourceTree = "<group>"; };
+		C33A58A31CBD90E300644ED3 /* LocksmithRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithRequest.swift; sourceTree = "<group>"; };
+		C37F4A461CF34DAA00665ED0 /* License.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
+		C37F4A4E1CF352C300665ED0 /* SyncService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
+		C37F4A501CF3750400665ED0 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
+		C37F4A531CF377A900665ED0 /* Inventory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inventory.swift; sourceTree = "<group>"; };
+		C37F4A551CF377EA00665ED0 /* AccountService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		C37F4A571CF3787F00665ED0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C37F4A5F1CF390FF00665ED0 /* DatabaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		C37F4A611CF3913C00665ED0 /* DatabaseOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseOperation.swift; sourceTree = "<group>"; };
+		C37F4A631CF3986400665ED0 /* InventoryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryService.swift; sourceTree = "<group>"; };
+		C37F4A651CF399B700665ED0 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		C37F4A691CF39A8300665ED0 /* ColumnData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnData.swift; sourceTree = "<group>"; };
+		C37F4A6B1CF39B5600665ED0 /* DataSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSettings.swift; sourceTree = "<group>"; };
+		C37F4A6D1CF39B8B00665ED0 /* GridSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridSettings.swift; sourceTree = "<group>"; };
+		C37F4A6F1CF39B9F00665ED0 /* GridFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridFilter.swift; sourceTree = "<group>"; };
+		C37F4A711CF39BAB00665ED0 /* ColumnSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnSettings.swift; sourceTree = "<group>"; };
+		C37F4A751CF3A0BB00665ED0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		C37F4A781CF3A2CC00665ED0 /* XuniCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XuniCoreKit.framework; path = ../Xuni/iOS/Controls/XuniCoreKit.framework; sourceTree = "<group>"; };
+		C37F4A7A1CF3A2E700665ED0 /* XuniFlexGridKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XuniFlexGridKit.framework; path = ../Xuni/iOS/Controls/XuniFlexGridKit.framework; sourceTree = "<group>"; };
+		C37F4A7C1CF3A47100665ED0 /* GridDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridDataSource.swift; sourceTree = "<group>"; };
+		C37F4A7E1CF3A48100665ED0 /* GridColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridColumn.swift; sourceTree = "<group>"; };
+		C37F4A801CF3A49A00665ED0 /* DataExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExport.swift; sourceTree = "<group>"; };
+		C3AE55431CC175A1000859E7 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		C3AE55461CC18404000859E7 /* SalesPortal-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SalesPortal-Bridging-Header.h"; sourceTree = "<group>"; };
+		C3AE55471CC18404000859E7 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		C3AE55481CC18404000859E7 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		C3AE55491CC18404000859E7 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		C3AE554A1CC18404000859E7 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		C3AE554B1CC18404000859E7 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		C3AE554C1CC18404000859E7 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		C3AE554D1CC18404000859E7 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		C3AE554E1CC18404000859E7 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		C3AE554F1CC18404000859E7 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		C3AE55501CC18404000859E7 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		C3AE55511CC18404000859E7 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		C3EAC00E1CF8846A0054D031 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		C3EAC0101CF8A8510054D031 /* InventoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
+		C3EAC0121CF8A9610054D031 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		C3EAC0141CF8A9820054D031 /* FiltersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersTableViewCell.swift; sourceTree = "<group>"; };
+		C3EAC0161CF8A9A00054D031 /* DateFiltersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFiltersTableViewCell.swift; sourceTree = "<group>"; };
+		C3EAC0181CF8A9A80054D031 /* BoolFiltersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolFiltersTableViewCell.swift; sourceTree = "<group>"; };
+		C3EAC01A1CF8B6C10054D031 /* ColumnsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnsViewController.swift; sourceTree = "<group>"; };
+		C3EAC01C1CF8B6DC0054D031 /* ColumnsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnsTableViewCell.swift; sourceTree = "<group>"; };
+		C3EAC01E1CF8CB3F0054D031 /* InventorySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventorySettingsViewController.swift; sourceTree = "<group>"; };
+		C3EAC0201CF8CB9C0054D031 /* InventorySettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventorySettingsTableViewCell.swift; sourceTree = "<group>"; };
 		C3ED0A861CBBECCF00B9520E /* SalesPortal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalesPortal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3ED0A891CBBECCF00B9520E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C3ED0A8B1CBBECCF00B9520E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C3ED0A8E1CBBECCF00B9520E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C3ED0A901CBBECCF00B9520E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3ED0A931CBBECCF00B9520E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C3ED0A951CBBECCF00B9520E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3ED0A9C1CBBEE1500B9520E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C3ED0A9F1CBC277D00B9520E /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		C3ED0AA11CBC27E200B9520E /* ErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
+		C3ED0AAB1CBD8D7400B9520E /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		C3ED0AAD1CBD8DEC00B9520E /* ApiOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,15 +122,49 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C37F4A7B1CF3A2E700665ED0 /* XuniFlexGridKit.framework in Frameworks */,
+				C37F4A791CF3A2CC00665ED0 /* XuniCoreKit.framework in Frameworks */,
+				C37F4A771CF3A17F00665ED0 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C37F4A521CF3755D00665ED0 /* Locksmith */ = {
+			isa = PBXGroup;
+			children = (
+				C33A58A21CBD90E300644ED3 /* Locksmith.swift */,
+				C33A58A31CBD90E300644ED3 /* LocksmithRequest.swift */,
+			);
+			name = Locksmith;
+			sourceTree = "<group>";
+		};
+		C3AE55451CC183CE000859E7 /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				C3AE55471CC18404000859E7 /* FMDB.h */,
+				C3AE55481CC18404000859E7 /* FMDatabase.h */,
+				C3AE55491CC18404000859E7 /* FMDatabase.m */,
+				C3AE554A1CC18404000859E7 /* FMResultSet.h */,
+				C3AE554B1CC18404000859E7 /* FMResultSet.m */,
+				C3AE554C1CC18404000859E7 /* FMDatabaseQueue.h */,
+				C3AE554D1CC18404000859E7 /* FMDatabaseQueue.m */,
+				C3AE554E1CC18404000859E7 /* FMDatabaseAdditions.h */,
+				C3AE554F1CC18404000859E7 /* FMDatabaseAdditions.m */,
+				C3AE55501CC18404000859E7 /* FMDatabasePool.h */,
+				C3AE55511CC18404000859E7 /* FMDatabasePool.m */,
+				C3AE55461CC18404000859E7 /* SalesPortal-Bridging-Header.h */,
+			);
+			name = fmdb;
+			sourceTree = "<group>";
+		};
 		C3ED0A7D1CBBECCF00B9520E = {
 			isa = PBXGroup;
 			children = (
+				C37F4A7A1CF3A2E700665ED0 /* XuniFlexGridKit.framework */,
+				C37F4A781CF3A2CC00665ED0 /* XuniCoreKit.framework */,
+				C37F4A751CF3A0BB00665ED0 /* libsqlite3.tbd */,
 				C3ED0A881CBBECCF00B9520E /* SalesPortal */,
 				C3ED0A871CBBECCF00B9520E /* Products */,
 			);
@@ -54,14 +181,65 @@
 		C3ED0A881CBBECCF00B9520E /* SalesPortal */ = {
 			isa = PBXGroup;
 			children = (
+				C37F4A461CF34DAA00665ED0 /* License.swift */,
+				C3ED0A9E1CBC276100B9520E /* Models */,
+				C3ED0A9B1CBBEDD600B9520E /* Controllers */,
 				C3ED0A891CBBECCF00B9520E /* AppDelegate.swift */,
-				C3ED0A8B1CBBECCF00B9520E /* ViewController.swift */,
 				C3ED0A8D1CBBECCF00B9520E /* Main.storyboard */,
 				C3ED0A901CBBECCF00B9520E /* Assets.xcassets */,
 				C3ED0A921CBBECCF00B9520E /* LaunchScreen.storyboard */,
 				C3ED0A951CBBECCF00B9520E /* Info.plist */,
 			);
 			path = SalesPortal;
+			sourceTree = "<group>";
+		};
+		C3ED0A9B1CBBEDD600B9520E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C3EAC0201CF8CB9C0054D031 /* InventorySettingsTableViewCell.swift */,
+				C3EAC01E1CF8CB3F0054D031 /* InventorySettingsViewController.swift */,
+				C3EAC01C1CF8B6DC0054D031 /* ColumnsTableViewCell.swift */,
+				C3EAC01A1CF8B6C10054D031 /* ColumnsViewController.swift */,
+				C3EAC0181CF8A9A80054D031 /* BoolFiltersTableViewCell.swift */,
+				C3EAC0161CF8A9A00054D031 /* DateFiltersTableViewCell.swift */,
+				C3EAC0141CF8A9820054D031 /* FiltersTableViewCell.swift */,
+				C3EAC0121CF8A9610054D031 /* FiltersViewController.swift */,
+				C3EAC0101CF8A8510054D031 /* InventoryViewController.swift */,
+				C3ED0A9C1CBBEE1500B9520E /* LoginViewController.swift */,
+				C3EAC00E1CF8846A0054D031 /* MainTabBarController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C3ED0A9E1CBC276100B9520E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C37F4A521CF3755D00665ED0 /* Locksmith */,
+				C3AE55451CC183CE000859E7 /* fmdb */,
+				C37F4A501CF3750400665ED0 /* SwiftSpinner.swift */,
+				C3ED0AA11CBC27E200B9520E /* ErrorCode.swift */,
+				C3ED0AAD1CBD8DEC00B9520E /* ApiOperation.swift */,
+				C3ED0AAB1CBD8D7400B9520E /* ApiService.swift */,
+				C3AE55431CC175A1000859E7 /* Account.swift */,
+				C37F4A551CF377EA00665ED0 /* AccountService.swift */,
+				C37F4A531CF377A900665ED0 /* Inventory.swift */,
+				C37F4A631CF3986400665ED0 /* InventoryService.swift */,
+				C37F4A611CF3913C00665ED0 /* DatabaseOperation.swift */,
+				C37F4A5F1CF390FF00665ED0 /* DatabaseService.swift */,
+				C37F4A4E1CF352C300665ED0 /* SyncService.swift */,
+				C3ED0A9F1CBC277D00B9520E /* Credentials.swift */,
+				C37F4A7C1CF3A47100665ED0 /* GridDataSource.swift */,
+				C37F4A7E1CF3A48100665ED0 /* GridColumn.swift */,
+				C37F4A691CF39A8300665ED0 /* ColumnData.swift */,
+				C37F4A6B1CF39B5600665ED0 /* DataSettings.swift */,
+				C37F4A651CF399B700665ED0 /* Extensions.swift */,
+				C37F4A6D1CF39B8B00665ED0 /* GridSettings.swift */,
+				C37F4A6F1CF39B9F00665ED0 /* GridFilter.swift */,
+				C37F4A711CF39BAB00665ED0 /* ColumnSettings.swift */,
+				C37F4A571CF3787F00665ED0 /* Constants.swift */,
+				C37F4A801CF3A49A00665ED0 /* DataExport.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +313,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3ED0A8C1CBBECCF00B9520E /* ViewController.swift in Sources */,
+				C33A58A51CBD90E300644ED3 /* LocksmithRequest.swift in Sources */,
+				C3ED0AAE1CBD8DEC00B9520E /* ApiOperation.swift in Sources */,
+				C3EAC00F1CF8846A0054D031 /* MainTabBarController.swift in Sources */,
+				C3EAC0191CF8A9A80054D031 /* BoolFiltersTableViewCell.swift in Sources */,
+				C37F4A721CF39BAB00665ED0 /* ColumnSettings.swift in Sources */,
+				C37F4A471CF34DAA00665ED0 /* License.swift in Sources */,
+				C37F4A701CF39B9F00665ED0 /* GridFilter.swift in Sources */,
+				C3EAC01F1CF8CB400054D031 /* InventorySettingsViewController.swift in Sources */,
+				C3ED0AA01CBC277D00B9520E /* Credentials.swift in Sources */,
+				C37F4A6E1CF39B8B00665ED0 /* GridSettings.swift in Sources */,
+				C37F4A811CF3A49A00665ED0 /* DataExport.swift in Sources */,
+				C3EAC0131CF8A9610054D031 /* FiltersViewController.swift in Sources */,
+				C3AE55521CC18404000859E7 /* FMDatabase.m in Sources */,
+				C3ED0A9D1CBBEE1500B9520E /* LoginViewController.swift in Sources */,
+				C37F4A511CF3750400665ED0 /* SwiftSpinner.swift in Sources */,
+				C3EAC0111CF8A8510054D031 /* InventoryViewController.swift in Sources */,
+				C3AE55541CC18404000859E7 /* FMDatabaseQueue.m in Sources */,
 				C3ED0A8A1CBBECCF00B9520E /* AppDelegate.swift in Sources */,
+				C37F4A6C1CF39B5600665ED0 /* DataSettings.swift in Sources */,
+				C37F4A7F1CF3A48100665ED0 /* GridColumn.swift in Sources */,
+				C3EAC01B1CF8B6C10054D031 /* ColumnsViewController.swift in Sources */,
+				C3ED0AAC1CBD8D7400B9520E /* ApiService.swift in Sources */,
+				C37F4A561CF377EA00665ED0 /* AccountService.swift in Sources */,
+				C3AE55551CC18404000859E7 /* FMDatabaseAdditions.m in Sources */,
+				C37F4A4F1CF352C300665ED0 /* SyncService.swift in Sources */,
+				C37F4A641CF3986400665ED0 /* InventoryService.swift in Sources */,
+				C37F4A541CF377A900665ED0 /* Inventory.swift in Sources */,
+				C3AE55441CC175A1000859E7 /* Account.swift in Sources */,
+				C37F4A6A1CF39A8300665ED0 /* ColumnData.swift in Sources */,
+				C37F4A601CF390FF00665ED0 /* DatabaseService.swift in Sources */,
+				C37F4A621CF3913C00665ED0 /* DatabaseOperation.swift in Sources */,
+				C37F4A581CF3787F00665ED0 /* Constants.swift in Sources */,
+				C3EAC0211CF8CB9C0054D031 /* InventorySettingsTableViewCell.swift in Sources */,
+				C3EAC0171CF8A9A00054D031 /* DateFiltersTableViewCell.swift in Sources */,
+				C37F4A7D1CF3A47100665ED0 /* GridDataSource.swift in Sources */,
+				C3EAC01D1CF8B6DC0054D031 /* ColumnsTableViewCell.swift in Sources */,
+				C37F4A661CF399B700665ED0 /* Extensions.swift in Sources */,
+				C3AE55531CC18404000859E7 /* FMResultSet.m in Sources */,
+				C3AE55561CC18404000859E7 /* FMDatabasePool.m in Sources */,
+				C3EAC0151CF8A9820054D031 /* FiltersTableViewCell.swift in Sources */,
+				C3ED0AA21CBC27E200B9520E /* ErrorCode.swift in Sources */,
+				C33A58A41CBD90E300644ED3 /* Locksmith.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +403,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -231,6 +450,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -251,10 +471,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = /Users/administrator/Documents/Xuni/iOS/Controls;
 				INFOPLIST_FILE = SalesPortal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.polanerselections.SalesPortal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SalesPortal/SalesPortal-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -262,10 +487,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = /Users/administrator/Documents/Xuni/iOS/Controls;
 				INFOPLIST_FILE = SalesPortal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.polanerselections.SalesPortal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SalesPortal/SalesPortal-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -288,6 +517,7 @@
 				C3ED0A9A1CBBECCF00B9520E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

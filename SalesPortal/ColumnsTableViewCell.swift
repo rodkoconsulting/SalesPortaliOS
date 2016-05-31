@@ -1,0 +1,46 @@
+//
+//  ColumnsTableViewCell.swift
+//  InventoryPortal
+//
+//  Created by administrator on 10/19/15.
+//  Copyright © 2015 Polaner Selections. All rights reserved.
+//
+
+import UIKit
+
+protocol ColumnCellDelegate : class {
+    func didChangeSwitchState(sender: ColumnsTableViewCell, isOn: Bool)
+}
+
+class ColumnsTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var columnsLabel: UILabel!
+    @IBOutlet weak var columnsSwitch: UISwitch!
+    @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak var filterImage: UIImageView!
+    
+    @IBAction func switchChanged(sender: UISwitch) {
+        self.switchDelegate?.didChangeSwitchState(self, isOn:columnsSwitch.on)
+        setStateLabel()
+    }
+    
+    
+    
+    weak var switchDelegate: ColumnCellDelegate?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+    func setStateLabel() {
+        stateLabel.text = columnsSwitch.on ? "Visible" : "Hidden"
+        stateLabel.textColor = columnsSwitch.on ? UIColor.blackColor() : UIColor.redColor()
+    }
+}
