@@ -9,21 +9,25 @@
 import UIKit
 import XuniFlexGridKit
 
-protocol ColumnsDelegate {
-    func changedFilters()
+protocol ColumnsDelegate: class {
+    func changedColumnFilters()
 }
 
 class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ColumnCellDelegate, FiltersDelegate  {
 
     @IBOutlet weak var columnsTableView: UITableView!
     
+    @IBAction func unwindFromColumns(sender: AnyObject) {
+        self.performSegueWithIdentifier("unwindFromColumns", sender: self)
+    }
     lazy var longPress: UILongPressGestureRecognizer = {
         let recognizer = UILongPressGestureRecognizer()
         return recognizer
     }()
     
-    var columnSettings : FlexColumnCollection?
-    var columnsDelegate: ColumnsDelegate?
+    weak var columnSettings : FlexColumnCollection?
+    weak var columnsDelegate: ColumnsDelegate?
+    var module: Module?
     //var gridFilter: [ColumnFilters]?
     //var filterSettings :
     
@@ -45,16 +49,18 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showFiltersViewController" {
-            guard let index = sender as? NSIndexPath else {
+            guard let index = sender as? NSIndexPath,
+                let column =  columnSettings?.objectAtIndex(UInt(index.row)) as? GridColumn else {
                 return
             }
             //let index = (columnsTableView.indexPathForSelectedRow)?.row
             //let column =  columnSettings?.objectAtIndex(UInt(index!)) as? GridColumn
-            let column =  columnSettings?.objectAtIndex(UInt(index.row)) as? GridColumn
-            let columnFilters = column!.columnFilters
+            
+            let columnFilters = column.columnFilters
             let filtersViewController = segue.destinationViewController as! FiltersViewController
             filtersViewController.filterDelegate = self
             filtersViewController.columnFilters = columnFilters
+            filtersViewController.columnIndex = index.row
         }
     }
     
@@ -93,18 +99,20 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         guard isFilterChanged else {
             return
         }
-        changedFilters()
-        columnsTableView.reloadData()
+        changedAllFilters()
 
     }
 
     @IBAction func defaultView(sender: AnyObject) {
+        guard let module = module else {
+            return
+        }
         columnSettings?.removeAllObjects()
-        let columns = GridColumn.generateColumns(nil)
+        let columns = GridColumn.generateColumns(nil, module: module)
         for column in columns {
             columnSettings?.addObject(column)
         }
-        columnsTableView.reloadData()
+        changedAllFilters()
     }
     
     func longPressGestureRecognized(gesture: UILongPressGestureRecognizer) {
@@ -285,23 +293,20 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         //columnsTableView.reloadData()
     }
 
-    func changedFilters() {
-        columnsDelegate?.changedFilters()
-        guard let indexPath = columnsTableView.indexPathForSelectedRow,
-            let column =  columnSettings?.objectAtIndex(UInt(indexPath.row)) as? GridColumn,
-            let cell = columnsTableView.cellForRowAtIndexPath(indexPath) as? ColumnsTableViewCell else {
+    func changedFilters(columnIndex columnIndex: Int) {
+        let columnIndexPath = NSIndexPath(forRow: columnIndex, inSection: 0)
+        columnsDelegate?.changedColumnFilters()
+        guard let column =  columnSettings?.objectAtIndex(UInt(columnIndex)) as? GridColumn,
+            let cell = columnsTableView.cellForRowAtIndexPath(columnIndexPath) as? ColumnsTableViewCell else {
                 return
         }
         cell.filterImage.hidden = column.columnFilters.filterList.count == 0
+        columnsTableView.reloadData()
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func changedAllFilters() {
+        columnsDelegate?.changedColumnFilters()
+        columnsTableView.reloadData()
     }
-    */
-
 }
+

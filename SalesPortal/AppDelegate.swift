@@ -76,14 +76,28 @@
         
         func saveUserDefaults() {
             
-            //if let viewController = getVisibleViewController(nil) {
-                //if viewController.isKindOfClass(DataGridViewController) {
-                    //if let myViewController = viewController as? DataGridViewController {
-                    //    myViewController.saveUserDefaults()
-                    //}
-                //}
-            //}
+            if let viewController = getVisibleViewController(nil) {
+                if viewController.isKindOfClass(InventoryViewController) {
+                    if let myViewController = viewController as? InventoryViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.Inventory)
+                    }
+                } else if viewController.isKindOfClass(AccountsViewController) {
+                    if let myViewController = viewController as? AccountsViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.Accounts)
+                    }
+                } else if viewController.isKindOfClass(OrderHeaderViewController) {
+                    if let myViewController = viewController as? OrderHeaderViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.OrderHeader)
+                    }
+                } else if viewController.isKindOfClass(OrderInventoryViewController) {
+                    if let myViewController = viewController as? OrderInventoryViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.OrderInventory)
+                    }
+                } else if viewController.isKindOfClass(OrderHistoryViewController) {
+                    if let myViewController = viewController as? OrderHistoryViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.OrderHistory)
+                    }
+                }
+            }
         }
-        
     }
-    

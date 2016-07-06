@@ -13,8 +13,8 @@ let kOPERATORPICKERTAG = 0
 let kCONDITIONPICKERTAG = 1
 let kBOOLPICKERTAG = 2
 
-protocol FiltersDelegate {
-    func changedFilters()
+protocol FiltersDelegate: class {
+    func changedFilters(columnIndex columnIndex: Int)
 }
 
 class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, DatePickerDelegate {
@@ -24,24 +24,25 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var filtersTableView: UITableView!
     
     
-    var columnFilters: ColumnFilters?
+    weak var columnFilters: ColumnFilters?
+    var columnIndex: Int?
     var rowBeingEdited : Int? = nil
-    var filterDelegate: FiltersDelegate?
+    weak var filterDelegate: FiltersDelegate?
    
     
     @IBAction func addFilter(sender: AnyObject) {
-        guard let columnFilters = columnFilters else {
+        guard let columnFilters = columnFilters,
+                let columnIndex = columnIndex else {
             return
         }
-        filterDelegate?.changedFilters()
         let newFilter = ColumnFilter(condition: columnFilters.conditionList.first!)
         columnFilters.filterList.append(newFilter)
         if let index = columnFilters.filterList.indexOf(newFilter) {
             let indexPath = NSIndexPath(forRow: index, inSection: 0)
             filtersTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
-        
         filtersTableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+        filterDelegate?.changedFilters(columnIndex: columnIndex)
     }
 
     @IBAction func dismiss(sender: AnyObject) {
@@ -196,21 +197,25 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 if let filter = columnFilters?.filterList[indexPath.row] {
                     removeFilter(filter)
                 }
-                filterDelegate?.changedFilters()
                 filtersTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                 filtersTableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+                guard let columnIndex = columnIndex else {
+                        return
+                }
+                filterDelegate?.changedFilters(columnIndex: columnIndex)
                 //filtersTableView.reloadData()
             }
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        guard let myColumnFilters = columnFilters else {
+        guard let myColumnFilters = columnFilters,
+            let columnIndex = columnIndex else {
             return
         }
         let row = textField.tag
-        filterDelegate?.changedFilters()
         myColumnFilters.filterList[row].value = textField.text ?? ""
         rowBeingEdited = nil
+        filterDelegate?.changedFilters(columnIndex: columnIndex)
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -270,8 +275,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        guard let columnFilters = columnFilters else {
-            return
+        guard let columnFilters = columnFilters,
+            let columnIndex = columnIndex else {
+                return
         }
         let rowCount = columnFilters.filterList.count
         if isPicker(pickerView.tag, constantTag: kCONDITIONPICKERTAG, rowCount: rowCount) {
@@ -286,7 +292,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             let selectedIndex = pickerView.tag - rowCount * kBOOLPICKERTAG
             columnFilters.filterList[selectedIndex].value = Constants.boolList[row]
         }
-        filterDelegate?.changedFilters()
+        filterDelegate?.changedFilters(columnIndex: columnIndex)
     }
     
     func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -321,12 +327,13 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func didChangePickerDate(sender sender: UIDatePicker, date: String) {
-        guard let myColumnFilters = columnFilters else {
-            return
+        guard let myColumnFilters = columnFilters,
+            let columnIndex = columnIndex else {
+                return
         }
         let row = sender.tag
-        filterDelegate?.changedFilters()
         myColumnFilters.filterList[row].value = date ?? ""
+        filterDelegate?.changedFilters(columnIndex: columnIndex)
     }
     
     func removeFilter(filter: ColumnFilter) {

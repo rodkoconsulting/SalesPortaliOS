@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol LoginViewControllerDelegate  {
-    func didLogin()
-}
-
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var userNameField: UITextField!
@@ -19,28 +15,44 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    //var isEntryController = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.stopAnimating()
     }
     
     override func viewDidAppear(animated: Bool) {
-        checkCredentials()
+        //checkCredentials()
+        userNameField.text = ""
+        passwordField.text = ""
     }
     
-    func checkCredentials() {
-        guard Credentials.getCredentials() != nil else {
-            return
-        }
-        //SwiftSpinner.show("Loading", animated: false) {
-        //    _ in
-            self.performSegueWithIdentifier("showMainTabBarController", sender: self)
-        //}
-    }
+   // func checkCredentials() {
+   //     guard Credentials.getCredentials() != nil else {
+   //         return
+   //     }
+        //performSegue()
+   //     dismissViewControllerAnimated(true, completion: nil)
+   // }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+    //override func didReceiveMemoryWarning() {
+    //    super.didReceiveMemoryWarning()
+   // }
+    
+    func performSegue() {
+        //if isEntryController {
+    //        SwiftSpinner.show("Loading...", animated: true) {
+    //            _ in
+    //            dispatch_async(dispatch_get_main_queue()) {
+    //                self.performSegueWithIdentifier("showMainTabBarController", sender: self)
+    //            }
+    //        }
+    //    } else {
+    //        dismissViewControllerAnimated(true, completion: nil)
+    //    }
+        self.performSegueWithIdentifier("unwindFromLogin", sender: self)
+   }
     
     @IBAction func loginButtonPressed(sender: AnyObject) {
         activityIndicator.startAnimating()
@@ -52,6 +64,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             (let responseDict, errorCompletion) in
             dispatch_async(dispatch_get_main_queue()) {
                 self.activityIndicator.stopAnimating()
+                }
                 guard let userDict = responseDict else {
                     guard let errorCode = errorCompletion else {
                         self.sendAlert(ErrorCode.UnknownError)
@@ -61,18 +74,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 credentials.saveCredentials(userDict)
-                //SwiftSpinner.show("Loading", animated: false) {
-                //    _ in
-                    self.performSegueWithIdentifier("showMainTabBarController", sender: self)
-                //}
-            }
+                //self.dismissViewControllerAnimated(true, completion: nil)
+                self.performSegue()
+           
         }
     }
     
-    @IBAction func unwindToLogin(sender: UIStoryboardSegue) {
-        userNameField.text = ""
-        passwordField.text = ""
-    }
+    //@IBAction func unwindToLogin(sender: UIStoryboardSegue) {
+    //    userNameField.text = ""
+    //    passwordField.text = ""
+    //}
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let length = textField.text!.characters.count - range.length + string.characters.count

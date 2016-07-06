@@ -16,7 +16,7 @@ class InventorySettingsViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var settingsTableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
-    var dataSettings: InventoryDataSettings?
+    weak var dataSettings: InventoryDataSettings?
     
     var settingLabels = [String]()
     //var settingPickers = [UIPickerView]()

@@ -16,6 +16,7 @@ struct DataExport {
         guard flexGrid.rows.count > 0 else {
             return nil
         }
+        
         var rowStart = copySelection ? flexGrid.selection.row : 0
         var rowEnd = copySelection ? flexGrid.selection.row2 : Int32(flexGrid.rows.count - 1)
         var columnStart = copySelection ? flexGrid.selection.col : 0

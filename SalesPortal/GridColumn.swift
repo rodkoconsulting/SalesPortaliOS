@@ -13,6 +13,7 @@ class GridColumn: FlexColumn {
     
     var alignment: NSTextAlignment?
     var autosize: Bool
+    var isSortAscending: Bool?
     var columnFilters: ColumnFilters
     
     init(myName: String, myHeader: String, myFilterType: FilterType?){
@@ -41,13 +42,18 @@ class GridColumn: FlexColumn {
             gridColumn.minWidth = Int32(minwidth)
         }
         if let alignment = columnDict[kAlignment] as? String where alignment == "right" {
-            //if alignment == "right" {
-                //gridColumn.alignment = NSTextAlignment.Right
                 gridColumn.dataType = XuniDataType.Number
-           //}
         }
-        if let sortMemberPath = columnDict[kSort] as? String {
-            gridColumn.sortMemberPath = sortMemberPath
+        //if let sortMemberPath = columnDict[kSort] as? String {
+        //    gridColumn.sortMemberPath = sortMemberPath
+        //}
+        if let sortAscend = columnDict[kSortAcsend] as? Bool {
+            gridColumn.isSortAscending = sortAscend
+        }
+        if let isReadOnly = columnDict[kReadOnly] as? Bool {
+            gridColumn.isReadOnly = isReadOnly
+        } else {
+            gridColumn.isReadOnly = true
         }
         guard let myColumnSetting = columnSettings else {
             return gridColumn
@@ -61,8 +67,8 @@ class GridColumn: FlexColumn {
         return gridColumn
     }
     
-    class func generateColumns(columnSettings: [ColumnSettings]?, columnType: ColumnType) -> [GridColumn] {
-        let columnData = columnType.getColumnData()
+    class func generateColumns(columnSettings: [ColumnSettings]?, module: Module) -> [GridColumn] {
+        let columnData = module.columnData
         var gridColumns = [GridColumn]()
         
         guard columnSettings != nil && columnSettings!.count == columnData.count else {

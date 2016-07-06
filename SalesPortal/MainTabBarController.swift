@@ -13,13 +13,14 @@ class MainTabBarController: UITabBarController {
     var inventory: NSMutableArray? = [Inventory(queryResult: nil, poDict: nil)]
     var inventoryDataSettings: InventoryDataSettings = InventoryDataSettings()
     
-    var account: NSMutableArray? = [Account(queryResult: nil)]
+    var accounts: NSMutableArray? = [Account(queryResult: nil)]
     
-    override func viewDidLoad() {
-        SwiftSpinner.show("Loading", animated: false) {
-               _ in
-        super.viewDidLoad()
-        }
-    }
+    //override func viewDidLoad() {
+        //SwiftSpinner.show("Loading", animated: false) {
+        //       _ in
+   //     super.viewDidLoad()
+        //SwiftSpinner.hide()
+        //}
+   // }
     
 }

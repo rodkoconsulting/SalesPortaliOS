@@ -41,7 +41,10 @@ class ApiOperation : NSObject, NSURLSessionDelegate {
             }
             switch(httpResponse.statusCode){
             case 200:
-                let jsonDictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: [])) as? [String: AnyObject]
+                guard let jsonDictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: [])) as? [String: AnyObject] else {
+                    completion(data: nil, error: ErrorCode.ServerError)
+                    return
+                }
                 completion(data: jsonDictionary, error: nil)
             case 401:
                 completion(data: nil, error: ErrorCode.HttpError(statusCode: 401))

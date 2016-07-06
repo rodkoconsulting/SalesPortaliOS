@@ -5,17 +5,24 @@ import Foundation
 
 class InventoryService: SyncService, SyncServiceType {
     typealias poDictType = [(onPo: Double, poEta: String, poDate: String)]
+    let date: String
     
-    lazy var queryDb: NSMutableArray? = {
+    init(module: Module, apiCredentials: [String : String], date: String) {
+        self.date = date
+        super.init(module: module, apiCredentials: apiCredentials)
+    }
+    
+    lazy var queryDb: (gridData:NSMutableArray?, searchData: [[String : AnyObject]]?) = {
         [unowned self] in
         guard let repState = self.apiCredentials["state"] else {
-            return nil
+            return (nil, nil)
         }
         guard repState.characters.count > 0 else {
-            return nil
+            return (nil, nil)
         }
         let dB = FMDatabase(path: Constants.databasePath)
         let inventoryList = NSMutableArray()
+        var inventorySearch = [[String : AnyObject]]()
         var poList: [InventoryPo] = []
         var poDict: [String:poDictType]
         //let state = repState.characters.last!
@@ -34,11 +41,13 @@ class InventoryService: SyncService, SyncServiceType {
             let results:FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsInArray: nil)
             while results?.next() == true {
                 let inventory = Inventory(queryResult: results!, poDict: poDict)
+                let inventoryDict = ["DisplayText":inventory.itemDescription, "DisplaySubText": inventory.itemCode]
                 inventoryList.addObject(inventory)
+                inventorySearch.append(inventoryDict)
             }
             dB.close()
         }
-        return inventoryList.count > 0 ? inventoryList : nil
+        return inventoryList.count > 0 ? (inventoryList, inventorySearch) : (nil, nil)
     }()
     
     func poListToDict(poList: [InventoryPo]) -> [String: poDictType] {
@@ -58,7 +67,7 @@ class InventoryService: SyncService, SyncServiceType {
 
     
     func getApi(timeSyncDict: [String : String], completion: (data: InvSync?, error: ErrorCode?) -> Void) {
-        let apiService = ApiService(apiString: apiInit!.rawValue)
+        let apiService = ApiService(apiString: module.apiInit)
         apiService.getApiInv(timeSyncDict, credentialDict: self.apiCredentials){
             (let apiDict, errorCode) in
             guard let inventoryDict = apiDict,

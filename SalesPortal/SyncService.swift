@@ -1,40 +1,16 @@
 
 import Foundation
 
-let inventoryTables = ["qty":"INV_QTY","price":"INV_PRICE","desc":"INV_DESC","po":"INV_PO"]
-let accountTables = ["list":"ACCOUNT_LIST"]
 
-enum ApiInit: String {
-    case Inventory = "inventory/"
-    case Account = "account/"
-}
 
-enum SyncTable: String {
-    case Inventory = "INV"
-    case Account = "ACCOUNT"
-    
-    var tables : [String : String] {
-        get {
-            switch self {
-            case Inventory:
-                return inventoryTables
-            case Account:
-                return accountTables
-            }
-        }
-    }
-}
 
 protocol SyncServiceBaseType {
-    var apiInit: ApiInit? { get }
-    var tableNames: [String : String] { get }
-    var syncTable: SyncTable? { get }
+    var module: Module { get }
     var apiCredentials: [String : String] { get }
-    var date: String { get }
 }
 
 protocol SyncServiceType {
-    var queryDb: NSMutableArray? { get }
+    var queryDb: (gridData: NSMutableArray?, searchData: [[String : AnyObject]]?) { get }
 }
 
 protocol SyncRows {
@@ -82,24 +58,18 @@ struct Sync<T: SyncRows> {
 
 class SyncService : SyncServiceBaseType {
     
-    let apiInit: ApiInit?
-    let syncTable: SyncTable?
-    let tableNames: [String : String]
+    let module: Module
     let apiCredentials: [String : String]
-    let date: String
     
-    init(apiInit: ApiInit, syncTable: SyncTable, tableNames: [String : String], apiCredentials: [String : String], date: String) {
-        self.apiInit = apiInit
-        self.syncTable = syncTable
-        self.tableNames = tableNames
+    init(module: Module, apiCredentials: [String : String]) {
+        self.module = module
         self.apiCredentials = apiCredentials
-        self.date = date
     }
     
     func updateLastSync() {
         let dB = FMDatabase(path: Constants.databasePath)
         if dB.open() {
-            let sqlInsert = "UPDATE LAST_SYNC SET last_sync='\(NSDate().getDateTimeString())' WHERE table_name='\(syncTable!.rawValue)'"
+            let sqlInsert = "UPDATE LAST_SYNC SET last_sync='\(NSDate().getDateTimeString())' WHERE table_name='\(module.moduleTable)'"
             dB.executeUpdate(sqlInsert, withArgumentsInArray: nil)
             dB.close()
         }
@@ -109,7 +79,7 @@ class SyncService : SyncServiceBaseType {
         let dB = FMDatabase(path: Constants.databasePath)
         var lastSyncResult: String?
         if dB.open() {
-            let sqlQuery = "SELECT LAST_SYNC FROM LAST_SYNC WHERE table_name='\(self.syncTable!.rawValue)'"
+            let sqlQuery = "SELECT LAST_SYNC FROM LAST_SYNC WHERE table_name='\(self.module.moduleTable)'"
             let results:FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsInArray: nil)
             if results?.next() == true {
                 lastSyncResult = results?.stringForColumn("last_sync")
@@ -125,7 +95,7 @@ class SyncService : SyncServiceBaseType {
         let dB = FMDatabase(path: Constants.databasePath)
         var lastSyncs: [String : String] = [:]
         if dB.open() {
-            for (name, table) in tableNames {
+            for (name, table) in module.syncTable {
                 let qryLastSync = "SELECT last_sync FROM LAST_SYNC WHERE table_name = '\(table)'"
                 let results:FMResultSet? = dB.executeQuery(qryLastSync, withArgumentsInArray: nil)
                 if results?.next() == true {

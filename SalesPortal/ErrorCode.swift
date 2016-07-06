@@ -8,6 +8,7 @@ enum ErrorCode: CustomStringConvertible, ErrorType {
     case ServerError
     case UnknownError
     case NoCredentials
+    case NoQuantity(itemCode: String)
     
     var description: String {
         switch self {
@@ -28,7 +29,10 @@ enum ErrorCode: CustomStringConvertible, ErrorType {
             return "Unknown error encountered"
         case .NoCredentials:
             return "Invalid username / password"
+        case .NoQuantity(let itemCode):
+            return "\(itemCode): Insufficient quantity available"
         }
+        
 
     }
     

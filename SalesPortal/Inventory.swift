@@ -47,7 +47,7 @@ import Foundation
                     let onBo = self.onBo else {
                         return nil
                 }
-                return "(ITEM_CODE, QTY_AVAIL, QTY_OH, ON_SO, ON_MO, ON_BO) VALUES ('\(itemCode)', \(quantityAvailable), \(quantityOnHand), \(onSo), \(onMo), \(onBo))"
+                return "('\(itemCode)', \(quantityAvailable), \(quantityOnHand), \(onSo), \(onMo), \(onBo))"
         }()
     }
     
@@ -86,7 +86,7 @@ import Foundation
                     else {
                         return nil
                 }
-                return "(ITEM_CODE, PO_NO, ON_PO, PO_ETA, PO_DATE) VALUES ('\(itemCode)', '\(poNo)', \(onPo), \(eta), \(poDate))"
+                return "('\(itemCode)', '\(poNo)', \(onPo), \(eta), \(poDate))"
         }()
     }
     
@@ -212,7 +212,7 @@ import Foundation
                     let scoreOther = self.scoreOther else {
                         return nil
                 }
-                return "(ITEM_CODE, DESC, BRAND, MASTER_VENDOR, VINTAGE, UOM, SIZE, DAMAGED_NOTES, CLOSURE, TYPE, VARIETAL, ORGANIC, BIODYNAMIC, FOCUS, COUNTRY, REGION, APPELLATION, RESTRICT_OFFSALE, RESTRICT_OFFSALE_NOTES, RESTRICT_PREMISE, RESTRICT_ALLOCATED, RESTRICT_APPROVAL, RESTRICT_MAX, RESTRICT_STATE, RESTRICT_SAMPLE, RESTRICT_BO, RESTRICT_MO, UPC, SCORE_WA, SCORE_WS, SCORE_IWC, SCORE_BH, SCORE_VM, SCORE_OTHER) VALUES ('\(itemCode)', '\(description)', '\(brand)', '\(masterVendor)', '\(vintage)', '\(uom)', '\(size)', '\(damagedNotes)', '\(closure)', '\(type)', '\(varietal)', '\(organic)', '\(biodynamic)', '\(focus)', '\(country)', '\(region)', '\(appellation)', '\(restrictOffSale)', '\(restrictOffSaleNotes)', '\(restrictPremise)', '\(restrictAllocate)','\(restrictApproval)', '\(restrictMax)', '\(restrictState)', '\(restrictSample)', '\(restrictBo)', '\(restrictMo)', '\(upc)', '\(scoreWa)', '\(scoreWs)', '\(scoreIwc)', '\(scoreBh)', '\(scoreVm)', '\(scoreOther)')"
+                return "('\(itemCode)', '\(description)', '\(brand)', '\(masterVendor)', '\(vintage)', '\(uom)', '\(size)', '\(damagedNotes)', '\(closure)', '\(type)', '\(varietal)', '\(organic)', '\(biodynamic)', '\(focus)', '\(country)', '\(region)', '\(appellation)', '\(restrictOffSale)', '\(restrictOffSaleNotes)', '\(restrictPremise)', '\(restrictAllocate)','\(restrictApproval)', '\(restrictMax)', '\(restrictState)', '\(restrictSample)', '\(restrictBo)', '\(restrictMo)', '\(upc)', '\(scoreWa)', '\(scoreWs)', '\(scoreIwc)', '\(scoreBh)', '\(scoreVm)', '\(scoreOther)')"
             }()
     }
 
@@ -248,7 +248,7 @@ import Foundation
                     let priceDesc = self.priceDesc else {
                         return nil
                 }
-                return "(ITEM_CODE, PRICE_LEVEL, DATE, PRICE_DESC) VALUES ('\(itemCode)', '\(priceLevel)', '\(date)', '\(priceDesc)')"
+                return "('\(itemCode)', '\(priceLevel)', '\(date)', '\(priceDesc)')"
             }()
     }
     
@@ -265,10 +265,6 @@ struct InvSync {
         poSync = Sync<InvPo>(dict: poDict)
     }
 }
-    
-
-    
-
 
 class InventoryPo {
     let itemCode: String
@@ -309,7 +305,7 @@ class Inventory : NSObject {
     let focusRaw: String
     let descriptionRaw: String
     let damagedNotes: String
-    let priceString: String
+    var priceString: String
     let country: String
     let region: String
     let appellation: String
@@ -332,6 +328,7 @@ class Inventory : NSObject {
     let scoreVmRaw: String
     let scoreOtherRaw: String
     
+    
     lazy var focus : Bool = {
         [unowned self] in
             return self.focusRaw == "Y" ? true : false
@@ -340,6 +337,9 @@ class Inventory : NSObject {
     lazy var sizeDescription : String = {
         [unowned self] in
             let bottleSizeArray = self.size.characters.split(Int.max, allowEmptySlices: false, isSeparator: { $0 == " " }).map { String($0) }
+            guard bottleSizeArray.count > 0 else {
+                return ""
+            }
             let sizeString = bottleSizeArray[0]
             let unitString = bottleSizeArray[1]
             return unitString == "L" ? "\(sizeString)\(unitString)" : sizeString
@@ -355,42 +355,69 @@ class Inventory : NSObject {
             return "\(self.brand) \(self.descriptionRaw) \(self.vintage) (\(self.uomString)/\(self.sizeDescription))\(self.damagedNotes)"
     }()
     
+    lazy var mixDescription : String = {
+        [unowned self] in
+        return "\(self.brand)\(self.descriptionRaw)\(self.vintage)"
+        }()
+    
     lazy var priceArray : [String] = {
         [unowned self] in
             let priceStripped = self.priceString.stringByReplacingOccurrencesOfString(" ", withString: "")
             return priceStripped.characters.split {$0 == ","}.map { String($0) }
     }()
     
+    lazy var uomInt : Int = {
+        [unowned self] in
+        return Int(self.uomString) ?? 12
+    }()
+    
+    lazy var bottleQuantityAvailable: Int = {
+        [unowned self] in
+        Int(round(self.quantityAvailable * Double(self.uomInt)))
+    } ()
+
+    lazy var backOrderQuantityAvailable: Int = {
+        [unowned self] in
+        return Int(round((self.onPoTotal - self.onBo) * Double(self.uomInt)))
+    }()
+    
+    
+    lazy var getPriceTupleArray : [(price: Int, unit: Int)] = {
+        //let isBottlePricing = self.isBottlePricing
+        var tupleArray:[(price: Int, unit: Int)] = []
+        for priceBreak in self.priceArray {
+            let breakArray: [String]
+            breakArray = priceBreak.containsString("/") ? priceBreak.characters.split{ $0 == "/" }.map { String($0) } : [priceBreak, "1"]
+            let priceWrapped: Int? = Int(breakArray[0])
+            let unitWrapped: Int?
+            if self.isBottlePricing {
+                unitWrapped = breakArray[1] != "B" ? Int((breakArray[1].stringByReplacingOccurrencesOfString("B", withString: ""))) : 1
+            } else {
+                unitWrapped = Int(breakArray[1])
+            }
+            if let price = priceWrapped, let unit = unitWrapped {
+                tupleArray.append((price, unit))
+            }
+        }
+        return tupleArray
+    }()
+    
     lazy var priceBreaks : priceBreakType = {
         [unowned self] in
-            let isBottlePrice = self.priceString.containsString("B")
-            let uomInt = Int(self.uomString) ?? 12
-            var priceTupleArray:[(price: Int, unit: Int)] = []
-            let priceCaseTuple: (price: Double, discount: Double)
-            for priceBreak in self.priceArray {
-                let breakArray: [String]
-                breakArray = priceBreak.containsString("/") ? priceBreak.characters.split{ $0 == "/" }.map { String($0) } : [priceBreak, "1"]
-                let priceWrapped: Int? = Int(breakArray[0])
-                let unitWrapped: Int?
-                if isBottlePrice {
-                    unitWrapped = breakArray[1] != "B" ? Int((breakArray[1].stringByReplacingOccurrencesOfString("B", withString: ""))) : 1
-                } else {
-                    unitWrapped = Int(breakArray[1])
-                }
-                if priceWrapped != nil && unitWrapped != nil {
-                    let priceTuple = (priceWrapped!, unitWrapped!)
-                    priceTupleArray.append(priceTuple)
-                }
-            }
-            if priceTupleArray.isEmpty {
+        //let isBottlePricing = self.isBottlePricing
+        let priceCaseTuple: (price: Double, discount: Double)
+        //let priceTupleArray = self.getPriceTupleArray
+            if self.getPriceTupleArray.isEmpty {
                 priceCaseTuple = (0, 0)
-            } else if !isBottlePrice {
-                priceCaseTuple = (Double((priceTupleArray[0]).price), Double((priceTupleArray[priceTupleArray.count - 1]).price))
+            } else if !self.isBottlePricing {
+                priceCaseTuple = (Double((self.getPriceTupleArray[0]).price), Double((self.getPriceTupleArray[self.getPriceTupleArray.count - 1]).price))
             } else {
-                priceCaseTuple = (Double((priceTupleArray[0]).price * uomInt), Double((priceTupleArray[priceTupleArray.count - 1]).price * uomInt))
+                priceCaseTuple = (Double((self.getPriceTupleArray[0]).price * self.uomInt), Double((self.getPriceTupleArray[self.getPriceTupleArray.count - 1]).price * self.uomInt))
             }
-            return (priceCase: priceCaseTuple.price, discountCase: priceCaseTuple.discount, priceBottle: priceCaseTuple.price/Double(uomInt), discountBottle:priceCaseTuple.discount/Double(uomInt))
+            return (priceCase: priceCaseTuple.price, discountCase: priceCaseTuple.discount, priceBottle: priceCaseTuple.price/Double(self.uomInt), discountBottle:priceCaseTuple.discount/Double(self.uomInt))
     }()
+    
+   
     
     lazy var priceCase : Double = {
         [unowned self] in
@@ -437,6 +464,18 @@ class Inventory : NSObject {
                 }
             }
             return poString
+    }()
+    
+    lazy var onPoTotal: Double = {
+        [unowned self] in
+        guard let onPo = self.poDict else {
+            return 0
+        }
+        var poTotal = 0.0
+        for po in onPo {
+            poTotal += po.onPo
+        }
+        return poTotal
     }()
 
     
@@ -668,6 +707,27 @@ class Inventory : NSObject {
     //    }
     //    return row
     //}()
+    
+    func getPricing(quantity: Double) -> Double {
+        guard hasPriceBreaks else {
+            return priceCase
+        }
+        let priceArray = getPriceTupleArray
+        if let priceTuple = priceArray.filter({Double($0.unit) <= quantity}).last {
+            return Double(priceTuple.price)
+        }
+        return priceCase
+    }
+    
+    lazy var hasPriceBreaks : Bool = {
+        [unowned self] in
+       return self.discountList.characters.count > 0
+    }()
+    
+    lazy var isBottlePricing : Bool = {
+        [unowned self] in
+        return self.priceString.containsString("B")
+    }()
     
     init(queryResult: FMResultSet?, poDict: [String:poDictType]?) {
         itemCode = queryResult?.stringForColumn("item_code") ?? ""

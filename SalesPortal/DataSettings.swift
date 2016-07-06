@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol InventoryDataSettingsDelegate {
+protocol InventoryDataSettingsDelegate: class {
     func changedDataSettings()
     func changedStateSettings()
 }
@@ -16,7 +16,7 @@ protocol InventoryDataSettingsDelegate {
 class InventoryDataSettings {
     var monthValues = [String]()
     
-    var delegate : InventoryDataSettingsDelegate?
+    weak var delegate : InventoryDataSettingsDelegate?
     var date: String
     let shipDates = NSDate().getNextShip()
     var month: String {
