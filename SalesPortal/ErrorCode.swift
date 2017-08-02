@@ -1,44 +1,53 @@
 
 import Foundation
 
-enum ErrorCode: CustomStringConvertible, ErrorType {
-    case NoInternet
-    case HttpError(statusCode: Int)
-    case DbError
-    case ServerError
-    case UnknownError
-    case NoCredentials
-    case NoQuantity(itemCode: String)
+enum ErrorCode: CustomStringConvertible, Error {
+    case noInternet
+    case httpError(statusCode: Int)
+    case dbError
+    case dbErrorSave
+    case serverError
+    case unknownError
+    case noCredentials
+    case noQuantity(itemCode: String)
+    case moboException
+    case billHoldException
     
     var description: String {
         switch self {
-        case .NoInternet:
-            return "No internet connection"
-        case .HttpError(let statusCode):
+        case .noInternet:
+            return "No Internet connection"
+        case .httpError(let statusCode):
             switch statusCode {
             case 401:
                 return "Invalid username / password"
             default:
                 return "Server unavailable"
             }
-        case .ServerError:
+        case .serverError:
             return "No Internet connection"
-        case .DbError:
+        case .dbError:
             return "Invalid data"
-        case .UnknownError:
+        case .dbErrorSave:
+            return "Unable to save data.  Please resync"
+        case .unknownError:
             return "Unknown error encountered"
-        case .NoCredentials:
+        case .noCredentials:
             return "Invalid username / password"
-        case .NoQuantity(let itemCode):
-            return "\(itemCode): Insufficient quantity available"
+        case .noQuantity(let itemCode):
+            return itemCode + ": Insufficient quantity available"
+        case .moboException:
+            return "Can only ship MOBOs on Standard Orders"
+        case .billHoldException:
+            return "Can only ship Bill and Hold items on Bill and Hold orders"
         }
         
 
     }
     
-    func isAuthError() -> Bool {
+    var isAuthError: Bool {
         switch self {
-        case .HttpError(statusCode: 401):
+        case .httpError(statusCode: 401):
             return true;
         default:
             return false;

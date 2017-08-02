@@ -16,42 +16,43 @@
         var window: UIWindow?
         
         
-        func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
             // Override point for customization after application launch.
             XuniLicenseManager.setKey(License().key)
-            //TestFairy.begin("83214e25cc75ac626e343dd7738c46b1f37c920e")
+            TestFairy.begin("83214e25cc75ac626e343dd7738c46b1f37c920e")
+            NSTimeZone.setDefaultTimeZone(TimeZone(identifier: "America/New_York")!)
             return true
         }
         
-        func applicationWillResignActive(application: UIApplication) {
+        func applicationWillResignActive(_ application: UIApplication) {
             // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
             // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
             saveUserDefaults()
         }
         
-        func applicationDidEnterBackground(application: UIApplication) {
+        func applicationDidEnterBackground(_ application: UIApplication) {
             // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
             // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-            
+            saveUserDefaults()
         }
         
-        func applicationWillEnterForeground(application: UIApplication) {
+        func applicationWillEnterForeground(_ application: UIApplication) {
             // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         }
         
-        func applicationDidBecomeActive(application: UIApplication) {
+        func applicationDidBecomeActive(_ application: UIApplication) {
             // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         }
         
-        func applicationWillTerminate(application: UIApplication) {
+        func applicationWillTerminate(_ application: UIApplication) {
             // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
             saveUserDefaults()
         }
         
-        func getVisibleViewController(rootViewController: UIViewController?) -> UIViewController? {
+        func getVisibleViewController(_ rootViewController: UIViewController?) -> UIViewController? {
             var myRootViewController = rootViewController
             if myRootViewController == nil {
-                myRootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
+                myRootViewController = UIApplication.shared.keyWindow?.rootViewController
             }
             
             if myRootViewController?.presentedViewController == nil {
@@ -59,14 +60,14 @@
             }
             
             if let presented = myRootViewController?.presentedViewController {
-                if presented.isKindOfClass(UINavigationController) {
-                    let navigationController = presented as! UINavigationController
-                    return navigationController.viewControllers.last!
+                if presented.isKind(of: UINavigationController.self) {
+                    let navigationController = presented as? UINavigationController
+                    return navigationController?.viewControllers.last
                 }
                 
-                if presented.isKindOfClass(UITabBarController) {
-                    let tabBarController = presented as! UITabBarController
-                    return tabBarController.selectedViewController!
+                if presented.isKind(of: UITabBarController.self) {
+                    let tabBarController = presented as? UITabBarController
+                    return tabBarController?.selectedViewController
                 }
                 
                 return getVisibleViewController(presented)
@@ -77,25 +78,49 @@
         func saveUserDefaults() {
             
             if let viewController = getVisibleViewController(nil) {
-                if viewController.isKindOfClass(InventoryViewController) {
+                if viewController.isKind(of: InventoryViewController.self) {
                     if let myViewController = viewController as? InventoryViewController {
                         myViewController.flexGrid.saveUserDefaults(Module.Inventory)
                     }
-                } else if viewController.isKindOfClass(AccountsViewController) {
+                } else if viewController.isKind(of: AccountsViewController.self) {
                     if let myViewController = viewController as? AccountsViewController {
                         myViewController.flexGrid.saveUserDefaults(Module.Accounts)
                     }
-                } else if viewController.isKindOfClass(OrderHeaderViewController) {
-                    if let myViewController = viewController as? OrderHeaderViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.OrderHeader)
+                } else if viewController.isKind(of: AccountOrderHeaderViewController.self) {
+                    if let myViewController = viewController as? AccountOrderHeaderViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.AccountOrder)
                     }
-                } else if viewController.isKindOfClass(OrderInventoryViewController) {
-                    if let myViewController = viewController as? OrderInventoryViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.OrderInventory)
+                }else if viewController.isKind(of: SampleOrderHeaderViewController.self) {
+                    if let myViewController = viewController as? SampleOrderHeaderViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.SampleOrder)
                     }
-                } else if viewController.isKindOfClass(OrderHistoryViewController) {
-                    if let myViewController = viewController as? OrderHistoryViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.OrderHistory)
+                } else if viewController.isKind(of: AccountOrderInventoryViewController.self) {
+                    if let myViewController = viewController as? AccountOrderInventoryViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.AccountOrderInventory)
+                    }
+                } else if viewController.isKind(of: SampleOrderInventoryViewController.self) {
+                    if let myViewController = viewController as? SampleOrderInventoryViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.SampleOrderInventory)
+                    }
+                } else if viewController.isKind(of: AccountOrderHistoryViewController.self) {
+                    if let myViewController = viewController as? AccountOrderHistoryViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.AccountOrderHistory)
+                    }
+                } else if viewController.isKind(of: SampleOrderHistoryViewController.self) {
+                    if let myViewController = viewController as? SampleOrderHistoryViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.SampleOrderHistory)
+                    }
+                } else if viewController.isKind(of: OrderMobosViewController.self) {
+                    if let myViewController = viewController as? OrderMobosViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.OrderMobos)
+                    }
+                } else if viewController.isKind(of: OrderListViewController.self) {
+                    if let myViewController = viewController as? OrderListViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.OrderList)
+                    }
+                } else if viewController.isKind(of: SampleListViewController.self) {
+                    if let myViewController = viewController as? SampleListViewController {
+                        myViewController.flexGrid.saveUserDefaults(Module.SampleList)
                     }
                 }
             }

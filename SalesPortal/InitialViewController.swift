@@ -15,14 +15,30 @@ class InitialViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        SwiftSpinner.show("Loading...", animated: false) {
-            _ in
-            dispatch_async(dispatch_get_main_queue()) {
-                //SwiftSpinner.hide()
-                self.performSegueWithIdentifier("showMainTabBarController", sender: self)
-            }
+        SwiftSpinner.show("Loading...", animated: false)
+        performSegue(withIdentifier: "showMainTabBarController", sender: self)
+        
+        // SWIFTSPINNER WITH COMPLETION
+//        SwiftSpinner.show("Loading...", animated: false) {
+//           [unowned self] in
+//            DispatchQueue.main.async {
+//                [unowned self] in
+//                self.performSegue(withIdentifier: "showMainTabBarController", sender: self)
+//            }
+//        }
+    }
+    
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+        guard let alertController = viewControllerToPresent as? UIAlertController else {
+            super.present(viewControllerToPresent, animated: flag, completion: completion)
+            return
         }
+        var presentingVC: UIViewController = self
+        while let presentedVC = presentingVC.presentedViewController {
+            presentingVC = presentedVC
+        }
+        presentingVC.present(alertController, animated: flag, completion: completion)
     }
 }

@@ -12,38 +12,38 @@ import Security
 
 // MARK: Security Class
 public enum SecurityClass: RawRepresentable {
-    case GenericPassword, InternetPassword, Certificate, Key, Identity
-    static let allClasses = [GenericPassword, InternetPassword, Certificate, Key, Identity]
+    case genericPassword, internetPassword, certificate, key, identity
+    static let allClasses = [genericPassword, internetPassword, certificate, key, identity]
     
     public init?(rawValue: String) {
         switch rawValue {
         case String(kSecClassGenericPassword):
-            self = GenericPassword
+            self = .genericPassword
         case String(kSecClassInternetPassword):
-            self = InternetPassword
+            self = .internetPassword
         case String(kSecClassCertificate):
-            self = Certificate
+            self = .certificate
         case String(kSecClassKey):
-            self = Key
+            self = .key
         case String(kSecClassIdentity):
-            self = Identity
+            self = .identity
         default:
             print("SecurityClass: Invalid raw value provided. Defaulting to .GenericPassword")
-            self = GenericPassword
+            self = .genericPassword
         }
     }
     
     public var rawValue: String {
         switch self {
-        case .GenericPassword:
+        case .genericPassword:
             return String(kSecClassGenericPassword)
-        case .InternetPassword:
+        case .internetPassword:
             return String(kSecClassInternetPassword)
-        case .Certificate:
+        case .certificate:
             return String(kSecClassCertificate)
-        case .Key:
+        case .key:
             return String(kSecClassKey)
-        case .Identity:
+        case .identity:
             return String(kSecClassIdentity)
         }
     }
@@ -51,45 +51,45 @@ public enum SecurityClass: RawRepresentable {
 
 // MARK: Accessible
 public enum Accessible: RawRepresentable {
-    case WhenUnlocked, AfterFirstUnlock, Always, WhenPasscodeSetThisDeviceOnly, WhenUnlockedThisDeviceOnly, AfterFirstUnlockThisDeviceOnly, AlwaysThisDeviceOnly
+    case whenUnlocked, afterFirstUnlock, always, whenPasscodeSetThisDeviceOnly, whenUnlockedThisDeviceOnly, afterFirstUnlockThisDeviceOnly, alwaysThisDeviceOnly
     
     public init?(rawValue: String) {
         switch rawValue {
         case String(kSecAttrAccessibleWhenUnlocked):
-            self = WhenUnlocked
+            self = .whenUnlocked
         case String(kSecAttrAccessibleAfterFirstUnlock):
-            self = AfterFirstUnlock
+            self = .afterFirstUnlock
         case String(kSecAttrAccessibleAlways):
-            self = Always
+            self = .always
         case String(kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly):
-            self = WhenPasscodeSetThisDeviceOnly
+            self = .whenPasscodeSetThisDeviceOnly
         case String(kSecAttrAccessibleWhenUnlockedThisDeviceOnly):
-            self = WhenUnlockedThisDeviceOnly
+            self = .whenUnlockedThisDeviceOnly
         case String(kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly):
-            self = AfterFirstUnlockThisDeviceOnly
+            self = .afterFirstUnlockThisDeviceOnly
         case String(kSecAttrAccessibleAlwaysThisDeviceOnly):
-            self = AlwaysThisDeviceOnly
+            self = .alwaysThisDeviceOnly
         default:
             print("Accessible: invalid rawValue provided. Defaulting to Accessible.WhenUnlocked.")
-            self = WhenUnlocked
+            self = .whenUnlocked
         }
     }
     
     public var rawValue: String {
         switch self {
-        case .WhenUnlocked:
+        case .whenUnlocked:
             return String(kSecAttrAccessibleWhenUnlocked)
-        case .AfterFirstUnlock:
+        case .afterFirstUnlock:
             return String(kSecAttrAccessibleAfterFirstUnlock)
-        case .Always:
+        case .always:
             return String(kSecAttrAccessibleAlways)
-        case .WhenPasscodeSetThisDeviceOnly:
+        case .whenPasscodeSetThisDeviceOnly:
             return String(kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly)
-        case .WhenUnlockedThisDeviceOnly:
+        case .whenUnlockedThisDeviceOnly:
             return String(kSecAttrAccessibleWhenUnlockedThisDeviceOnly)
-        case .AfterFirstUnlockThisDeviceOnly:
+        case .afterFirstUnlockThisDeviceOnly:
             return String(kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly)
-        case .AlwaysThisDeviceOnly:
+        case .alwaysThisDeviceOnly:
             return String(kSecAttrAccessibleAlwaysThisDeviceOnly)
         }
     }
@@ -97,30 +97,30 @@ public enum Accessible: RawRepresentable {
 
 // MARK: Match Limit
 public enum MatchLimit {
-    case One, All
-    @available(*, deprecated=1.1.2, message="Use .All instead.") case Many
+    case one, all
+    @available(*, deprecated: 1.1.2, message: "Use .All instead.") case many
 }
 
 // MARK: Request Type
 public enum RequestType {
-    case Create, Read, Update, Delete
+    case create, read, update, delete
 }
 
 // MARK: Locksmith Request
-public class LocksmithRequest: NSObject {
+open class LocksmithRequest: NSObject {
     // Keychain Options
     // Required
-    public var service: String = LocksmithDefaultService
-    public var userAccount: String?
-    public var type: RequestType = .Read  // Default to non-destructive
+    open var service: String = LocksmithDefaultService
+    open var userAccount: String?
+    open var type: RequestType = .read  // Default to non-destructive
     
     // Optional
-    public var securityClass: SecurityClass = .GenericPassword  // Default to password lookup
-    public var group: String?
-    public var data: [String:AnyObject]?
-    public var matchLimit: MatchLimit = .One
-    public var synchronizable = false
-    public var accessible: Accessible?
+    open var securityClass: SecurityClass = .genericPassword  // Default to password lookup
+    open var group: String?
+    open var data: [String:AnyObject]?
+    open var matchLimit: MatchLimit = .one
+    open var synchronizable = false
+    open var accessible: Accessible?
     
     required public init(userAccount: String?, service: String = LocksmithDefaultService) {
         self.service = service

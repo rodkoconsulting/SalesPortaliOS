@@ -9,10 +9,10 @@
 import UIKit
 
 @objc protocol MPGTextFieldDelegate{
-    func dataForPopoverInTextField(textfield: MPGTextField_Swift) -> [[String : AnyObject]]
+    func dataForPopoverInTextField(_ textfield: MPGTextField_Swift) -> [[String : String]]
     func searchTextChanged()
-    optional func textFieldDidEndEditing(textField: MPGTextField_Swift, isIndex: Bool)
-    optional func textFieldShouldSelect(textField: MPGTextField_Swift) -> Bool
+    @objc optional func textFieldDidEndEditing(_ textField: MPGTextField_Swift, isIndex: Bool)
+    @objc optional func textFieldShouldSelect(_ textField: MPGTextField_Swift) -> Bool
     
 }
 
@@ -20,7 +20,7 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
     
     weak var mDelegate : MPGTextFieldDelegate?
     var tableViewController : UITableViewController?
-    var data = [[String : AnyObject]]()
+    var data = [[String : String]]()
     @IBInspectable var popoverBackgroundColor : UIColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 1.0)
     @IBInspectable var popoverSize : CGRect?
     @IBInspectable var seperatorColor : UIColor = UIColor(white: 0.95, alpha: 1.0)
@@ -30,6 +30,7 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
         super.init(frame: frame)
         self.delegate = self
     }
+    
     
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
@@ -53,14 +54,15 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
     }
     
     override func resignFirstResponder() -> Bool{
-        UIView.animateWithDuration(0.3,
+        UIView.animate(withDuration: 0.3,
             animations: ({
+                [unowned self] in
                 if let table = self.tableViewController {
                     table.tableView.alpha = 0.0
                 }
                 }),
             completion:{
-                (finished : Bool) in
+                [unowned self](finished : Bool) in
                     if self.tableViewController != nil {
                         self.tableViewController!.tableView.removeFromSuperview()
                         self.tableViewController = nil
@@ -90,6 +92,8 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
             self.tableViewController!.tableView.dataSource = self
             self.tableViewController!.tableView.backgroundColor = self.popoverBackgroundColor
             self.tableViewController!.tableView.separatorColor = self.seperatorColor
+            self.tableViewController!.tableView.estimatedRowHeight = 89
+            self.tableViewController!.tableView.rowHeight = UITableViewAutomaticDimension
             if let frameSize = self.popoverSize{
                 self.tableViewController!.tableView.frame = frameSize
             } else {
@@ -106,12 +110,13 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
             
             superView.addSubview(tableViewController!.tableView)
             self.tableViewController!.tableView.alpha = 0.0
-            UIView.animateWithDuration(0.3,
+            UIView.animate(withDuration: 0.3,
                 animations: ({
+                    [unowned self] in
                     self.tableViewController!.tableView.alpha = 1.0
                     }),
                 completion:{
-                    (finished : Bool) in
+                   (finished : Bool) in
                 })
         }
     }
@@ -128,20 +133,21 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
 //        }
 //    }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         guard let str = self.text else {
             return 0
         }
         let count = self.applyFilterWithSearchQuery(str).count
         if count == 0{
-            UIView.animateWithDuration(0.3,
+            UIView.animate(withDuration: 0.3,
                 animations: ({
+                    [unowned self] in
                     if let table = self.tableViewController {
                         table.tableView.alpha = 0.0
                     }
                     }),
                 completion:{
-                    (finished : Bool) in
+                    [unowned self] (finished : Bool) in
                     if let table = self.tableViewController{
                         table.tableView.removeFromSuperview()
                         self.tableViewController = nil
@@ -151,33 +157,38 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
         return count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MPGResultsCell") ?? UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "MPGResultsCell")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MPGResultsCell") ?? UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "MPGResultsCell")
         guard let str = self.text else {
             return cell
         }
-        cell.backgroundColor = UIColor.clearColor()
+        cell.backgroundColor = UIColor.clear
         let dataForRowAtIndexPath = self.applyFilterWithSearchQuery(str)[indexPath.row]
-        guard let displayText = dataForRowAtIndexPath["DisplayText"] as? String,
-            let displaySubText = dataForRowAtIndexPath["DisplaySubText"] as? String else {
+        guard let displayText = dataForRowAtIndexPath["DisplayText"],
+            let displaySubText = dataForRowAtIndexPath["DisplaySubText"] else {
                 return cell
         }
+        
+        //cell.textLabel?.font = cell.textLabel?.font.fontWithSize(12)
         cell.textLabel!.text = displayText
+        cell.textLabel?.numberOfLines = 0
+        //cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        //cell.detailTextLabel?.font = cell.detailTextLabel?.font.fontWithSize(12)
         cell.detailTextLabel!.text = displaySubText
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         self.resignFirstResponder()
     }
     
     
-    func applyFilterWithSearchQuery(filter : String) -> [[String : AnyObject]]
+    func applyFilterWithSearchQuery(_ filter : String) -> [[String : String]]
     {
         let filteredData = data.filter({
-                if let matchText = $0["DisplayText"] as? String,
-                    let matchSubText = $0["DisplaySubText"] as? String {
-                    return (matchText.lowercaseString.rangeOfString((filter as String).lowercaseString) != nil) || (matchSubText.lowercaseString.rangeOfString((filter as String).lowercaseString) != nil)
+                if let matchText = $0["DisplayText"],
+                    let matchSubText = $0["DisplaySubText"] {
+                    return (matchText.lowercased().range(of: (filter as String).lowercased()) != nil) || (matchSubText.lowercased().range(of: (filter as String).lowercased()) != nil)
                 }
                 else{
                     return false
@@ -186,17 +197,17 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
         return filteredData
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         handleExit()
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let str = self.text,
             let mDelegate = mDelegate else {
                 removeFromView()
                 return
         }
-        guard str.characters.count > 0 && self.isFirstResponder() else {
+        guard str.characters.count > 0 && self.isFirstResponder else {
             removeFromView()
             return
         }
@@ -221,7 +232,7 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
         if ((mDelegate?.textFieldShouldSelect?(self)) != nil){
             if self.applyFilterWithSearchQuery(str).count > 0 {
                 let selectedData = self.applyFilterWithSearchQuery(str)[indexPath.row]
-                if let displayText = selectedData["DisplaySubText"] as? String {
+                if let displayText = selectedData["DisplaySubText"] {
                     self.text = displayText
                 }
             }

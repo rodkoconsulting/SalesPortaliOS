@@ -10,155 +10,265 @@ import Foundation
 import XuniFlexGridKit
 
 enum Module {
-    case Inventory
-    case Accounts
-    case OrderInventory
-    case OrderHeader
-    case OrderHistory
+    case inventory
+    case accounts
+    case accountOrderInventory
+    case sampleOrderInventory
+    case accountOrder
+    case sampleOrder
+    case accountOrderHistory
+    case sampleOrderHistory
+    case orderList
+    case orderMobos
+    case orderSaved
+    case sampleList
 }
 
 extension Module {
     var mailSubject: String {
         switch self {
-        case Inventory:
+        case .inventory:
             return "iOS Inventory Excel file"
-        case OrderInventory:
+        case .accountOrderInventory:
             return "iOS Order Inventory Excel file"
-        case OrderHeader:
+        case .sampleOrderInventory:
+            return "iOS Sample Order Inventory Excel file"
+        case .accountOrder:
             return "iOS Order Excel file"
-        case OrderHistory:
+        case .sampleOrder:
+            return "iOS Sample Order Excel file"
+        case .accountOrderHistory:
             return "iOS Order History Excel file"
-        case Accounts:
+        case .sampleOrderHistory:
+            return "iOS Sample Order History Excel file"
+        case .accounts:
             return "iOS Accounts Excel file"
+        case .orderList:
+            return "iOS Order List Excel file"
+        case .orderMobos:
+            return "iOS MOBOs Excel file"
+        case .orderSaved:
+            return "iOS Saved Orders Excel file"
+        case .sampleList:
+            return "iOS Sample List Excel file"
         }
     }
-    
+
     var mailBody: String {
         switch self {
-        case Inventory:
+        case .inventory:
             return "Attached is the Excel Inventory data from the iOS Sales Portal."
-        case OrderInventory:
+        case .accountOrderInventory:
             return "Attached is the Excel Order Inventory data from the iOS Sales Portal."
-        case .OrderHeader:
+        case .sampleOrderInventory:
+            return "Attached is the Excel Sample Order Inventory data from the iOS Sales Portal."
+        case .accountOrder:
             return "Attached is the Excel Order data from the iOS Sales Portal."
-        case OrderHistory:
+        case .sampleOrder:
+            return "Attached is the Excel Sample Order data from the iOS Sales Portal."
+        case .accountOrderHistory:
             return "Attached is the Excel Order History from the iOS Sales Portal."
-        case Accounts:
+        case .sampleOrderHistory:
+            return "Attached is the Excel Sample Order History from the iOS Sales Portal."
+        case .accounts:
             return "Attached is the Excel Account data from the iOS Sales Portal."
+        case .orderList:
+            return "Attached is the Excel Order List data from the iOS Sales Portal."
+        case .orderMobos:
+            return "Attached is the Excel MOBO data from the iOS Sales Portal."
+        case .orderSaved:
+            return "Attached is the Excel Saved Orders data from the iOS Sales Portal."
+        case .sampleList:
+            return "Attached is the Excel Sample List data from the iOS Sales Portal."
         }
     }
     
     var mailAttachment: String {
         switch self {
-        case Inventory:
+        case .inventory:
             return "InventoryPortalExport.csv"
-        case OrderInventory:
+        case .accountOrderInventory:
             return "OrderInventoryPortalExport.csv"
-        case OrderHeader:
+        case .sampleOrderInventory:
+            return "SampleOrderInventoryPortalExport.csv"
+        case .accountOrder:
             return "OrderDataPortalExport.csv"
-        case .OrderHistory:
+        case .sampleOrder:
+            return "SampleOrderDataPortalExport.csv"
+        case .accountOrderHistory:
             return "OrderHistoryPortalExport.csv"
-        case Accounts:
+        case .sampleOrderHistory:
+            return "OrderHistoryPortalExport.csv"
+        case .accounts:
             return "AccountPortalExport.csv"
+        case .orderList:
+            return "OrderListPortalExport.csv"
+        case .orderMobos:
+            return "OrderMoboPortalExport.csv"
+        case .orderSaved:
+            return "OrderSavedPortalExport.csv"
+        case .sampleList:
+            return "SampleListPortalExport.csv"
         }
     }
     
     var columnData: [[String:AnyObject]] {
-        let columnData = ColumnData()
         switch self {
-        case Inventory:
-            return columnData.inventoryColumns
-        case OrderInventory:
-            return columnData.orderInventoryColumns
-        case .OrderHeader:
-            return columnData.orderHeaderColumns
-        case .OrderHistory:
-            return columnData.orderHistoryColumns
-        case Accounts:
-            return columnData.accountColumns
+        case .inventory:
+            return ColumnData.inventoryColumns
+        case .accountOrderInventory:
+            return ColumnData.accountOrderInventoryColumns
+        case .sampleOrderInventory:
+            return ColumnData.sampleOrderInventoryColumns
+        case .accountOrder:
+            return ColumnData.orderHeaderColumns
+        case .sampleOrder:
+            return ColumnData.sampleOrderHeaderColumns
+        case .accountOrderHistory:
+            return ColumnData.accountOrderHistoryColumns
+        case .sampleOrderHistory:
+            return ColumnData.sampleOrderHistoryColumns
+        case .accounts:
+            return ColumnData.accountColumns
+        case .orderList:
+            return ColumnData.orderListColumns
+        case .orderMobos:
+            return ColumnData.orderMoboColumns
+        case .orderSaved:
+            return ColumnData.orderSavedColumns
+        case .sampleList:
+            return ColumnData.sampleListColumns
         }
     }
     
     var columnSettings: String {
         switch self {
-        case Inventory:
+        case .inventory:
             return "columnSettingsInventory"
-        case OrderInventory:
-            return "columnSettingsOrderInventory"
-        case .OrderHeader:
+        case .accountOrderInventory:
+            return "columnSettingsAccountOrderInventory"
+        case .sampleOrderInventory:
+            return "columnSettingsSampleOrderInventory"
+        case .accountOrder:
             return "columnSettingsOrderHeader"
-        case .OrderHistory:
-            return "columnSettingsOrderHistory"
-        case Accounts:
+        case .sampleOrder:
+            return "columnSettingsSampleOrderHeader"
+        case .accountOrderHistory:
+            return "columnSettingsAccountOrderHistory"
+        case .sampleOrderHistory:
+            return "columnSettingsSampleOrderHistory"
+        case .accounts:
             return "columnSettingsAccounts"
+        case .orderList:
+            return "columnSettingsOrderList"
+        case .orderMobos:
+            return "columnSettingsOrderMobos"
+        case .orderSaved:
+            return "columnSettingsOrderSaved"
+        case .sampleList:
+            return "columnSettingsSampleList"
         }
     }
     
     var apiInit: String {
         switch self {
-        case Inventory:
+        case .inventory:
             return "inventory/"
-        case OrderInventory:
+        case .accountOrderInventory, .sampleOrderInventory:
             return "inventory/"
-        case .OrderHeader:
+        case .accountOrder:
+            return "transmit_new/"
+        case .sampleOrder:
+            return "transmit_sample/"
+        case .accountOrderHistory, .sampleOrderHistory:
             return "inventory/"
-        case .OrderHistory:
-            return "inventory/"
-        case Accounts:
+        case .accounts:
             return "account/"
+        case .orderList:
+            return "orders/"
+        case .orderMobos:
+            return "orders/"
+        case .orderSaved:
+            return "orders/"
+        case .sampleList:
+            return "samples/"
+
         }
     }
     
     var moduleTable: String {
         switch self {
-        case Inventory:
+        case .inventory:
             return "INV"
-        case OrderInventory:
+        case .accountOrderInventory, .sampleOrderInventory:
             return "INV"
-        case OrderHeader:
+        case .accountOrder:
             return "INV"
-        case OrderHistory:
+        case .sampleOrder:
             return "INV"
-        case Accounts:
+        case .accountOrderHistory, .sampleOrderHistory:
+            return "INV"
+        case .accounts:
             return "ACCOUNTS"
+        case .orderList:
+            return "ORDERS"
+        case .orderMobos:
+            return "ORDERS"
+        case .orderSaved:
+            return "ORDERS"
+        case .sampleList:
+            return "SAMPLES"
         }
     }
     
-    var index: String {
+    var index: [String] {
         switch self {
-        case Inventory, .OrderInventory, .OrderHistory, .OrderHeader:
-            return "itemCode"
-        case Accounts:
-            return "customerNo"
+        case .inventory, .accountOrderInventory, .sampleOrderInventory, .accountOrderHistory, .sampleOrderHistory,.accountOrder, .sampleOrder, .orderMobos, .orderSaved, .sampleList:
+            return ["itemCode"]
+        case .orderList:
+            return ["itemCode", "customerNo"]
+        case .accounts:
+            return ["customerNo"]
         }
     }
     
     var syncTable: [String : String] {
         switch self {
-            case Inventory:
+            case .inventory, .accountOrderInventory, .sampleOrderInventory, .accountOrderHistory, .sampleOrderHistory, .accountOrder,.sampleOrder:
                 return ["qty":"INV_QTY","price":"INV_PRICE","desc":"INV_DESC","po":"INV_PO"]
-            case OrderInventory:
-                return ["qty":"INV_QTY","price":"INV_PRICE","desc":"INV_DESC","po":"INV_PO"]
-            case OrderHistory:
-                return ["qty":"INV_QTY","price":"INV_PRICE","desc":"INV_DESC","po":"INV_PO"]
-            case .OrderHeader:
-                return ["qty":"INV_QTY","price":"INV_PRICE","desc":"INV_DESC","po":"INV_PO"]
-            case Accounts:
+            case .accounts:
                 return ["list":"ACCOUNTS_LIST", "HistH":"ACCOUNTS_INV_HEAD", "HistD":"ACCOUNTS_INV_DET", "Inact": "ACCOUNTS_ITEMS_INACTIVE"  ]
+            case .orderList:
+                return ["H":"ORDER_LIST_HEADER", "D":"ORDER_LIST_DETAIL"]
+            case .orderMobos:
+                return ["H":"ORDER_LIST_HEADER", "D":"ORDER_LIST_DETAIL"]
+            case .orderSaved:
+                return ["H":"ORDER_HEADER", "D":"ORDER_DETAIL"]
+            case .sampleList:
+                return ["H":"SAMPLE_LIST_HEADER", "D":"SAMPLE_LIST_DETAIL", "A":"SAMPLE_ADDRESSES", "I":"SAMPLE_ITEMS_INACTIVE"]
+
         }
     }
 }
 
 
 struct Constants {
-    static let databasePath = NSURL(fileURLWithPath:NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]).URLByAppendingPathComponent("polPortal15.db").absoluteString
+    static let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+    static let url = URL(fileURLWithPath: path) 
+    static let filePath = url.appendingPathComponent("polPortal\(dbVersion).db").path
+    static let previousFilePath = url.appendingPathComponent("polPortal\(dbVersionPrevious).db").path
+    static let databasePath = URL(fileURLWithPath:NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]).appendingPathComponent("polPortal\(dbVersion).db").absoluteString
     static let hourCutoff = 16
     static let minuteCutoff = 10
-    static let defaultSelectionMode = FlexSelectionMode.CellRange
     static let timeSyncDefault = "2000-01-01 00:00:00.000"
-    static let stateValues = ["NY", "NJ"]
     static let boolList = ["True", "False"]
-    static let shipDays = 14
+    static let shipDays = 10
     static let coopCaseList = [5,10]
     static let noCoopText = "None"
+    static let njCaseThreshold = 5
+    static let ComboCellHeight = 45
+    static let dbVersionPrevious = 42
+    static let dbVersion = 44
+    static let sampleOrderSegue = "showSampleOrderTabBarController"
+    static let accountOrderSegue = "showAccountOrderTabBarController"
 }

@@ -10,10 +10,9 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
 
-    var inventory: NSMutableArray? = [Inventory(queryResult: nil, poDict: nil)]
+    var inventory: NSMutableArray?
     var inventoryDataSettings: InventoryDataSettings = InventoryDataSettings()
-    
-    var accounts: NSMutableArray? = [Account(queryResult: nil)]
+    var accounts: NSMutableArray?
     
     //override func viewDidLoad() {
         //SwiftSpinner.show("Loading", animated: false) {

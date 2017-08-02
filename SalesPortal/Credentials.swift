@@ -8,6 +8,7 @@ struct Credentials {
     let username: String
     let password: String
     var state: String?
+    var isRep: Bool = true
     
     init(username: String, password: String) {
         self.username = username
@@ -20,7 +21,7 @@ struct Credentials {
         }
     }
     
-    typealias JSONDictionaryCompletion = (data: [String: AnyObject]?, error: ErrorCode?) -> Void
+    typealias JSONDictionaryCompletion = (_ data: [String: AnyObject]?, _ error: ErrorCode?) -> Void
     
     static func getCredentials() -> [String : String]? {
         guard let dictionary = Locksmith.loadDataForUserAccount("polPortal") as? [String: String] else {
@@ -29,13 +30,13 @@ struct Credentials {
         return dictionary
     }
     
-    static func saveStateCredentials(state state: String) {
+    static func saveStateCredentials(state: String) {
         guard var credentials = Credentials.getCredentials() else {
             return
         }
-        credentials["state"] = String(state[state.endIndex.predecessor()])
-        Credentials.deleteCredentials()
-        try! Locksmith.saveData(credentials, forUserAccount: "polPortal")
+        credentials["state"] = String(state[state.characters.index(before: state.endIndex)])
+        //Credentials.deleteCredentials()
+        try! Locksmith.updateData(credentials as [String : AnyObject], forUserAccount: "polPortal")
     }
     
     static func getStateCredentials() -> String {
@@ -48,13 +49,13 @@ struct Credentials {
         return credentialState
     }
     
-    func saveCredentials(userDict: [String : AnyObject]) {
+    func saveCredentials(_ userDict: [String : AnyObject]) {
         var dict = credentialDict
         for (key, value) in userDict {
             dict[key] = value as? String
         }
         
-        try! Locksmith.saveData(dict, forUserAccount: "polPortal")
+        try! Locksmith.saveData(dict as [String : AnyObject], forUserAccount: "polPortal")
     }
     
     static func deleteCredentials() -> Void {
@@ -65,11 +66,11 @@ struct Credentials {
         }
     }
     
-    func verifyCredentials(completion: (JSONDictionaryCompletion)) {
+    func verifyCredentials(_ completion: @escaping (JSONDictionaryCompletion)) {
         let apiService = ApiService(apiString: apiInit)
         apiService.getApiUser(credentialDict){
-            (let JSONDictionary, error) in
-            completion(data: JSONDictionary, error: error)
+            (JSONDictionary, error) in
+            completion(JSONDictionary, error)
         }
         
     }

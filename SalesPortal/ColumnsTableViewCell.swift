@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ColumnCellDelegate : class {
-    func didChangeSwitchState(sender: ColumnsTableViewCell, isOn: Bool)
+    func didChangeSwitchState(_ sender: ColumnsTableViewCell, isOn: Bool)
 }
 
 class ColumnsTableViewCell: UITableViewCell {
@@ -19,8 +19,8 @@ class ColumnsTableViewCell: UITableViewCell {
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak var filterImage: UIImageView!
     
-    @IBAction func switchChanged(sender: UISwitch) {
-        self.switchDelegate?.didChangeSwitchState(self, isOn:columnsSwitch.on)
+    @IBAction func switchChanged(_ sender: UISwitch) {
+        self.switchDelegate?.didChangeSwitchState(self, isOn:columnsSwitch.isOn)
         setStateLabel()
     }
     
@@ -33,14 +33,14 @@ class ColumnsTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
     func setStateLabel() {
-        stateLabel.text = columnsSwitch.on ? "Visible" : "Hidden"
-        stateLabel.textColor = columnsSwitch.on ? UIColor.blackColor() : UIColor.redColor()
+        stateLabel.text = columnsSwitch.isOn ? "Visible" : "Hidden"
+        stateLabel.textColor = columnsSwitch.isOn ? UIColor.black : UIColor.red
     }
 }

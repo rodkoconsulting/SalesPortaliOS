@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import XuniInputKit
 
-class BoolFiltersTableViewCell: UITableViewCell, UIPickerViewDelegate {
+class BoolFiltersTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var operatorPicker: UIPickerView!
-    @IBOutlet weak var conditionPicker: UIPickerView!
-    @IBOutlet weak var boolPicker: UIPickerView!
+    @IBOutlet weak var operatorComboBox: XuniComboBox!
+    @IBOutlet weak var conditionComboBox: XuniComboBox!
+    @IBOutlet weak var boolComboBox: XuniComboBox!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 

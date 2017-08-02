@@ -166,7 +166,37 @@ testDict["test1"]
 
 newDict["test1"]
 
+extension Double
+{
+    func truncate(places : Int)-> Double
+    {
+        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
+    }
+    
+    func rounded()-> Double
+    {
+        return (round(self*10000)/10000).truncate(0)
+    }
+}
+
+let test = 1.83333 * 12
+let test2 = Int(test.rounded())
+
+let quantity = 0.67
+let uomInt = 12
 
 
 
+
+let num = (quantity * Double(uomInt))
+(round(num*10)/10).truncate(0)
+(quantity * Double(uomInt)).rounded()
+Int((quantity * Double(uomInt)).rounded())
+
+
+let totalbottles = 11
+
+let cases = totalbottles / uomInt
+
+let bottles = totalbottles - (cases * uomInt)
 

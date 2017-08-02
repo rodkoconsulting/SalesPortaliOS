@@ -33,7 +33,7 @@ import Foundation
                 guard let itemCode = self.itemCode else {
                     return nil
                 }
-                return "ITEM_CODE='\(itemCode)'"
+                return "ITEM_CODE='" + itemCode + "'"
         }()
         
         
@@ -47,8 +47,9 @@ import Foundation
                     let onBo = self.onBo else {
                         return nil
                 }
-                return "('\(itemCode)', \(quantityAvailable), \(quantityOnHand), \(onSo), \(onMo), \(onBo))"
+                return "('" + itemCode + "', " + "\(quantityAvailable), \(quantityOnHand), \(onSo), \(onMo), \(onBo))"
         }()
+        
     }
     
     class InvPo: SyncRows {
@@ -73,7 +74,7 @@ import Foundation
                     let poNo = self.poNo else {
                     return nil
                 }
-                return "ITEM_CODE='\(itemCode)' and PO_NO='\(poNo)'"
+                return "ITEM_CODE='" + itemCode + "' and PO_NO='" + poNo + "'"
         }()
         
          lazy var getDbInsert: String? = {
@@ -86,8 +87,9 @@ import Foundation
                     else {
                         return nil
                 }
-                return "('\(itemCode)', '\(poNo)', \(onPo), \(eta), \(poDate))"
+                return "('" + itemCode + "', '" + poNo + "', " + "\(onPo)" + ", '" + eta + "', '"  + poDate + "')"
         }()
+        
     }
     
     
@@ -171,7 +173,7 @@ import Foundation
                 guard let itemCode = self.itemCode else {
                     return nil
                 }
-                return "ITEM_CODE='\(itemCode)'"
+                return "ITEM_CODE='" + itemCode + "'"
         }()
         
         lazy var getDbInsert : String? = {
@@ -212,8 +214,9 @@ import Foundation
                     let scoreOther = self.scoreOther else {
                         return nil
                 }
-                return "('\(itemCode)', '\(description)', '\(brand)', '\(masterVendor)', '\(vintage)', '\(uom)', '\(size)', '\(damagedNotes)', '\(closure)', '\(type)', '\(varietal)', '\(organic)', '\(biodynamic)', '\(focus)', '\(country)', '\(region)', '\(appellation)', '\(restrictOffSale)', '\(restrictOffSaleNotes)', '\(restrictPremise)', '\(restrictAllocate)','\(restrictApproval)', '\(restrictMax)', '\(restrictState)', '\(restrictSample)', '\(restrictBo)', '\(restrictMo)', '\(upc)', '\(scoreWa)', '\(scoreWs)', '\(scoreIwc)', '\(scoreBh)', '\(scoreVm)', '\(scoreOther)')"
+                return "('" + itemCode + "', '" + description + "', '" + brand + "', '" + masterVendor + "', '" + vintage + "', '" + uom + "', '" + size + "', '" + damagedNotes + "', '" + closure + "', '" + type + "', '" + varietal + "', '" + organic + "', '" + biodynamic + "', '" + focus + "', '" + country + "', '" + region + "', '" + appellation + "', '" + restrictOffSale + "', '" + restrictOffSaleNotes + "', '" + restrictPremise + "', '" + restrictAllocate + "', '" + restrictApproval + "', '" + restrictMax + "', '" + restrictState + "', '" + restrictSample + "', '" + restrictBo + "', '" + restrictMo + "', '" + upc + "', '" + scoreWa + "', '" + scoreWs + "', '" + scoreIwc + "', '" + scoreBh + "', '" + scoreVm + "', '" + scoreOther + "')"
             }()
+
     }
 
     class InvPrice: SyncRows {
@@ -237,7 +240,7 @@ import Foundation
                     let date = self.date else {
                     return nil
                 }
-                return "ITEM_CODE='\(itemCode)' AND PRICE_LEVEL='\(priceLevel)' AND DATE='\(date)'"
+                return "ITEM_CODE='" + itemCode + "' AND PRICE_LEVEL='" + priceLevel + "' AND DATE='" + date + "'"
         }()
         
         lazy var getDbInsert : String? = {
@@ -248,7 +251,7 @@ import Foundation
                     let priceDesc = self.priceDesc else {
                         return nil
                 }
-                return "('\(itemCode)', '\(priceLevel)', '\(date)', '\(priceDesc)')"
+                return "('" + itemCode + "', '" + priceLevel + "', '" + date + "', '" + priceDesc + "')"
             }()
     }
     
@@ -274,12 +277,13 @@ class InventoryPo {
     let poDate: String
     
     init(queryResult: FMResultSet) {
-            itemCode = queryResult.stringForColumn("item_code")
-            purchaseOrderNo = queryResult.stringForColumn("po_no")
-            onPo = queryResult.doubleForColumn("on_po")
-            poEta = queryResult.stringForColumn("po_eta")
-            poDate = queryResult.stringForColumn("po_date")
+            itemCode = queryResult.string(forColumn: "item_code")
+            purchaseOrderNo = queryResult.string(forColumn: "po_no")
+            onPo = queryResult.double(forColumn: "on_po")
+            poEta = queryResult.string(forColumn: "po_eta")
+            poDate = queryResult.string(forColumn: "po_date")
     }
+
 }
 
 class Inventory : NSObject {
@@ -336,33 +340,33 @@ class Inventory : NSObject {
     
     lazy var sizeDescription : String = {
         [unowned self] in
-            let bottleSizeArray = self.size.characters.split(Int.max, allowEmptySlices: false, isSeparator: { $0 == " " }).map { String($0) }
+            let bottleSizeArray = self.size.characters.split(maxSplits: Int.max, omittingEmptySubsequences: true, whereSeparator: { $0 == " " }).map { String($0) }
             guard bottleSizeArray.count > 0 else {
                 return ""
             }
             let sizeString = bottleSizeArray[0]
             let unitString = bottleSizeArray[1]
-            return unitString == "L" ? "\(sizeString)\(unitString)" : sizeString
+            return unitString == "L" ? sizeString + unitString : sizeString
     }()
     
     lazy var uomString : String = {
         [unowned self] in
-            return self.uom.stringByReplacingOccurrencesOfString("C", withString: "")
+            return self.uom.replacingOccurrences(of: "C", with: "")
     }()
 
     lazy var itemDescription : String = {
         [unowned self] in
-            return "\(self.brand) \(self.descriptionRaw) \(self.vintage) (\(self.uomString)/\(self.sizeDescription))\(self.damagedNotes)"
+            return self.brand + " " + self.descriptionRaw + " " + self.vintage + " " + "(" + self.uomString + "/" + self.sizeDescription + ")" + self.damagedNotes
     }()
     
     lazy var mixDescription : String = {
         [unowned self] in
-        return "\(self.brand)\(self.descriptionRaw)\(self.vintage)"
+        return self.brand + self.descriptionRaw + self.vintage
         }()
     
     lazy var priceArray : [String] = {
         [unowned self] in
-            let priceStripped = self.priceString.stringByReplacingOccurrencesOfString(" ", withString: "")
+            let priceStripped = self.priceString.replacingOccurrences(of: " ", with: "")
             return priceStripped.characters.split {$0 == ","}.map { String($0) }
     }()
     
@@ -378,20 +382,24 @@ class Inventory : NSObject {
 
     lazy var backOrderQuantityAvailable: Int = {
         [unowned self] in
+        guard self.onPoTotal >= self.onBo else {
+            return 0
+        }
         return Int(round((self.onPoTotal - self.onBo) * Double(self.uomInt)))
     }()
     
     
-    lazy var getPriceTupleArray : [(price: Int, unit: Int)] = {
+    lazy var getPriceTupleArray : [(price: Double, unit: Int)] = {
         //let isBottlePricing = self.isBottlePricing
-        var tupleArray:[(price: Int, unit: Int)] = []
+        [unowned self] in
+        var tupleArray:[(price: Double, unit: Int)] = []
         for priceBreak in self.priceArray {
             let breakArray: [String]
-            breakArray = priceBreak.containsString("/") ? priceBreak.characters.split{ $0 == "/" }.map { String($0) } : [priceBreak, "1"]
-            let priceWrapped: Int? = Int(breakArray[0])
+            breakArray = priceBreak.contains("/") ? priceBreak.characters.split{ $0 == "/" }.map { String($0) } : [priceBreak, "1"]
+            let priceWrapped: Double? = Double(breakArray[0])
             let unitWrapped: Int?
             if self.isBottlePricing {
-                unitWrapped = breakArray[1] != "B" ? Int((breakArray[1].stringByReplacingOccurrencesOfString("B", withString: ""))) : 1
+                unitWrapped = breakArray[1] != "B" ? Int((breakArray[1].replacingOccurrences(of: "B", with: ""))) : 1
             } else {
                 unitWrapped = Int(breakArray[1])
             }
@@ -412,7 +420,7 @@ class Inventory : NSObject {
             } else if !self.isBottlePricing {
                 priceCaseTuple = (Double((self.getPriceTupleArray[0]).price), Double((self.getPriceTupleArray[self.getPriceTupleArray.count - 1]).price))
             } else {
-                priceCaseTuple = (Double((self.getPriceTupleArray[0]).price * self.uomInt), Double((self.getPriceTupleArray[self.getPriceTupleArray.count - 1]).price * self.uomInt))
+                priceCaseTuple = ((self.getPriceTupleArray[0]).price * Double(self.uomInt), (self.getPriceTupleArray[self.getPriceTupleArray.count - 1]).price * Double(self.uomInt))
             }
             return (priceCase: priceCaseTuple.price, discountCase: priceCaseTuple.discount, priceBottle: priceCaseTuple.price/Double(self.uomInt), discountBottle:priceCaseTuple.discount/Double(self.uomInt))
     }()
@@ -442,12 +450,12 @@ class Inventory : NSObject {
     lazy var discountList : String = {
         [unowned self] in
             var discountArray:[String] = []
-            for (index, pricebreak) in self.priceArray.enumerate() {
+            for (index, pricebreak) in self.priceArray.enumerated() {
                 if index != 0 {
                     discountArray.append(pricebreak)
                 }
             }
-            return discountArray.joinWithSeparator(",")
+            return discountArray.joined(separator: ",")
     }()
     
     lazy var onPo : String = {
@@ -456,9 +464,9 @@ class Inventory : NSObject {
                 return "0"
             }
             var poString = ""
-            for (index, po) in onPo.enumerate() {
+            for (index, po) in onPo.enumerated() {
                 let onPoString = String(format: "%g", Double(round(100*po.onPo)/100))
-                poString += "\(onPoString)"
+                poString += onPoString
                 if index <  onPo.count - 1 {
                     poString += "\n"
                 }
@@ -479,23 +487,16 @@ class Inventory : NSObject {
     }()
 
     
-    private func getPoEta(isSort isSort: Bool) -> String {
+    func getPoEta(_ isSort: Bool) -> String  {
         guard let onPo = poDict else {
             return ""
         }
-        //let dateFormatterToDate:NSDateFormatter = NSDateFormatter()
-        //dateFormatterToDate.dateFormat = "yyyyMMdd"
         var poEtaString = ""
-        for (index, po) in onPo.enumerate() {
-            //let date = dateFormatterToDate.dateFromString(po.poEta)
+        for (index, po) in onPo.enumerated() {
             let date = po.poEta.getDate()
             if let etaDate = date {
-                //let year = Dates.getYearFromDate(date: etaDate)
                 let year = etaDate.getYearInt()
                 if year > 2000 {
-                    //let dateFormatterToString:NSDateFormatter = NSDateFormatter()
-                    //dateFormatterToString.dateFormat = "M/d/yy"
-                    //poEtaString += dateFormatterToString.stringFromDate(etaDate)
                     poEtaString += etaDate.getDateGridString()
                     if isSort {
                         return poEtaString
@@ -511,38 +512,31 @@ class Inventory : NSObject {
     
     lazy var poEta : String = {
         [unowned self] in
-            return self.getPoEta(isSort: false)
+            return self.getPoEta(false)
     }()
     
-    lazy var poEtaSort : NSDate = {
+    lazy var poEtaSort : Date = {
         [unowned self] in
-            let dateString = self.getPoEta(isSort: true)
+            let dateString = self.getPoEta(true)
             guard let sortDate = dateString.getGridDate() else {
-                return NSDate.defaultPoEtaDate()
+                return Date.defaultPoEtaDate()
             }
-            return sortDate
+            return sortDate as Date
     }()
     
-    private func getPoDate(isSort isSort: Bool) -> String {
-        guard let onPo = poDict else {
+    func getPoDate(_ isSort: Bool) -> String {
+        guard let onPo = self.poDict else {
             return ""
         }
-        //let dateFormatterToDate:NSDateFormatter = NSDateFormatter()
-        var minDate = NSDate.defaultPoDate()
-        //dateFormatterToDate.dateFormat = "yyyyMMdd"
+        var minDate = Date.defaultPoDate()
         var poDateString = ""
-        for (index, po) in onPo.enumerate() {
+        for (index, po) in onPo.enumerated() {
             let date = po.poDate.getDate()
-            //let date = dateFormatterToDate.dateFromString(po.poDate)
             if let poDate = date {
                 let year = poDate.getYearInt()
-                //let year = Dates.getYearFromDate(date: poDate)
                 if year < 2000 {
                     poDateString += ""
                 } else {
-                    //let dateFormatterToString:NSDateFormatter = NSDateFormatter()
-                    //dateFormatterToString.dateFormat = "M/d/yy"
-                    //poDateString += dateFormatterToString.stringFromDate(poDate)
                     poDateString += poDate.getDateGridString()
                     if poDate.isGreaterThanDate(minDate) {
                         minDate = poDate
@@ -554,7 +548,6 @@ class Inventory : NSObject {
             }
         }
         if isSort {
-            //return Dates.getStringFromDate(date: minDate, format: "M/d/yy")
             return minDate.getDateGridString()
         } else {
             return poDateString
@@ -563,17 +556,16 @@ class Inventory : NSObject {
     
     lazy var poDate : String = {
         [unowned self] in
-            return self.getPoDate(isSort: false)
+            return self.getPoDate(false)
     }()
     
-    lazy var poDateSort : NSDate = {
+    lazy var poDateSort : Date = {
         [unowned self] in
-            let dateString = self.getPoDate(isSort: true)
-            //guard let sortDate = Dates.getDateFromString(date: dateString, format: "M/d/yy") else {
+            let dateString = self.getPoDate(true)
             guard let sortDate = dateString.getGridDate() else {
-                return NSDate.defaultPoDate()
+                return Date.defaultPoDate()
             }
-            return sortDate
+            return sortDate as Date
     }()
     
     lazy var offSale : String = {
@@ -583,7 +575,7 @@ class Inventory : NSObject {
             }
             var offSaleString = "Offsale"
             if self.restrictOffSaleNotes.characters.count > 0 {
-                offSaleString += "/\(self.restrictOffSaleNotes)"
+                offSaleString = offSaleString + "/" + self.restrictOffSaleNotes
             }
             offSaleString += "; "
             return offSaleString
@@ -601,7 +593,7 @@ class Inventory : NSObject {
     
     lazy var state : String = {
         [unowned self] in
-            return self.restrictState.characters.count > 0 ? "\(self.restrictState); " : ""
+            return self.restrictState.characters.count > 0 ? self.restrictState + "; " : ""
     }()
     
     lazy var approval : String = {
@@ -610,21 +602,21 @@ class Inventory : NSObject {
                 return ""
             }
             if self.restrictApproval=="SPECIAL ORDER" {
-                return "\(self.restrictApproval); "
-            } else if (self.restrictApproval as NSString).localizedCaseInsensitiveContainsString("Retail") {
-                let retailApproval = self.restrictApproval.stringByReplacingOccurrencesOfString("Retail", withString: "")
-                return "Retail Ask \(retailApproval); "
+                return self.restrictApproval + "; "
+            } else if (self.restrictApproval as NSString).localizedCaseInsensitiveContains("Retail") {
+                let retailApproval = self.restrictApproval.replacingOccurrences(of: "Retail", with: "")
+                return "Retail Ask " + retailApproval + "; "
             } else {
-                return "Ask \(self.restrictApproval); "
+                return "Ask " + self.restrictApproval + "; "
             }
     }()
     
     lazy var maxCases : String = {
         [unowned self] in
-            guard let maxCasesInt = Int(self.restrictMax) where maxCasesInt > 0 else {
+            guard let maxCasesInt = Int(self.restrictMax), maxCasesInt > 0 else {
                 return ""
             }
-            return "\(self.restrictMax)c Max; "
+            return self.restrictMax + "c Max; "
     }()
     
     lazy var noSample : String = {
@@ -644,11 +636,11 @@ class Inventory : NSObject {
     
     lazy var restrictedList : String = {
         [unowned self] in
-            let restricted = "\(self.offSale)\(self.allocated)\(self.premise)\(self.state)\(self.approval)\(self.maxCases)\(self.noSample)\(self.noBackOrders)\(self.noMasterOrders)"
+            let restricted = self.offSale + self.allocated + self.premise + self.state + self.approval + self.maxCases + self.noSample + self.noBackOrders + self.noMasterOrders
             guard restricted.characters.count > 0 else {
                 return ""
             }
-            return restricted[restricted.startIndex..<restricted.startIndex.advancedBy(restricted.characters.count - 2)]
+            return restricted[restricted.startIndex..<restricted.characters.index(restricted.startIndex, offsetBy: restricted.characters.count - 2)]
     }()
     
     lazy var isRestricted : Bool = {
@@ -658,65 +650,53 @@ class Inventory : NSObject {
     
     lazy var scoreWa : String = {
         [unowned self] in
-            return self.scoreWaRaw.characters.count > 0 ? "\(self.scoreWaRaw)(WA);" : ""
+            return self.scoreWaRaw.characters.count > 0 ? self.scoreWaRaw + "(WA);" : ""
     }()
     
     lazy var scoreWs : String = {
         [unowned self] in
-            return self.scoreWsRaw.characters.count > 0 ? "\(self.scoreWsRaw)(WS);" : ""
+            return self.scoreWsRaw.characters.count > 0 ? self.scoreWsRaw + "(WS);" : ""
     }()
     
     lazy var scoreIwc : String = {
         [unowned self] in
-            return self.scoreIwcRaw.characters.count > 0 ? "\(self.scoreIwcRaw)(IWC);" : ""
+            return self.scoreIwcRaw.characters.count > 0 ? self.scoreIwcRaw + "(IWC);" : ""
     }()
     
     lazy var scoreBh : String = {
         [unowned self] in
-            return self.scoreBhRaw.characters.count > 0 ? "\(self.scoreBhRaw)(BH);" : ""
+            return self.scoreBhRaw.characters.count > 0 ? self.scoreBhRaw + "(BH);" : ""
     }()
     
     lazy var scoreVm : String = {
         [unowned self] in
-            return self.scoreVmRaw.characters.count > 0 ? "\(self.scoreVmRaw)(VM);" : ""
+            return self.scoreVmRaw.characters.count > 0 ? self.scoreVmRaw + "(VM);" : ""
     }()
     
     lazy var scoreOther : String  = {
         [unowned self] in
-            return self.scoreOtherRaw.characters.count > 0 ? "\(self.scoreOtherRaw);" : ""
+            return self.scoreOtherRaw.characters.count > 0 ? self.scoreOtherRaw + ";" : ""
     }()
     
     lazy var scoreList : String  = {
         [unowned self] in
-            let scores = "\(self.scoreWa)\(self.scoreWs)\(self.scoreIwc)\(self.scoreBh)\(self.scoreVm)\(self.scoreOther)"
+            let scores = self.scoreWa + self.scoreWs + self.scoreIwc + self.scoreBh + self.scoreVm + self.scoreOther
             guard scores.characters.count > 0 else {
                 return ""
             }
-            return scores[scores.startIndex..<scores.startIndex.advancedBy(scores.characters.count - 1)]
+            return scores[scores.startIndex..<scores.characters.index(scores.startIndex, offsetBy: scores.characters.count - 1)]
     }()
-    
-    //lazy var getRowDataArray : [String] = {
-    //    [unowned self] in
-    //    var row : [String] = []
-    //    let columnData = ColumnData()
-    //    for column in columnData.data {
-    //        if let columnProperty = column[kName] as? String,
-    //            let columnValue = self.valueForKey(columnProperty) {
-    //            row.append("\(columnValue)")
-    //        }
-    //    }
-    //    return row
-    //}()
-    
-    func getPricing(quantity: Double) -> Double {
-        guard hasPriceBreaks else {
-            return priceCase
+  
+    lazy var getPricing:(Double) -> Double = {
+        [unowned self] (quantity: Double) in
+        guard self.hasPriceBreaks else {
+            return self.isBottlePricing ? self.priceBottle : self.priceCase
         }
-        let priceArray = getPriceTupleArray
+        let priceArray = self.getPriceTupleArray
         if let priceTuple = priceArray.filter({Double($0.unit) <= quantity}).last {
             return Double(priceTuple.price)
         }
-        return priceCase
+        return self.priceCase
     }
     
     lazy var hasPriceBreaks : Bool = {
@@ -726,51 +706,51 @@ class Inventory : NSObject {
     
     lazy var isBottlePricing : Bool = {
         [unowned self] in
-        return self.priceString.containsString("B")
+        return self.priceString.contains("B")
     }()
     
     init(queryResult: FMResultSet?, poDict: [String:poDictType]?) {
-        itemCode = queryResult?.stringForColumn("item_code") ?? ""
+        itemCode = queryResult?.string(forColumn: "item_code") ?? ""
         self.poDict = poDict?[itemCode]
-        quantityAvailable = queryResult?.doubleForColumn("qty_avail") ?? 0
-        quantityOnHand = queryResult?.doubleForColumn("qty_oh") ?? 0
-        onSo = queryResult?.doubleForColumn("on_so") ?? 0
-        onMo = queryResult?.doubleForColumn("on_mo") ?? 0
-        onBo = queryResult?.doubleForColumn("on_bo") ?? 0
-        descriptionRaw = queryResult?.stringForColumn("desc") ?? ""
-        brand = queryResult?.stringForColumn("brand") ?? ""
-        masterVendor = queryResult?.stringForColumn("master_vendor") ?? ""
-        vintage = queryResult?.stringForColumn("vintage") ?? ""
-        uom = queryResult?.stringForColumn("uom") ?? ""
-        size = queryResult?.stringForColumn("size") ?? ""
-        damagedNotes = queryResult?.stringForColumn("damaged_notes") ?? ""
-        closure = queryResult?.stringForColumn("closure") ?? ""
-        type = queryResult?.stringForColumn("type") ?? ""
-        varietal = queryResult?.stringForColumn("varietal") ?? ""
-        organic = queryResult?.stringForColumn("organic") ?? ""
-        biodynamic = queryResult?.stringForColumn("biodynamic") ?? ""
-        focusRaw = queryResult?.stringForColumn("focus") ?? ""
-        country = queryResult?.stringForColumn("country") ?? ""
-        region = queryResult?.stringForColumn("region") ?? ""
-        appellation = queryResult?.stringForColumn("appellation") ?? ""
-        restrictOffSale = queryResult?.stringForColumn("restrict_offsale") ?? ""
-        restrictOffSaleNotes = queryResult?.stringForColumn("restrict_offsale_notes") ?? ""
-        restrictAllocated = queryResult?.stringForColumn("restrict_allocated") ?? ""
-        restrictPremise = queryResult?.stringForColumn("restrict_premise") ?? ""
-        restrictState = queryResult?.stringForColumn("restrict_state") ?? ""
-        restrictApproval = queryResult?.stringForColumn("restrict_approval") ?? ""
-        restrictMax = queryResult?.stringForColumn("restrict_max") ?? ""
-        restrictSample = queryResult?.stringForColumn("restrict_sample") ?? ""
-        restrictBo = queryResult?.stringForColumn("restrict_bo") ?? ""
-        restrictMo = queryResult?.stringForColumn("restrict_mo") ?? ""
-        date = queryResult?.stringForColumn("date") ?? ""
-        priceString = queryResult?.stringForColumn("price_desc") ?? ""
-        upc = queryResult?.stringForColumn("upc") ?? ""
-        scoreWaRaw = queryResult?.stringForColumn("score_wa") ?? ""
-        scoreWsRaw = queryResult?.stringForColumn("score_ws") ?? ""
-        scoreVmRaw = queryResult?.stringForColumn("score_vm") ?? ""
-        scoreIwcRaw = queryResult?.stringForColumn("score_iwc") ?? ""
-        scoreBhRaw = queryResult?.stringForColumn("score_bh") ?? ""
-        scoreOtherRaw = queryResult?.stringForColumn("score_other") ?? ""
+        quantityAvailable = queryResult?.double(forColumn: "qty_avail") ?? 0
+        quantityOnHand = queryResult?.double(forColumn: "qty_oh") ?? 0
+        onSo = queryResult?.double(forColumn: "on_so") ?? 0
+        onMo = queryResult?.double(forColumn: "on_mo") ?? 0
+        onBo = queryResult?.double(forColumn: "on_bo") ?? 0
+        descriptionRaw = queryResult?.string(forColumn: "desc") ?? ""
+        brand = queryResult?.string(forColumn: "brand") ?? ""
+        masterVendor = queryResult?.string(forColumn: "master_vendor") ?? ""
+        vintage = queryResult?.string(forColumn: "vintage") ?? ""
+        uom = queryResult?.string(forColumn: "uom") ?? ""
+        size = queryResult?.string(forColumn: "size") ?? ""
+        damagedNotes = queryResult?.string(forColumn: "damaged_notes") ?? ""
+        closure = queryResult?.string(forColumn: "closure") ?? ""
+        type = queryResult?.string(forColumn: "type") ?? ""
+        varietal = queryResult?.string(forColumn: "varietal") ?? ""
+        organic = queryResult?.string(forColumn: "organic") ?? ""
+        biodynamic = queryResult?.string(forColumn: "biodynamic") ?? ""
+        focusRaw = queryResult?.string(forColumn: "focus") ?? ""
+        country = queryResult?.string(forColumn: "country") ?? ""
+        region = queryResult?.string(forColumn: "region") ?? ""
+        appellation = queryResult?.string(forColumn: "appellation") ?? ""
+        restrictOffSale = queryResult?.string(forColumn: "restrict_offsale") ?? ""
+        restrictOffSaleNotes = queryResult?.string(forColumn: "restrict_offsale_notes") ?? ""
+        restrictAllocated = queryResult?.string(forColumn: "restrict_allocated") ?? ""
+        restrictPremise = queryResult?.string(forColumn: "restrict_premise") ?? ""
+        restrictState = queryResult?.string(forColumn: "restrict_state") ?? ""
+        restrictApproval = queryResult?.string(forColumn: "restrict_approval") ?? ""
+        restrictMax = queryResult?.string(forColumn: "restrict_max") ?? ""
+        restrictSample = queryResult?.string(forColumn: "restrict_sample") ?? ""
+        restrictBo = queryResult?.string(forColumn: "restrict_bo") ?? ""
+        restrictMo = queryResult?.string(forColumn: "restrict_mo") ?? ""
+        date = queryResult?.string(forColumn: "date") ?? ""
+        priceString = queryResult?.string(forColumn: "price_desc") ?? ""
+        upc = queryResult?.string(forColumn: "upc") ?? ""
+        scoreWaRaw = queryResult?.string(forColumn: "score_wa") ?? ""
+        scoreWsRaw = queryResult?.string(forColumn: "score_ws") ?? ""
+        scoreVmRaw = queryResult?.string(forColumn: "score_vm") ?? ""
+        scoreIwcRaw = queryResult?.string(forColumn: "score_iwc") ?? ""
+        scoreBhRaw = queryResult?.string(forColumn: "score_bh") ?? ""
+        scoreOtherRaw = queryResult?.string(forColumn: "score_other") ?? ""
     }
 }

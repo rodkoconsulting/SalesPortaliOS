@@ -2,122 +2,79 @@
 //  OrderInventory.swift
 //  SalesPortal
 //
+//  Created by administrator on 2/6/17.
+//  Copyright © 2017 Polaner Selections. All rights reserved.
+//
+
+import Foundation
+//
+//  OrderInventory.swift
+//  SalesPortal
+//
 //  Created by administrator on 6/7/16.
 //  Copyright © 2016 Polaner Selections. All rights reserved.
 //
 
 import Foundation
 
-protocol OrderInventoryDelegate: class {
-    func updateOrderPricing(mixDesc mixDesc: String, quantityDelta: Double)
-}
-
 protocol OrderInventoryErrorDelegate: class {
-    func sendAlert(error: ErrorCode)
+    func sendAlert(_ error: ErrorCode)
+    func saveOrderDelegate()
 }
 
-class OrderInventory: Inventory {
+
+protocol isOrderInventory {
+    weak var errorDelegate: OrderInventoryErrorDelegate? { get set }
+}
+
+
+class OrderInventory: Inventory, isOrderInventory {
     
     let lastQuantity: Double
-    let lastPrice: Double
-    let lastDate: NSDate
+    let lastDate: Date
+    var comment: String?
+    let groupKey: String = ""
     
-    var isOverride: Bool
-    var orderType: OrderType?
-    var cases: Int {
-        didSet {
-            if isOverSold  {
-                cases = oldValue
-                errorDelegate?.sendAlert(.NoQuantity(itemCode: itemCode))
-                return
-            }
-            let quantityDelta = Double(cases - oldValue)
-            updateLinePricing(quantityDelta)
-        }
-    }
+    var isGridUpdate: Bool = true
     
+    var cases: Int = 0
     
     var bottles: Int {
         didSet {
-            if bottlesExceedCase   {
+            if bottles < 0  {
                 bottles = oldValue
                 return
             }
-            if isOverSold  {
+            if isOverSold(bottles)  {
                 bottles = oldValue
-                errorDelegate?.sendAlert(.NoQuantity(itemCode: itemCode))
+                errorDelegate?.sendAlert(.noQuantity(itemCode: itemCode))
                 return
             }
-            let quantityDelta = Double(bottles - oldValue) / Double(uomInt)
-            updateLinePricing(quantityDelta)
+            errorDelegate?.saveOrderDelegate();
         }
-    }
-    
-    var unitPrice: Double
-    
-    var isOverSold : Bool {
-        guard let orderType = orderType else {
-            return false
-        }
-        switch orderType {
-            case .Standard, .Master:
-                return bottleQtyFromOpen > bottleQuantityAvailable
-            case .Back:
-                return bottleTotal > backOrderQuantityAvailable
-            default:
-                return false
-        }
-    }
-    
-    func checkOrderTypeChangeOverSell() -> String? {
-        guard isOverSold else {
-            return nil
-        }
-        //errorDelegate?.sendAlert(.NoQuantity(itemCode: itemCode))
-        cases = 0
-        bottles = 0
-        return itemCode
-    }
-    
-    var bottleQtyFromOpen : Int {
-        return bottleTotal
     }
     
     var bottleTotal: Int {
         return cases * uomInt + bottles
     }
     
-    var priceTotal: Double {
-        return unitPrice * Double(bottleTotal) / Double(uomInt)
+    func isOverSold(_ bottleTotal: Int) -> Bool  {
+        return bottleTotal > bottleQuantityAvailable
     }
     
-    var bottlesExceedCase: Bool {
-        return (bottles > uomInt - 1)
-    }
-    
-    weak var delegate: OrderInventoryDelegate?
     weak var errorDelegate: OrderInventoryErrorDelegate?
     
     override init(queryResult: FMResultSet?, poDict: [String : poDictType]?) {
-        self.cases = 0
         self.bottles = 0
-        self.unitPrice = 0
-        self.isOverride = false
-        self.lastQuantity = queryResult?.doubleForColumn("last_qty") ?? 0
-        self.lastPrice = queryResult?.doubleForColumn("last_price") ?? 0
-        let lastDateString = queryResult?.stringForColumn("last_date")
-        self.lastDate = lastDateString?.getShipDate() ??  NSDate.defaultPoDate()
+        self.lastQuantity = queryResult?.double(forColumn: "last_qty") ?? 0
+        let lastDateString = queryResult?.string(forColumn: "last_date")
+        self.lastDate = lastDateString?.getShipDate() as! Date ??  Date.defaultPoDate()
         super.init(queryResult: queryResult, poDict: poDict)
-        self.unitPrice = self.priceCase
     }
     
-    private func updateLinePricing(quantityDelta: Double) {
-        //if bottleTotal == 0 {
-        //    unitPrice = priceCase
-        //} else {
-            unitPrice = isBottlePricing ? getPricing(Double(bottleTotal)) : getPricing(Double(bottleTotal) / Double(uomInt))
-        //}
-        isOverride = false
-        delegate?.updateOrderPricing(mixDesc: mixDescription, quantityDelta: quantityDelta)
+    func getDbDetailInsert(_ orderNo: Int) -> String {
+        return "(\(orderNo), '" + itemCode + "', \(bottles))"
     }
+
+    
 }

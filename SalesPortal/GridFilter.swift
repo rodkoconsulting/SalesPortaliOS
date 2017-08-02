@@ -33,12 +33,12 @@ enum StringCondition : String {
 
     static let allValues = [Contains.rawValue, NotContains.rawValue, StartsWith.rawValue, EndsWith.rawValue, Equals.rawValue, NotEquals.rawValue]
     
-    func isMatched(text text: String, filterText: String) -> Bool {
+    func isMatched(text: String, filterText: String) -> Bool {
         switch self {
         case .Contains:
-            return text.rangeOfString(filterText) != nil
+            return text.range(of: filterText) != nil
         case .NotContains:
-            return text.rangeOfString(filterText) == nil
+            return text.range(of: filterText) == nil
         case .StartsWith:
             return text.hasPrefix(filterText)
         case .EndsWith:
@@ -61,7 +61,7 @@ enum NumberCondition : String {
     
     static let allValues = [Equals.rawValue, Greater.rawValue, GreaterEquals.rawValue, Less.rawValue, LessEquals.rawValue, NotEquals.rawValue]
     
-    func isMatched(number number: Double, filterNumber: Double) -> Bool {
+    func isMatched(number: Double, filterNumber: Double) -> Bool {
         switch self {
         case .Equals:
             if number == filterNumber {
@@ -99,7 +99,7 @@ enum DateCondition : String {
     
     static let allValues = [Equals.rawValue, Greater.rawValue, Less.rawValue]
     
-    func isMatched(date date: NSDate, filterDate: NSDate) -> Bool {
+    func isMatched(date: Date, filterDate: Date) -> Bool {
         switch self {
         case .Equals:
             if date == filterDate {
@@ -127,23 +127,23 @@ enum BoolCondition: String {
 
 class ColumnFilter : NSObject {
     var value : String = ""
-    var filterOperatior : FilterOperator = FilterOperator.And
+    var filterOperator : FilterOperator = FilterOperator.And
     var condition : String
 
     init(condition: String) {
         self.condition = condition
     }
     
-    func getStringResult(value value: String) -> Bool {
-        let text = value.lowercaseString
-        let filterText = self.value.lowercaseString
+    func getStringResult(value: String) -> Bool {
+        let text = value.lowercased()
+        let filterText = self.value.lowercased()
         guard let condition = StringCondition(rawValue: self.condition) else {
             return false
         }
         return condition.isMatched(text: text, filterText: filterText)
     }
     
-    func getNumberResult(value value: String) -> Bool {
+    func getNumberResult(value: String) -> Bool {
         guard let number = Double(value),
             let filterNumber = Double(self.value),
             let condition = NumberCondition(rawValue: self.condition) else {
@@ -152,23 +152,23 @@ class ColumnFilter : NSObject {
         return condition.isMatched(number: number, filterNumber: filterNumber)
     }
     
-    func getDateResult(value value: String) -> Bool {
+    func getDateResult(value: String) -> Bool {
             guard let date = value.getGridDate(),
                     let filterDate = self.value.getGridDate(),
                     let condition = DateCondition(rawValue: self.condition) else {
                 return false
             }
-        return condition.isMatched(date: date, filterDate: filterDate)
+        return condition.isMatched(date: date as Date, filterDate: filterDate as Date)
         }
     
-    func getBoolResult(value value: String) -> Bool {
+    func getBoolResult(value: String) -> Bool {
         let boolValue = (value as NSString).boolValue
         let filterValue = (self.value as NSString).boolValue
         return filterValue == boolValue
     }
 
     
-    func getResult(value value: String, filterType: FilterType) -> Bool {
+    func getResult(value: String, filterType: FilterType) -> Bool {
         switch filterType {
         case .String:
                 return getStringResult(value: value)
@@ -180,6 +180,7 @@ class ColumnFilter : NSObject {
             return getBoolResult(value: value)
         }
     }
+    
 }
 
 class ColumnFilters : NSObject {
@@ -208,7 +209,7 @@ class ColumnFilters : NSObject {
         self.header = header
     }
     
-    func getFilterResults(filterTuple: [(filterBool: Bool, filterOperator: FilterOperator)]) -> Bool {
+    func getFilterResults(_ filterTuple: [(filterBool: Bool, filterOperator: FilterOperator)]) -> Bool {
         var filterResults = filterTuple.first!.filterBool
         guard filterTuple.count > 1  else {
             return filterResults
@@ -220,5 +221,5 @@ class ColumnFilters : NSObject {
         }
         return filterResults
     }
-    
+
 }

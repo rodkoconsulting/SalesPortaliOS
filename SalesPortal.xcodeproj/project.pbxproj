@@ -7,18 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C302B98A1D01BC6B00B04DB6 /* OrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302B9891D01BC6B00B04DB6 /* OrderHeaderViewController.swift */; };
-		C302B98C1D01C15900B04DB6 /* OrderTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302B98B1D01C15900B04DB6 /* OrderTabBarController.swift */; };
+		078BA24F1F31087300588A92 /* XuniInputKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078BA24E1F31087300588A92 /* XuniInputKit.framework */; };
+		078BA2511F310CCF00588A92 /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078BA2501F310CCF00588A92 /* SwiftSpinner.swift */; };
+		C300D4B81E490D5100183B32 /* SampleOrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300D4B71E490D5100183B32 /* SampleOrderHeaderViewController.swift */; };
+		C300D4BA1E494DE700183B32 /* AccountOrderHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300D4B91E494DE700183B32 /* AccountOrderHistoryViewController.swift */; };
+		C302B98A1D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302B9891D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift */; };
 		C309FC111D05DBB5002868BD /* ShipDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C309FC101D05DBB5002868BD /* ShipDateViewController.swift */; };
 		C309FC131D05E294002868BD /* XuniCalendarKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309FC121D05E294002868BD /* XuniCalendarKit.framework */; };
+		C31734571DA2A1AB00C60830 /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31734561DA2A1AB00C60830 /* OrderListViewController.swift */; };
+		C318DB961DD0E83900DB7812 /* AccountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318DB951DD0E83900DB7812 /* AccountInfoViewController.swift */; };
+		C31F1F3D1E3BDE3400F1ACC0 /* SampleOrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31F1F3C1E3BDE3300F1ACC0 /* SampleOrderService.swift */; };
+		C33791101DAC5AD2009EA4C1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C337910F1DAC5AD1009EA4C1 /* CoreMedia.framework */; };
+		C33791121DAC5ADA009EA4C1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33791111DAC5ADA009EA4C1 /* CoreMotion.framework */; };
+		C33791141DAC5AE8009EA4C1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33791131DAC5AE8009EA4C1 /* AVFoundation.framework */; };
+		C33791161DAC5B02009EA4C1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33791151DAC5B02009EA4C1 /* SystemConfiguration.framework */; };
+		C33791181DAC5B14009EA4C1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33791171DAC5B14009EA4C1 /* OpenGLES.framework */; };
+		C33A556B1E31422E00C6C28A /* SampleOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A556A1E31422E00C6C28A /* SampleOrder.swift */; };
 		C33A58A41CBD90E300644ED3 /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A58A21CBD90E300644ED3 /* Locksmith.swift */; };
 		C33A58A51CBD90E300644ED3 /* LocksmithRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A58A31CBD90E300644ED3 /* LocksmithRequest.swift */; };
+		C344AF9B1E4A2F1B00BB1E6D /* AccountOrderInventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C344AF9A1E4A2F1B00BB1E6D /* AccountOrderInventoryViewController.swift */; };
+		C344AF9D1E4A7C7100BB1E6D /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = C344AF9C1E4A7C7000BB1E6D /* Order.swift */; };
+		C344AFA11E4B91C500BB1E6D /* OrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C344AFA01E4B91C500BB1E6D /* OrderHeaderViewController.swift */; };
+		C34AF3E21D2FFBFA00294278 /* OrderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34AF3E11D2FFBFA00294278 /* OrderList.swift */; };
+		C354DBA61E36740800497C9D /* SampleOrderAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354DBA51E36740800497C9D /* SampleOrderAddress.swift */; };
+		C354DBA81E367D7F00497C9D /* SampleOrderAddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354DBA71E367D7F00497C9D /* SampleOrderAddressService.swift */; };
 		C35A73751D21A498000644F6 /* OrderHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35A73741D21A498000644F6 /* OrderHistoryViewController.swift */; };
-		C364481E1D02005300A545DD /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = C364481D1D02005300A545DD /* Order.swift */; };
+		C35A9EFB1E45205A00C5BC1C /* SampleOrderNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35A9EFA1E45205A00C5BC1C /* SampleOrderNotesViewController.swift */; };
+		C35A9EFD1E48E91500C5BC1C /* OrderTabBarController_new.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35A9EFC1E48E91500C5BC1C /* OrderTabBarController_new.swift */; };
+		C35A9EFF1E48F13B00C5BC1C /* OrderInventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35A9EFE1E48F13B00C5BC1C /* OrderInventory.swift */; };
+		C35A9F011E48F2DE00C5BC1C /* OrderNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35A9F001E48F2DE00C5BC1C /* OrderNotesViewController.swift */; };
+		C364481E1D02005300A545DD /* AccountOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C364481D1D02005300A545DD /* AccountOrder.swift */; };
 		C36448201D02181C00A545DD /* Holidays.plist in Resources */ = {isa = PBXBuildFile; fileRef = C364481F1D02181C00A545DD /* Holidays.plist */; };
+		C36796AF1F2A6904000F38BC /* upload-dsym.sh in Resources */ = {isa = PBXBuildFile; fileRef = C36796AC1F2A6904000F38BC /* upload-dsym.sh */; };
+		C36796B01F2A6904000F38BC /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C36796AD1F2A6904000F38BC /* libTestFairy.a */; };
+		C36C04831E26E013008078B5 /* SampleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36C04821E26E013008078B5 /* SampleListViewController.swift */; };
+		C36C7AC91E52564C00985F1F /* SampleOrderInventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36C7AC81E52564C00985F1F /* SampleOrderInventoryViewController.swift */; };
+		C36C7ACB1E5263ED00985F1F /* SampleOrderHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36C7ACA1E5263ED00985F1F /* SampleOrderHistoryViewController.swift */; };
 		C37F4A471CF34DAA00665ED0 /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A461CF34DAA00665ED0 /* License.swift */; };
 		C37F4A4F1CF352C300665ED0 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A4E1CF352C300665ED0 /* SyncService.swift */; };
-		C37F4A511CF3750400665ED0 /* SwiftSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A501CF3750400665ED0 /* SwiftSpinner.swift */; };
 		C37F4A541CF377A900665ED0 /* Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A531CF377A900665ED0 /* Inventory.swift */; };
 		C37F4A561CF377EA00665ED0 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A551CF377EA00665ED0 /* AccountService.swift */; };
 		C37F4A581CF3787F00665ED0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A571CF3787F00665ED0 /* Constants.swift */; };
@@ -35,22 +61,29 @@
 		C37F4A791CF3A2CC00665ED0 /* XuniCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C37F4A781CF3A2CC00665ED0 /* XuniCoreKit.framework */; };
 		C37F4A7B1CF3A2E700665ED0 /* XuniFlexGridKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C37F4A7A1CF3A2E700665ED0 /* XuniFlexGridKit.framework */; };
 		C37F4A7D1CF3A47100665ED0 /* GridDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A7C1CF3A47100665ED0 /* GridDataSource.swift */; };
-		C37F4A7F1CF3A48100665ED0 /* GridColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A7E1CF3A48100665ED0 /* GridColumn.swift */; };
+		C37F4A7F1CF3A48100665ED0 /* DataGridColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A7E1CF3A48100665ED0 /* DataGridColumn.swift */; };
 		C37F4A811CF3A49A00665ED0 /* DataExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A801CF3A49A00665ED0 /* DataExport.swift */; };
-		C3A6D2D81D0A0A9600AFFB3A /* OrderTypePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A6D2D71D0A0A9600AFFB3A /* OrderTypePickerViewController.swift */; };
+		C383DD651E0B23C40020E6B3 /* SampleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C383DD641E0B23C40020E6B3 /* SampleList.swift */; };
+		C383DD671E0B37670020E6B3 /* SampleListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C383DD661E0B37670020E6B3 /* SampleListService.swift */; };
+		C39D06DA1D3EB294008D4DB7 /* OrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39D06D91D3EB294008D4DB7 /* OrderService.swift */; };
+		C3A896431DEDECD200148660 /* InvoiceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A896421DEDECD200148660 /* InvoiceList.swift */; };
 		C3AE55441CC175A1000859E7 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AE55431CC175A1000859E7 /* Account.swift */; };
 		C3AE55521CC18404000859E7 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE55491CC18404000859E7 /* FMDatabase.m */; };
 		C3AE55531CC18404000859E7 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE554B1CC18404000859E7 /* FMResultSet.m */; };
 		C3AE55541CC18404000859E7 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE554D1CC18404000859E7 /* FMDatabaseQueue.m */; };
 		C3AE55551CC18404000859E7 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE554F1CC18404000859E7 /* FMDatabaseAdditions.m */; };
 		C3AE55561CC18404000859E7 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AE55511CC18404000859E7 /* FMDatabasePool.m */; };
-		C3AEC95E1D105E3300E3EB41 /* OrderNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AEC95D1D105E3300E3EB41 /* OrderNotesViewController.swift */; };
-		C3AEC9601D108EAF00E3EB41 /* OrderCoopNoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AEC95F1D108EAF00E3EB41 /* OrderCoopNoPickerViewController.swift */; };
+		C3AEC95E1D105E3300E3EB41 /* AccountOrderNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AEC95D1D105E3300E3EB41 /* AccountOrderNotesViewController.swift */; };
+		C3BC29D21D30286200BBEFC3 /* OrderListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BC29D11D30286200BBEFC3 /* OrderListService.swift */; };
+		C3CFF78E1D47BEC600802784 /* OrderSavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFF78D1D47BEC600802784 /* OrderSavedViewController.swift */; };
+		C3CFF7901D47EA2500802784 /* OrderSavedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFF78F1D47EA2500802784 /* OrderSavedService.swift */; };
+		C3CFF7921D47F1AA00802784 /* OrderSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CFF7911D47F1AA00802784 /* OrderSaved.swift */; };
+		C3D424971D4275A2000BE982 /* ComboData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D424961D4275A2000BE982 /* ComboData.swift */; };
 		C3D45EC71D0ECC1F0023E234 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D45EC61D0ECC1F0023E234 /* InitialViewController.swift */; };
 		C3DB417B1CFDFA2F00D4BD63 /* AccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB417A1CFDFA2F00D4BD63 /* AccountsViewController.swift */; };
 		C3E386691D071779009FEB20 /* OrderInventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E386681D071779009FEB20 /* OrderInventoryViewController.swift */; };
-		C3E3866B1D07247A009FEB20 /* OrderInventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E3866A1D07247A009FEB20 /* OrderInventory.swift */; };
-		C3E3866D1D076631009FEB20 /* OrderInventoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E3866C1D076631009FEB20 /* OrderInventoryService.swift */; };
+		C3E3866B1D07247A009FEB20 /* AccountOrderInventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E3866A1D07247A009FEB20 /* AccountOrderInventory.swift */; };
+		C3E3866D1D076631009FEB20 /* AccountOrderInventoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E3866C1D076631009FEB20 /* AccountOrderInventoryService.swift */; };
 		C3E386711D085CC9009FEB20 /* DataGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E386701D085CC9009FEB20 /* DataGridViewController.swift */; };
 		C3EAC00F1CF8846A0054D031 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC00E1CF8846A0054D031 /* MainTabBarController.swift */; };
 		C3EAC0111CF8A8510054D031 /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EAC0101CF8A8510054D031 /* InventoryViewController.swift */; };
@@ -72,21 +105,55 @@
 		C3ED0AAC1CBD8D7400B9520E /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED0AAB1CBD8D7400B9520E /* ApiService.swift */; };
 		C3ED0AAE1CBD8DEC00B9520E /* ApiOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ED0AAD1CBD8DEC00B9520E /* ApiOperation.swift */; };
 		C3F19F8E1D2320AD00D76C73 /* MPGTextField-Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F19F8D1D2320AD00D76C73 /* MPGTextField-Swift.swift */; };
+		C3F372F11D343CA700E7F39A /* MoboListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F372F01D343CA700E7F39A /* MoboListService.swift */; };
+		C3F372F31D3581A700E7F39A /* OrderMobosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F372F21D3581A700E7F39A /* OrderMobosViewController.swift */; };
+		C3F372F51D36C62000E7F39A /* MoboList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F372F41D36C62000E7F39A /* MoboList.swift */; };
+		C3F632111D874C8E007BC756 /* CalendarModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F632101D874C8E007BC756 /* CalendarModalView.swift */; };
+		C3F632131D87522A007BC756 /* FilterDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F632121D87522A007BC756 /* FilterDateViewController.swift */; };
+		C3F7167F1E2E7BE4001933D9 /* SampleOrderInventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F7167E1E2E7BE4001933D9 /* SampleOrderInventory.swift */; };
+		C3F716811E2E8420001933D9 /* SampleOrderInventoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F716801E2E8420001933D9 /* SampleOrderInventoryService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C302B9891D01BC6B00B04DB6 /* OrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHeaderViewController.swift; sourceTree = "<group>"; };
-		C302B98B1D01C15900B04DB6 /* OrderTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderTabBarController.swift; sourceTree = "<group>"; };
+		078BA24E1F31087300588A92 /* XuniInputKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XuniInputKit.framework; path = ../Xuni/iOS/Controls/XuniInputKit.framework; sourceTree = "<group>"; };
+		078BA2501F310CCF00588A92 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
+		C300D4B71E490D5100183B32 /* SampleOrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderHeaderViewController.swift; sourceTree = "<group>"; };
+		C300D4B91E494DE700183B32 /* AccountOrderHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderHistoryViewController.swift; sourceTree = "<group>"; };
+		C302B9891D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderHeaderViewController.swift; sourceTree = "<group>"; };
 		C309FC101D05DBB5002868BD /* ShipDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShipDateViewController.swift; sourceTree = "<group>"; };
 		C309FC121D05E294002868BD /* XuniCalendarKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XuniCalendarKit.framework; path = ../Xuni/iOS/Controls/XuniCalendarKit.framework; sourceTree = "<group>"; };
+		C31734561DA2A1AB00C60830 /* OrderListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderListViewController.swift; sourceTree = "<group>"; };
+		C318DB951DD0E83900DB7812 /* AccountInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoViewController.swift; sourceTree = "<group>"; };
+		C31F1F3C1E3BDE3300F1ACC0 /* SampleOrderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderService.swift; sourceTree = "<group>"; };
+		C337910F1DAC5AD1009EA4C1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		C33791111DAC5ADA009EA4C1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		C33791131DAC5AE8009EA4C1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C33791151DAC5B02009EA4C1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C33791171DAC5B14009EA4C1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		C33A556A1E31422E00C6C28A /* SampleOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrder.swift; sourceTree = "<group>"; };
 		C33A58A21CBD90E300644ED3 /* Locksmith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locksmith.swift; sourceTree = "<group>"; };
 		C33A58A31CBD90E300644ED3 /* LocksmithRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithRequest.swift; sourceTree = "<group>"; };
+		C344AF9A1E4A2F1B00BB1E6D /* AccountOrderInventoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderInventoryViewController.swift; sourceTree = "<group>"; };
+		C344AF9C1E4A7C7000BB1E6D /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		C344AFA01E4B91C500BB1E6D /* OrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHeaderViewController.swift; sourceTree = "<group>"; };
+		C34AF3E11D2FFBFA00294278 /* OrderList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderList.swift; sourceTree = "<group>"; };
+		C354DBA51E36740800497C9D /* SampleOrderAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderAddress.swift; sourceTree = "<group>"; };
+		C354DBA71E367D7F00497C9D /* SampleOrderAddressService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderAddressService.swift; sourceTree = "<group>"; };
 		C35A73741D21A498000644F6 /* OrderHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHistoryViewController.swift; sourceTree = "<group>"; };
-		C364481D1D02005300A545DD /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		C35A9EFA1E45205A00C5BC1C /* SampleOrderNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderNotesViewController.swift; sourceTree = "<group>"; };
+		C35A9EFC1E48E91500C5BC1C /* OrderTabBarController_new.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderTabBarController_new.swift; sourceTree = "<group>"; };
+		C35A9EFE1E48F13B00C5BC1C /* OrderInventory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderInventory.swift; sourceTree = "<group>"; };
+		C35A9F001E48F2DE00C5BC1C /* OrderNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderNotesViewController.swift; sourceTree = "<group>"; };
+		C364481D1D02005300A545DD /* AccountOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrder.swift; sourceTree = "<group>"; };
 		C364481F1D02181C00A545DD /* Holidays.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Holidays.plist; sourceTree = "<group>"; };
+		C36796AC1F2A6904000F38BC /* upload-dsym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-dsym.sh"; sourceTree = "<group>"; };
+		C36796AD1F2A6904000F38BC /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
+		C36796AE1F2A6904000F38BC /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
+		C36C04821E26E013008078B5 /* SampleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleListViewController.swift; sourceTree = "<group>"; };
+		C36C7AC81E52564C00985F1F /* SampleOrderInventoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderInventoryViewController.swift; sourceTree = "<group>"; };
+		C36C7ACA1E5263ED00985F1F /* SampleOrderHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderHistoryViewController.swift; sourceTree = "<group>"; };
 		C37F4A461CF34DAA00665ED0 /* License.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
 		C37F4A4E1CF352C300665ED0 /* SyncService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
-		C37F4A501CF3750400665ED0 /* SwiftSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSpinner.swift; sourceTree = "<group>"; };
 		C37F4A531CF377A900665ED0 /* Inventory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inventory.swift; sourceTree = "<group>"; };
 		C37F4A551CF377EA00665ED0 /* AccountService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		C37F4A571CF3787F00665ED0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -103,9 +170,12 @@
 		C37F4A781CF3A2CC00665ED0 /* XuniCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XuniCoreKit.framework; path = ../Xuni/iOS/Controls/XuniCoreKit.framework; sourceTree = "<group>"; };
 		C37F4A7A1CF3A2E700665ED0 /* XuniFlexGridKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XuniFlexGridKit.framework; path = ../Xuni/iOS/Controls/XuniFlexGridKit.framework; sourceTree = "<group>"; };
 		C37F4A7C1CF3A47100665ED0 /* GridDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridDataSource.swift; sourceTree = "<group>"; };
-		C37F4A7E1CF3A48100665ED0 /* GridColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridColumn.swift; sourceTree = "<group>"; };
+		C37F4A7E1CF3A48100665ED0 /* DataGridColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataGridColumn.swift; sourceTree = "<group>"; };
 		C37F4A801CF3A49A00665ED0 /* DataExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExport.swift; sourceTree = "<group>"; };
-		C3A6D2D71D0A0A9600AFFB3A /* OrderTypePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderTypePickerViewController.swift; sourceTree = "<group>"; };
+		C383DD641E0B23C40020E6B3 /* SampleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleList.swift; sourceTree = "<group>"; };
+		C383DD661E0B37670020E6B3 /* SampleListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleListService.swift; sourceTree = "<group>"; };
+		C39D06D91D3EB294008D4DB7 /* OrderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderService.swift; sourceTree = "<group>"; };
+		C3A896421DEDECD200148660 /* InvoiceList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceList.swift; sourceTree = "<group>"; };
 		C3AE55431CC175A1000859E7 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		C3AE55461CC18404000859E7 /* SalesPortal-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SalesPortal-Bridging-Header.h"; sourceTree = "<group>"; };
 		C3AE55471CC18404000859E7 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
@@ -119,13 +189,17 @@
 		C3AE554F1CC18404000859E7 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		C3AE55501CC18404000859E7 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
 		C3AE55511CC18404000859E7 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		C3AEC95D1D105E3300E3EB41 /* OrderNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderNotesViewController.swift; sourceTree = "<group>"; };
-		C3AEC95F1D108EAF00E3EB41 /* OrderCoopNoPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCoopNoPickerViewController.swift; sourceTree = "<group>"; };
+		C3AEC95D1D105E3300E3EB41 /* AccountOrderNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderNotesViewController.swift; sourceTree = "<group>"; };
+		C3BC29D11D30286200BBEFC3 /* OrderListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderListService.swift; sourceTree = "<group>"; };
+		C3CFF78D1D47BEC600802784 /* OrderSavedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderSavedViewController.swift; sourceTree = "<group>"; };
+		C3CFF78F1D47EA2500802784 /* OrderSavedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderSavedService.swift; sourceTree = "<group>"; };
+		C3CFF7911D47F1AA00802784 /* OrderSaved.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderSaved.swift; sourceTree = "<group>"; };
+		C3D424961D4275A2000BE982 /* ComboData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComboData.swift; sourceTree = "<group>"; };
 		C3D45EC61D0ECC1F0023E234 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		C3DB417A1CFDFA2F00D4BD63 /* AccountsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsViewController.swift; sourceTree = "<group>"; };
 		C3E386681D071779009FEB20 /* OrderInventoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderInventoryViewController.swift; sourceTree = "<group>"; };
-		C3E3866A1D07247A009FEB20 /* OrderInventory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderInventory.swift; sourceTree = "<group>"; };
-		C3E3866C1D076631009FEB20 /* OrderInventoryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderInventoryService.swift; sourceTree = "<group>"; };
+		C3E3866A1D07247A009FEB20 /* AccountOrderInventory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderInventory.swift; sourceTree = "<group>"; };
+		C3E3866C1D076631009FEB20 /* AccountOrderInventoryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderInventoryService.swift; sourceTree = "<group>"; };
 		C3E386701D085CC9009FEB20 /* DataGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataGridViewController.swift; sourceTree = "<group>"; };
 		C3EAC00E1CF8846A0054D031 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		C3EAC0101CF8A8510054D031 /* InventoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +223,13 @@
 		C3ED0AAB1CBD8D7400B9520E /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		C3ED0AAD1CBD8DEC00B9520E /* ApiOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiOperation.swift; sourceTree = "<group>"; };
 		C3F19F8D1D2320AD00D76C73 /* MPGTextField-Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MPGTextField-Swift.swift"; sourceTree = "<group>"; };
+		C3F372F01D343CA700E7F39A /* MoboListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoboListService.swift; sourceTree = "<group>"; };
+		C3F372F21D3581A700E7F39A /* OrderMobosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderMobosViewController.swift; sourceTree = "<group>"; };
+		C3F372F41D36C62000E7F39A /* MoboList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoboList.swift; sourceTree = "<group>"; };
+		C3F632101D874C8E007BC756 /* CalendarModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarModalView.swift; sourceTree = "<group>"; };
+		C3F632121D87522A007BC756 /* FilterDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterDateViewController.swift; sourceTree = "<group>"; };
+		C3F7167E1E2E7BE4001933D9 /* SampleOrderInventory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderInventory.swift; sourceTree = "<group>"; };
+		C3F716801E2E8420001933D9 /* SampleOrderInventoryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderInventoryService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,7 +237,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				078BA24F1F31087300588A92 /* XuniInputKit.framework in Frameworks */,
+				C33791181DAC5B14009EA4C1 /* OpenGLES.framework in Frameworks */,
+				C33791161DAC5B02009EA4C1 /* SystemConfiguration.framework in Frameworks */,
+				C33791141DAC5AE8009EA4C1 /* AVFoundation.framework in Frameworks */,
+				C33791121DAC5ADA009EA4C1 /* CoreMotion.framework in Frameworks */,
+				C33791101DAC5AD2009EA4C1 /* CoreMedia.framework in Frameworks */,
 				C309FC131D05E294002868BD /* XuniCalendarKit.framework in Frameworks */,
+				C36796B01F2A6904000F38BC /* libTestFairy.a in Frameworks */,
 				C37F4A7B1CF3A2E700665ED0 /* XuniFlexGridKit.framework in Frameworks */,
 				C37F4A791CF3A2CC00665ED0 /* XuniCoreKit.framework in Frameworks */,
 				C37F4A771CF3A17F00665ED0 /* libsqlite3.tbd in Frameworks */,
@@ -166,6 +254,144 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		078BA2481F30E5A700588A92 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				078BA24E1F31087300588A92 /* XuniInputKit.framework */,
+				C33791171DAC5B14009EA4C1 /* OpenGLES.framework */,
+				C33791151DAC5B02009EA4C1 /* SystemConfiguration.framework */,
+				C33791131DAC5AE8009EA4C1 /* AVFoundation.framework */,
+				C33791111DAC5ADA009EA4C1 /* CoreMotion.framework */,
+				C337910F1DAC5AD1009EA4C1 /* CoreMedia.framework */,
+				C309FC121D05E294002868BD /* XuniCalendarKit.framework */,
+				C37F4A7A1CF3A2E700665ED0 /* XuniFlexGridKit.framework */,
+				C37F4A781CF3A2CC00665ED0 /* XuniCoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C300D4BB1E494E9800183B32 /* AccountOrder */ = {
+			isa = PBXGroup;
+			children = (
+				C3AEC95D1D105E3300E3EB41 /* AccountOrderNotesViewController.swift */,
+				C302B9891D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift */,
+				C300D4B91E494DE700183B32 /* AccountOrderHistoryViewController.swift */,
+				C3F372F21D3581A700E7F39A /* OrderMobosViewController.swift */,
+				C344AF9A1E4A2F1B00BB1E6D /* AccountOrderInventoryViewController.swift */,
+			);
+			name = AccountOrder;
+			sourceTree = "<group>";
+		};
+		C300D4BC1E494EC800183B32 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				C3DB417A1CFDFA2F00D4BD63 /* AccountsViewController.swift */,
+				C318DB951DD0E83900DB7812 /* AccountInfoViewController.swift */,
+			);
+			name = Account;
+			sourceTree = "<group>";
+		};
+		C300D4BD1E494EEF00183B32 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				C3EAC0181CF8A9A80054D031 /* BoolFiltersTableViewCell.swift */,
+				C3EAC0161CF8A9A00054D031 /* DateFiltersTableViewCell.swift */,
+				C3F632121D87522A007BC756 /* FilterDateViewController.swift */,
+				C3EAC0141CF8A9820054D031 /* FiltersTableViewCell.swift */,
+				C3EAC0121CF8A9610054D031 /* FiltersViewController.swift */,
+			);
+			name = Filters;
+			sourceTree = "<group>";
+		};
+		C300D4BE1E494F0900183B32 /* Columns */ = {
+			isa = PBXGroup;
+			children = (
+				C3EAC01C1CF8B6DC0054D031 /* ColumnsTableViewCell.swift */,
+				C3EAC01A1CF8B6C10054D031 /* ColumnsViewController.swift */,
+			);
+			name = Columns;
+			sourceTree = "<group>";
+		};
+		C300D4BF1E494F3600183B32 /* DataGrid */ = {
+			isa = PBXGroup;
+			children = (
+				C3E386701D085CC9009FEB20 /* DataGridViewController.swift */,
+			);
+			name = DataGrid;
+			sourceTree = "<group>";
+		};
+		C300D4C01E494F5300183B32 /* Inventory */ = {
+			isa = PBXGroup;
+			children = (
+				C3EAC0201CF8CB9C0054D031 /* InventorySettingsTableViewCell.swift */,
+				C3EAC01E1CF8CB3F0054D031 /* InventorySettingsViewController.swift */,
+				C3EAC0101CF8A8510054D031 /* InventoryViewController.swift */,
+			);
+			name = Inventory;
+			sourceTree = "<group>";
+		};
+		C300D4C11E494F7500183B32 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				C3D45EC61D0ECC1F0023E234 /* InitialViewController.swift */,
+				C3ED0A9C1CBBEE1500B9520E /* LoginViewController.swift */,
+				C3EAC00E1CF8846A0054D031 /* MainTabBarController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		C300D4C21E494F9B00183B32 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				C35A9F001E48F2DE00C5BC1C /* OrderNotesViewController.swift */,
+				C3E386681D071779009FEB20 /* OrderInventoryViewController.swift */,
+				C309FC101D05DBB5002868BD /* ShipDateViewController.swift */,
+				C35A73741D21A498000644F6 /* OrderHistoryViewController.swift */,
+				C3CFF78D1D47BEC600802784 /* OrderSavedViewController.swift */,
+				C35A9EFC1E48E91500C5BC1C /* OrderTabBarController_new.swift */,
+				C344AFA01E4B91C500BB1E6D /* OrderHeaderViewController.swift */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
+		C300D4C31E49500500183B32 /* OrderList */ = {
+			isa = PBXGroup;
+			children = (
+				C31734561DA2A1AB00C60830 /* OrderListViewController.swift */,
+			);
+			name = OrderList;
+			sourceTree = "<group>";
+		};
+		C300D4C41E49502600183B32 /* SampleList */ = {
+			isa = PBXGroup;
+			children = (
+				C36C04821E26E013008078B5 /* SampleListViewController.swift */,
+			);
+			name = SampleList;
+			sourceTree = "<group>";
+		};
+		C300D4C51E49508600183B32 /* SampleOrder */ = {
+			isa = PBXGroup;
+			children = (
+				C300D4B71E490D5100183B32 /* SampleOrderHeaderViewController.swift */,
+				C35A9EFA1E45205A00C5BC1C /* SampleOrderNotesViewController.swift */,
+				C36C7AC81E52564C00985F1F /* SampleOrderInventoryViewController.swift */,
+				C36C7ACA1E5263ED00985F1F /* SampleOrderHistoryViewController.swift */,
+			);
+			name = SampleOrder;
+			sourceTree = "<group>";
+		};
+		C33791091DAC5A07009EA4C1 /* TestFairy */ = {
+			isa = PBXGroup;
+			children = (
+				C36796AC1F2A6904000F38BC /* upload-dsym.sh */,
+				C36796AD1F2A6904000F38BC /* libTestFairy.a */,
+				C36796AE1F2A6904000F38BC /* TestFairy.h */,
+			);
+			name = TestFairy;
+			path = SalesPortal;
+			sourceTree = "<group>";
+		};
 		C37F4A521CF3755D00665ED0 /* Locksmith */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,12 +423,11 @@
 		C3ED0A7D1CBBECCF00B9520E = {
 			isa = PBXGroup;
 			children = (
-				C309FC121D05E294002868BD /* XuniCalendarKit.framework */,
-				C37F4A7A1CF3A2E700665ED0 /* XuniFlexGridKit.framework */,
-				C37F4A781CF3A2CC00665ED0 /* XuniCoreKit.framework */,
 				C37F4A751CF3A0BB00665ED0 /* libsqlite3.tbd */,
+				C33791091DAC5A07009EA4C1 /* TestFairy */,
 				C3ED0A881CBBECCF00B9520E /* SalesPortal */,
 				C3ED0A871CBBECCF00B9520E /* Products */,
+				078BA2481F30E5A700588A92 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -233,28 +458,17 @@
 		C3ED0A9B1CBBEDD600B9520E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C3EAC0201CF8CB9C0054D031 /* InventorySettingsTableViewCell.swift */,
-				C3EAC01E1CF8CB3F0054D031 /* InventorySettingsViewController.swift */,
-				C3EAC01C1CF8B6DC0054D031 /* ColumnsTableViewCell.swift */,
-				C3EAC01A1CF8B6C10054D031 /* ColumnsViewController.swift */,
-				C3EAC0181CF8A9A80054D031 /* BoolFiltersTableViewCell.swift */,
-				C3EAC0161CF8A9A00054D031 /* DateFiltersTableViewCell.swift */,
-				C3EAC0141CF8A9820054D031 /* FiltersTableViewCell.swift */,
-				C3EAC0121CF8A9610054D031 /* FiltersViewController.swift */,
-				C3EAC0101CF8A8510054D031 /* InventoryViewController.swift */,
-				C3ED0A9C1CBBEE1500B9520E /* LoginViewController.swift */,
-				C3EAC00E1CF8846A0054D031 /* MainTabBarController.swift */,
-				C3DB417A1CFDFA2F00D4BD63 /* AccountsViewController.swift */,
-				C309FC101D05DBB5002868BD /* ShipDateViewController.swift */,
-				C302B9891D01BC6B00B04DB6 /* OrderHeaderViewController.swift */,
-				C3E386681D071779009FEB20 /* OrderInventoryViewController.swift */,
-				C35A73741D21A498000644F6 /* OrderHistoryViewController.swift */,
-				C302B98B1D01C15900B04DB6 /* OrderTabBarController.swift */,
-				C3E386701D085CC9009FEB20 /* DataGridViewController.swift */,
-				C3A6D2D71D0A0A9600AFFB3A /* OrderTypePickerViewController.swift */,
-				C3D45EC61D0ECC1F0023E234 /* InitialViewController.swift */,
-				C3AEC95D1D105E3300E3EB41 /* OrderNotesViewController.swift */,
-				C3AEC95F1D108EAF00E3EB41 /* OrderCoopNoPickerViewController.swift */,
+				C300D4C51E49508600183B32 /* SampleOrder */,
+				C300D4C41E49502600183B32 /* SampleList */,
+				C300D4C31E49500500183B32 /* OrderList */,
+				C300D4C21E494F9B00183B32 /* Order */,
+				C300D4C11E494F7500183B32 /* Login */,
+				C300D4C01E494F5300183B32 /* Inventory */,
+				C300D4BF1E494F3600183B32 /* DataGrid */,
+				C300D4BE1E494F0900183B32 /* Columns */,
+				C300D4BD1E494EEF00183B32 /* Filters */,
+				C300D4BC1E494EC800183B32 /* Account */,
+				C300D4BB1E494E9800183B32 /* AccountOrder */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -264,32 +478,52 @@
 			children = (
 				C37F4A521CF3755D00665ED0 /* Locksmith */,
 				C3AE55451CC183CE000859E7 /* fmdb */,
-				C37F4A501CF3750400665ED0 /* SwiftSpinner.swift */,
-				C3F19F8D1D2320AD00D76C73 /* MPGTextField-Swift.swift */,
-				C3ED0AA11CBC27E200B9520E /* ErrorCode.swift */,
-				C3ED0AAD1CBD8DEC00B9520E /* ApiOperation.swift */,
-				C3ED0AAB1CBD8D7400B9520E /* ApiService.swift */,
 				C3AE55431CC175A1000859E7 /* Account.swift */,
 				C37F4A551CF377EA00665ED0 /* AccountService.swift */,
-				C37F4A531CF377A900665ED0 /* Inventory.swift */,
-				C3E3866A1D07247A009FEB20 /* OrderInventory.swift */,
-				C3E3866C1D076631009FEB20 /* OrderInventoryService.swift */,
-				C37F4A631CF3986400665ED0 /* InventoryService.swift */,
+				C3ED0AAD1CBD8DEC00B9520E /* ApiOperation.swift */,
+				C3ED0AAB1CBD8D7400B9520E /* ApiService.swift */,
+				C3F632101D874C8E007BC756 /* CalendarModalView.swift */,
+				C37F4A691CF39A8300665ED0 /* ColumnData.swift */,
+				C37F4A711CF39BAB00665ED0 /* ColumnSettings.swift */,
+				C3D424961D4275A2000BE982 /* ComboData.swift */,
+				C37F4A571CF3787F00665ED0 /* Constants.swift */,
+				C3ED0A9F1CBC277D00B9520E /* Credentials.swift */,
 				C37F4A611CF3913C00665ED0 /* DatabaseOperation.swift */,
 				C37F4A5F1CF390FF00665ED0 /* DatabaseService.swift */,
-				C37F4A4E1CF352C300665ED0 /* SyncService.swift */,
-				C3ED0A9F1CBC277D00B9520E /* Credentials.swift */,
-				C37F4A7C1CF3A47100665ED0 /* GridDataSource.swift */,
-				C37F4A7E1CF3A48100665ED0 /* GridColumn.swift */,
-				C37F4A691CF39A8300665ED0 /* ColumnData.swift */,
-				C37F4A6B1CF39B5600665ED0 /* DataSettings.swift */,
-				C37F4A651CF399B700665ED0 /* Extensions.swift */,
-				C37F4A6D1CF39B8B00665ED0 /* GridSettings.swift */,
-				C37F4A6F1CF39B9F00665ED0 /* GridFilter.swift */,
-				C37F4A711CF39BAB00665ED0 /* ColumnSettings.swift */,
-				C37F4A571CF3787F00665ED0 /* Constants.swift */,
 				C37F4A801CF3A49A00665ED0 /* DataExport.swift */,
-				C364481D1D02005300A545DD /* Order.swift */,
+				C37F4A7E1CF3A48100665ED0 /* DataGridColumn.swift */,
+				C37F4A6B1CF39B5600665ED0 /* DataSettings.swift */,
+				C3ED0AA11CBC27E200B9520E /* ErrorCode.swift */,
+				C37F4A651CF399B700665ED0 /* Extensions.swift */,
+				C37F4A7C1CF3A47100665ED0 /* GridDataSource.swift */,
+				C37F4A6F1CF39B9F00665ED0 /* GridFilter.swift */,
+				C37F4A6D1CF39B8B00665ED0 /* GridSettings.swift */,
+				C37F4A531CF377A900665ED0 /* Inventory.swift */,
+				C37F4A631CF3986400665ED0 /* InventoryService.swift */,
+				C3A896421DEDECD200148660 /* InvoiceList.swift */,
+				C3F372F41D36C62000E7F39A /* MoboList.swift */,
+				C3F372F01D343CA700E7F39A /* MoboListService.swift */,
+				C3F19F8D1D2320AD00D76C73 /* MPGTextField-Swift.swift */,
+				C3E3866A1D07247A009FEB20 /* AccountOrderInventory.swift */,
+				C364481D1D02005300A545DD /* AccountOrder.swift */,
+				C3E3866C1D076631009FEB20 /* AccountOrderInventoryService.swift */,
+				C35A9EFE1E48F13B00C5BC1C /* OrderInventory.swift */,
+				C34AF3E11D2FFBFA00294278 /* OrderList.swift */,
+				C3BC29D11D30286200BBEFC3 /* OrderListService.swift */,
+				C3CFF7911D47F1AA00802784 /* OrderSaved.swift */,
+				C3CFF78F1D47EA2500802784 /* OrderSavedService.swift */,
+				C39D06D91D3EB294008D4DB7 /* OrderService.swift */,
+				C354DBA51E36740800497C9D /* SampleOrderAddress.swift */,
+				C354DBA71E367D7F00497C9D /* SampleOrderAddressService.swift */,
+				C383DD641E0B23C40020E6B3 /* SampleList.swift */,
+				C383DD661E0B37670020E6B3 /* SampleListService.swift */,
+				C33A556A1E31422E00C6C28A /* SampleOrder.swift */,
+				C3F7167E1E2E7BE4001933D9 /* SampleOrderInventory.swift */,
+				C3F716801E2E8420001933D9 /* SampleOrderInventoryService.swift */,
+				C37F4A4E1CF352C300665ED0 /* SyncService.swift */,
+				C31F1F3C1E3BDE3300F1ACC0 /* SampleOrderService.swift */,
+				C344AF9C1E4A7C7000BB1E6D /* Order.swift */,
+				078BA2501F310CCF00588A92 /* SwiftSpinner.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -304,6 +538,7 @@
 				C3ED0A821CBBECCF00B9520E /* Sources */,
 				C3ED0A831CBBECCF00B9520E /* Frameworks */,
 				C3ED0A841CBBECCF00B9520E /* Resources */,
+				C308C58F1E81888D00CD3E11 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -321,11 +556,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Polaner Selections";
 				TargetAttributes = {
 					C3ED0A851CBBECCF00B9520E = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -356,10 +592,27 @@
 				C36448201D02181C00A545DD /* Holidays.plist in Resources */,
 				C3ED0A911CBBECCF00B9520E /* Assets.xcassets in Resources */,
 				C3ED0A8F1CBBECCF00B9520E /* Main.storyboard in Resources */,
+				C36796AF1F2A6904000F38BC /* upload-dsym.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C308C58F1E81888D00CD3E11 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh \"$SRCROOT/SalesPortal/upload-dsym.sh\" ab7896c2d211ac2502176c7d04e433ba854b052c";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C3ED0A821CBBECCF00B9520E /* Sources */ = {
@@ -372,54 +625,86 @@
 				C3EAC00F1CF8846A0054D031 /* MainTabBarController.swift in Sources */,
 				C3EAC0191CF8A9A80054D031 /* BoolFiltersTableViewCell.swift in Sources */,
 				C37F4A721CF39BAB00665ED0 /* ColumnSettings.swift in Sources */,
+				C33A556B1E31422E00C6C28A /* SampleOrder.swift in Sources */,
 				C37F4A471CF34DAA00665ED0 /* License.swift in Sources */,
 				C37F4A701CF39B9F00665ED0 /* GridFilter.swift in Sources */,
 				C309FC111D05DBB5002868BD /* ShipDateViewController.swift in Sources */,
+				C3CFF7901D47EA2500802784 /* OrderSavedService.swift in Sources */,
+				C344AF9B1E4A2F1B00BB1E6D /* AccountOrderInventoryViewController.swift in Sources */,
+				C318DB961DD0E83900DB7812 /* AccountInfoViewController.swift in Sources */,
+				C300D4B81E490D5100183B32 /* SampleOrderHeaderViewController.swift in Sources */,
+				C3F7167F1E2E7BE4001933D9 /* SampleOrderInventory.swift in Sources */,
 				C3EAC01F1CF8CB400054D031 /* InventorySettingsViewController.swift in Sources */,
+				C3BC29D21D30286200BBEFC3 /* OrderListService.swift in Sources */,
 				C3ED0AA01CBC277D00B9520E /* Credentials.swift in Sources */,
+				C36C04831E26E013008078B5 /* SampleListViewController.swift in Sources */,
+				C3A896431DEDECD200148660 /* InvoiceList.swift in Sources */,
 				C37F4A6E1CF39B8B00665ED0 /* GridSettings.swift in Sources */,
+				C3CFF78E1D47BEC600802784 /* OrderSavedViewController.swift in Sources */,
 				C37F4A811CF3A49A00665ED0 /* DataExport.swift in Sources */,
 				C3EAC0131CF8A9610054D031 /* FiltersViewController.swift in Sources */,
-				C302B98C1D01C15900B04DB6 /* OrderTabBarController.swift in Sources */,
 				C3AE55521CC18404000859E7 /* FMDatabase.m in Sources */,
+				C34AF3E21D2FFBFA00294278 /* OrderList.swift in Sources */,
+				C344AFA11E4B91C500BB1E6D /* OrderHeaderViewController.swift in Sources */,
 				C3ED0A9D1CBBEE1500B9520E /* LoginViewController.swift in Sources */,
-				C37F4A511CF3750400665ED0 /* SwiftSpinner.swift in Sources */,
+				C300D4BA1E494DE700183B32 /* AccountOrderHistoryViewController.swift in Sources */,
+				C3D424971D4275A2000BE982 /* ComboData.swift in Sources */,
+				C3F632131D87522A007BC756 /* FilterDateViewController.swift in Sources */,
 				C3EAC0111CF8A8510054D031 /* InventoryViewController.swift in Sources */,
 				C3AE55541CC18404000859E7 /* FMDatabaseQueue.m in Sources */,
 				C3ED0A8A1CBBECCF00B9520E /* AppDelegate.swift in Sources */,
 				C37F4A6C1CF39B5600665ED0 /* DataSettings.swift in Sources */,
-				C364481E1D02005300A545DD /* Order.swift in Sources */,
-				C37F4A7F1CF3A48100665ED0 /* GridColumn.swift in Sources */,
-				C3E3866B1D07247A009FEB20 /* OrderInventory.swift in Sources */,
-				C3AEC9601D108EAF00E3EB41 /* OrderCoopNoPickerViewController.swift in Sources */,
+				C354DBA61E36740800497C9D /* SampleOrderAddress.swift in Sources */,
+				C3F372F31D3581A700E7F39A /* OrderMobosViewController.swift in Sources */,
+				C364481E1D02005300A545DD /* AccountOrder.swift in Sources */,
+				C37F4A7F1CF3A48100665ED0 /* DataGridColumn.swift in Sources */,
+				C3E3866B1D07247A009FEB20 /* AccountOrderInventory.swift in Sources */,
 				C3EAC01B1CF8B6C10054D031 /* ColumnsViewController.swift in Sources */,
 				C3DB417B1CFDFA2F00D4BD63 /* AccountsViewController.swift in Sources */,
 				C3ED0AAC1CBD8D7400B9520E /* ApiService.swift in Sources */,
+				C35A9EFD1E48E91500C5BC1C /* OrderTabBarController_new.swift in Sources */,
 				C37F4A561CF377EA00665ED0 /* AccountService.swift in Sources */,
+				C35A9EFF1E48F13B00C5BC1C /* OrderInventory.swift in Sources */,
 				C3F19F8E1D2320AD00D76C73 /* MPGTextField-Swift.swift in Sources */,
+				C35A9F011E48F2DE00C5BC1C /* OrderNotesViewController.swift in Sources */,
 				C3AE55551CC18404000859E7 /* FMDatabaseAdditions.m in Sources */,
+				C3F372F11D343CA700E7F39A /* MoboListService.swift in Sources */,
+				C383DD651E0B23C40020E6B3 /* SampleList.swift in Sources */,
+				C39D06DA1D3EB294008D4DB7 /* OrderService.swift in Sources */,
+				C35A9EFB1E45205A00C5BC1C /* SampleOrderNotesViewController.swift in Sources */,
 				C3E386711D085CC9009FEB20 /* DataGridViewController.swift in Sources */,
 				C37F4A4F1CF352C300665ED0 /* SyncService.swift in Sources */,
 				C37F4A641CF3986400665ED0 /* InventoryService.swift in Sources */,
-				C3AEC95E1D105E3300E3EB41 /* OrderNotesViewController.swift in Sources */,
+				C344AF9D1E4A7C7100BB1E6D /* Order.swift in Sources */,
+				C3AEC95E1D105E3300E3EB41 /* AccountOrderNotesViewController.swift in Sources */,
+				C31734571DA2A1AB00C60830 /* OrderListViewController.swift in Sources */,
+				C354DBA81E367D7F00497C9D /* SampleOrderAddressService.swift in Sources */,
+				C36C7ACB1E5263ED00985F1F /* SampleOrderHistoryViewController.swift in Sources */,
 				C3E386691D071779009FEB20 /* OrderInventoryViewController.swift in Sources */,
 				C37F4A541CF377A900665ED0 /* Inventory.swift in Sources */,
 				C3AE55441CC175A1000859E7 /* Account.swift in Sources */,
+				078BA2511F310CCF00588A92 /* SwiftSpinner.swift in Sources */,
 				C37F4A6A1CF39A8300665ED0 /* ColumnData.swift in Sources */,
 				C37F4A601CF390FF00665ED0 /* DatabaseService.swift in Sources */,
-				C302B98A1D01BC6B00B04DB6 /* OrderHeaderViewController.swift in Sources */,
+				C302B98A1D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift in Sources */,
 				C37F4A621CF3913C00665ED0 /* DatabaseOperation.swift in Sources */,
 				C37F4A581CF3787F00665ED0 /* Constants.swift in Sources */,
 				C3EAC0211CF8CB9C0054D031 /* InventorySettingsTableViewCell.swift in Sources */,
+				C383DD671E0B37670020E6B3 /* SampleListService.swift in Sources */,
 				C3EAC0171CF8A9A00054D031 /* DateFiltersTableViewCell.swift in Sources */,
 				C37F4A7D1CF3A47100665ED0 /* GridDataSource.swift in Sources */,
+				C31F1F3D1E3BDE3400F1ACC0 /* SampleOrderService.swift in Sources */,
+				C3F632111D874C8E007BC756 /* CalendarModalView.swift in Sources */,
 				C3EAC01D1CF8B6DC0054D031 /* ColumnsTableViewCell.swift in Sources */,
+				C3F372F51D36C62000E7F39A /* MoboList.swift in Sources */,
 				C37F4A661CF399B700665ED0 /* Extensions.swift in Sources */,
+				C36C7AC91E52564C00985F1F /* SampleOrderInventoryViewController.swift in Sources */,
 				C3AE55531CC18404000859E7 /* FMResultSet.m in Sources */,
 				C3AE55561CC18404000859E7 /* FMDatabasePool.m in Sources */,
 				C3EAC0151CF8A9820054D031 /* FiltersTableViewCell.swift in Sources */,
-				C3E3866D1D076631009FEB20 /* OrderInventoryService.swift in Sources */,
-				C3A6D2D81D0A0A9600AFFB3A /* OrderTypePickerViewController.swift in Sources */,
+				C3CFF7921D47F1AA00802784 /* OrderSaved.swift in Sources */,
+				C3F716811E2E8420001933D9 /* SampleOrderInventoryService.swift in Sources */,
+				C3E3866D1D076631009FEB20 /* AccountOrderInventoryService.swift in Sources */,
 				C3ED0AA21CBC27E200B9520E /* ErrorCode.swift in Sources */,
 				C35A73751D21A498000644F6 /* OrderHistoryViewController.swift in Sources */,
 				C33A58A41CBD90E300644ED3 /* Locksmith.swift in Sources */,
@@ -462,13 +747,16 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -490,8 +778,10 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -509,13 +799,16 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -530,8 +823,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
@@ -540,14 +836,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = /Users/administrator/Documents/Xuni/iOS/Controls;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = /Users/andrewrodko/Documents/Xuni/IOS/Controls;
 				INFOPLIST_FILE = SalesPortal/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SalesPortal",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.polanerselections.SalesPortal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SalesPortal/SalesPortal-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -556,13 +864,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = /Users/administrator/Documents/Xuni/iOS/Controls;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = /Users/andrewrodko/Documents/Xuni/IOS/Controls;
 				INFOPLIST_FILE = SalesPortal/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SalesPortal",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.polanerselections.SalesPortal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SalesPortal/SalesPortal-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

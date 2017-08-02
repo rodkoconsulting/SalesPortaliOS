@@ -16,16 +16,18 @@ enum DateStrings : String {
 }
 
 extension FlexGrid {
-    func flexAutoSizeColumns() {
+    
+    func firstVisibleColumn() -> Int32 {
         for col: UInt in 0 ..< self.columns.count {
-            let gridCol = self.columns.objectAtIndex(col) as! GridColumn
-            if gridCol.autosize {
-                self.autoSizeColumn(Int32(col))
+            let gridCol = self.columns.object(at: col) as! DataGridColumn
+            if gridCol.visible {
+                return Int32(col)
             }
         }
+        return 0
     }
     
-    func gridLayout(moduleType: Module) {
+    func gridLayout(_ moduleType: Module) {
         self.alternatingRowBackgroundColor = GridSettings.alternatingRowBackgroundColor
         self.gridLinesVisibility = GridSettings.gridLinesVisibility
         self.selectionMode = GridSettings.defaultSelectionMode
@@ -33,63 +35,156 @@ extension FlexGrid {
         self.isEnabled = true
         self.selectionBackgroundColor = GridSettings.colorSelected
         self.selectionTextColor = GridSettings.selectionTextColor
-        self.font = GridSettings.defaultFont
-        self.columnHeaderFont = GridSettings.columnHeaderFont
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let defaultColumnSettings = ColumnSettings.generateColumnSettings(defaults.objectForKey(moduleType.columnSettings) as? [[String : AnyObject]])
-        let columns = GridColumn.generateColumns(defaultColumnSettings, module: moduleType)
+        self.font = GridSettings.defaultFont!
+        self.columnHeaderFont = GridSettings.columnHeaderFont!
+        let defaults = UserDefaults.standard
+        //let defaultColumnSettings : [ColumnSettings]?  = nil
+        let defaultColumnSettings = ColumnSettings.generateColumnSettings(defaults.object(forKey: moduleType.columnSettings) as? [[String : AnyObject]])
+        let (columns, tag) = DataGridColumn.generateColumns(defaultColumnSettings, module: moduleType)
+        self.tag = tag
         for column in columns {
-            self.columns.addObject(column)
+            self.columns.add(column)
         }
     }
     
     func sortColumns() {
         for col: UInt in 0 ..< self.columns.count {
-            if let gridCol = self.columns.objectAtIndex(col) as? GridColumn {
+            if let gridCol = self.columns.object(at: col) as? DataGridColumn {
                 self.sortColumn(gridCol)
             }
         }
     }
     
-    func sortColumn(column: GridColumn) {
+    
+    func getColumnFromGroupLevel(_ groupLevel: UInt, isManager: Bool) -> Int32? {
+        for col: UInt in 0 ..< self.columns.count {
+            if let gridCol = self.columns.object(at: col) as? DataGridColumn {
+                guard let colGroupLevel = isManager ? gridCol.groupLevelManager : gridCol.groupLevel else {
+                    continue
+                }
+                if colGroupLevel == Int(groupLevel) {
+                    return Int32(col)
+                }
+            }
+        }
+        return nil
+    }
+
+    func isSelectionVisible() -> Bool {
+        return self.selection.row >= 0 &&
+                self.selection.col >= 0 &&
+            UInt(self.selection.row) < self.rows.count &&
+            UInt(self.selection.row2) < self.rows.count &&
+            UInt(self.selection.col) < self.columns.count &&
+            UInt(self.selection.col2) < self.columns.count
+    }
+    
+    func sortColumn(_ column: DataGridColumn) {
+        guard let collectionView = self.collectionView else {
+            return
+        }
         guard let isSortAscending = column.isSortAscending else {
             return
         }
-        let sd = XuniSortDescription(property: column.binding, ascending: isSortAscending)
-        self.collectionView.sortDescriptions.addObject(sd)
+        guard let sd = XuniSortDescription(property: column.binding, ascending: isSortAscending) else {
+            return
+        }
+        collectionView.sortDescriptions.add(sd)
     }
     
-    func isRestrictedItem(row: Int32) -> Bool {
-        guard let flexRow = self.rows.objectAtIndex(UInt(row)) as? FlexRow,
-            let inventory = flexRow.dataItem as? Inventory else {
+    func isRestrictedItem(_ row: Int32) -> Bool {
+        let flexRow = self.rows.object(at: UInt(row))
+        guard let inventory = flexRow.dataItem as? Inventory else {
                 return false
         }
         return inventory.isRestricted
     }
     
-    func isFocusItem(row: Int32) -> Bool {
-        guard let flexRow = self.rows.objectAtIndex(UInt(row)) as? FlexRow,
-            let inventory = flexRow.dataItem as? Inventory else {
+    func isFocusItem(_ row: Int32) -> Bool {
+        let flexRow = self.rows.object(at: UInt(row))
+        guard let inventory = flexRow.dataItem as? Inventory else {
                 return false
         }
         return inventory.focus
     }
     
-    func filterIndex<T: NSObject>(searchText: String?, row: T, moduleType: Module) -> Bool {
-        guard let value = row.valueForKey(moduleType.index) as? String else {
-            return false
+    func getAccountColor(_ row: Int32) -> UIColor? {
+        let flexRow = self.rows.object(at: UInt(row))
+        guard let account = flexRow.dataItem as? Account else {
+                return nil
         }
-        return value.lowercaseString.rangeOfString(searchText!.lowercaseString) != nil
+        return account.status.gridColor
     }
     
-    func filterColumns<T: NSObject>(searchText: String?, row: T) -> Bool {
+    func getOrderListColor(_ row: Int32) -> UIColor? {
+        let flexRow = self.rows.object(at: UInt(row))
+        guard let orderList = flexRow.dataItem as? OrderList else {
+                return nil
+        }
+        return orderList.gridColor
+    }
+    
+    func getSampleListColor(_ row: Int32) -> UIColor? {
+        let flexRow = self.rows.object(at: UInt(row))
+        guard let sampleList = flexRow.dataItem as? SampleList else {
+                return nil
+        }
+        return sampleList.gridColor
+    }
+    
+    func getOrderListTextColor(_ row: Int32, col: Int32) -> UIColor? {
+        let defaultColor = UIColor.black
+        let flexRow = self.rows.object(at: UInt(row))
+        let flexCol = self.columns.object(at: UInt(col))
+        guard let orderList = flexRow.dataItem as? OrderList else {
+                return defaultColor
+        }
+        guard orderList.holdCode == "BO" && flexCol.binding == "shipExpireDate"  else {
+            return defaultColor
+        }
+        return nil
+    }
+    
+    func filterIndex<T: NSObject>(_ searchText: String?, row: T, moduleType: Module) -> Bool {
+        for index in moduleType.index {
+            if let value = row.value(forKey: index) as? String {
+                if value.lowercased().range(of: searchText!.lowercased()) != nil {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func removeGestures() {
+        if let recognizers = self.gestureRecognizers {
+            for recognizer in recognizers {
+                self.removeGestureRecognizer(recognizer)
+            }
+        }
+    }
+    
+    func hasFilters() -> Bool {
+        for index in 0...self.columns.count - 1 {
+            guard let column = self.columns.object(at: index) as? DataGridColumn else {
+                    continue
+            }
+            if column.columnFilters.filterList.count > 0 {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func filterColumns<T: NSObject>(_ searchText: String?, row: T) -> Bool {
         let hasSearchText = searchText != nil && searchText != ""
         var searchMatched = !hasSearchText
         var columnFilterMatched = true
         var allFiltersMatched = true
         for index in 0...self.columns.count - 1 {
-            guard let column = self.columns.objectAtIndex(index) as? GridColumn,
-                let columnValue = row.valueForKey(column.binding) else {
+            guard let column = self.columns.object(at: index) as? DataGridColumn,
+                let binding = column.binding,
+                let columnValue = row.value(forKey: binding) else {
                     continue
             }
             let filters = column.columnFilters.filterList
@@ -98,14 +193,14 @@ extension FlexGrid {
                 valueArray.append("")
             }
             for value in valueArray {
-                if hasSearchText && value.lowercaseString.rangeOfString(searchText!.lowercaseString) != nil {
+                if hasSearchText && value.lowercased().range(of: searchText!.lowercased()) != nil {
                     searchMatched = true
                 }
                 if filters.count > 0 {
                     columnFilterMatched = false
                     var columnResults = [(filterBool: Bool, filterOperator: FilterOperator)]()
                     for columnFilter in column.columnFilters.filterList {
-                        columnResults.append((columnFilter.getResult(value: value, filterType: column.columnFilters.filterType), columnFilter.filterOperatior))
+                        columnResults.append((columnFilter.getResult(value: value, filterType: column.columnFilters.filterType), columnFilter.filterOperator))
                     }
                     let filterMatched = column.columnFilters.getFilterResults(columnResults)
                     if filterMatched {
@@ -122,48 +217,58 @@ extension FlexGrid {
 
     func saveColumnSettings() -> [[String : AnyObject]] {
         var myColumnSettings = [[String : AnyObject]]()
+        myColumnSettings.append(["version":self.tag as AnyObject])
         for col: UInt in 0 ..< self.columns.count {
             var myDict = [String : AnyObject]()
-            let column = self.columns.objectAtIndex(UInt(col)) as! FlexColumn
-            myDict["name"] = column.name
-            myDict["visible"] = column.visible
+            let column = self.columns.object(at: UInt(col)) 
+            myDict["name"] = column.name as AnyObject
+            myDict["visible"] = column.visible as AnyObject
             if column.visible {
-                myDict["width"] = column.width
+                myDict["width"] = column.width as AnyObject
             }
             myColumnSettings.append(myDict)
         }
         return myColumnSettings
     }
     
-    func saveUserDefaults(moduleType: Module) {
+    func saveUserDefaults(_ moduleType: Module) {
         let columnSettings = self.saveColumnSettings()
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(columnSettings, forKey: moduleType.columnSettings)
+        let defaults = UserDefaults.standard
+        defaults.set(columnSettings, forKey: moduleType.columnSettings)
     }
     
 }
 
 extension Double
 {
-    func truncate(places : Int)-> Double
+    func truncate(_ places : Int)-> Double
     {
         return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
     }
     
     func rounded()-> Double
     {
-        return (round(self*10000)/10000).truncate(0)
+        return self.roundToPlaces(4).truncate(0)
+    }
+    
+    func roundedBottles()-> Double
+    {
+        return self.roundToPlaces(1).truncate(0)
+    }
+    
+    func roundToPlaces(_ places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
     }
 }
 
 extension String {
-    func getGridDate() -> NSDate? {
-        if self.containsString("+") {
-            return NSDateFormatter.dateConvertedFormatter.dateFromString(self)
+    func getGridDate() -> Date? {
+        if self.contains("+") {
+            return DateFormatter.dateConvertedFormatter.date(from: self)
         }
-        return NSDateFormatter.dateGridFormatter.dateFromString(self)
+        return DateFormatter.dateGridFormatter.date(from: self)
     }
-
     
     func getGridDateString() -> String {
         return self.getDate()?.getDateGridString() ?? ""
@@ -173,12 +278,20 @@ extension String {
         return self.getDate()?.getDateShipPrint() ?? ""
     }
     
-    func getDate() -> NSDate? {
-        return NSDateFormatter.dateFormatter.dateFromString(self)
+    func getFilterDate() -> Date? {
+        return DateFormatter.dateShipPrintFormatter.date(from: self)
     }
     
-    func getShipDate() -> NSDate? {
-        return NSDateFormatter.dateShipFormatter.dateFromString(self)
+    func getDate() -> Date? {
+        return DateFormatter.dateFormatter.date(from: self)
+    }
+    
+    func getDateTime() -> Date? {
+        return DateFormatter.dateTimeFormatter.date(from: self)
+    }
+    
+    func getShipDate() -> Date? {
+        return DateFormatter.dateShipFormatter.date(from: self)
     }
     
     func getShipMonth() -> String? {
@@ -186,88 +299,92 @@ extension String {
     }
 }
 
-extension NSDateFormatter {
-    private static let dateFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
+extension DateFormatter {
+    fileprivate static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         return formatter
     }()
     
-    private static let dateConvertedFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
+    fileprivate static let dateConvertedFormatter: DateFormatter = {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd hh:mm:ss ZZZZ"
         return formatter
     }()
 
     
-    private static let dateShipFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
+    fileprivate static let dateShipFormatter: DateFormatter = {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyMMdd"
         return formatter
     }()
     
-    private static let dateShipPrintFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
+    fileprivate static let dateShipPrintFormatter: DateFormatter = {
+        let formatter = DateFormatter()
         formatter.dateFormat = "EEE M/d/yy"
         return formatter
     }()
     
-    private static let dateTimeFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
+    @nonobjc static let dateTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
         formatter.dateFormat = "M/d/yy h:mm a"
         return formatter
     }()
     
-    private static let monthFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "MMMM"
+    fileprivate static let monthFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM"
         return formatter
     }()
     
-    private static let dateGridFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
+    fileprivate static let dateGridFormatter: DateFormatter = {
+        let formatter = DateFormatter()
         formatter.dateFormat = "M/d/yy"
         return formatter
     }()
 
 }
 
-extension NSDate
+extension Date
 {
-    func isGreaterThanDate(dateToCompare : NSDate) -> Bool
+    func isGreaterThanDate(_ dateToCompare : Date) -> Bool
     {
-        return self.compare(dateToCompare) == NSComparisonResult.OrderedDescending
+        return self.compare(dateToCompare) == ComparisonResult.orderedDescending
     }
     
-    func isLessThanDate(dateToCompare : NSDate) -> Bool
+    func isLessThanDate(_ dateToCompare : Date) -> Bool
     {
-        return self.compare(dateToCompare) == NSComparisonResult.OrderedAscending
+        return self.compare(dateToCompare) == ComparisonResult.orderedAscending
     }
     
     func isAfterHours() -> Bool
     {
         var hour: Int = 0
         var minute: Int = 0
-        NSCalendar.currentCalendar().getHour(&hour, minute: &minute, second: nil, nanosecond: nil, fromDate:self)
+        (Calendar.current as NSCalendar).getHour(&hour, minute: &minute, second: nil, nanosecond: nil, from:self)
         return hour > Constants.hourCutoff || (hour > (Constants.hourCutoff - 1) && minute > Constants.minuteCutoff)
     }
     
-    func addDay() -> NSDate {
-        return NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: self, options: NSCalendarOptions(rawValue: 0))!
+    func addDay() -> Date {
+        return (Calendar.current as NSCalendar).date(byAdding: .day, value: 1, to: self, options: NSCalendar.Options(rawValue: 0))!
     }
     
-    func addWeek() -> NSDate {
-        return NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 7, toDate: self, options: NSCalendarOptions(rawValue: 0))!
+    func addTwoDays() -> Date {
+        return (Calendar.current as NSCalendar).date(byAdding: .day, value: 2, to: self, options: NSCalendar.Options(rawValue: 0))!
+    }
+    
+    func addWeek() -> Date {
+        return (Calendar.current as NSCalendar).date(byAdding: .day, value: 7, to: self, options: NSCalendar.Options(rawValue: 0))!
     }
     
     func isHoliday() -> Bool {
-        guard let path = NSBundle.mainBundle().pathForResource("Holidays", ofType: "plist"),
+        guard let path = Bundle.main.path(forResource: "Holidays", ofType: "plist"),
             let holidayDict = NSDictionary(contentsOfFile: path),
-            let holidays = holidayDict["Holidays"] as? [NSDate] else {
+            let holidays = holidayDict["Holidays"] as? [Date] else {
                 return false
         }
         for holiday in holidays {
-            if NSCalendar.currentCalendar().isDate(self, inSameDayAsDate: holiday) {
+            if Calendar.current.isDate(self, inSameDayAs: holiday) {
                 return true
             }
         }
@@ -275,18 +392,18 @@ extension NSDate
     }
 
     func isWeekendOrHoliday() -> Bool {
-        return NSCalendar.currentCalendar().isDateInWeekend(self) || isHoliday()
+        return Calendar.current.isDateInWeekend(self) || isHoliday()
     }
     
-    func isShipDay(shipDays:[ShipDays]?) -> Bool {
+    func isShipDay(_ shipDays:[ShipDays]?) -> Bool {
         guard !isWeekendOrHoliday() else {
             return false
         }
         guard let shipDays = shipDays else {
             return true
         }
-        let dayInt = NSCalendar.currentCalendar().components(.Weekday, fromDate: self).weekday
-        guard let dayEnum = ShipDays(rawValue: dayInt) else {
+        let dayInt = (Calendar.current as NSCalendar).components(.weekday, from: self).weekday
+        guard let dayEnum = ShipDays(rawValue: dayInt!) else {
             return false
         }
         return shipDays.contains(dayEnum)
@@ -294,38 +411,42 @@ extension NSDate
     
     
     func getDateString() -> String {
-        return NSDateFormatter.dateFormatter.stringFromDate(self)
+        return DateFormatter.dateFormatter.string(from: self)
     }
     
     func getDateShipString() -> String {
-        return NSDateFormatter.dateShipFormatter.stringFromDate(self)
+        return DateFormatter.dateShipFormatter.string(from: self)
     }
     
     func getDateShipPrint() -> String {
-        return NSDateFormatter.dateShipPrintFormatter.stringFromDate(self)
+        return DateFormatter.dateShipPrintFormatter.string(from: self)
     }
     
     func getDateGridString() -> String {
-        return NSDateFormatter.dateGridFormatter.stringFromDate(self)
+        return DateFormatter.dateGridFormatter.string(from: self)
     }
     
     func getDateTimeString() -> String {
-        return NSDateFormatter.dateTimeFormatter.stringFromDate(self)
+        return DateFormatter.dateTimeFormatter.string(from: self)
     }
     
     func getMonthString() -> String {
-        return NSDateFormatter.monthFormatter.stringFromDate(self)
+        return DateFormatter.monthFormatter.string(from: self)
     }
     
     func getYearInt() -> Int {
-        return NSCalendar.currentCalendar().components(.Year, fromDate: self).year
+        return (Calendar.current as NSCalendar).components(.year, from: self).year!
+    }
+    
+    func getMonthInt() -> Int {
+        return (Calendar.current as NSCalendar).components(.month, from: self).month!
     }
     
     func getNextWeekMonth() -> String {
         return self.addWeek().getMonthString()
     }
     
-    func getNextShip(shipDays:[ShipDays]?=nil) -> (shipDate: String, shipMonth: String) {
+    func getNextShip(_ shipDays:[ShipDays]?=nil) -> (shipDate: String, shipMonth: String) {
         var shipDate = self
         if shipDate.isAfterHours() {
             shipDate = shipDate.addDay()
@@ -340,7 +461,21 @@ extension NSDate
         return (shipDate.getDateShipString(), shipDate.getMonthString())
     }
     
-    func getMaxShipDate(shipDays:[ShipDays]) -> NSDate {
+    func getDailySalesDate() -> Date {
+        var shipDate = self.addDay()
+        while shipDate.isWeekendOrHoliday() {
+            shipDate = shipDate.addDay()
+        }
+        return (shipDate)
+    }
+    
+    func getDailySalesDateString() -> String {
+        return self.getDailySalesDate().getDateShipString()
+    }
+
+
+    
+    func getMaxShipDate(_ shipDays:[ShipDays]) -> Date {
         var totalShipDays = 1
         var maxShipDate = self
         while totalShipDays < Constants.shipDays {
@@ -353,11 +488,11 @@ extension NSDate
     }
    
 
-    class func defaultPoDate() -> NSDate {
-        return NSDateFormatter.dateFormatter.dateFromString(DateStrings.PoDate.rawValue)!
+    static func defaultPoDate() -> Date {
+        return DateFormatter.dateFormatter.date(from: DateStrings.PoDate.rawValue)!
     }
     
-    class func defaultPoEtaDate() -> NSDate {
-        return NSDateFormatter.dateFormatter.dateFromString(DateStrings.PoEtaDate.rawValue)!
+    static func defaultPoEtaDate() -> Date {
+        return DateFormatter.dateFormatter.date(from: DateStrings.PoEtaDate.rawValue)!
     }
 }

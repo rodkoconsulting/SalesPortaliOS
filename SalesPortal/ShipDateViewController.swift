@@ -20,9 +20,9 @@ class ShipDateViewController: UIViewController, XuniCalendarDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var calendar: XuniCalendar!
     
-    weak var order : Order?
+    weak var order : isOrderType?
     weak var delegate: ShipDateDelegate?
-    var currentDate: NSDate?
+    var currentDate: Date?
     var dateText: String = "Ship"
 
     
@@ -32,14 +32,16 @@ class ShipDateViewController: UIViewController, XuniCalendarDelegate {
             return
         }
         dateText = order.orderType == .PickUp ? "Pick Up" : "Ship"
-        navigationBar.title = order.account.customerName
+        
+        navigationBar.title = order.account?.customerName ?? "Sample"
+        let shipDays = order.account?.shipDays ?? ShipDays.fullWeek
         calendar.delegate = self
         calendar.maxSelectionCount = 1
-        if let minShipDate = order.minShipDate.getDate() {
+        if let minShipDate = order.minShipDate?.getDate() {
             calendar.minDate = minShipDate
-            calendar.maxDate = minShipDate.getMaxShipDate(order.account.shipDays)
+            calendar.maxDate = minShipDate.getMaxShipDate(shipDays)
         }
-        calendar.selectedDate = order.shipDate.getDate()
+        calendar.selectedDate = order.shipDate?.getDate()
         calendar.displayDate = calendar.selectedDate
         currentDate = calendar.selectedDate
         updateDateLabel()
@@ -50,71 +52,78 @@ class ShipDateViewController: UIViewController, XuniCalendarDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func dismiss(sender: AnyObject) {
+    @IBAction func dismiss(_ sender: AnyObject) {
         if let order  = order,
             let selectedDate = currentDate?.getDateShipString()  {
-            let monthChanged = selectedDate.getShipMonth() != order.shipDate.getShipMonth()
+            let monthChanged = selectedDate.getShipMonth() != order.shipDate?.getShipMonth()
             order.shipDate = selectedDate
             if monthChanged {
                 delegate?.shipMonthChanged()
             }
         }
-        performSegueWithIdentifier("unwindToOrderHeader", sender: self)
+        performSegue(withIdentifier: "unwindToOrderHeader", sender: self)
     }
     
     func updateDateLabel() {
-        dateLabel.text = "\(dateText) Date: \(calendar.selectedDate.getDateShipPrint())"
+        dateLabel.text = dateText + " Date: " + calendar.selectedDate.getDateShipPrint()
     }
     
-    func daySlotLoading(sender: XuniCalendar, args: XuniCalendarDaySlotLoadingEventArgs) {
-        if (args.isAdjacentDay) {
-            return
+    func daySlotLoading(_ sender: XuniCalendar, date: Date, isAdjacentDay: Bool, daySlot: XuniCalendarDaySlotBase) -> XuniCalendarDaySlotBase! {
+        if isAdjacentDay {
+            return daySlot
         }
-        if args.date.isLessThanDate(calendar.minDate) || args.date.isGreaterThanDate(calendar.maxDate) {
-            return
+        if date.isLessThanDate(calendar.minDate) || date.isGreaterThanDate(calendar.maxDate) {
+            return daySlot
         }
         guard let order = order else {
-            return
+            return daySlot
         }
-        let shipIcon = args.date.isShipDay(order.account.shipDays) ? UIImage(named: "shipDay") : UIImage(named: "nonShipDay")
-        let rect = args.daySlot.frame
+        
+        let shipIcon = date.isShipDay(order.account?.shipDays) ? UIImage(named: "shipDay") : UIImage(named: "nonShipDay")
+        let rect = daySlot.frame
         let size = rect.size
         var rect1: CGRect
         var rect2: CGRect
         let imageDaySlot = XuniCalendarImageDaySlot(calendar: sender, frame: rect)
-        rect1 = CGRectMake(0, 0, size.width, size.height / 6 * 4)
-        rect2 = CGRectMake(size.width / 2 - 6 / 2, size.height / 6 * 4, 6, 6)
-        imageDaySlot.dayTextRect = rect1
-        imageDaySlot.imageRect = rect2
-        imageDaySlot.imageSource = shipIcon
-        args.daySlot = imageDaySlot
+        rect1 = CGRect(x: 0, y: 0, width: size.width, height: size.height / 6 * 4)
+        rect2 = CGRect(x: size.width / 2 - 6 / 2, y: size.height / 6 * 4, width: 6, height: 6)
+        imageDaySlot?.dayTextRect = rect1
+        imageDaySlot?.imageRect = rect2
+        imageDaySlot?.imageSource = shipIcon
+        return imageDaySlot
     }
-
-    func selectionChanging(sender: XuniCalendar!, args: XuniCalendarSelectionChangedEventArgs!) {
+    
+    func selectionChanging(_ sender: XuniCalendar!, selectedDates: XuniCalendarRange!) {
         guard let order = order else {
             return
         }
-        let selectedDate = args.selectedDates.startDate
-        if !selectedDate.isShipDay(order.account.shipDays) {
-            calendar.displayDate = currentDate
+        guard let selectedDate = selectedDates.startDate else {
+            return
+        }
+        if !selectedDate.isShipDay(order.account?.shipDays) {
             calendar.selectedDate = currentDate
-            
         }
     }
     
-    func selectionChanged(sender: XuniCalendar!, args: XuniCalendarSelectionChangedEventArgs!) {
+    func selectionChanged(_ sender: XuniCalendar!, selectedDates: XuniCalendarRange!) {
         currentDate = calendar.selectedDate
         updateDateLabel()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func displayDateChanging(_ sender: XuniCalendar!) {
+        guard let order = order else {
+            return
+        }
+        guard sender.selectedDate.isShipDay(order.account?.shipDays) else {
+            calendar.selectedDate = currentDate
+            return
+        }
+        currentDate = sender.selectedDate
+        updateDateLabel()
     }
-    */
+    
+    func displayDateChanged(_ sender: XuniCalendar!) {
+        calendar.refresh()
+    }
 
 }

@@ -7,10 +7,19 @@ import Foundation
 protocol SyncServiceBaseType {
     var module: Module { get }
     var apiCredentials: [String : String] { get }
+    var queryLastSync : String? { get }
+    func queryAllLastSync() throws -> [String : String]
+    func updateLastSync()
+    
 }
 
-protocol SyncServiceType {
-    var queryDb: (gridData: NSMutableArray?, searchData: [[String : AnyObject]]?) { get }
+protocol SyncServiceType : SyncServiceBaseType {
+    func queryDb() -> (gridData: NSMutableArray?, searchData: [[String : String]]?, isManager: Bool)
+}
+
+protocol OrderSyncServiceType: SyncServiceType {
+    func getApi(_ timeSyncDict: [String : String], completion: @escaping (_ data: InvSync?, _ error: ErrorCode?) -> Void)
+    func updateDb(_ invSync: InvSync) throws
 }
 
 protocol SyncRows {
@@ -42,7 +51,7 @@ struct Sync<T: SyncRows> {
         }
     }
     
-    private func structArrayFromDictionaryArray<T: SyncRows>(rowList: [[String: AnyObject]]) -> [T]? {
+    fileprivate func structArrayFromDictionaryArray<T: SyncRows>(_ rowList: [[String: AnyObject]]) -> [T]? {
         var structArray : [T] = []
         for row in rowList {
             structArray.append(T(dict: row))
@@ -67,22 +76,26 @@ class SyncService : SyncServiceBaseType {
     }
     
     func updateLastSync() {
-        let dB = FMDatabase(path: Constants.databasePath)
+        guard let dB = FMDatabase(path: Constants.databasePath) else {
+            return
+        }
         if dB.open() {
-            let sqlInsert = "UPDATE LAST_SYNC SET last_sync='\(NSDate().getDateTimeString())' WHERE table_name='\(module.moduleTable)'"
-            dB.executeUpdate(sqlInsert, withArgumentsInArray: nil)
+            let sqlInsert = "UPDATE LAST_SYNC SET last_sync='" + Date().getDateTimeString() + "' WHERE table_name='" + module.moduleTable + "'"
+            dB.executeUpdate(sqlInsert, withArgumentsIn: nil)
             dB.close()
         }
     }
     
     lazy var queryLastSync : String? = {
-        let dB = FMDatabase(path: Constants.databasePath)
+        guard let dB = FMDatabase(path: Constants.databasePath) else {
+            return nil
+        }
         var lastSyncResult: String?
         if dB.open() {
-            let sqlQuery = "SELECT LAST_SYNC FROM LAST_SYNC WHERE table_name='\(self.module.moduleTable)'"
-            let results:FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsInArray: nil)
+            let sqlQuery = "SELECT LAST_SYNC FROM LAST_SYNC WHERE table_name='" + self.module.moduleTable + "'"
+            let results:FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             if results?.next() == true {
-                lastSyncResult = results?.stringForColumn("last_sync")
+                lastSyncResult = results?.string(forColumn: "last_sync")
             } else {
                 lastSyncResult = nil
             }
@@ -92,14 +105,16 @@ class SyncService : SyncServiceBaseType {
     }()
 
     func queryAllLastSync() throws -> [String : String]  {
-        let dB = FMDatabase(path: Constants.databasePath)
+        guard let dB = FMDatabase(path: Constants.databasePath) else {
+            throw ErrorCode.dbError
+        }
         var lastSyncs: [String : String] = [:]
         if dB.open() {
             for (name, table) in module.syncTable {
-                let qryLastSync = "SELECT last_sync FROM LAST_SYNC WHERE table_name = '\(table)'"
-                let results:FMResultSet? = dB.executeQuery(qryLastSync, withArgumentsInArray: nil)
+                let qryLastSync = "SELECT last_sync FROM LAST_SYNC WHERE table_name = '" + table + "'"
+                let results:FMResultSet? = dB.executeQuery(qryLastSync, withArgumentsIn: nil)
                 if results?.next() == true {
-                    if let lastSync = results?.stringForColumn("last_sync") {
+                    if let lastSync = results?.string(forColumn: "last_sync") {
                         lastSyncs[name] = lastSync
                     } else {
                         lastSyncs[name] = Constants.timeSyncDefault
@@ -111,9 +126,8 @@ class SyncService : SyncServiceBaseType {
             dB.close()
         }
         guard !lastSyncs.isEmpty else {
-            throw ErrorCode.DbError
+            throw ErrorCode.dbError
         }
         return lastSyncs
     }
-
 }

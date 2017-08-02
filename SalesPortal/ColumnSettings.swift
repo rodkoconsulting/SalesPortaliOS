@@ -12,19 +12,20 @@ struct ColumnSettings {
     var name : String?
     var visible : Bool?
     var width: Double?
+    var version: Int?
     
     init?(settingDict : [String : AnyObject]) {
-        guard let name = settingDict["name"] as? String,
-            let visible = settingDict["visible"] as? Bool else {
-            return nil
-        }
+        let name = settingDict["name"] as? String
+        let visible = settingDict["visible"] as? Bool
         let width = settingDict["width"] as? Double
+        let version = settingDict["version"] as? Int
         self.name = name
         self.visible = visible
         self.width = width
+        self.version = version
     }
     
-    static func generateColumnSettings(columnSettings: [[String : AnyObject]]?) -> [ColumnSettings]? {
+    static func generateColumnSettings(_ columnSettings: [[String : AnyObject]]?) -> [ColumnSettings]? {
         guard let columnSettings = columnSettings else {
             return nil
         }

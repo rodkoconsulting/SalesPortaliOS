@@ -2,44 +2,71 @@ import UIKit
 import XuniFlexGridKit
 import MessageUI
 
-class AccountsViewController: DataGridViewController, ColumnsDelegate {
+class AccountsViewController: DataGridViewController {
 
+    @IBOutlet weak var accountNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let mainViewController = self.tabBarController as? MainTabBarController
-        gridData = mainViewController?.accounts
-        initGrid()
-        longPressInitialize(flexGrid)
+        
         SwiftSpinner.show("Loading...", animated: false) {
-            _ in
+            [unowned self] _ in
             self.displayView()
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func loadSettings() {
+        let mainViewController = tabBarController as? MainTabBarController
+        gridData = mainViewController?.accounts
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if isFilterChanged {
             filterRefresh()
         }
-    }
-    
-    override func setItemLabels(selectedRow selectedRow: Int32) {
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         flexGrid.saveUserDefaults(moduleType)
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func setItemLabels(selectedRow: Int32) {
+        guard selectedRow >= 0 && UInt(selectedRow) < flexGrid.rows.count else {
+            return
+        }
+        let flexRow = flexGrid.rows.objectAtIndex(UInt(selectedRow)) as! GridRow
+        guard let account = flexRow.dataItem as? Account else {
+            return
+        }
+        if accountNameLabel != nil {
+            accountNameLabel.text = account.customerName
+        }
+    }
+    
+    override func clearItemLabels() {
+        accountNameLabel.text = ""
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if segue.identifier == "showAccountOrderTabBarController" {
+            guard let row = sender as? GridRow,
+                let account = row.dataItem as? Account,
+                let orderTabBarController = segue.destination as? OrderTabBarController else {
+                    return
+            }
+            orderTabBarController.order = AccountOrder(account: account)
+        }
         if segue.identifier == "showColumnsViewController" {
-            guard let columnsViewController = segue.destinationViewController as? ColumnsViewController else {
+            guard let columnsViewController = segue.destination as? ColumnsViewController else {
                 return
             }
             columnsViewController.columnsDelegate = self
@@ -47,30 +74,45 @@ class AccountsViewController: DataGridViewController, ColumnsDelegate {
             columnsViewController.module = moduleType
         }
         if segue.identifier == "showFiltersViewController" {
-            segueFiltersViewController(segue: segue, sender: sender)
+            segueFiltersViewController(segue: segue, sender: sender as AnyObject)
         }
-        if segue.identifier == "showOrderTabBarController" {
-            guard let row = sender as? FlexRow,
-                let account = row.dataItem as? Account,
-                let orderTabBarController = segue.destinationViewController as? OrderTabBarController else {
-                    return
-            }
-            orderTabBarController.order = Order(account: account)
-        }
-    }
-
-    override func handleLongPress(sender: UILongPressGestureRecognizer) {
-        let pressedPoint = sender.locationInView(flexGrid)
-        let hit = FlexHitTestInfo(grid: flexGrid, atPoint: pressedPoint)
-        if sender.state == UIGestureRecognizerState.Began && hit.cellType == FlexCellType.ColumnHeader {
-            guard let column = flexGrid.columns.objectAtIndex(UInt(hit.column)) as? GridColumn else {
+        if segue.identifier == "showAccountInfoViewController" {
+            guard let row = flexGrid.rows.objectAtIndex(UInt(flexGrid.selection.row)) as? GridRow, let account = row.dataItem as? Account, let accountInfoViewController = segue.destination as? AccountInfoViewController else {
                 return
             }
-            showFilterActionSheet(column: column, rowIndex: hit.row, panel: hit.gridPanel, flexGrid: flexGrid)
+            accountInfoViewController.account = account
         }
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard identifier == "showAccountInfoViewController" else {
+            return true
+        }
+        guard flexGrid.isSelectionVisible() else {
+            return false
+        }
+        guard let _ = flexGrid.rows.objectAtIndex(UInt(flexGrid.selection.row)) as? GridRow else {
+            return false
+        }
+        return true
+    }
+
+
+//    override func handleLongPress(sender: UILongPressGestureRecognizer) {
+//        let pressedPoint = sender.locationInView(flexGrid)
+//        let hit = GridHitTestInfo(grid: flexGrid, atPoint: pressedPoint)
+//        guard hit.column >= 0 else {
+//            return
+//        }
+//        if sender.state == UIGestureRecognizerState.Began && hit.cellType == GridCellType.ColumnHeader {
+//            guard let column = flexGrid.columns.objectAtIndex(UInt(hit.column)) as? DataGridColumn else {
+//                return
+//            }
+//            showFilterActionSheet(column: column, rowIndex: hit.row, panel: hit.gridPanel, flexGrid: flexGrid)
+//        }
+//    }
   
-    @IBAction func refreshGrid(sender: AnyObject) {
+    @IBAction func refreshGrid(_ sender: AnyObject) {
         syncAccounts()
     }
     
@@ -80,8 +122,8 @@ class AccountsViewController: DataGridViewController, ColumnsDelegate {
     
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
-        self.moduleType = Module.Accounts
-        self.classType = Account.self
+        moduleType = Module.accounts
+        classType = Account.self
     }
     
     
@@ -91,38 +133,42 @@ class AccountsViewController: DataGridViewController, ColumnsDelegate {
     //    }
     // }
     
-    override func clearSelectedCells() {
-        guard flexGrid.rows.count > 0 && flexGrid.columns.count > 0 else {
-            return
-        }
-        flexGrid.selection = FlexCellRange(row: 0, col: 1)
-        flexGrid.selection = FlexCellRange(row: 0, col: 0)
-    }
-
+    //override func clearSelectedCells() {
+    //    guard flexGrid.rows.count > 0 && flexGrid.columns.count > 0 else {
+    //        return
+    //    }
+    //    flexGrid.selection = GridCellRange(row: 0, col: 1)
+    //    flexGrid.selection = GridCellRange(row: 0, col: 0)
+    //}
+    
+    
     func displayView() {
-        do {
-            try DbOperation.databaseInit()
+        //do {
+            //try DbOperation.databaseInit()
             loadData(isSynched: false)
-        } catch {
-            sendAlert(ErrorCode.DbError)
-        }
+        //} catch {
+           // sendAlert(ErrorCode.DbError)
+        //}
     }
     
-    override func cellDoubleTapped(sender: FlexGrid!, panel: FlexGridPanel!, forRange range: FlexCellRange!) -> Bool {
-        guard panel != nil else {
+    override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, forRange range: GridCellRange!) -> Bool {
+        guard let range = range else {
+            return false
+        }
+        guard range.col >= 0 else {
             return false
         }
         switch panel.cellType {
-            case FlexCellType.ColumnHeader:
-                guard let column = flexGrid.columns.objectAtIndex(UInt(range.col)) as? GridColumn else {
+            case GridCellType.ColumnHeader:
+                guard let column = flexGrid.columns.objectAtIndex(UInt(range.col)) as? DataGridColumn else {
                     return false
                 }
                 showFilterActionSheet(column: column, rowIndex: range.row, panel: panel)
-            case FlexCellType.Cell:
-                guard let row = flexGrid.rows.objectAtIndex(UInt(range.row)) as? FlexRow else {
+            case GridCellType.Cell:
+                guard let row = flexGrid.rows.objectAtIndex(UInt(range.row)) as? GridRow else {
                     return false
                 }
-                self.performSegueWithIdentifier("showOrderTabBarController", sender: row)
+                performSegueWithIdentifier("showAccountOrderTabBarController", sender: row)
             default:
                 return false
                 
@@ -130,37 +176,38 @@ class AccountsViewController: DataGridViewController, ColumnsDelegate {
         return false
         }
     
-    override func loadData(isSynched isSynched: Bool) {
+    override func loadData(isSynched: Bool) {
         guard let credentials = Credentials.getCredentials() else {
             displayLogIn()
             return
         }
         gridData?.removeAllObjects()
         let accountService = AccountService(module: moduleType, apiCredentials: credentials)
-        let accountQuery = accountService.queryDb
+        let accountQuery = accountService.queryDb()
         gridData = accountQuery.gridData
+        isManager = accountQuery.isManager
         if let accountSearchData = accountQuery.searchData {
             searchData = accountSearchData
         }
         let accountLastSync = accountService.queryLastSync
-        guard accountLastSync != nil && self.gridData != nil else {
+        guard accountLastSync != nil && gridData != nil else {
             guard !isSynched else {
-                self.completionError(ErrorCode.DbError)
+                completionError(ErrorCode.dbError)
                 return
             }
-            self.syncAccounts()
+            syncAccounts()
             return
         }
-        if flexGrid.collectionView != nil {
-            flexGrid.collectionView.removeAllObjects()
+        if let collectionView = flexGrid.collectionView {
+            collectionView.removeAllObjects()
         }
-        if flexGrid.itemsSource != nil {
-            flexGrid.itemsSource.removeAllObjects()
+        if let itemsSource = flexGrid.itemsSource {
+            itemsSource.removeAllObjects()
         }
-        self.flexGrid.itemsSource = gridData
-        self.isFilterChanged = false
-        self.filterGridColumns(self.searchBar.text!, classType: classType)
-        dispatch_async(dispatch_get_main_queue()) {
+        flexGrid.itemsSource = gridData
+        isFilterChanged = false
+        filterGridColumns(searchBar.text!, classType: classType)
+        DispatchQueue.main.async {
             SwiftSpinner.hide()
         }
         
@@ -168,29 +215,44 @@ class AccountsViewController: DataGridViewController, ColumnsDelegate {
     
     func syncAccounts() {
         guard let credentials = Credentials.getCredentials(), let _ = credentials["state"] else {
-            self.displayLogIn()
+            displayLogIn()
             return
         }
         SwiftSpinner.show("Syncing...", animated: false)
         let accountService = AccountService(module: moduleType, apiCredentials: credentials)
+        let orderListService = OrderListService(module: Module.orderList, apiCredentials: credentials)
         do {
-            let lastAllSync = try accountService.queryAllLastSync()
-            accountService.getApi(lastAllSync) {
-                (let accountSyncCompletion, error) in
+            let lastAccountSync = try accountService.queryAllLastSync()
+            let lastOrderListSync = try orderListService.queryAllLastSync()
+            accountService.getApi(lastAccountSync) {
+                [unowned self](accountSyncCompletion, error) in
                 guard let accountSync = accountSyncCompletion else  {
-                    self.completionError(error ?? ErrorCode.UnknownError)
+                    self.completionError(error ?? ErrorCode.unknownError)
                     return
                 }
                 do {
                     try accountService.updateDb(accountSync)
                 } catch {
-                    self.completionError(ErrorCode.DbError)
+                    self.completionError(ErrorCode.dbError)
                 }
                 accountService.updateLastSync()
-                self.loadData(isSynched: true)
+                orderListService.getApi(lastOrderListSync) {
+                    (orderListSyncCompletion, error) in
+                    guard let orderListSync = orderListSyncCompletion else  {
+                        self.completionError(error ?? ErrorCode.unknownError)
+                        return
+                    }
+                    do {
+                        try orderListService.updateDb(orderListSync)
+                    } catch {
+                        self.completionError(ErrorCode.dbError)
+                    }
+                    orderListService.updateLastSync()
+                    self.loadData(isSynched: true)
+                }
             }
         } catch {
-            self.completionError(ErrorCode.DbError)
+            completionError(ErrorCode.dbError)
         }
     }    
 }

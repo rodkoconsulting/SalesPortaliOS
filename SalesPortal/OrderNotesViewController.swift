@@ -7,111 +7,73 @@
 //
 
 import UIKit
+import XuniInputKit
 
-class OrderNotesViewController: UIViewController, OrderCoopNoDelegate  {
-
+class OrderNotesViewController: UIViewController, UITextFieldDelegate  {
+    
     @IBOutlet weak var notesTextField: UITextField!
-    @IBOutlet weak var poNoTextField: UITextField!
-    @IBOutlet weak var coopNoButton: UIButton!
-    @IBOutlet weak var coopNoLabel: UILabel!
-    @IBOutlet weak var coopCasesLabel: UILabel!
-    @IBOutlet weak var coopCasesControl: UISegmentedControl!
     @IBOutlet weak var navigationBar: UINavigationItem!
     
-    weak var order: Order?
+    weak var order: isOrderType?
     
-    @IBAction func coopCasesChanged(sender: AnyObject) {
-        if let _ =  order?.coopNo {
-            order?.coopCases = Constants.coopCaseList[  coopCasesControl.selectedSegmentIndex]
-        }
+    var maxLength: Int = 0; //implement in child
+    
+    func callChildDismiss() {
+        //implement in child
     }
     
-    @IBAction func dismiss(sender: AnyObject) {
+    func callChildViewDidLoad() {
+        //implement in child
+    }
+    
+    func callChildInitNotes() {
+        //implement in child
+    }
+    
+    @IBAction func dismiss(_ sender: AnyObject) {
         guard let order = order else {
-            performSegueWithIdentifier("unwindToHeader", sender: self)
+            performSegue(withIdentifier: "unwindToHeader", sender: self)
             return
         }
         order.notes = notesTextField.text
-        order.poNo = poNoTextField.text
-        performSegueWithIdentifier("unwindToHeader", sender: self)
+        callChildDismiss()
+        performSegue(withIdentifier: "unwindToHeader", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBar.title = order?.account.customerName
+        notesTextField.delegate = self
+        callChildViewDidLoad()
         initNotes()
-        // Do any additional setup after loading the view.
-    }
-    
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showOrderCoopNoPickerVC" {
-            guard let orderCoopNoPickerViewController = segue.destinationViewController as? OrderCoopNoPickerViewController else {
-                return
-            }
-            orderCoopNoPickerViewController.order = order
-            orderCoopNoPickerViewController.delegate = self
-            
-        }
-    }
-
-    func changedCoopNo() {
-        guard let order = order else {
-            return
-        }
-        coopNoButton.setTitle(order.coopNo ?? Constants.noCoopText, forState: .Normal)
-        if order.coopNo == nil {
-            ResetCoopCases()
-        }
     }
     
     func initNotes() {
-        for (index, cases) in Constants.coopCaseList.enumerate() {
-            coopCasesControl.setTitle("\(cases)", forSegmentAtIndex: index)
-        }
         notesTextField.text = order?.notes
-        poNoTextField.text = order?.poNo
-        guard order?.account.coopList.count > 0 else {
-            HideCoop()
-            return
+        callChildInitNotes()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentCharacterCount = textField.text?.characters.count ?? 0
+        if (range.length + range.location > currentCharacterCount) {
+            return false
         }
-        coopNoButton.setTitle(order?.coopNo ?? "None", forState: .Normal)
-        guard let coopCases = order?.coopCases else {
-            coopCasesControl.selectedSegmentIndex = 0
-            return
-        }
-        coopCasesControl.selectedSegmentIndex = Constants.coopCaseList.indexOf(coopCases) ?? 0
+        let newLength = currentCharacterCount + string.characters.count - range.length
+        return newLength <= maxLength
     }
     
-    func HideCoop() {
-        coopNoLabel.hidden = true
-        coopNoButton.hidden = true
-        coopCasesLabel.hidden = true
-        coopCasesControl.hidden = true
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        exitVc()
     }
     
-    func ResetCoopCases() {
-        order?.coopCases = nil
-        coopCasesControl.selectedSegmentIndex = 0
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func exitVc() {
+        notesTextField.delegate = nil
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
-        super.touchesBegan(touches, withEvent: event)
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

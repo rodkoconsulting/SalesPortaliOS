@@ -3,24 +3,24 @@ import UIKit
 import XuniFlexGridKit
 import MessageUI
 
-class OrderInventoryViewController: DataGridViewController, ColumnsDelegate, OrderInventoryErrorDelegate  {
+class OrderInventoryViewController: DataGridViewController, OrderInventoryErrorDelegate  {
     
-    weak var order: Order?
+    @IBOutlet weak var myTabBarItem: UITabBarItem!
+    
+    weak var order: isOrderType?
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        guard let orderTabBarController = self.tabBarController as? OrderTabBarController,
-            let order = orderTabBarController.order else {
-                return
+        guard let orderTabBarController = tabBarController as? OrderTabBarController else {
+            return
         }
-        gridData = order.orderInventory
-        searchData = order.searchData
-        initGrid()
+        order = orderTabBarController.order
+        initData()
+        super.viewDidLoad()
         setTitleLabel()
-        longPressInitialize(flexGrid)
+        flexGrid.selectionMode = currentSelectionMode
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         flexGrid.invalidate()
 
@@ -29,44 +29,65 @@ class OrderInventoryViewController: DataGridViewController, ColumnsDelegate, Ord
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    func saveOrderDelegate() {
+        try! order?.saveOrder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         flexGrid.finishEditing(false)
         flexGrid.saveUserDefaults(moduleType)
     }
     
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showColumnsViewController" {
-            guard let columnsViewController = segue.destinationViewController as? ColumnsViewController else {
-                return
-            }
-            columnsViewController.columnsDelegate = self
-            columnsViewController.columnSettings = flexGrid.columns
-            columnsViewController.module = moduleType
+    func initData() {
+        guard let order = order else {
+            return
         }
-        if segue.identifier == "showFiltersViewController" {
-           segueFiltersViewController(segue: segue, sender: sender)
+        gridData = order.orderInventory
+        searchData = order.searchData
+    }
+    
+//    override func handleLongPress(sender: UILongPressGestureRecognizer) {
+//        let pressedPoint = sender.locationInView(flexGrid)
+//        let hit = GridHitTestInfo(grid: flexGrid, atPoint: pressedPoint)
+//        guard hit.column >= 0 else {
+//            return
+//        }
+//        if sender.state == UIGestureRecognizerState.Began && hit.cellType == GridCellType.ColumnHeader {
+//            guard let column = flexGrid.columns.objectAtIndex(UInt(hit.column)) as? DataGridColumn else {
+//                return
+//            }
+//            showFilterActionSheet(column: column, rowIndex: hit.row, panel: hit.gridPanel, flexGrid: flexGrid)
+//        }
+//    }
+    
+    func saveOrder() {
+        guard let order = order else {
+            return
+        }
+        try! order.saveOrder()
+    }
+    
+    override func setItemLabels(selectedRow: Int32) {
+        guard selectedRow >= 0 && UInt(selectedRow) < flexGrid.rows.count else {
+            return
+        }
+        let flexRow = flexGrid.rows.objectAtIndex(UInt(selectedRow)) as! GridRow
+        let inventory = flexRow.dataItem as! Inventory
+        if descriptionLabel != nil {
+            descriptionLabel.text = inventory.itemDescription
+            restrictionLabel.text = inventory.restrictedList
         }
     }
     
-    
-    
-    override func handleLongPress(sender: UILongPressGestureRecognizer) {
-        let pressedPoint = sender.locationInView(flexGrid)
-        let hit = FlexHitTestInfo(grid: flexGrid, atPoint: pressedPoint)
-        if sender.state == UIGestureRecognizerState.Began && hit.cellType == FlexCellType.ColumnHeader {
-            guard let column = flexGrid.columns.objectAtIndex(UInt(hit.column)) as? GridColumn else {
-                return
-            }
-            showFilterActionSheet(column: column, rowIndex: hit.row, panel: hit.gridPanel, flexGrid: flexGrid)
-        }
+    override func clearItemLabels() {
+        descriptionLabel.text = ""
+        restrictionLabel.text = ""
     }
    
     override func initGrid() {
+        super.initGrid()
         flexGrid.isReadOnly = false
-        flexGrid.delegate = self
-        flexGrid.gridLayout(moduleType)
-        flexGrid.itemsSource = gridData
         filterGrid("")
     }
     
@@ -76,19 +97,7 @@ class OrderInventoryViewController: DataGridViewController, ColumnsDelegate, Ord
 //        self.classType = Account.self
 //    }
     
-    required init?(coder aDecoder: NSCoder){
-        super.init(coder: aDecoder)
-        self.moduleType = Module.OrderInventory
-        self.classType = OrderInventory.self
-    }
-    
-    override func setTitleLabel() {
-        if let order = order {
-            let accountState = order.account.priceLevel
-            let orderMonth = order.shipDate.getDate()?.getMonthString() ?? NSDate().getMonthString()
-            titleLabel.text = "\(accountState) \(orderMonth) pricing"
-        }
-    }
+        
 
     //func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
     //    flexGrid.finishEditing(false)
@@ -97,17 +106,20 @@ class OrderInventoryViewController: DataGridViewController, ColumnsDelegate, Ord
     //    }
     //}
   
-    override func filterGridColumns<T: NSObject>(searchText: String?, classType: T.Type, isIndex: Bool = false) {
-        flexGrid.collectionView.filter = {(item : NSObject?) -> Bool in
+    override func filterGridColumns<T: NSObject>(_ searchText: String?, classType: T.Type, isIndex: Bool = false) {
+        guard let collectionView = flexGrid.collectionView else {
+            return
+        }
+        collectionView.filter = {[unowned self](item : NSObject?) -> Bool in
             guard let row = item as? OrderInventory else {
                 return false
             }
             guard !isIndex else {
-                return row.itemCode == searchText
+                return self.flexGrid.filterIndex(searchText, row: row, moduleType: self.moduleType) && self.flexGrid.filterColumns(nil, row: row)
             }
             guard row.priceCase > 0 else {
                 let index = self.searchData.indexOf {
-                    if let value = $0["DisplaySubText"] as? String where value == row.itemCode {
+                    if let value = $0["DisplaySubText"], value == row.itemCode {
                         return true
                     }
                     return false
@@ -122,29 +134,27 @@ class OrderInventoryViewController: DataGridViewController, ColumnsDelegate, Ord
         resetGrid()
     }
 
-    func beginningEdit(sender: FlexGrid!, panel: FlexGridPanel!, forRange range: FlexCellRange!) -> Bool {
-        guard let flexRow = flexGrid.rows.objectAtIndex(UInt(range.row)) as? FlexRow,
+    func setAccountInventoryDelegate(_ orderInventory: OrderInventory) {
+        // implement in child
+    }
+    
+    func beginningEdit(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!) -> Bool {
+        guard panel != nil else {
+            return false
+        }
+        guard let flexRow = flexGrid.rows.objectAtIndex(UInt(range.row)) as? GridRow,
             let inventory = flexRow.dataItem as? OrderInventory else {
                 return false
         }
-        let viewRange = flexGrid.viewRange
-        let topRow = viewRange.row2 != viewRange.row ? viewRange.row + 1 :  viewRange.row
-        topCell = panel.getCellRectForRow(topRow, inColumn: range.col)
-        //activeHeader = headerPanel.getCellRectForRow(1, inColumn: range.col)
         activeField = panel.getCellRectForRow(range.row, inColumn: range.col)
-        
-        //flexGrid.scrollRowIntoView(range.row, forColumn: range.col)
-        //if inventory.delegate == nil {
-            inventory.errorDelegate = self
-            inventory.delegate = order
-            inventory.orderType = order?.orderType
-        //}
+        inventory.errorDelegate = self
+        setAccountInventoryDelegate(inventory)
         return false
     }
     
-    func cellEditEnding(sender: FlexGrid!, panel: FlexGridPanel!, forRange range: FlexCellRange!, cancel: Bool) -> Bool {
+    func cellEditEnding(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!, cancel: Bool) -> Bool {
         activeField = nil
-        topCell = nil
+        //topCell = nil
         return false
     }
 }

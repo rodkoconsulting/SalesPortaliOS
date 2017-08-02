@@ -8,50 +8,77 @@ enum ApiOperationEnum: String {
     case Error = "Error"
 }
 
-class ApiOperation : NSObject, NSURLSessionDelegate {
-    lazy var config: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
-    lazy var session: NSURLSession = NSURLSession(configuration: self.config, delegate: self, delegateQueue:NSOperationQueue.mainQueue())
-    let queryURL: NSURL
+class ApiOperation : NSObject, URLSessionDelegate {
+    lazy var config: URLSessionConfiguration = URLSessionConfiguration.default
+    lazy var session: Foundation.URLSession = Foundation.URLSession(configuration: self.config, delegate: self, delegateQueue:OperationQueue.main)
+    let queryURL: URL
     let username: String
     let password: String
     
-    typealias JSONDictionaryCompletion = (data: [String: AnyObject]?, error: ErrorCode?) -> Void
+    typealias JSONDictionaryCompletion = (_ data: [String: AnyObject]?, _ error: ErrorCode?) -> Void
+    typealias JSONPostCompletion = (_ success: Bool, _ error: ErrorCode?) -> Void
     
-    init(url: NSURL, credentials: [String : String]){
+    init(url: URL, credentials: [String : String]){
         self.queryURL = url
         self.username = credentials["username"]!
         self.password = credentials["password"]!
     }
     
-    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
-        completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!))
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        completionHandler(Foundation.URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
     }
     
-    func downloadJSONFromURL(completion: (JSONDictionaryCompletion)) {
+    func uploadJSONToURL(_ jsonData: Data, completion: @escaping (JSONPostCompletion)) {
         let loginString = NSString(format: "%@:%@", username, password)
-        let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64LoginString = loginData.base64EncodedStringWithOptions([])
-        let request: NSMutableURLRequest = NSMutableURLRequest(URL: queryURL)
-        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-        let dataTask = session.dataTaskWithRequest(request){
-            (let data, let response, let error) in
-            guard let httpResponse = response as? NSHTTPURLResponse else {
-                completion(data: nil, error: ErrorCode.ServerError)
+        let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)!
+        let base64LoginString = loginData.base64EncodedString(options: [])
+        let request: NSMutableURLRequest = NSMutableURLRequest(url: queryURL)
+        request.setValue("Basic " + base64LoginString, forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: {
+            (data, response, error) in
+            guard let _ = response, let data = data else {
+                completion(false, ErrorCode.noInternet)
+                return
+            }
+            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves)) as? [String: AnyObject],
+                let _ = jsonDictionary["success"] as? Bool else {
+                    completion(false, ErrorCode.serverError)
+                    return
+            }
+            completion(true, nil)
+        })
+        dataTask.resume()
+    }
+    
+    func downloadJSONFromURL(_ completion: @escaping (JSONDictionaryCompletion)) {
+        let loginString = NSString(format: "%@:%@", username, password)
+        let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)!
+        let base64LoginString = loginData.base64EncodedString(options: [])
+        let request: NSMutableURLRequest = NSMutableURLRequest(url: queryURL)
+        request.setValue("Basic " + base64LoginString, forHTTPHeaderField: "Authorization")
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: {
+            (data, response, error) in
+            guard let httpResponse = response as? HTTPURLResponse, let data = data else {
+                completion(nil, ErrorCode.serverError)
                 return
             }
             switch(httpResponse.statusCode){
             case 200:
-                guard let jsonDictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: [])) as? [String: AnyObject] else {
-                    completion(data: nil, error: ErrorCode.ServerError)
+                guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: AnyObject] else {
+                    completion(nil, ErrorCode.serverError)
                     return
                 }
-                completion(data: jsonDictionary, error: nil)
+                completion(jsonDictionary, nil)
             case 401:
-                completion(data: nil, error: ErrorCode.HttpError(statusCode: 401))
+                completion(nil, ErrorCode.httpError(statusCode: 401))
             default:
-                completion(data: nil, error: ErrorCode.HttpError(statusCode: httpResponse.statusCode as Int))
+                completion(nil, ErrorCode.httpError(statusCode: httpResponse.statusCode as Int))
             }
-        }
+        })
         dataTask.resume()
     }
 }

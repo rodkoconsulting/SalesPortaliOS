@@ -7,19 +7,20 @@
 //
 
 import UIKit
+import XuniInputKit
 
 class InventorySettingsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var settingsLabel: UILabel!                                                                                                              
-    @IBOutlet weak var settingsPicker: UIPickerView!
-    
+    @IBOutlet weak var settingsComboBox: XuniComboBox!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

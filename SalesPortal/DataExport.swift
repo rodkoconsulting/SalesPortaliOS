@@ -12,7 +12,7 @@ import MessageUI
 
 struct DataExport {
     
-    static func copyGrid(copySelection copySelection: Bool, flexGrid: FlexGrid) -> String? {
+    static func copyGrid<T: NSObject>(copySelection: Bool, flexGrid: FlexGrid, classType: T.Type, moduleType: Module, isManager: Bool) -> String? {
         guard flexGrid.rows.count > 0 else {
             return nil
         }
@@ -22,12 +22,12 @@ struct DataExport {
         var columnStart = copySelection ? flexGrid.selection.col : 0
         var columnEnd = copySelection ? flexGrid.selection.col2 : Int32(flexGrid.columns.count - 1)
         
-        func getColHeaderText(flexGrid: FlexGrid) -> String {
+        func getColHeaderText(_ flexGrid: FlexGrid) -> String {
             var headerString = ""
             for index in 0...flexGrid.columns.count - 1 {
-                let column = flexGrid.columns.objectAtIndex(UInt(index)) as! FlexColumn
+                let column = flexGrid.columns.objectAtIndex(UInt(index)) as! GridColumn
                 if column.visible {
-                    headerString += "\(column.header)"
+                    headerString += column.header ?? ""
                 }
                 if index < flexGrid.columns.count - 1 {
                     headerString += "\t"
@@ -39,9 +39,9 @@ struct DataExport {
 
         var text = copySelection ? "" : getColHeaderText(flexGrid)
         
-        func getCellText(row row: Int32, column: Int32, flexGrid: FlexGrid) -> String {
-            let cellData = flexGrid.getCellDataForRow(row, inColumn: column, formatted: false)
-            var cellText = cellData.description
+        func getCellText<T: NSObject>(row: Int32, column: Int32, flexGrid: FlexGrid, classType: T.Type, isManager: Bool) -> String {
+            let cellData = flexGrid.getCellDataForRow(row, inColumn: column, formatted: false) ?? getGroupRowData(row, col: column, flexGrid: flexGrid, isManager: isManager)
+            var cellText = cellData?.description ?? ""
             if let _ = cellText.rangeOfString("."),
                 let cellNumber = Double(cellText) {
                 cellText = String(format:"%.2f", cellNumber)
@@ -49,6 +49,21 @@ struct DataExport {
             cellText = cellText.stringByReplacingOccurrencesOfString("\n", withString: ",")
             return cellText
         }
+        
+        func getGroupRowData(_ row: Int32, col: Int32, flexGrid: FlexGrid, isManager: Bool) -> NSObject? {
+            guard col == flexGrid.firstVisibleColumn() else {
+                return ""
+            }
+            guard let groupRow = flexGrid.rows.objectAtIndex(UInt(row)) as? GridGroupRow else {
+                return ""
+            }
+            let gridRowIndex = groupRow.cellRange.row2
+            guard let gridColIndex = flexGrid.getColumnFromGroupLevel(groupRow.level, isManager: isManager) else {
+                return ""
+            }
+            return flexGrid.getCellDataForRow(gridRowIndex, inColumn: gridColIndex, formatted: false)
+        }
+        
         
         
         guard rowStart>=0 && columnStart>=0 else {
@@ -66,9 +81,9 @@ struct DataExport {
         }
         for row in rowStart...rowEnd {
             for column in columnStart...columnEnd {
-                let flexColumn = flexGrid.columns.objectAtIndex(UInt(column)) as! FlexColumn
+                let flexColumn = flexGrid.columns.objectAtIndex(UInt(column)) as! GridColumn
                 if flexColumn.visible {
-                    text += getCellText(row: row, column: column, flexGrid: flexGrid)
+                    text += getCellText(row: row, column: column, flexGrid: flexGrid, classType: classType, isManager: isManager)
                 }
                 if column != columnEnd {
                     text += "\t"
@@ -80,21 +95,21 @@ struct DataExport {
         return text
     }
 
-    static func excelExport(flexGrid flexGrid: FlexGrid, mailSubject: String, mailBody: String, attachmentName: String) -> MFMailComposeViewController? {
-        guard let stringSelection = copyGrid(copySelection: false, flexGrid: flexGrid) else {
+    static func excelExport<T: NSObject>(flexGrid: FlexGrid,classType: T.Type, moduleType: Module, isManager: Bool) -> MFMailComposeViewController? {
+        guard let stringSelection = copyGrid(copySelection: false, flexGrid: flexGrid, classType: classType, moduleType: moduleType, isManager: isManager) else {
             return nil
         }
         guard MFMailComposeViewController.canSendMail() else {
             return nil
         }
         let mailComposer = MFMailComposeViewController()
-        mailComposer.setSubject(mailSubject)
-        mailComposer.setMessageBody(mailBody, isHTML: true)
-        let emailData = stringSelection.dataUsingEncoding(NSUTF16StringEncoding)
+        mailComposer.setSubject(moduleType.mailSubject)
+        mailComposer.setMessageBody(moduleType.mailBody, isHTML: true)
+        let emailData = stringSelection.dataUsingEncoding(String.Encoding.utf16)
         guard let emailAttachment = emailData else {
             return nil
         }
-        mailComposer.addAttachmentData(emailAttachment, mimeType: "application/vnd.ms-excel", fileName: attachmentName)
+        mailComposer.addAttachmentData(emailAttachment, mimeType: "application/vnd.ms-excel", fileName: moduleType.mailAttachment)
         return mailComposer
     }
 }

@@ -1,38 +1,32 @@
-
 import UIKit
 import XuniFlexGridKit
 import MessageUI
 
-class InventoryViewController: DataGridViewController, InventoryDataSettingsDelegate, ColumnsDelegate  {
+class InventoryViewController: DataGridViewController, InventoryDataSettingsDelegate {
     
-    var dataSettings: InventoryDataSettings?
+    weak var dataSettings: InventoryDataSettings?
 
-    @IBAction func refreshGrid(sender: AnyObject) {
+    @IBAction func refreshGrid(_ sender: AnyObject) {
         if let dataSettings = dataSettings {
           dataSettings.refreshDates()  
         }
         syncInventory()
     }
     
-    @IBAction func unwindFromLogin(segue: UIStoryboardSegue){
+    @IBAction func unwindFromLogin(_ segue: UIStoryboardSegue){
         displayView()
     }
     
     
-    @IBAction func unwindFromSettings(segue: UIStoryboardSegue) {
+    @IBAction func unwindFromSettings(_ segue: UIStoryboardSegue) {
         
     }
     
-//    init() {
-//        super.init(nibName: nil, bundle: nil)
-//        self.moduleType = Module.Inventory
-//        self.classType = Inventory.self
-//    }
     
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
-        self.moduleType = Module.Inventory
-        self.classType = Inventory.self
+        moduleType = Module.inventory
+        classType = Inventory.self
     }
     
     func changedDataSettings() {
@@ -42,121 +36,132 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
     
     func changedStateSettings() {
         if let dataSettings = dataSettings {
-            Credentials.saveStateCredentials(state: dataSettings.repState)
+            Credentials.saveStateCredentials(state: dataSettings.repState.rawValue)
         }
     }
     
     override func setTitleLabel() {
         if let dataSettings = dataSettings {
-           titleLabel.text = "\(dataSettings.repState) \(dataSettings.month) pricing"
+           titleLabel.text = dataSettings.repState.labelText() + " " + dataSettings.month
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         if segue.identifier == "showSettingsViewController" {
-            guard let settingsViewController = segue.destinationViewController as? InventorySettingsViewController else {
+            guard let settingsViewController = segue.destination as? InventorySettingsViewController else {
                 return
             }
             settingsViewController.dataSettings = dataSettings
             isSettingsChanged = false
         }
-        if segue.identifier == "showColumnsViewController" {
-            guard let columnsViewController = segue.destinationViewController as? ColumnsViewController else {
-                return
-            }
-            columnsViewController.columnsDelegate = self
-            columnsViewController.columnSettings = flexGrid.columns
-            columnsViewController.module = moduleType
-        }
-        if segue.identifier == "showFiltersViewController" {
-            segueFiltersViewController(segue: segue, sender: sender)
-        }
     }
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let mainViewController = self.tabBarController as? MainTabBarController
-        dataSettings = mainViewController?.inventoryDataSettings
-        gridData = mainViewController?.inventory
-        if let dataSettings = dataSettings {
-            dataSettings.delegate = self
+        do {
+            try DbOperation.databaseInit()
+        } catch {
+            sendAlert(ErrorCode.dbError)
         }
-        flexGrid.isReadOnly = true
-        flexGrid.alternatingRowBackgroundColor = GridSettings.alternatingRowBackgroundColor
-        flexGrid.gridLinesVisibility = GridSettings.gridLinesVisibility
-        flexGrid.selectionMode = GridSettings.defaultSelectionMode
-        flexGrid.delegate = self
         setTitleLabel()
-        gridColumnLayout()
-        //flexGrid.itemsSource = inventory
-        longPressInitialize()
         //SwiftSpinner.show("Loading...", animated: false) {
         //    _ in
-            self.displayView()
+            displayView()
         //}
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func loadSettings() {
+        let mainViewController = tabBarController as? MainTabBarController
+        dataSettings = mainViewController?.inventoryDataSettings
+        if let dataSettings = dataSettings {
+            dataSettings.delegate = self
+        }
+        gridData = mainViewController?.inventory
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if isSettingsChanged {
            loadingData(true)
         } else if isFilterChanged {
             filterRefresh()
         }
+        isSettingsChanged = false
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func setItemLabels(selectedRow: Int32) {
+        guard selectedRow >= 0 && UInt(selectedRow) < flexGrid.rows.count else {
+            return
+        } // 11/21
+        let flexRow = flexGrid.rows.objectAtIndex(UInt(selectedRow)) as! GridRow
+        let inventory = flexRow.dataItem as! Inventory
+        if descriptionLabel != nil {
+            descriptionLabel.text = inventory.itemDescription
+            restrictionLabel.text = inventory.restrictedList
+        }
+    }
+    
+    override func clearItemLabels() {
+        descriptionLabel.text = ""
+        restrictionLabel.text = ""
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         flexGrid.saveUserDefaults(moduleType)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
     }
     
     
     func displayView() {
-        do {
-            try DbOperation.databaseInit()
+        //do {
+        //    try DbOperation.databaseInit()
             loadData(isSynched: false)
-        } catch {
-            sendAlert(ErrorCode.DbError)
-        }
+        //} catch {
+        //    sendAlert(ErrorCode.DbError)
+        //}
     }
 
     
-    override func loadData(isSynched isSynched: Bool) {
+    override func loadData(isSynched: Bool) {
         guard let credentials = Credentials.getCredentials() else {
             displayLogIn()
             return
         }
         guard let dataSettings = dataSettings else {
-            self.completionError(ErrorCode.DbError)
+            completionError(ErrorCode.dbError)
             return
         }
         gridData?.removeAllObjects()
         let inventoryService = InventoryService(module: moduleType, apiCredentials: credentials, date: dataSettings.date)
-        let inventoryQuery = inventoryService.queryDb
+        let inventoryQuery = inventoryService.queryDb()
         gridData = inventoryQuery.gridData
+        isManager = inventoryQuery.isManager
         if let inventorySearchData = inventoryQuery.searchData {
             searchData = inventorySearchData
         }
         let invLastSync = inventoryService.queryLastSync
-        guard invLastSync != nil && self.gridData != nil else {
+        guard invLastSync != nil && gridData != nil else {
             guard !isSynched else {
-                self.completionError(ErrorCode.DbError)
+                completionError(ErrorCode.dbError)
                 return
             }
-            self.syncInventory()
+            syncInventory()
             return
         }
-        if flexGrid.collectionView != nil {
-            flexGrid.collectionView.removeAllObjects()
+        if let collectionView = flexGrid.collectionView {
+            collectionView.removeAllObjects()
         }
-        if flexGrid.itemsSource != nil {
-            flexGrid.itemsSource.removeAllObjects()
+        if let itemsSource = flexGrid.itemsSource {
+            itemsSource.removeAllObjects()
         }
-        self.flexGrid.itemsSource = gridData
+        flexGrid.itemsSource = gridData
         //flexGrid.collectionView.removeAllObjects()
         //flexGrid.collectionView = nil
         //self.flexGrid.itemsSource.removeAllObjects()
@@ -165,45 +170,46 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
         
         //inventory?.removeAllObjects()
         //inventory = nil
-        self.isFilterChanged = false
-        self.filterGridColumns(self.searchBar.text!, classType: classType)
-        dispatch_async(dispatch_get_main_queue()) {
+        isFilterChanged = false
+        filterGridColumns(searchBar.text!, classType: classType)
+        DispatchQueue.main.async {
             SwiftSpinner.hide()
         }
         
     }
     
     func syncInventory() {
+        //[][0]  crash test
         guard let credentials = Credentials.getCredentials(), let credentialState = credentials["state"] else {
-            self.displayLogIn()
+            displayLogIn()
             return
         }
         guard let dataSettings = dataSettings else {
-            completionError(ErrorCode.UnknownError)
+            completionError(ErrorCode.unknownError)
             return
         }
-        dataSettings.repState = "N\(credentialState)"
+        dataSettings.repState = States(rawValue: credentialState) ?? States.NY
         SwiftSpinner.show("Syncing...", animated: false)
         let inventoryService = InventoryService(module: moduleType, apiCredentials: credentials, date: dataSettings.date)
         do {
             let lastAllSync = try inventoryService.queryAllLastSync()
             inventoryService.getApi(lastAllSync) {
-                (let inventorySyncCompletion, error) in
+                [unowned self](inventorySyncCompletion, error) in
                 guard let inventorySync = inventorySyncCompletion else  {
-                    self.completionError(error ?? ErrorCode.UnknownError)
+                    self.completionError(error ?? ErrorCode.unknownError)
                     return
                 }
                 do {
                     try inventoryService.updateDb(inventorySync)
                 } catch {
-                    self.completionError(ErrorCode.DbError)
+                    self.completionError(ErrorCode.dbError)
                 }
                 //let invLastSync = NSDate().getDateTimeString()
                 inventoryService.updateLastSync()
                 self.loadData(isSynched: true)
             }
         } catch {
-            self.completionError(ErrorCode.DbError)
+            completionError(ErrorCode.dbError)
         }
         isSettingsChanged = false
     }

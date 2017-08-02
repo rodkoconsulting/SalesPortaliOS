@@ -7,33 +7,22 @@
 //
 
 import UIKit
+import XuniInputKit
 
-protocol DatePickerDelegate : class {
-    func didChangePickerDate(sender sender: UIDatePicker, date: String)
-}
 
-class DateFiltersTableViewCell: UITableViewCell, UIPickerViewDelegate  {
+class DateFiltersTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var operatorPicker: UIPickerView!
-    @IBOutlet weak var conditionPicker: UIPickerView!
-    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var operatorComboBox: XuniComboBox!
+    @IBOutlet weak var conditionComboBox: XuniComboBox!
+    @IBOutlet weak var dateButton: UIButton!
     
-    weak var delegate: DatePickerDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-    }
-    
-    @IBAction func dateChanged(sender: AnyObject) {
-        //let dateFormatter = NSDateFormatter()
-        //dateFormatter.dateFormat = "M/d/yy"
-        //let date = dateFormatter.stringFromDate(datePicker.date)
-        let date = datePicker.date.getDateGridString()
-        self.delegate?.didChangePickerDate(sender: datePicker, date: date)
     }
     
 }

@@ -18,13 +18,19 @@ enum DatabaseTable: String {
     case AccountInvoiceHeader = "ACCOUNTS_INV_HEAD"
     case AccountInvoiceDetail = "ACCOUNTS_INV_DET"
     case AccountItemsInactive = "ACCOUNTS_ITEMS_INACTIVE"
+    case OrderListHeader = "ORDER_LIST_HEADER"
+    case OrderListDetail = "ORDER_LIST_DETAIL"
+    case SampleListHeader = "SAMPLE_LIST_HEADER"
+    case SampleListDetail = "SAMPLE_LIST_DETAIL"
+    case SampleAddress = "SAMPLE_ADDRESSES"
+    case SampleItemsInactive = "SAMPLE_ITEMS_INACTIVE"
 }
 
 
 protocol DatabaseServiceType {
     var tableName: DatabaseTable { get }
     
-    func updateDb<T>(syncObject: Sync<T>) throws
+    func updateDb<T>(_ syncObject: Sync<T>) throws
     
     init(tableName: DatabaseTable)
     
@@ -37,72 +43,73 @@ struct DatabaseService: DatabaseServiceType {
         self.tableName = tableName
     }
     
-    func updateDb<T>(syncObject: Sync<T>) throws {
-        var isSyncUpdated: Bool = false
-        let dB = FMDatabase(path: Constants.databasePath)
-        guard dB.open() else {
-            throw ErrorCode.DbError
-        }
-        defer {
-            if !isSyncUpdated {
-                let sqlReset = "UPDATE LAST_SYNC SET last_sync=NULL WHERE table_name='\(tableName.rawValue)'"
-                dB.executeUpdate(sqlReset, withArgumentsInArray: nil)
-            }
-            dB.close()
-        }
+    func syncReset(_ dB: FMDatabase) {
+        dB.executeUpdate("UPDATE LAST_SYNC SET last_sync=NULL WHERE table_name='" + tableName.rawValue + "'", withArgumentsIn: nil)
+        dB.close()
+    }
+    
+    func updateDb<T>(_ syncObject: Sync<T>) throws {
         let operation = syncObject.operation
+        
         guard operation != ApiOperationEnum.Error else {
-            throw ErrorCode.ServerError
+            throw ErrorCode.serverError
         }
         guard operation != ApiOperationEnum.Empty else {
-            isSyncUpdated = true
             return
         }
         if operation == ApiOperationEnum.Clear {
             do {
-                try DbOperation.databaseClear(tableName.rawValue, databasePath: Constants.databasePath)
+                try DbOperation.databaseClear(tableName.rawValue)
             } catch {
-                throw ErrorCode.DbError
-            }
-        }
-        if let deletedRows =  syncObject.deletedRows {
-            var sqlDelete = "DELETE FROM \(tableName.rawValue) WHERE "
-            for row in deletedRows {
-                guard let dbDelete = row.getDbDelete else {
-                    throw ErrorCode.DbError
-                }
-                sqlDelete += "\(dbDelete) OR "
-            }
-            sqlDelete = sqlDelete[sqlDelete .startIndex..<sqlDelete.startIndex.advancedBy(sqlDelete.characters.count - 4)]
-            let isDeleted = dB.executeUpdate(sqlDelete, withArgumentsInArray: nil)
-            guard isDeleted else {
-                throw ErrorCode.DbError
-            }
-
-        }
-        if let addedRows = syncObject.addedRows {
-            var sqlInsert = "INSERT INTO \(tableName.rawValue) VALUES"
-            for row in addedRows {
-                guard let dbInsert = row.getDbInsert else {
-                    throw ErrorCode.DbError
-                }
-                sqlInsert += "\(dbInsert),"
-            }
-            sqlInsert = sqlInsert[sqlInsert.startIndex..<sqlInsert.startIndex.advancedBy(sqlInsert.characters.count - 1)]
-            let isInserted = dB.executeUpdate(sqlInsert, withArgumentsInArray: nil)
-            guard isInserted else {
-                throw ErrorCode.DbError
+                throw ErrorCode.dbError
             }
         }
         guard let syncTime = syncObject.syncTime else {
-            throw ErrorCode.DbError
+            throw ErrorCode.dbError
         }
-        let sqlUpdateSync = "UPDATE LAST_SYNC SET last_sync='\(syncTime)' WHERE table_name='\(tableName.rawValue)'"
-        isSyncUpdated = dB.executeUpdate(sqlUpdateSync, withArgumentsInArray: nil)
-        if !isSyncUpdated {
-            throw ErrorCode.DbError
+        let dB = FMDatabase(path: Constants.databasePath)
+        guard dB.open() else {
+            throw ErrorCode.dbError
         }
-
+        var isSyncUpdated: Bool = false
         
+        if let deletedRows =  syncObject.deletedRows {
+            for row in deletedRows {
+                guard let dbDelete = row.getDbDelete else {
+                    syncReset(dB)
+                    throw ErrorCode.dbError
+                }
+                let sqlDelete = "DELETE FROM " + tableName.rawValue + " WHERE " + dbDelete
+                let isDeleted = dB.executeUpdate(sqlDelete, withArgumentsIn: nil)
+                guard isDeleted else {
+                    syncReset(dB)
+                    throw ErrorCode.dbError
+                }
+            }
+        }
+        
+        if let addedRows = syncObject.addedRows {
+            var sqlInsert = "INSERT INTO " + tableName.rawValue + " VALUES"
+            for row in addedRows {
+                guard let dbInsert = row.getDbInsert else {
+                    syncReset(dB)
+                    throw ErrorCode.dbError
+                }
+                sqlInsert = sqlInsert + dbInsert + ","
+            }
+            sqlInsert = sqlInsert[sqlInsert.startIndex..<sqlInsert.characters.index(sqlInsert.startIndex, offsetBy: sqlInsert.characters.count - 1)]
+            let isInserted = dB.executeUpdate(sqlInsert, withArgumentsIn: nil)
+            guard isInserted else {
+                syncReset(dB)
+                throw ErrorCode.dbError
+            }
+        }
+        let sqlUpdateSync = "UPDATE LAST_SYNC SET last_sync='" + syncTime + "' WHERE table_name='" + tableName.rawValue + "'"
+        isSyncUpdated = dB.executeUpdate(sqlUpdateSync, withArgumentsIn: nil)
+        if !isSyncUpdated {
+            syncReset(dB)
+            throw ErrorCode.dbError
+        }
+        dB.close()
     }
 }

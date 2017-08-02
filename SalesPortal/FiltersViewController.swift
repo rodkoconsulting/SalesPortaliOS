@@ -8,16 +8,18 @@
 
 import UIKit
 import XuniFlexGridKit
+import XuniInputKit
+import XuniCalendarKit
 
-let kOPERATORPICKERTAG = 0
-let kCONDITIONPICKERTAG = 1
-let kBOOLPICKERTAG = 2
+let kOPERATORTAG = 0
+let kCONDITIONTAG = 1
+let kBOOLTAG = 2
 
 protocol FiltersDelegate: class {
-    func changedFilters(columnIndex columnIndex: Int)
+    func changedFilters(columnIndex: Int)
 }
 
-class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, DatePickerDelegate {
+class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, XuniDropDownDelegate, XuniComboBoxDelegate, FilterDateDelegate {
 
     
     @IBOutlet weak var filtersNavigationItem: UINavigationItem!
@@ -28,85 +30,113 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var columnIndex: Int?
     var rowBeingEdited : Int? = nil
     weak var filterDelegate: FiltersDelegate?
-   
     
-    @IBAction func addFilter(sender: AnyObject) {
+    @IBAction func addFilter(_ sender: AnyObject) {
         guard let columnFilters = columnFilters,
                 let columnIndex = columnIndex else {
             return
         }
         let newFilter = ColumnFilter(condition: columnFilters.conditionList.first!)
         columnFilters.filterList.append(newFilter)
-        if let index = columnFilters.filterList.indexOf(newFilter) {
-            let indexPath = NSIndexPath(forRow: index, inSection: 0)
-            filtersTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        if let index = columnFilters.filterList.index(of: newFilter) {
+            let indexPath = IndexPath(row: index, section: 0)
+            filtersTableView.insertRows(at: [indexPath], with: .automatic)
         }
-        filtersTableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+        filtersTableView.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.fade)
         filterDelegate?.changedFilters(columnIndex: columnIndex)
     }
 
-    @IBAction func dismiss(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func dismiss(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         filtersTableView.reloadData()
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //filtersTableView.rowHeight = UITableViewAutomaticDimension
-        //filtersTableView.estimatedRowHeight = 65
-        filtersTableView.rowHeight = 125
+        //filtersTableView.rowHeight = 125
         if let columnFilters = columnFilters {
-            filtersNavigationItem.title = "Filters - \(columnFilters.header)"
-            if columnFilters.filterType == .Date {
-               filtersTableView.rowHeight = 200
-            }
+            filtersNavigationItem.title = "Filters - " + columnFilters.header
+            //if columnFilters.filterType == .Date {
+            //   filtersTableView.rowHeight = 200
+            //}
         }
-        
-        // Do any additional setup after loading the view.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if segue.identifier == "showFilterDateViewController" {
+            guard let filterDateViewController = segue.destination as?
+                FilterDateViewController, let senderButton = sender as? UIButton else {
+                return
+            }
+            filterDateViewController.senderTag = senderButton.tag
+            filterDateViewController.delegate = self
+            filterDateViewController.date = senderButton.currentTitle?.getFilterDate() ?? Date()
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        exitVc()
     }
-    
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let columnFilters = columnFilters else {
             return 0
         }
         return columnFilters.filterList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func initComboBox(_ comboBox: XuniComboBox) {
+        comboBox.delegate = self
+        comboBox.displayMemberPath = "name"
+        comboBox.isEditable = false
+        comboBox.dropDownBehavior = XuniDropDownBehavior.HeaderTap
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         guard let myColumnFilters = columnFilters else {
-            cell = filtersTableView.dequeueReusableCellWithIdentifier("FiltersTableCell", forIndexPath: indexPath)
+            cell = filtersTableView.dequeueReusableCell(withIdentifier: "FiltersTableCell", for: indexPath)
             return cell
         }
         let row = indexPath.row
         let filter = myColumnFilters.filterList[row]
         switch myColumnFilters.filterType {
             case .String, .Number:
-                cell = filtersTableView.dequeueReusableCellWithIdentifier("FiltersTableCell", forIndexPath: indexPath)
+                cell = filtersTableView.dequeueReusableCell(withIdentifier: "FiltersTableCell", for: indexPath)
             case .Date:
-                cell = filtersTableView.dequeueReusableCellWithIdentifier("DateFiltersTableCell", forIndexPath: indexPath)
+                cell = filtersTableView.dequeueReusableCell(withIdentifier: "DateFiltersTableCell", for: indexPath)
             case .Bool:
-                cell = filtersTableView.dequeueReusableCellWithIdentifier("BoolFiltersTableCell", forIndexPath: indexPath)
+                cell = filtersTableView.dequeueReusableCell(withIdentifier: "BoolFiltersTableCell", for: indexPath)
         }
         let backgroundView = UIView()
-        backgroundView.backgroundColor = UIColor.clearColor()
+        backgroundView.backgroundColor = UIColor.clear
         cell.selectedBackgroundView = backgroundView
-        
+        let defaultConditionIndex = myColumnFilters.conditionList.index{$0 == filter.condition} ?? 0
+        let conditionItemsSource = ComboData.filterConditionData(myColumnFilters.conditionList)
+        let conditionIndex = UInt(myColumnFilters.conditionList.startIndex.distance(to: defaultConditionIndex))
+        let conditionTag = row + myColumnFilters.filterList.count * kCONDITIONTAG
+        let conditionHeight = Double(conditionItemsSource.count * Constants.ComboCellHeight)
+        let defaultOperatorIndex = myColumnFilters.operatorList.index{$0 == filter.filterOperator} ?? 0
+        let operatorItemsSource = ComboData.filterOperatorData(myColumnFilters.operatorList)
+        let operatorIndex = UInt(myColumnFilters.conditionList.startIndex.distance(to: defaultOperatorIndex))
+        let operatorTag = row + myColumnFilters.filterList.count * kOPERATORTAG
+        let operatorHeight = Double(operatorItemsSource.count * Constants.ComboCellHeight)
+        let defaultBoolIndex = Constants.boolList.index{$0 == filter.value} ?? 0
+        let boolItemsSource = ComboData.filterBoolData()
+        let boolIndex = UInt(Constants.boolList.startIndex.distance(to: defaultBoolIndex))
+        let boolTag = row + myColumnFilters.filterList.count * kBOOLTAG
+        let boolHeight = Double(boolItemsSource.count * Constants.ComboCellHeight)
+
         switch myColumnFilters.filterType {
             case .String, .Number:
                 let filterCell = cell as! FiltersTableViewCell
@@ -114,91 +144,77 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 filterCell.valueText.text = filter.value
                 filterCell.valueText.tag = row
                 filterCell.valueText.layer.borderWidth = 2
-                filterCell.valueText.layer.borderColor = UIColor(red: 192/255.0, green: 192/255.0, blue: 192/255.0, alpha: 1.0).CGColor
+                filterCell.valueText.layer.borderColor = UIColor(red: 192/255.0, green: 192/255.0, blue: 192/255.0, alpha: 1.0).cgColor
                 filterCell.valueText.layer.cornerRadius = 8.0
                 filterCell.valueText.layer.masksToBounds = true
                 if myColumnFilters.filterType == .Number {
-                    filterCell.valueText.keyboardType = UIKeyboardType.DecimalPad
+                    filterCell.valueText.keyboardType = UIKeyboardType.decimalPad
                 }
-                filterCell.conditionPicker.delegate = self
-                filterCell.conditionPicker.dataSource = self
-                filterCell.conditionPicker.tag =  row + myColumnFilters.filterList.count * kCONDITIONPICKERTAG
-                let defaultConditionIndex = myColumnFilters.conditionList.indexOf{$0 == filter.condition} ?? 0
-                filterCell.conditionPicker.selectRow(defaultConditionIndex, inComponent: 0, animated: false)
-                
-                filterCell.operatorPicker.delegate = self
-                filterCell.operatorPicker.dataSource = self
-                filterCell.operatorPicker.tag = row + myColumnFilters.filterList.count * kOPERATORPICKERTAG
-                let defaultOperatorIndex = myColumnFilters.operatorList.indexOf{$0 == filter.filterOperatior} ?? 0
-                filterCell.operatorPicker.selectRow(defaultOperatorIndex, inComponent: 0, animated: false)
-                filterCell.operatorPicker.hidden = row == 0
+                initComboBox(filterCell.conditionComboBox)
+                filterCell.conditionComboBox.tag =  conditionTag
+                filterCell.conditionComboBox.itemsSource = conditionItemsSource
+                filterCell.conditionComboBox.selectedIndex = conditionIndex
+                filterCell.conditionComboBox.dropDownHeight = conditionHeight
+                initComboBox(filterCell.operatorComboBox)
+                filterCell.operatorComboBox.tag =  operatorTag
+                filterCell.operatorComboBox.itemsSource = operatorItemsSource
+                filterCell.operatorComboBox.selectedIndex = operatorIndex
+                filterCell.operatorComboBox.dropDownHeight = operatorHeight
+                filterCell.operatorComboBox.hidden = row == 0
                 return filterCell
             case .Date:
                 let dateCell = cell as! DateFiltersTableViewCell
-                
-                dateCell.conditionPicker.delegate = self
-                dateCell.conditionPicker.dataSource = self
-                dateCell.conditionPicker.tag =  row + myColumnFilters.filterList.count * kCONDITIONPICKERTAG
-                let defaultConditionIndex = myColumnFilters.conditionList.indexOf{$0 == filter.condition} ?? 0
-                dateCell.conditionPicker.selectRow(defaultConditionIndex, inComponent: 0, animated: false)
-                
-                dateCell.operatorPicker.delegate = self
-                dateCell.operatorPicker.dataSource = self
-                dateCell.operatorPicker.tag = row + myColumnFilters.filterList.count * kOPERATORPICKERTAG
-                let defaultOperatorIndex = myColumnFilters.operatorList.indexOf{$0 == filter.filterOperatior} ?? 0
-                dateCell.operatorPicker.selectRow(defaultOperatorIndex, inComponent: 0, animated: false)
-                dateCell.operatorPicker.hidden = row == 0
-                dateCell.delegate = self
-                dateCell.datePicker.tag = row
-                dateCell.datePicker.datePickerMode = UIDatePickerMode.Date
-                //let currentDate = NSDate()
-                //let dateFormatter = NSDateFormatter()
-                //dateFormatter.dateFormat = "M/d/yy"
-                //let filterDate = dateFormatter.dateFromString(filter.value) ?? currentDate
-                let filterDate = filter.value.getGridDate() ?? NSDate()
-                dateCell.datePicker.date = filterDate
-                //myColumnFilters.filterList[row].value = dateFormatter.stringFromDate(filterDate)
+                initComboBox(dateCell.conditionComboBox)
+                dateCell.conditionComboBox.tag =  conditionTag
+                dateCell.conditionComboBox.itemsSource = conditionItemsSource
+                dateCell.conditionComboBox.selectedIndex = conditionIndex
+                dateCell.conditionComboBox.dropDownHeight = conditionHeight
+                initComboBox(dateCell.operatorComboBox)
+                dateCell.operatorComboBox.tag =  operatorTag
+                dateCell.operatorComboBox.itemsSource = operatorItemsSource
+                dateCell.operatorComboBox.selectedIndex = operatorIndex
+                dateCell.operatorComboBox.dropDownHeight = operatorHeight
+                dateCell.operatorComboBox.hidden = row == 0
+                dateCell.dateButton.tag = row
+                let filterDate = filter.value.getGridDate() ?? Date()
+                dateCell.dateButton.setTitle(filterDate.getDateShipPrint(), for: UIControlState())
                 myColumnFilters.filterList[row].value = filterDate.getDateGridString()
-                //dateCell.datePicker.minimumDate = currentDate
                 return dateCell
-        case .Bool:
+            case .Bool:
                 let boolCell = cell as! BoolFiltersTableViewCell
-                
-                boolCell.conditionPicker.delegate = self
-                boolCell.conditionPicker.dataSource = self
-                boolCell.conditionPicker.tag =  row + myColumnFilters.filterList.count * kCONDITIONPICKERTAG
-                let defaultConditionIndex = myColumnFilters.conditionList.indexOf{$0 == filter.condition} ?? 0
-                boolCell.conditionPicker.selectRow(defaultConditionIndex, inComponent: 0, animated: false)
-                
-                boolCell.operatorPicker.delegate = self
-                boolCell.operatorPicker.dataSource = self
-                boolCell.operatorPicker.tag = row + myColumnFilters.filterList.count * kOPERATORPICKERTAG
-                let defaultOperatorIndex = myColumnFilters.operatorList.indexOf{$0 == filter.filterOperatior} ?? 0
-                boolCell.operatorPicker.selectRow(defaultOperatorIndex, inComponent: 0, animated: false)
-                boolCell.operatorPicker.hidden = row == 0
-                
-                boolCell.boolPicker.delegate = self
-                boolCell.boolPicker.dataSource = self
-                boolCell.boolPicker.tag =  row + myColumnFilters.filterList.count * kBOOLPICKERTAG
-                let defaultBoolIndex = Constants.boolList.indexOf{$0 == filter.value} ?? 0
-                boolCell.boolPicker.selectRow(defaultBoolIndex, inComponent: 0, animated: false)
+                initComboBox(boolCell.conditionComboBox)
+                boolCell.conditionComboBox.tag =  conditionTag
+                boolCell.conditionComboBox.itemsSource = conditionItemsSource
+                boolCell.conditionComboBox.selectedIndex = conditionIndex
+                boolCell.conditionComboBox.dropDownHeight = conditionHeight
+                initComboBox(boolCell.operatorComboBox)
+                boolCell.operatorComboBox.tag =  operatorTag
+                boolCell.operatorComboBox.itemsSource = operatorItemsSource
+                boolCell.operatorComboBox.selectedIndex = operatorIndex
+                boolCell.operatorComboBox.dropDownHeight = operatorHeight
+                boolCell.operatorComboBox.hidden = row == 0
+                initComboBox(boolCell.boolComboBox)
+                boolCell.boolComboBox.tag =  boolTag
+                boolCell.boolComboBox.itemsSource = boolItemsSource
+                boolCell.boolComboBox.selectedIndex = boolIndex
+                boolCell.boolComboBox.dropDownHeight = boolHeight
                 myColumnFilters.filterList[row].value = Constants.boolList[defaultBoolIndex]
                 return boolCell
         }
     }
     
     
-    func tableView(tableView: UITableView,
-        commitEditingStyle editingStyle: UITableViewCellEditingStyle,
-        forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView,
+        commit editingStyle: UITableViewCellEditingStyle,
+        forRowAt indexPath: IndexPath) {
             resignTextField()
             // If the table view is asking to commit a delete command...
-            if editingStyle == .Delete {
+            if editingStyle == .delete {
                 if let filter = columnFilters?.filterList[indexPath.row] {
                     removeFilter(filter)
                 }
-                filtersTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                filtersTableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+                filtersTableView.deleteRows(at: [indexPath], with: .automatic)
+                filtersTableView.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.fade)
                 guard let columnIndex = columnIndex else {
                         return
                 }
@@ -207,7 +223,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         guard let myColumnFilters = columnFilters,
             let columnIndex = columnIndex else {
             return
@@ -218,128 +234,92 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         filterDelegate?.changedFilters(columnIndex: columnIndex)
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         rowBeingEdited = textField.tag
     }
     
     func resignTextField() {
         if let row = rowBeingEdited,
-            let cell = filtersTableView.cellForRowAtIndexPath(NSIndexPath(forRow:row, inSection:0)) as? FiltersTableViewCell {
+            let cell = filtersTableView.cellForRow(at: IndexPath(row:row, section:0)) as? FiltersTableViewCell {
                 cell.valueText.resignFirstResponder()
             }
         }
     
-    func isPicker(pickerTag: Int, constantTag: Int, rowCount: Int) -> Bool {
-        return pickerTag >=  rowCount * constantTag && pickerTag < rowCount * constantTag + rowCount
+    func isComboBox(_ comboTag: Int, constantTag: Int, rowCount: Int) -> Bool {
+        return comboTag >=  rowCount * constantTag && comboTag < rowCount * constantTag + rowCount
     }
     
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard let columnFilters = columnFilters else {
-            return 0
-        }
-        let rowCount = columnFilters.filterList.count
-        if isPicker(pickerView.tag, constantTag: kCONDITIONPICKERTAG, rowCount: rowCount) {
-            return columnFilters.conditionList.count
-        }
-        if isPicker(pickerView.tag, constantTag: kOPERATORPICKERTAG, rowCount: rowCount) {
-            return columnFilters.operatorList.count
-        }
-        if isPicker(pickerView.tag, constantTag: kBOOLPICKERTAG, rowCount: rowCount) {
-            return Constants.boolList.count
-        }
-        return 0
-    }
-    
-    
-
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard let columnFilters = columnFilters else {
-            return nil
-        }
-        let rowCount = columnFilters.filterList.count
-        if isPicker(pickerView.tag, constantTag: kCONDITIONPICKERTAG, rowCount: rowCount) {
-            return columnFilters.conditionList[row]
-        }
-        if isPicker(pickerView.tag, constantTag: kOPERATORPICKERTAG, rowCount: rowCount) {
-            return columnFilters.operatorList[row].rawValue
-        }
-        if isPicker(pickerView.tag, constantTag: kBOOLPICKERTAG, rowCount: rowCount) {
-            return Constants.boolList[row]
-        }
-        return nil
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func selectedIndexChanged(_ sender: XuniComboBox!) {
         guard let columnFilters = columnFilters,
             let columnIndex = columnIndex else {
                 return
         }
         let rowCount = columnFilters.filterList.count
-        if isPicker(pickerView.tag, constantTag: kCONDITIONPICKERTAG, rowCount: rowCount) {
-            let selectedIndex = pickerView.tag - rowCount * kCONDITIONPICKERTAG
-            columnFilters.filterList[selectedIndex].condition = columnFilters.conditionList[row]
+        if isComboBox(sender.tag, constantTag: kCONDITIONTAG, rowCount: rowCount) {
+            let selectedIndex = sender.tag - rowCount * kCONDITIONTAG
+            columnFilters.filterList[selectedIndex].condition = columnFilters.conditionList[Int(sender.selectedIndex)]
         }
-        if isPicker(pickerView.tag, constantTag: kOPERATORPICKERTAG, rowCount: rowCount) {
-            let selectedIndex = pickerView.tag - rowCount * kOPERATORPICKERTAG
-            columnFilters.filterList[selectedIndex].filterOperatior = columnFilters.operatorList[row]
+        if isComboBox(sender.tag, constantTag: kOPERATORTAG, rowCount: rowCount) {
+            let selectedIndex = sender.tag - rowCount * kOPERATORTAG
+            columnFilters.filterList[selectedIndex].filterOperator = columnFilters.operatorList[Int(sender.selectedIndex)]
         }
-        if isPicker(pickerView.tag, constantTag: kBOOLPICKERTAG, rowCount: rowCount) {
-            let selectedIndex = pickerView.tag - rowCount * kBOOLPICKERTAG
-            columnFilters.filterList[selectedIndex].value = Constants.boolList[row]
+        if isComboBox(sender.tag, constantTag: kBOOLTAG, rowCount: rowCount) {
+            let selectedIndex = sender.tag - rowCount * kBOOLTAG
+            columnFilters.filterList[selectedIndex].value = Constants.boolList[Int(sender.selectedIndex)]
         }
         filterDelegate?.changedFilters(columnIndex: columnIndex)
     }
     
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 20.0
-    }
-    
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
-        
-        var pickerLabel = view as? UILabel;
-        
-        if (pickerLabel == nil)
-        {
-            pickerLabel = UILabel()
-            
-            pickerLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
-            pickerLabel?.textAlignment = NSTextAlignment.Center
-        }
-        guard let columnFilters = columnFilters else {
-            return pickerLabel!
-        }
-        let rowCount = columnFilters.filterList.count
-        if isPicker(pickerView.tag, constantTag: kCONDITIONPICKERTAG, rowCount: rowCount) {
-            pickerLabel?.text = columnFilters.conditionList[row]
-        }
-        if isPicker(pickerView.tag, constantTag: kOPERATORPICKERTAG, rowCount: rowCount) {
-            pickerLabel?.text = columnFilters.operatorList[row].rawValue
-        }
-        if isPicker(pickerView.tag, constantTag: kBOOLPICKERTAG, rowCount: rowCount) {
-            pickerLabel?.text = Constants.boolList[row]
-        }
-        return pickerLabel!
-    }
-
-    func didChangePickerDate(sender sender: UIDatePicker, date: String) {
+    func didChangeFilterDate(_ date: String, tag: Int) {
         guard let myColumnFilters = columnFilters,
             let columnIndex = columnIndex else {
                 return
         }
-        let row = sender.tag
-        myColumnFilters.filterList[row].value = date ?? ""
+        let row = tag
+        myColumnFilters.filterList[row].value = date
+        filtersTableView.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.fade)
         filterDelegate?.changedFilters(columnIndex: columnIndex)
     }
     
-    func removeFilter(filter: ColumnFilter) {
-        if let index = columnFilters?.filterList.indexOf(filter) {
-            columnFilters!.filterList.removeAtIndex(index)
+    func removeFilter(_ filter: ColumnFilter) {
+        if let index = columnFilters?.filterList.index(of: filter) {
+            columnFilters!.filterList.remove(at: index)
         }
     }
+    
+    func deinitComboBox(_ comboBox: XuniComboBox) {
+        comboBox.selectedItem = nil
+        comboBox.itemsSource.removeAllObjects()
+        comboBox.collectionView.removeAllObjects()
+        comboBox.delegate = nil
+    }
+    
+    func exitVc() {
+        for row in 0 ..< filtersTableView.numberOfRows(inSection: 0) {
+            let filterCell = filtersTableView.cellForRow(at: IndexPath(row: row, section: 0))
+            guard let cell = filterCell else {
+                continue
+            }
+            if cell.isKind(of: FiltersTableViewCell.self) {
+                if let cell = cell as? FiltersTableViewCell {
+                    deinitComboBox(cell.conditionComboBox)
+                    deinitComboBox(cell.operatorComboBox)
+                }
+            } else if cell.isKind(of: DateFiltersTableViewCell.self) {
+                if let cell = cell as? DateFiltersTableViewCell {
+                    deinitComboBox(cell.conditionComboBox)
+                    deinitComboBox(cell.operatorComboBox)
+                }
+            } else if cell.isKind(of: BoolFiltersTableViewCell.self) {
+                if let cell = cell as? BoolFiltersTableViewCell {
+                    deinitComboBox(cell.conditionComboBox)
+                    deinitComboBox(cell.operatorComboBox)
+                    deinitComboBox(cell.boolComboBox)
+                }
+            }
+            
+        }
+    }
+
     
 }

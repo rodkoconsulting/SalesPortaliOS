@@ -17,21 +17,23 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var columnsTableView: UITableView!
     
-    @IBAction func unwindFromColumns(sender: AnyObject) {
-        self.performSegueWithIdentifier("unwindFromColumns", sender: self)
+    @IBAction func unwindFromColumns(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "unwindFromColumns", sender: self)
     }
     lazy var longPress: UILongPressGestureRecognizer = {
         let recognizer = UILongPressGestureRecognizer()
         return recognizer
     }()
     
-    weak var columnSettings : FlexColumnCollection?
+    weak var columnSettings : GridColumnCollection?
     weak var columnsDelegate: ColumnsDelegate?
+    
     var module: Module?
     //var gridFilter: [ColumnFilters]?
     //var filterSettings :
     
-    var sourceIndexPath: NSIndexPath? = nil
+    var sourceIndexPath: IndexPath? = nil
+    var topVisibleIndexPath: IndexPath? = nil
     var snapshot: UIView? = nil
     
     override func viewDidLoad() {
@@ -47,26 +49,26 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFiltersViewController" {
-            guard let index = sender as? NSIndexPath,
-                let column =  columnSettings?.objectAtIndex(UInt(index.row)) as? GridColumn else {
+            guard let index = sender as? IndexPath,
+                let column =  columnSettings?.objectAtIndex(UInt(index.row)) as? DataGridColumn else {
                 return
             }
             //let index = (columnsTableView.indexPathForSelectedRow)?.row
             //let column =  columnSettings?.objectAtIndex(UInt(index!)) as? GridColumn
             
             let columnFilters = column.columnFilters
-            let filtersViewController = segue.destinationViewController as! FiltersViewController
+            let filtersViewController = segue.destination as! FiltersViewController
             filtersViewController.filterDelegate = self
             filtersViewController.columnFilters = columnFilters
             filtersViewController.columnIndex = index.row
         }
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any!) -> Bool {
         if identifier == "showFiltersViewController" {
-            guard let index = (columnsTableView.indexPathForSelectedRow)?.row, let _ =  columnSettings?.objectAtIndex(UInt(index)) as? GridColumn else {
+            guard let index = (columnsTableView.indexPathForSelectedRow)?.row, let _ =  columnSettings?.objectAtIndex(UInt(index)) as? DataGridColumn else {
                 return false
             }
         }
@@ -82,48 +84,48 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
 //        cell.filterImage.hidden = column.columnFilters.filterList.count == 0
 //    }
     
-    @IBAction func removeFilters(sender: AnyObject) {
-        var isFilterChanged = false
-        guard let myColumnSettings = columnSettings else {
-            return
-        }
-        for index in 0...myColumnSettings.count - 1 {
-            guard let column = myColumnSettings.objectAtIndex(index) as? GridColumn else {
-                continue
-            }
-            if column.columnFilters.filterList.count > 0 {
-                isFilterChanged = true
-            }
-            column.columnFilters.filterList.removeAll()
-        }
-        guard isFilterChanged else {
-            return
-        }
-        changedAllFilters()
+//    @IBAction func removeFilters(sender: AnyObject) {
+//        var isFilterChanged = false
+//        guard let myColumnSettings = columnSettings else {
+//            return
+//        }
+//        for index in 0...myColumnSettings.count - 1 {
+//            guard let column = myColumnSettings.objectAtIndex(index) as? DataGridColumn else {
+//                continue
+//            }
+//            if column.columnFilters.filterList.count > 0 {
+//                isFilterChanged = true
+//            }
+//            column.columnFilters.filterList.removeAll()
+//        }
+//        guard isFilterChanged else {
+//            return
+//        }
+//        changedAllFilters()
+//
+//    }
 
-    }
-
-    @IBAction func defaultView(sender: AnyObject) {
+    @IBAction func defaultView(_ sender: AnyObject) {
         guard let module = module else {
             return
         }
         columnSettings?.removeAllObjects()
-        let columns = GridColumn.generateColumns(nil, module: module)
+        let (columns, _) = DataGridColumn.generateColumns(nil, module: module)
         for column in columns {
             columnSettings?.addObject(column)
         }
         changedAllFilters()
     }
     
-    func longPressGestureRecognized(gesture: UILongPressGestureRecognizer) {
+    func longPressGestureRecognized(_ gesture: UILongPressGestureRecognizer) {
         let state: UIGestureRecognizerState = gesture.state;
-        let location: CGPoint = gesture.locationInView(columnsTableView)
+        let location: CGPoint = gesture.location(in: columnsTableView)
         
         //if location.y < 0 {
         //    location.y = CGFloat(0)
         //}
         
-        let indexPath: NSIndexPath? = columnsTableView.indexPathForRowAtPoint(location)
+        let indexPath: IndexPath? = columnsTableView.indexPathForRow(at: location)
         
         //if indexPath == nil {
         //    indexPath = NSIndexPath(forRow: Int(columnSettings!.count) - 1, inSection: 0)
@@ -131,12 +133,12 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         switch (state) {
             
-        case UIGestureRecognizerState.Began:
+        case UIGestureRecognizerState.began:
             guard let indexPath = indexPath else {
                 return
             }
             sourceIndexPath = indexPath;
-            let cell = columnsTableView.cellForRowAtIndexPath(indexPath)!
+            let cell = columnsTableView.cellForRow(at: indexPath)!
             snapshot = customSnapshotFromView(cell)
             
             var center = cell.center
@@ -144,50 +146,52 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
             snapshot?.alpha = 0.0
             columnsTableView.addSubview(snapshot!)
             
-            UIView.animateWithDuration(0.25, animations: { () -> Void in
+            UIView.animate(withDuration: 0.25, animations: { [unowned self] () -> Void  in
                 center.y = location.y
                 self.snapshot?.center = center
-                self.snapshot?.transform = CGAffineTransformMakeScale(1.05, 1.05)
+                self.snapshot?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
                 self.snapshot?.alpha = 0.98
                 cell.alpha = 0.0
             })
             
             
         
-        case UIGestureRecognizerState.Changed:
-            guard let indexPath = indexPath else {
+        case UIGestureRecognizerState.changed:
+            guard let indexPath = indexPath, let superview = columnsTableView.superview  else {
                 return
             }
+            let cellRect = columnsTableView.rectForRow(at: indexPath)
+            let convertedRect = columnsTableView.convert(cellRect, to:superview)
+            let intersect = columnsTableView.frame.intersection(convertedRect)
+            let visibleHeight = intersect.height
+            topVisibleIndexPath = visibleHeight > 0 ? indexPath : topVisibleIndexPath
             var center: CGPoint = snapshot!.center
             center.y = location.y
             snapshot?.center = center
-            
-            
-            if indexPath != sourceIndexPath {
+            if topVisibleIndexPath != sourceIndexPath {
                 // ... update data source.
-                moveColumnAtIndex(sourceIndexPath!.row, toIndex: indexPath.row)
+                moveColumnAtIndex(sourceIndexPath!.row, toIndex: topVisibleIndexPath!.row)
                 // ... move the rows.
-                columnsTableView.moveRowAtIndexPath(sourceIndexPath!, toIndexPath: indexPath)
+                columnsTableView.moveRow(at: sourceIndexPath!, to: topVisibleIndexPath!)
                 // ... and update source so it is in sync with UI changes.
-                sourceIndexPath = indexPath;
+                sourceIndexPath = topVisibleIndexPath;
             }
             
             
             
         default:
-            guard let cell = columnsTableView.cellForRowAtIndexPath(sourceIndexPath!)  else {
+            guard let cell = columnsTableView.cellForRow(at: sourceIndexPath!)  else {
                 return
             }
             cell.alpha = 0.0
-            UIView.animateWithDuration(0.25, animations: { () -> Void in
+            UIView.animate(withDuration: 0.25, animations: { [unowned self] () -> Void in
                 self.snapshot?.center = cell.center
-                self.snapshot?.transform = CGAffineTransformIdentity
+                
+                self.snapshot?.transform = CGAffineTransform.identity
                 self.snapshot?.alpha = 0.0
                 // Undo fade out.
                 cell.alpha = 1.0
-                
-                }, completion: { (finished) in
-                    
+                }, completion: { [unowned self] (finished) in
                     self.sourceIndexPath = nil
                     self.snapshot?.removeFromSuperview()
                     self.snapshot = nil;
@@ -202,7 +206,7 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func moveColumnAtIndex(fromIndex: Int, toIndex: Int) {
+    func moveColumnAtIndex(_ fromIndex: Int, toIndex: Int) {
         guard let movedItem = columnSettings?.objectAtIndex(UInt(fromIndex)) else {
             return
         }
@@ -211,13 +215,13 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     }
    
-    func customSnapshotFromView(inputView: UIView) -> UIView {
+    func customSnapshotFromView(_ inputView: UIView) -> UIView {
         
         // Make an image from the input view.
         UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, false, 0)
         if let context = UIGraphicsGetCurrentContext()
         {
-            inputView.layer.renderInContext(context)
+            inputView.layer.render(in: context)
         }
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext();
@@ -233,26 +237,26 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return snapshot
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let myColumnSettings = columnSettings else {
             return 1
         }
         return Int(myColumnSettings.count)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = columnsTableView.dequeueReusableCellWithIdentifier("ColumnsTableCell", forIndexPath: indexPath) as! ColumnsTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = columnsTableView.dequeueReusableCell(withIdentifier: "ColumnsTableCell", for: indexPath) as! ColumnsTableViewCell
         let row = indexPath.row
         cell.switchDelegate = self
         
         guard let myColumnSettings = columnSettings else {
             return cell
         }
-        let col = myColumnSettings.objectAtIndex(UInt(row)) as! GridColumn
+        let col = myColumnSettings.objectAtIndex(UInt(row)) as! DataGridColumn
         cell.columnsLabel.text = col.header
         cell.columnsSwitch.on = col.visible
         cell.filterImage.hidden = col.columnFilters.filterList.count == 0
@@ -261,28 +265,28 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let filter = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Filter", handler: { (action, indexPath) -> Void in
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let filter = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Filter", handler: { (action, indexPath) -> Void in
             //self.editing = false
-            self.performSegueWithIdentifier("showFiltersViewController", sender: indexPath)
+            self.performSegue(withIdentifier: "showFiltersViewController", sender: indexPath)
             self.columnsTableView.reloadData()
         })
-        filter.backgroundColor = UIColor.lightGrayColor()
+        filter.backgroundColor = UIColor.lightGray
         let actionArray: Array = [filter]
         return actionArray
     }
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
     }
     
-    func didChangeSwitchState(sender: ColumnsTableViewCell, isOn: Bool) {
-        guard let indexPath = columnsTableView.indexPathForCell(sender),
-                let col = columnSettings!.objectAtIndex(UInt(indexPath.row)) as? FlexColumn else {
+    func didChangeSwitchState(_ sender: ColumnsTableViewCell, isOn: Bool) {
+        guard let indexPath = columnsTableView.indexPath(for: sender),
+                let col = columnSettings!.objectAtIndex(UInt(indexPath.row)) as? GridColumn else {
             return
         }
         col.visible = isOn
@@ -293,11 +297,11 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         //columnsTableView.reloadData()
     }
 
-    func changedFilters(columnIndex columnIndex: Int) {
-        let columnIndexPath = NSIndexPath(forRow: columnIndex, inSection: 0)
+    func changedFilters(columnIndex: Int) {
+        let columnIndexPath = IndexPath(row: columnIndex, section: 0)
         columnsDelegate?.changedColumnFilters()
-        guard let column =  columnSettings?.objectAtIndex(UInt(columnIndex)) as? GridColumn,
-            let cell = columnsTableView.cellForRowAtIndexPath(columnIndexPath) as? ColumnsTableViewCell else {
+        guard let column =  columnSettings?.objectAtIndex(UInt(columnIndex)) as? DataGridColumn,
+            let cell = columnsTableView.cellForRow(at: columnIndexPath) as? ColumnsTableViewCell else {
                 return
         }
         cell.filterImage.hidden = column.columnFilters.filterList.count == 0

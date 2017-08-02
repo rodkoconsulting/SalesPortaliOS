@@ -4,12 +4,14 @@
 <dict>
 	<key>Holidays</key>
 	<array>
-		<date>2016-02-15T05:00:00Z</date>
-		<date>2016-05-30T04:00:00Z</date>
-		<date>2016-07-04T04:00:00Z</date>
-		<date>2016-09-05T04:00:00Z</date>
-		<date>2016-11-24T05:00:00Z</date>
-		<date>2016-11-25T05:00:00Z</date>
+		<date>2018-01-01T05:00:00Z</date>
+		<date>2017-12-25T05:00:00Z</date>
+		<date>2017-02-20T05:00:00Z</date>
+		<date>2017-05-29T04:00:00Z</date>
+		<date>2017-07-04T04:00:00Z</date>
+		<date>2017-09-04T04:00:00Z</date>
+		<date>2017-11-23T05:00:00Z</date>
+		<date>2017-11-24T05:00:00Z</date>
 		<date>2016-12-26T05:00:00Z</date>
 		<date>2017-01-02T05:00:00Z</date>
 	</array>

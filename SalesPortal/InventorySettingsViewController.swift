@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import XuniInputKit
 
-let kMONTHPICKERTAG = 1
-let kSTATEPICKERTAG = 2
+let kMONTHTAG = 1
+let kSTATETAG = 2
 
-class InventorySettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class InventorySettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, XuniDropDownDelegate, XuniComboBoxDelegate  {
     
     @IBOutlet weak var settingsTableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -19,13 +20,29 @@ class InventorySettingsViewController: UIViewController, UITableViewDelegate, UI
     weak var dataSettings: InventoryDataSettings?
     
     var settingLabels = [String]()
-    //var settingPickers = [UIPickerView]()
-    let settingTags = [kMONTHPICKERTAG, kSTATEPICKERTAG]
+    let settingTags = [kMONTHTAG, kSTATETAG]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         settingLabels = ["Month", "State"]
         settingsTableView.rowHeight = 100
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        exitVc()
+    }
+
+    
+    func exitVc() {
+        for row in 0 ..< settingsTableView.numberOfRows(inSection: 0) {
+            let cell = settingsTableView.cellForRow(at: IndexPath(row: row, section: 0)) as! InventorySettingsTableViewCell
+            cell.settingsComboBox.selectedItem = nil
+            cell.settingsComboBox.itemsSource.removeAllObjects()
+            cell.settingsComboBox.collectionView.removeAllObjects()
+            cell.settingsComboBox.delegate = nil
+            cell.settingsComboBox = nil
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,106 +50,52 @@ class InventorySettingsViewController: UIViewController, UITableViewDelegate, UI
         // Dispose of any resources that can be recreated.
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingLabels.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = settingsTableView.dequeueReusableCellWithIdentifier("SettingsTableCell", forIndexPath: indexPath) as! InventorySettingsTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = settingsTableView.dequeueReusableCell(withIdentifier: "SettingsTableCell", for: indexPath) as! InventorySettingsTableViewCell
         let row = indexPath.row
         cell.settingsLabel.text = settingLabels[row]
-        cell.settingsPicker.delegate = self
-        cell.settingsPicker.dataSource = self
-        cell.settingsPicker.tag = settingTags[row]
+        cell.settingsComboBox.delegate = self
+        cell.settingsComboBox.displayMemberPath = "name"
+        cell.settingsComboBox.isEditable = false
+        cell.settingsComboBox.dropDownBehavior = XuniDropDownBehavior.HeaderTap
+        //cell.settingsComboBox.autoClose = true
+        //cell.settingsComboBox.dropDownHeight = 250;
+        cell.settingsComboBox.tag = settingTags[row]
         if let myDataSettings = dataSettings {
-            if settingTags[row] == kMONTHPICKERTAG {
-                if let defaultMonthIndex = myDataSettings.monthValues.indexOf(myDataSettings.month) {                cell.settingsPicker.selectRow(defaultMonthIndex, inComponent: 0, animated: false)
+            if settingTags[row] == kMONTHTAG {
+                cell.settingsComboBox.itemsSource = ComboData.monthData(myDataSettings.monthValues)
+                if let defaultMonthIndex = myDataSettings.monthValues.index(of: myDataSettings.month) {
+                    cell.settingsComboBox.selectedIndex = UInt(myDataSettings.monthValues.startIndex.distanceTo(defaultMonthIndex))
                 }
-            } else if settingTags[row] == kSTATEPICKERTAG {
-                if let defaultStateIndex = Constants.stateValues.indexOf(myDataSettings.repState) {
-                    cell.settingsPicker.selectRow(defaultStateIndex, inComponent: 0, animated: false)
+                
+            } else if settingTags[row] == kSTATETAG {
+                
+                cell.settingsComboBox.itemsSource = ComboData.stateData()
+                if let defaultStateIndex = States.allValues.index(of: myDataSettings.repState.rawValue) {
+                    cell.settingsComboBox.selectedIndex = UInt(States.allValues.startIndex.distanceTo(defaultStateIndex))
                 }
             }
+            cell.settingsComboBox.dropDownHeight = Double(cell.settingsComboBox.itemsSource.count * Constants.ComboCellHeight)
         }
         return cell
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func selectedIndexChanged(_ sender: XuniComboBox!) {
         if let myDataSettings = dataSettings {
-            if pickerView.tag == kMONTHPICKERTAG {
-                return myDataSettings.monthValues.count
-            } else if pickerView.tag == kSTATEPICKERTAG {
-                return Constants.stateValues.count
-            }
-        }
-        return 0
-    }
-
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if let myDataSettings = dataSettings {
-            if pickerView.tag == kMONTHPICKERTAG {
-                return myDataSettings.monthValues[row]
-            } else if pickerView.tag == kSTATEPICKERTAG {
-                return Constants.stateValues[row]
-            }
-        }
-        return nil
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if let myDataSettings = dataSettings {
-            if pickerView.tag == kMONTHPICKERTAG {
-                myDataSettings.month = myDataSettings.monthValues[row]
-            } else if pickerView.tag == kSTATEPICKERTAG {
-                myDataSettings.repState = Constants.stateValues[row]
+            if sender.tag == kMONTHTAG {
+                myDataSettings.month = myDataSettings.monthValues[Int(sender.selectedIndex)]
+            } else if sender.tag == kSTATETAG {
+                myDataSettings.repState = States(rawValue:States.allValues[Int(sender.selectedIndex)]) ?? States.NY
             }
         }
     }
-    
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 24.0
-    }
-    
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
-        
-        var pickerLabel = view as? UILabel;
-        
-        if (pickerLabel == nil)
-        {
-            pickerLabel = UILabel()
-            
-            pickerLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
-            pickerLabel?.textAlignment = NSTextAlignment.Center
-        }
-        if let myDataSettings = dataSettings {
-            if pickerView.tag == kMONTHPICKERTAG {
-                pickerLabel?.text = myDataSettings.monthValues[row]
-            } else if pickerView.tag == kSTATEPICKERTAG {
-                pickerLabel?.text = Constants.stateValues[row]
-            }
-        }
-        return pickerLabel!;
-    }
-    
-    //func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-    //    return CGFloat(25.0)
-    //}
 
 }

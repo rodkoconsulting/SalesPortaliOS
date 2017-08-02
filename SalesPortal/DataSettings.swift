@@ -18,29 +18,35 @@ class InventoryDataSettings {
     
     weak var delegate : InventoryDataSettingsDelegate?
     var date: String
-    let shipDates = NSDate().getNextShip()
+    let shipDates = Date().getNextShip()
     var month: String {
         didSet {
-            delegate?.changedDataSettings()
+            if month != oldValue {
+                date = month == monthValues[0] ? Date().getNextShip().shipDate : Date().addWeek().getNextShip().shipDate
+                delegate?.changedDataSettings()
+            }
         }
     }
     
-    var repState: String{
+    var repState: States {
         didSet {
-            delegate?.changedDataSettings()
-            delegate?.changedStateSettings()
+            if repState != oldValue {
+                delegate?.changedDataSettings()
+                delegate?.changedStateSettings()
+            }
         }
     }
     
     init() {
         month = shipDates.shipMonth
         date = shipDates.shipDate
-        repState = "N\(Credentials.getStateCredentials())"
+        let savedState = Credentials.getStateCredentials()
+        repState = States(rawValue: savedState) ?? States.NY
         initMonths()
     }
     
     func initMonths() {
-        let nextMonth = NSDate().getNextWeekMonth()
+        let nextMonth = Date().getNextWeekMonth()
         monthValues.append(month)
         if nextMonth != month {
             monthValues.append(nextMonth)

@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import XuniInputKit
 
-class FiltersTableViewCell: UITableViewCell, UIPickerViewDelegate {
-
-    @IBOutlet weak var conditionPicker: UIPickerView!
-    @IBOutlet weak var operatorPicker: UIPickerView!
+class FiltersTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var conditionComboBox: XuniComboBox!
+    @IBOutlet weak var operatorComboBox: XuniComboBox!
     @IBOutlet weak var valueText: UITextField!
     
     override func awakeFromNib() {
@@ -19,7 +20,7 @@ class FiltersTableViewCell: UITableViewCell, UIPickerViewDelegate {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
