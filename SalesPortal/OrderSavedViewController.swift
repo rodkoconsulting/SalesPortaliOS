@@ -37,7 +37,7 @@ class OrderSavedViewController: DataGridViewController {
         guard range.col >= 0 else {
             return false
         }
-        guard let column = flexGrid.columns.objectAtIndex(UInt(range.col)) as? DataGridColumn else {
+        guard let column = flexGrid.columns.object(at: UInt(range.col)) as? DataGridColumn else {
             return false
         }
         switch panel.cellType {

@@ -65,7 +65,7 @@ class InventorySettingsViewController: UIViewController, UITableViewDelegate, UI
         cell.settingsComboBox.delegate = self
         cell.settingsComboBox.displayMemberPath = "name"
         cell.settingsComboBox.isEditable = false
-        cell.settingsComboBox.dropDownBehavior = XuniDropDownBehavior.HeaderTap
+        cell.settingsComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
         //cell.settingsComboBox.autoClose = true
         //cell.settingsComboBox.dropDownHeight = 250;
         cell.settingsComboBox.tag = settingTags[row]
@@ -73,14 +73,13 @@ class InventorySettingsViewController: UIViewController, UITableViewDelegate, UI
             if settingTags[row] == kMONTHTAG {
                 cell.settingsComboBox.itemsSource = ComboData.monthData(myDataSettings.monthValues)
                 if let defaultMonthIndex = myDataSettings.monthValues.index(of: myDataSettings.month) {
-                    cell.settingsComboBox.selectedIndex = UInt(myDataSettings.monthValues.startIndex.distanceTo(defaultMonthIndex))
+                    cell.settingsComboBox.selectedIndex = UInt(myDataSettings.monthValues.distance(from: myDataSettings.monthValues.startIndex, to: defaultMonthIndex))
                 }
-                
             } else if settingTags[row] == kSTATETAG {
                 
                 cell.settingsComboBox.itemsSource = ComboData.stateData()
                 if let defaultStateIndex = States.allValues.index(of: myDataSettings.repState.rawValue) {
-                    cell.settingsComboBox.selectedIndex = UInt(States.allValues.startIndex.distanceTo(defaultStateIndex))
+                    cell.settingsComboBox.selectedIndex = UInt(States.allValues.distance(from: States.allValues.startIndex, to: defaultStateIndex))
                 }
             }
             cell.settingsComboBox.dropDownHeight = Double(cell.settingsComboBox.itemsSource.count * Constants.ComboCellHeight)

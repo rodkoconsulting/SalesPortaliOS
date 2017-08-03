@@ -38,7 +38,9 @@ class OrderListService: SyncService, SyncServiceType {
 //    }
     
     func queryDb() -> (gridData:NSMutableArray?, searchData: [[String : String]]?, isManager: Bool) {
-        let dB = FMDatabase(path: Constants.databasePath)
+        guard let dB = FMDatabase(path: Constants.databasePath) else {
+            return (nil, nil, false)
+        }
         let orderListArray = NSMutableArray()
         var orderListSearch = [[String : String]]()
         let date = Date().getDailySalesDateString()
