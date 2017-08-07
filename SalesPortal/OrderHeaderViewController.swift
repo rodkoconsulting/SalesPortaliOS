@@ -68,7 +68,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         headerComboBox.displayMemberPath = "name"
         headerComboBox.isEditable = false
         headerComboBox.textFont = GridSettings.defaultFont
-        headerComboBox.dropDownBehavior = XuniDropDownBehavior.HeaderTap
+        headerComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
         let listCount = headerComboBox.itemsSource.count > 6 ? 6 : headerComboBox.itemsSource.count
         headerComboBox.dropDownHeight = Double(listCount * Constants.ComboCellHeight)
     }
@@ -89,17 +89,29 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     fileprivate func loadViews() {
-        SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] _ in
-            self.loadMyView()
-            self.loadAllViews()
-            self.loadSavedData()
-            DispatchQueue.main.async {
-                SwiftSpinner.hide()
-                self.sendOverSellAlert()
-            }
+        SwiftSpinner.show("Loading...", animated: false)
+        loadMyView()
+        loadAllViews()
+        loadSavedData()
+        DispatchQueue.main.async {
+            SwiftSpinner.hide()
+            self.sendOverSellAlert()
         }
     }
+    
+        
+// SWIFTSPINNER WITH COMPLETION
+//        SwiftSpinner.show("Loading...", animated: false) {
+//            [unowned self] _ in
+//            self.loadMyView()
+//            self.loadAllViews()
+//            self.loadSavedData()
+//            DispatchQueue.main.async {
+//                SwiftSpinner.hide()
+//                self.sendOverSellAlert()
+//            }
+//        }
+//    }
     
     func sendOverSellAlert() {
         if order?.overSoldItems.characters.count > 0 {
@@ -125,8 +137,8 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
             return
         }
         for index in 0...flexGrid.rows.count - 1 {
-            guard let flexRow = flexGrid.rows.objectAtIndex(index) as? GridRow,
-                let inventory = flexRow.dataItem as? OrderInventory else {
+            let flexRow = flexGrid.rows.object(at: index)
+            guard let inventory = flexRow.dataItem as? OrderInventory else {
                     continue
             }
             inventory.errorDelegate = nil
@@ -179,7 +191,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         // implement in child
     }
     
-    func orderTypeChanged(_ orderType: OrderType) {
+    func orderTypeChanged(orderType: OrderType) {
         // implement in child
     }
     
@@ -188,7 +200,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
             return
         }
         if order.isSaved {
-            orderTypeChanged(order.orderType)
+            orderTypeChanged(orderType: order.orderType)
             order.loadSavedLines()
             order.isSaved = false
         }
@@ -198,11 +210,11 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         guard panel != nil else {
             return false
         }
-        guard let flexRow = flexGrid.rows.objectAtIndex(UInt(range.row)) as? GridRow,
-            let inventory = flexRow.dataItem as? OrderInventory else {
+        let flexRow = flexGrid.rows.object(at: UInt(range.row))
+        guard let inventory = flexRow.dataItem as? OrderInventory else {
                 return false
         }
-        activeField = panel.getCellRectForRow(range.row, inColumn: range.col)
+        activeField = panel.getCellRect(forRow: range.row, inColumn: range.col)
         
         inventory.errorDelegate = self
         return false
@@ -285,7 +297,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         }
         let gd: XuniPropertyGroupDescription = XuniPropertyGroupDescription(property: "groupKey")
         flexGrid.groupHeaderFormat = "Totals:"
-        collectionView.groupDescriptions.addObject(gd)
+        collectionView.groupDescriptions.add(gd)
     }
     
     func getOrderInventoryService(_ order: isOrderType, credentials: [String :  String]) -> OrderSyncServiceType? {
@@ -432,40 +444,68 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
             completionError(ErrorCode.noCredentials)
             return
         }
-        SwiftSpinner.show("Transmitting...", animated: false) {
-            let orderService = OrderService(order: order, apiCredentials: credentials)
-            do {
-                try self.order?.saveOrder()
-                orderService.sendOrder() {
-                    [unowned self](success, error) in
-                    guard success else {
-                        self.completionError(error ?? ErrorCode.noInternet)
-                        return
-                    }
-                    orderService.depleteDb()
-                    try! self.order?.deleteOrder()
-                    DispatchQueue.main.async {
-                        SwiftSpinner.hide(){
-                            [unowned self] in
-                            self.sendMessage(title: "Transmit Order", message: "Order Sent!")
-                        }
-                    }
+        SwiftSpinner.show("Transmitting...", animated: false)
+        let orderService = OrderService(order: order, apiCredentials: credentials)
+        do {
+            try order.saveOrder()
+            orderService.sendOrder() {
+                [unowned self](success, error) in
+                guard success else {
+                    self.completionError(error ?? ErrorCode.noInternet)
+                    return
                 }
-            } catch {
+                orderService.depleteDb()
+                try! self.order?.deleteOrder()
                 DispatchQueue.main.async {
-                    SwiftSpinner.hide() {
+                    SwiftSpinner.hide(){
                         [unowned self] in
-                        self.completionError(ErrorCode.dbError)
+                        self.sendMessage(title: "Transmit Order", message: "Order Sent!")
                     }
                 }
             }
+        } catch {
+            DispatchQueue.main.async {
+                SwiftSpinner.hide() {
+                    [unowned self] in
+                    self.completionError(ErrorCode.dbError)
+                }
+            }
         }
+        
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Transmitting...", animated: false) {
+//            let orderService = OrderService(order: order, apiCredentials: credentials)
+//            do {
+//                try self.order?.saveOrder()
+//                orderService.sendOrder() {
+//                    [unowned self](success, error) in
+//                    guard success else {
+//                        self.completionError(error ?? ErrorCode.noInternet)
+//                        return
+//                    }
+//                    orderService.depleteDb()
+//                    try! self.order?.deleteOrder()
+//                    DispatchQueue.main.async {
+//                        SwiftSpinner.hide(){
+//                            [unowned self] in
+//                            self.sendMessage(title: "Transmit Order", message: "Order Sent!")
+//                        }
+//                    }
+//                }
+//            } catch {
+//                DispatchQueue.main.async {
+//                    SwiftSpinner.hide() {
+//                        [unowned self] in
+//                        self.completionError(ErrorCode.dbError)
+//                    }
+//                }
+//            }
+//        }
     }
     
     
     fileprivate func deleteOrder() {
-        SwiftSpinner.show("Deleting...", animated: false) {
-            [unowned self] in
+        SwiftSpinner.show("Deleting...", animated: false)
             DispatchQueue.main.async {
                 [unowned self] in
                 do {
@@ -481,7 +521,26 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                     }
                 }
             }
-        }
+    
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Deleting...", animated: false) {
+//            [unowned self] in
+//            DispatchQueue.main.async {
+//                [unowned self] in
+//                do {
+//                    try self.order?.deleteOrder()
+//                    SwiftSpinner.hide() {
+//                        [unowned self] in
+//                        self.sendMessage(title: "Delete Order", message: "Order Deleted!")
+//                    }
+//                } catch {
+//                    SwiftSpinner.hide() {
+//                        [unowned self] in
+//                        self.completionError(ErrorCode.dbError)
+//                    }
+//                }
+//            }
+//        }
     }
     
     fileprivate func cancelOrder() {
@@ -490,8 +549,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     fileprivate func saveOrder() {
-        SwiftSpinner.show("Saving...", animated: false) {
-            [unowned self] _ in
+        SwiftSpinner.show("Saving...", animated: false)
             DispatchQueue.main.async {
                 [unowned self] in
                 do {
@@ -507,7 +565,26 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                     }
                 }
             }
-        }
+        
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Saving...", animated: false) {
+//            [unowned self] _ in
+//            DispatchQueue.main.async {
+//                [unowned self] in
+//                do {
+//                    try self.order?.saveOrder()
+//                    SwiftSpinner.hide() {
+//                        [unowned self] in
+//                        self.sendMessage(title: "Save Order", message: "Order Saved!")
+//                    }
+//                } catch {
+//                    SwiftSpinner.hide() {
+//                        [unowned self] in
+//                        self.completionError(ErrorCode.dbError)
+//                    }
+//                }
+//            }
+//        }
     }
     
     
@@ -515,11 +592,11 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         let actionSheet = UIAlertController(title: "Send Data", message: nil, preferredStyle: .actionSheet)
         //let cancelTitle = order?.orderNo == nil ? "Cancel Order" : "Cancel Changes"
         let cancelTitle = "Cancel Order"
-        let copyButton = UIAlertAction(title: "Copy", style: .Default) {
+        let copyButton = UIAlertAction(title: "Copy", style: .default) {
             [unowned self] (alert) -> Void in
             self.copyData(flexGrid, moduleType: moduleType)
         }
-        let emailButton = UIAlertAction(title: "Email", style: .Default) {
+        let emailButton = UIAlertAction(title: "Email", style: .default) {
             [unowned self] (alert) -> Void in
             self.emailData(flexGrid, moduleType: moduleType)
         }

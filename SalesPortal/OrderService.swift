@@ -55,7 +55,7 @@ struct OrderService {
         }
         apiService.sendApiOrder(jsonData, credentialDict: credentials){
             (success, errorCode) in
-            completion(success: success, error: errorCode)
+            completion(success, errorCode)
         }
     }
     
@@ -103,7 +103,9 @@ struct OrderService {
     }
     
     func updateDbMo(_ orderNo: String, itemCode: String, quantity: Double) {
-        let dB = FMDatabase(path: Constants.databasePath as String)
+        guard let dB = FMDatabase(path: Constants.databasePath as String) else {
+            return
+        }
         guard dB.open() else {
             return
         }
@@ -112,7 +114,9 @@ struct OrderService {
     }
     
     func updateDbInventory(_ itemCode: String, quantityAvailable: Double, quantityOnSo: Double, quantityOnMo: Double, quantityOnBo: Double) {
-        let dB = FMDatabase(path: Constants.databasePath as String)
+        guard let dB = FMDatabase(path: Constants.databasePath as String) else {
+            return
+        }
         guard dB.open() else {
             return
         }

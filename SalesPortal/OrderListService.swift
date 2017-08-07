@@ -125,10 +125,10 @@ class OrderListService: SyncService, SyncServiceType {
                 let orderHeaderDict = orderListDict["H"] as? [String : AnyObject],
                 let orderDetailDict = orderListDict["D"] as? [String : AnyObject]
                 else {
-                    completion(data: nil, error: errorCode)
+                    completion(nil, errorCode)
                     return
             }
-            completion(data: OrderListSync(orderHeaderDict: orderHeaderDict, orderDetailDict: orderDetailDict), error: nil)
+            completion(OrderListSync(orderHeaderDict: orderHeaderDict, orderDetailDict: orderDetailDict), nil)
         }
     }
     

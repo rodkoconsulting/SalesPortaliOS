@@ -19,7 +19,9 @@ class InventoryService: SyncService, SyncServiceType {
         guard repState.characters.count > 0 else {
             return (nil, nil, false)
         }
-        let dB = FMDatabase(path: Constants.databasePath)
+        guard let dB = FMDatabase(path: Constants.databasePath) else {
+            return (nil, nil, false)
+        }
         let inventoryList = NSMutableArray()
         var inventorySearch = [[String : String]]()
         var poList: [InventoryPo] = []
@@ -75,10 +77,10 @@ class InventoryService: SyncService, SyncServiceType {
                 let priceDict = inventoryDict["Price"] as? [String : AnyObject],
                 let poDict = inventoryDict["Po"] as? [String : AnyObject]
                 else {
-                    completion(data: nil, error: errorCode)
+                    completion(nil, errorCode)
                     return
             }
-            completion(data: InvSync(qtyDict: qtyDict, descDict: descDict, priceDict: priceDict, poDict: poDict), error: nil)
+            completion(InvSync(qtyDict: qtyDict, descDict: descDict, priceDict: priceDict, poDict: poDict), nil)
         }
     }
     

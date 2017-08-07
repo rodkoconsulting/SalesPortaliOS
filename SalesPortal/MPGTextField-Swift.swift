@@ -179,7 +179,7 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        self.resignFirstResponder()
+        let _ = self.resignFirstResponder()
     }
     
     

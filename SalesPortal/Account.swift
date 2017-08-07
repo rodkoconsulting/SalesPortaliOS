@@ -101,7 +101,7 @@
         let invoiceDate: String?
         let comment: String?
         
-        required init(dict: [String: AnyObject]?) {
+        required init(dict: [String: Any]?) {
             division = dict?["Div"] as? String
             customerNo = dict?["CustNo"] as? String
             invoiceNo = dict?["InvNo"] as? String
@@ -146,7 +146,7 @@
         let unitPrice: Double?
         let total: Double?
         
-        required init(dict: [String: AnyObject]?) {
+        required init(dict: [String: Any]?) {
             invoiceNo = dict?["InvNo"] as? String
             headerSeqNo = dict?["SeqNoH"] as? String
             detailSeqNo = dict?["SeqNoD"] as? String
@@ -213,7 +213,7 @@
         let rep: String?
         let region: String?
         
-        required init(dict: [String: AnyObject]?) {
+        required init(dict: [String: Any]?) {
             division = dict?["Div"] as? String
             customerNo = dict?["CustNo"] as? String
             customerName = dict?["CustName"] as? String
@@ -290,7 +290,7 @@
         let invoiceDetailSync: Sync<AccountInvoiceDetail>
         let itemsInactiveSync: Sync<AccountItemsInactive>
         
-        init(listDict: [String : AnyObject], invoiceHeaderDict: [String : AnyObject], invoiceDetailDict: [String : AnyObject], itemsInactiveDict: [String : AnyObject]) {
+        init(listDict: [String : Any], invoiceHeaderDict: [String : Any], invoiceDetailDict: [String : Any], itemsInactiveDict: [String : Any]) {
             listSync = Sync<AccountList>(dict: listDict)
             invoiceHeaderSync = Sync<AccountInvoiceHeader>(dict: invoiceHeaderDict)
             invoiceDetailSync = Sync<AccountInvoiceDetail>(dict: invoiceDetailDict)

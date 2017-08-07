@@ -67,7 +67,9 @@ struct DatabaseService: DatabaseServiceType {
         guard let syncTime = syncObject.syncTime else {
             throw ErrorCode.dbError
         }
-        let dB = FMDatabase(path: Constants.databasePath)
+        guard let dB = FMDatabase(path: Constants.databasePath) else {
+            return
+        }
         guard dB.open() else {
             throw ErrorCode.dbError
         }

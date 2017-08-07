@@ -99,7 +99,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         comboBox.delegate = self
         comboBox.displayMemberPath = "name"
         comboBox.isEditable = false
-        comboBox.dropDownBehavior = XuniDropDownBehavior.HeaderTap
+        comboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -160,7 +160,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 filterCell.operatorComboBox.itemsSource = operatorItemsSource
                 filterCell.operatorComboBox.selectedIndex = operatorIndex
                 filterCell.operatorComboBox.dropDownHeight = operatorHeight
-                filterCell.operatorComboBox.hidden = row == 0
+                filterCell.operatorComboBox.isHidden = row == 0
                 return filterCell
             case .Date:
                 let dateCell = cell as! DateFiltersTableViewCell
@@ -174,7 +174,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 dateCell.operatorComboBox.itemsSource = operatorItemsSource
                 dateCell.operatorComboBox.selectedIndex = operatorIndex
                 dateCell.operatorComboBox.dropDownHeight = operatorHeight
-                dateCell.operatorComboBox.hidden = row == 0
+                dateCell.operatorComboBox.isHidden = row == 0
                 dateCell.dateButton.tag = row
                 let filterDate = filter.value.getGridDate() ?? Date()
                 dateCell.dateButton.setTitle(filterDate.getDateShipPrint(), for: UIControlState())
@@ -192,7 +192,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 boolCell.operatorComboBox.itemsSource = operatorItemsSource
                 boolCell.operatorComboBox.selectedIndex = operatorIndex
                 boolCell.operatorComboBox.dropDownHeight = operatorHeight
-                boolCell.operatorComboBox.hidden = row == 0
+                boolCell.operatorComboBox.isHidden = row == 0
                 initComboBox(boolCell.boolComboBox)
                 boolCell.boolComboBox.tag =  boolTag
                 boolCell.boolComboBox.itemsSource = boolItemsSource

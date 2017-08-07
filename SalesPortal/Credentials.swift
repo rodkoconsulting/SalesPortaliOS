@@ -24,7 +24,7 @@ struct Credentials {
     typealias JSONDictionaryCompletion = (_ data: [String: AnyObject]?, _ error: ErrorCode?) -> Void
     
     static func getCredentials() -> [String : String]? {
-        guard let dictionary = Locksmith.loadDataForUserAccount("polPortal") as? [String: String] else {
+        guard let dictionary = Locksmith.loadDataForUserAccount(userAccount: "polPortal") as? [String: String] else {
             return nil
         }
         return dictionary
@@ -36,7 +36,7 @@ struct Credentials {
         }
         credentials["state"] = String(state[state.characters.index(before: state.endIndex)])
         //Credentials.deleteCredentials()
-        try! Locksmith.updateData(credentials as [String : AnyObject], forUserAccount: "polPortal")
+        try! Locksmith.updateData(data: credentials as [String : Any], forUserAccount: "polPortal")
     }
     
     static func getStateCredentials() -> String {
@@ -55,12 +55,12 @@ struct Credentials {
             dict[key] = value as? String
         }
         
-        try! Locksmith.saveData(dict as [String : AnyObject], forUserAccount: "polPortal")
+        try! Locksmith.saveData(data: dict as [String : Any], forUserAccount: "polPortal")
     }
     
     static func deleteCredentials() -> Void {
         do {
-            try Locksmith.deleteDataForUserAccount("polPortal")
+            try Locksmith.deleteDataForUserAccount(userAccount: "polPortal")
         } catch {
             
         }

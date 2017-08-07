@@ -11,7 +11,9 @@ import Foundation
 class OrderAddressService {
     
     class func getAddressList() -> [OrderAddress]? {
-        let dB = FMDatabase(path: Constants.databasePath)
+        guard let dB = FMDatabase(path: Constants.databasePath) else {
+            return nil
+        }
         var addressList = [OrderAddress]()
         if dB.open() {
             let sqlQuery =

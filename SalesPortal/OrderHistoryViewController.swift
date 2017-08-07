@@ -56,8 +56,10 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
         guard selectedRow >= 0 && UInt(selectedRow) < flexGrid.rows.count else {
             return
         }
-        let flexRow = flexGrid.rows.objectAtIndex(UInt(selectedRow)) as! GridRow
-        let inventory = flexRow.dataItem as! Inventory
+        let flexRow = flexGrid.rows.object(at: UInt(selectedRow))
+        guard let inventory = flexRow.dataItem as? Inventory else {
+            return
+        }
         if descriptionLabel != nil {
             descriptionLabel.text = inventory.itemDescription
             restrictionLabel.text = inventory.restrictedList
@@ -113,14 +115,14 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
                 return self.flexGrid.filterIndex(searchText, row: row, moduleType: self.moduleType) && self.flexGrid.filterColumns(nil, row: row)
             }
             guard row.lastQuantity > 0 else {
-                let index = self.searchData.indexOf {
+                let index = self.searchData.index {
                     if let value = $0["DisplaySubText"], value == row.itemCode {
                         return true
                     }
                     return false
                 }
                 if let index = index {
-                    self.searchData.removeAtIndex(index)
+                    self.searchData.remove(at: index)
                 }
                 return false
             }
@@ -137,11 +139,11 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
         guard panel != nil else {
             return false
         }
-        guard let flexRow = flexGrid.rows.objectAtIndex(UInt(range.row)) as? GridRow,
-            let inventory = flexRow.dataItem as? OrderInventory else {
+        let flexRow = flexGrid.rows.object(at: UInt(range.row))
+        guard let inventory = flexRow.dataItem as? OrderInventory else {
                 return false
         }
-        activeField = panel.getCellRectForRow(range.row, inColumn: range.col)
+        activeField = panel.getCellRect(forRow: range.row, inColumn: range.col)
         inventory.errorDelegate = self
         setAccountInventoryDelegate(inventory)
         return false
@@ -149,7 +151,6 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
     
     func cellEditEnding(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!, cancel: Bool) -> Bool {
         activeField = nil
-        
         return false
     }
     

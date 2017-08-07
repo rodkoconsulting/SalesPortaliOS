@@ -3,7 +3,7 @@ class OrderSavedList : NSObject {
     let orderNo: Int
     let customerName: String
     let orderTypeRaw: String
-    let shipDate: Date?
+    var shipDate: Date?
     let saveTime: Date
     let price: Double
     let total: Double
@@ -15,8 +15,12 @@ class OrderSavedList : NSObject {
         self.orderNo = Int(orderNo)
         orderTypeRaw = queryResult?.string(forColumn: "type") ?? ""
         let rawShipDate = queryResult?.string(forColumn: "ship_date").getShipDate()
-        shipDate = rawShipDate?.getYearInt() >= Date().getYearInt() ? rawShipDate : nil
-        saveTime = queryResult?.string(forColumn: "save_time").getDateTime() as! Date ?? Date()
+        if let year = rawShipDate?.getYearInt() {
+            if year >= Date().getYearInt() {
+                shipDate = rawShipDate
+            }
+        }
+        saveTime = queryResult?.string(forColumn: "save_time").getDateTime() ?? Date()
         customerName = queryResult?.string(forColumn: "customer_name") ?? ""
         price = queryResult?.double(forColumn: "total_price") ?? 0
         total = queryResult?.double(forColumn: "total_qty") ?? 0

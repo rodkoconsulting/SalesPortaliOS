@@ -12,7 +12,9 @@ class SampleListService: SyncService, SyncServiceType {
 
     
     func queryDb() -> (gridData:NSMutableArray?, searchData: [[String : String]]?, isManager: Bool) {
-        let dB = FMDatabase(path: Constants.databasePath)
+        guard let dB = FMDatabase(path: Constants.databasePath) else {
+            return (nil, nil, false)
+        }
         let sampleListArray = NSMutableArray()
         var sampleListSearch = [[String : String]]()
         var isMultipleReps = false
@@ -70,10 +72,10 @@ class SampleListService: SyncService, SyncServiceType {
                 let sampleAddressDict = sampleListDict["A"] as? [String : AnyObject],
                 let sampleItemsInactiveDict = sampleListDict["I"] as? [String : AnyObject]
                 else {
-                    completion(data: nil, error: errorCode)
+                    completion(nil, errorCode)
                     return
             }
-            completion(data: SampleListSync(sampleHeaderDict: sampleHeaderDict, sampleDetailDict: sampleDetailDict, sampleAddressDict: sampleAddressDict, sampleItemsInactiveDict: sampleItemsInactiveDict), error: nil)
+            completion(SampleListSync(sampleHeaderDict: sampleHeaderDict, sampleDetailDict: sampleDetailDict, sampleAddressDict: sampleAddressDict, sampleItemsInactiveDict: sampleItemsInactiveDict), nil)
         }
     }
     

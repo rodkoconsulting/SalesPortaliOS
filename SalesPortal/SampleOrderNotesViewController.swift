@@ -17,7 +17,7 @@ class SampleOrderNotesViewController: OrderNotesViewController  {
     
     override func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         maxLength = 30
-        return super.textField(textField: textField, shouldChangeCharactersInRange: range, replacementString: string)
+        return super.textField(textField, shouldChangeCharactersIn: range, replacementString: string)
     }
     
 

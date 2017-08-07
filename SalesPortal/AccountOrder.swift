@@ -459,7 +459,12 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         }
         let notes = (self.notes ?? "").replacingOccurrences(of: "'", with: "''")
         let columns = "(TYPE, DIVISION_NO, CUSTOMER_NO, SAVE_TIME, SHIP_DATE, NOTES, COOP_QTY, COOP_NO, TOTAL_QTY, TOTAL_PRICE, PO_NO) "
-        let values =  "VALUES ('" + orderType.rawValue + "', '" + divisionNo + "', '" + customerNo + "', '" + saveTime + "', '" + (shipDate ?? "") + "', '" + notes + "', \(coopCases ?? 0), '" + (coopNo ?? "") + "', \(orderTotal), \(priceTotal), '" + (poNo ?? "") + "')"
+        let orderType = self.orderType.rawValue
+        let shipDate = self.shipDate ?? ""
+        let coopCases = "\(self.coopCases ?? 0)"
+        let coopNo = self.coopNo ?? ""
+        let poNo = self.poNo ?? ""
+        let values =  "VALUES ('" + orderType + "', '" + divisionNo + "', '" + customerNo + "', '" + saveTime + "', '" + shipDate + "', '" + notes + "', '" + coopCases + "', '" + coopNo + "', \(orderTotal), \(priceTotal), '" + poNo + "')"
         return columns + values
     }
     
@@ -487,7 +492,11 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         }
         let notes = (self.notes ?? "").replacingOccurrences(of: "'", with: "''")
         let saveTime = Date().getDateTimeString()
-        return "TYPE='" + orderType.rawValue + "', SAVE_TIME='" + saveTime + "', SHIP_DATE='" + (shipDate ?? "") + "', NOTES='" + notes + "', COOP_QTY=\(coopCases ?? 0), COOP_NO='" + (coopNo ?? "") + "', TOTAL_QTY=\(orderTotal), TOTAL_PRICE=\(priceTotal), PO_NO='" + (poNo ?? "") + "' WHERE ORDER_NO=\(orderNo)"
+        let orderType = self.orderType.rawValue
+        let shipDate = self.shipDate ?? ""
+        let coopCases = "\(self.coopCases ?? 0)"
+        let coopNo = self.coopNo ?? ""
+        return "TYPE='" + orderType + "', SAVE_TIME='" + saveTime + "', SHIP_DATE='" + shipDate + "', NOTES='" + notes + "', COOP_QTY='" + coopCases + "', COOP_NO='" + coopNo + "', TOTAL_QTY=\(orderTotal), TOTAL_PRICE=\(priceTotal), PO_NO='" + (poNo ?? "") + "' WHERE ORDER_NO=\(orderNo)"
     }
     
     func saveOrder() throws {
@@ -515,30 +524,30 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         guard let orderInventory = orderInventory else {
             return nil
         }
-        var orderDict = [String : AnyObject]()
-        var detailArray = [[String : AnyObject]]()
+        var orderDict = [String : Any]()
+        var detailArray = [[String : Any]]()
         let notes = (self.notes ?? "").replacingOccurrences(of: "'", with: "")
-        orderDict["custNo"] = account?.customerNoRaw as AnyObject ?? "" as AnyObject
-        orderDict["type"] = orderType.rawValue as AnyObject
-        orderDict["date"] = shipDate as AnyObject ?? "" as AnyObject
-        orderDict["note"] = notes as AnyObject ?? "" as AnyObject
-        orderDict["coop"] = coopNo as AnyObject ?? "" as AnyObject
-        orderDict["po"] = poNo as AnyObject ?? "" as AnyObject
-        orderDict["id"] = orderId as AnyObject ?? "" as AnyObject
+        orderDict["custNo"] = account?.customerNoRaw ?? ""
+        orderDict["type"] = orderType.rawValue 
+        orderDict["date"] = shipDate ?? ""
+        orderDict["note"] = notes 
+        orderDict["coop"] = coopNo ?? ""
+        orderDict["po"] = poNo ?? ""
+        orderDict["id"] = orderId ?? ""
         for line in orderInventory where (line as? AccountOrderInventory)?.bottleTotal > 0 {
             guard let line = line as? AccountOrderInventory else {
                 continue
             }
-            var detailDict = [String : AnyObject]()
-            detailDict["item"] = line.itemCode as AnyObject
-            detailDict["price"] = line.unitPrice as AnyObject
-            detailDict["mobos"] = line.moboString as AnyObject
-            detailDict["moboqty"] = line.moboTotal.quantity as AnyObject
-            detailDict["qty"] = line.bottleTotal as AnyObject
-            detailDict["over"] = line.isPriceOverride ? 1 : 0 as AnyObject
+            var detailDict = [String : Any]()
+            detailDict["item"] = line.itemCode
+            detailDict["price"] = line.unitPrice
+            detailDict["mobos"] = line.moboString
+            detailDict["moboqty"] = line.moboTotal.quantity
+            detailDict["qty"] = line.bottleTotal
+            detailDict["over"] = line.isPriceOverride ? 1 : 0
             detailArray.append(detailDict)
         }
-        orderDict["details"] = detailArray as AnyObject
+        orderDict["details"] = detailArray
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: orderDict, options: JSONSerialization.WritingOptions.prettyPrinted)
             return jsonData

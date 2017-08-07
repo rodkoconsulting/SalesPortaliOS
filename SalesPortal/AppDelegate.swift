@@ -20,7 +20,7 @@
             // Override point for customization after application launch.
             XuniLicenseManager.setKey(License().key)
             TestFairy.begin("83214e25cc75ac626e343dd7738c46b1f37c920e")
-            NSTimeZone.setDefaultTimeZone(TimeZone(identifier: "America/New_York")!)
+            NSTimeZone.default = TimeZone(identifier: "America/New_York")!
             return true
         }
         
@@ -80,47 +80,47 @@
             if let viewController = getVisibleViewController(nil) {
                 if viewController.isKind(of: InventoryViewController.self) {
                     if let myViewController = viewController as? InventoryViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.Inventory)
+                        myViewController.flexGrid.saveUserDefaults(Module.inventory)
                     }
                 } else if viewController.isKind(of: AccountsViewController.self) {
                     if let myViewController = viewController as? AccountsViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.Accounts)
+                        myViewController.flexGrid.saveUserDefaults(Module.accounts)
                     }
                 } else if viewController.isKind(of: AccountOrderHeaderViewController.self) {
                     if let myViewController = viewController as? AccountOrderHeaderViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.AccountOrder)
+                        myViewController.flexGrid.saveUserDefaults(Module.accountOrder)
                     }
                 }else if viewController.isKind(of: SampleOrderHeaderViewController.self) {
                     if let myViewController = viewController as? SampleOrderHeaderViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.SampleOrder)
+                        myViewController.flexGrid.saveUserDefaults(Module.sampleOrder)
                     }
                 } else if viewController.isKind(of: AccountOrderInventoryViewController.self) {
                     if let myViewController = viewController as? AccountOrderInventoryViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.AccountOrderInventory)
+                        myViewController.flexGrid.saveUserDefaults(Module.accountOrderInventory)
                     }
                 } else if viewController.isKind(of: SampleOrderInventoryViewController.self) {
                     if let myViewController = viewController as? SampleOrderInventoryViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.SampleOrderInventory)
+                        myViewController.flexGrid.saveUserDefaults(Module.sampleOrderInventory)
                     }
                 } else if viewController.isKind(of: AccountOrderHistoryViewController.self) {
                     if let myViewController = viewController as? AccountOrderHistoryViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.AccountOrderHistory)
+                        myViewController.flexGrid.saveUserDefaults(Module.accountOrderHistory)
                     }
                 } else if viewController.isKind(of: SampleOrderHistoryViewController.self) {
                     if let myViewController = viewController as? SampleOrderHistoryViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.SampleOrderHistory)
+                        myViewController.flexGrid.saveUserDefaults(Module.sampleOrderHistory)
                     }
                 } else if viewController.isKind(of: OrderMobosViewController.self) {
                     if let myViewController = viewController as? OrderMobosViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.OrderMobos)
+                        myViewController.flexGrid.saveUserDefaults(Module.orderMobos)
                     }
                 } else if viewController.isKind(of: OrderListViewController.self) {
                     if let myViewController = viewController as? OrderListViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.OrderList)
+                        myViewController.flexGrid.saveUserDefaults(Module.orderList)
                     }
                 } else if viewController.isKind(of: SampleListViewController.self) {
                     if let myViewController = viewController as? SampleListViewController {
-                        myViewController.flexGrid.saveUserDefaults(Module.SampleList)
+                        myViewController.flexGrid.saveUserDefaults(Module.sampleList)
                     }
                 }
             }

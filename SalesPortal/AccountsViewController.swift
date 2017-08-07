@@ -9,10 +9,14 @@ class AccountsViewController: DataGridViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] _ in
-            self.displayView()
-        }
+        SwiftSpinner.show("Loading...", animated: false)
+        displayView()
+        
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Loading...", animated: false) {
+//            [unowned self] _ in
+//            self.displayView()
+//        }
     }
     
     override func loadSettings() {
@@ -42,7 +46,7 @@ class AccountsViewController: DataGridViewController {
         guard selectedRow >= 0 && UInt(selectedRow) < flexGrid.rows.count else {
             return
         }
-        let flexRow = flexGrid.rows.objectAtIndex(UInt(selectedRow)) as! GridRow
+        let flexRow = flexGrid.rows.object(at: UInt(selectedRow))
         guard let account = flexRow.dataItem as? Account else {
             return
         }
@@ -77,7 +81,8 @@ class AccountsViewController: DataGridViewController {
             segueFiltersViewController(segue: segue, sender: sender as AnyObject)
         }
         if segue.identifier == "showAccountInfoViewController" {
-            guard let row = flexGrid.rows.objectAtIndex(UInt(flexGrid.selection.row)) as? GridRow, let account = row.dataItem as? Account, let accountInfoViewController = segue.destination as? AccountInfoViewController else {
+            let row = flexGrid.rows.object(at: UInt(flexGrid.selection.row))
+            guard let account = row.dataItem as? Account, let accountInfoViewController = segue.destination as? AccountInfoViewController else {
                 return
             }
             accountInfoViewController.account = account
@@ -89,9 +94,6 @@ class AccountsViewController: DataGridViewController {
             return true
         }
         guard flexGrid.isSelectionVisible() else {
-            return false
-        }
-        guard let _ = flexGrid.rows.objectAtIndex(UInt(flexGrid.selection.row)) as? GridRow else {
             return false
         }
         return true
@@ -151,7 +153,7 @@ class AccountsViewController: DataGridViewController {
         //}
     }
     
-    override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, forRange range: GridCellRange!) -> Bool {
+    override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange!) -> Bool {
         guard let range = range else {
             return false
         }
@@ -159,19 +161,17 @@ class AccountsViewController: DataGridViewController {
             return false
         }
         switch panel.cellType {
-            case GridCellType.ColumnHeader:
-                guard let column = flexGrid.columns.objectAtIndex(UInt(range.col)) as? DataGridColumn else {
+            case GridCellType.columnHeader:
+                guard let column = flexGrid.columns.object(at: UInt(range.col)) as? DataGridColumn else {
                     return false
                 }
                 showFilterActionSheet(column: column, rowIndex: range.row, panel: panel)
-            case GridCellType.Cell:
-                guard let row = flexGrid.rows.objectAtIndex(UInt(range.row)) as? GridRow else {
-                    return false
-                }
-                performSegueWithIdentifier("showAccountOrderTabBarController", sender: row)
+            case GridCellType.cell:
+                let row = flexGrid.rows.object(at: UInt(range.row))
+                performSegue(withIdentifier: "showAccountOrderTabBarController", sender: row)
             default:
                 return false
-                
+            
             }
         return false
         }

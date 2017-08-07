@@ -55,7 +55,7 @@ struct SampleOrderService {
         }
         apiService.sendApiOrder(jsonData, credentialDict: credentials){
             (success, errorCode) in
-            completion(success: success, error: errorCode)
+            completion(success, errorCode)
         }
     }
     
@@ -77,7 +77,9 @@ struct SampleOrderService {
     }
     
     func updateDbInventory(_ itemCode: String, quantityAvailable: Double) {
-        let dB = FMDatabase(path: Constants.databasePath as String)
+        guard let dB = FMDatabase(path: Constants.databasePath as String) else {
+            return
+        }
         guard dB.open() else {
             return
         }

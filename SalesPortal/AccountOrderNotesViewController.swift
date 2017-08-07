@@ -86,7 +86,7 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
             return
         }
         guard let coopList = accountOrder.account?.coopList else {
-            coopNoComboBox.hidden = true
+            coopNoComboBox.isHidden = true
             return
         }
         if let coopNo = accountOrder.coopNo {
@@ -96,11 +96,11 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
             selectedIndex = UInt(accountOrder.account?.coopList.startIndex.distance(to: index + 1) ?? 0)
         }
         coopNoComboBox.delegate = self
-        coopNoComboBox.headerBorderColor = UIColor.blackColor()
-        coopNoComboBox.buttonColor = UIColor.blackColor()
+        coopNoComboBox.headerBorderColor = UIColor.black
+        coopNoComboBox.buttonColor = UIColor.black
         coopNoComboBox.displayMemberPath = "name"
         coopNoComboBox.isEditable = false
-        coopNoComboBox.dropDownBehavior = XuniDropDownBehavior.HeaderTap
+        coopNoComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
         coopNoComboBox.itemsSource = ComboData.coopNoData(coopList)
         coopNoComboBox.selectedIndex = selectedIndex
         coopNoComboBox.dropDownHeight = Double(coopNoComboBox.itemsSource.count * Constants.ComboCellHeight)
@@ -108,7 +108,7 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
     
     func HideCoop() {
         coopNoLabel.isHidden = true
-        coopNoComboBox.hidden = true
+        coopNoComboBox.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -118,7 +118,7 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
     
     override func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         maxLength = 150
-        return super.textField(textField: textField, shouldChangeCharactersInRange: range, replacementString: string)
+        return super.textField(textField, shouldChangeCharactersIn: range, replacementString: string)
     }
     
     override func exitVc() {

@@ -18,7 +18,7 @@ import Foundation
         let onBo: Double?
         
         
-        required init(dict: [String: AnyObject]?)
+        required init(dict: [String: Any]?)
         {
             itemCode = dict?["Code"] as? String
             quantityAvailable = dict?["QtyA"] as? Double
@@ -59,7 +59,7 @@ import Foundation
         let eta: String?
         let poDate: String?
         
-        required init(dict: [String: AnyObject]?)
+        required init(dict: [String: Any]?)
         {
             itemCode = dict?["Code"] as? String
             onPo = dict?["OnPo"] as? Double
@@ -130,7 +130,7 @@ import Foundation
         let scoreOther: String?
         
         
-        required init(dict: [String: AnyObject]?)
+        required init(dict: [String: Any]?)
         {
             itemCode = dict?["Code"] as? String
             description = dict?["Desc"] as? String
@@ -225,7 +225,7 @@ import Foundation
         let date: String?
         let priceDesc: String?
         
-        required init(dict: [String: AnyObject]?)
+        required init(dict: [String: Any]?)
         {
             itemCode = dict?["Code"] as? String
             priceLevel = dict?["Level"] as? String
@@ -261,7 +261,7 @@ struct InvSync {
     let priceSync: Sync<InvPrice>
     let poSync: Sync<InvPo>
     
-    init(qtyDict: [String : AnyObject], descDict: [String : AnyObject], priceDict: [String : AnyObject], poDict: [String : AnyObject]) {
+    init(qtyDict: [String : Any], descDict: [String : Any], priceDict: [String : Any], poDict: [String : Any]) {
         qtySync = Sync<InvQty>(dict: qtyDict)
         descSync = Sync<InvDesc>(dict: descDict)
         priceSync = Sync<InvPrice>(dict: priceDict)

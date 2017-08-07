@@ -17,10 +17,13 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
     override func viewDidLoad() {
         super.viewDidLoad()
         initComboBox()
-        SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] _ in
-            self.displayView()
-        }
+        SwiftSpinner.show("Loading...", animated: false)
+        self.displayView()
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Loading...", animated: false) {
+//            [unowned self] _ in
+//            self.displayView()
+//        }
     }
     
     fileprivate func initComboBox() {
@@ -28,7 +31,7 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
         orderFilterComboBox.displayMemberPath = "name"
         orderFilterComboBox.itemsSource = ComboData.orderListFilterData()
         orderFilterComboBox.isEditable = false
-        orderFilterComboBox.dropDownBehavior = XuniDropDownBehavior.HeaderTap
+        orderFilterComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
         orderFilterComboBox.dropDownHeight = Double(self.orderFilterComboBox.itemsSource.count * Constants.ComboCellHeight)
         
     }
@@ -38,7 +41,7 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
             return
         }
         clearItemLabels()
-        let flexRow = flexGrid.rows.objectAtIndex(UInt(selectedRow)) as! GridRow
+        let flexRow = flexGrid.rows.object(at: UInt(selectedRow))
         guard let order = flexRow.dataItem as? OrderList else {
             return
         }
@@ -129,7 +132,7 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
             return
         }
         let gd: XuniPropertyGroupDescription = XuniPropertyGroupDescription(property: "totalGroupLabel")
-        collectionView.groupDescriptions.addObject(gd)
+        collectionView.groupDescriptions.add(gd)
         super.groupRows()
     }
     
@@ -201,7 +204,7 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
         //}
     }
     
-    override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, forRange range: GridCellRange!) -> Bool {
+    override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange!) -> Bool {
         guard let range = range else {
             return false
         }
@@ -209,13 +212,13 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
             return false
         }
         switch panel.cellType {
-        case GridCellType.ColumnHeader:
-            guard let column = flexGrid.columns.objectAtIndex(UInt(range.col)) as? DataGridColumn else {
+        case GridCellType.columnHeader:
+            guard let column = flexGrid.columns.object(at: UInt(range.col)) as? DataGridColumn else {
                 return false
             }
             showFilterActionSheet(column: column, rowIndex: range.row, panel: panel)
-        case GridCellType.Cell:
-            guard let row = flexGrid.rows.objectAtIndex(UInt(range.row)) as? GridGroupRow else {
+        case GridCellType.cell:
+            guard let row = flexGrid.rows.object(at: UInt(range.row)) as? GridGroupRow else {
                 return false
             }
             showGroupActionSheet(row, panel: panel)

@@ -112,7 +112,7 @@ extension Module {
         }
     }
     
-    var columnData: [[String:AnyObject]] {
+    var columnData: [[String:Any]] {
         switch self {
         case .inventory:
             return ColumnData.inventoryColumns

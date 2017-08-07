@@ -15,7 +15,9 @@ class AccountOrderInventoryService: SyncService, OrderSyncServiceType {
     }
     
     func queryDb() -> (gridData:NSMutableArray?, searchData: [[String : String]]?, isManager: Bool) {
-        let dB = FMDatabase(path: Constants.databasePath)
+        guard let dB = FMDatabase(path: Constants.databasePath) else {
+            return (nil, nil, false)
+        }
         let orderInventoryList = NSMutableArray()
         var inventorySearch = [[String : String]]()
         var poList: [InventoryPo] = []
@@ -81,10 +83,10 @@ class AccountOrderInventoryService: SyncService, OrderSyncServiceType {
                 let priceDict = inventoryDict["Price"] as? [String : AnyObject],
                 let poDict = inventoryDict["Po"] as? [String : AnyObject]
                 else {
-                    completion(data: nil, error: errorCode)
+                    completion(nil, errorCode)
                     return
             }
-            completion(data: InvSync(qtyDict: qtyDict, descDict: descDict, priceDict: priceDict, poDict: poDict), error: nil)
+            completion(InvSync(qtyDict: qtyDict, descDict: descDict, priceDict: priceDict, poDict: poDict), nil)
         }
     }
     

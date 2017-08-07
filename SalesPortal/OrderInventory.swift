@@ -68,7 +68,7 @@ class OrderInventory: Inventory, isOrderInventory {
         self.bottles = 0
         self.lastQuantity = queryResult?.double(forColumn: "last_qty") ?? 0
         let lastDateString = queryResult?.string(forColumn: "last_date")
-        self.lastDate = lastDateString?.getShipDate() as! Date ??  Date.defaultPoDate()
+        self.lastDate = lastDateString?.getShipDate() ??  Date.defaultPoDate()
         super.init(queryResult: queryResult, poDict: poDict)
     }
     

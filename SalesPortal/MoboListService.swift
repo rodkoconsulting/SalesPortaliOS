@@ -17,7 +17,9 @@ class OrderMoboService: SyncService, SyncServiceType {
     }
     
     func queryDb() -> (gridData:NSMutableArray?, searchData: [[String : String]]?, isManager: Bool) {
-        let dB = FMDatabase(path: Constants.databasePath)
+        guard let dB = FMDatabase(path: Constants.databasePath) else {
+            return (nil, nil, false)
+        }
         let moboListArray = NSMutableArray()
         var moboListSearch = [[String : String]]()
         if dB.open() {
@@ -56,10 +58,10 @@ class OrderMoboService: SyncService, SyncServiceType {
                 let orderHeaderDict = orderListDict["H"] as? [String : AnyObject],
                 let orderDetailDict = orderListDict["D"] as? [String : AnyObject]
                 else {
-                    completion(data: nil, error: errorCode)
+                    completion(nil, errorCode)
                     return
             }
-            completion(data: OrderListSync(orderHeaderDict: orderHeaderDict, orderDetailDict: orderDetailDict), error: nil)
+            completion(OrderListSync(orderHeaderDict: orderHeaderDict, orderDetailDict: orderDetailDict), nil)
         }
     }
     

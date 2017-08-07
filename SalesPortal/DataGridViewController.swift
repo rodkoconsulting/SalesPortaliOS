@@ -27,16 +27,25 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         self.view.endEditing(true)
         flexGrid.finishEditing(false)
         self.view.endEditing(true)
-        SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] _ in
-            self.searchBar.text = ""
-            self.clearFilterButton.isEnabled = false
-            self.searchBar.resignFirstResponder()
-            self.filterGrid("")
-            DispatchQueue.main.async {
-                SwiftSpinner.hide()
-            }
+        SwiftSpinner.show("Loading...", animated: false)
+        searchBar.text = ""
+        clearFilterButton.isEnabled = false
+        let _ = searchBar.resignFirstResponder()
+        filterGrid("")
+        DispatchQueue.main.async {
+            SwiftSpinner.hide()
         }
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Loading...", animated: false) {
+//            [unowned self] _ in
+//            self.searchBar.text = ""
+//            self.clearFilterButton.isEnabled = false
+//            self.searchBar.resignFirstResponder()
+//            self.filterGrid("")
+//            DispatchQueue.main.async {
+//                SwiftSpinner.hide()
+//            }
+//        }
     }
     
     @IBAction func unwindFromColumns(_ segue: UIStoryboardSegue) {
@@ -59,7 +68,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     @IBAction func removeFilters(_ sender: AnyObject) {
         var isFilterChanged = false
         for index in 0...flexGrid.columns.count - 1 {
-            guard let column = flexGrid.columns.objectAtIndex(index) as? DataGridColumn else {
+            guard let column = flexGrid.columns.object(at: index) as? DataGridColumn else {
                 continue
             }
             if column.columnFilters.filterList.count > 0 {
@@ -96,9 +105,9 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     //var cellTappedRange: GridCellRange? = nil
     //var longPress: UILongPressGestureRecognizer!
     
-    var flexGridSelectionChangingHandler: (_ eventContainer: XuniEventContainer?)-> Void  = {
-        (eventContainer: XuniEventContainer!)-> Void  in
-            let eventContainerEventArgs = eventContainer!.eventArgs as! GridCellRangeEventArgs
+    var flexGridSelectionChangingHandler: ((_ eventContainer: XuniEventContainer<GridCellRangeEventArgs>?)-> Void)!  = {
+        (eventContainer: XuniEventContainer<GridCellRangeEventArgs>?)-> Void  in
+            let eventContainerEventArgs = eventContainer!.eventArgs!
             if (eventContainerEventArgs.row <  0) {
                 eventContainerEventArgs.cancel = true
             }
@@ -126,14 +135,15 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
     
     func addHandlers() {
-        self.flexGrid.flexGridSelectionChanging.addHandler(flexGridSelectionChangingHandler, forObject: self)
+        self.flexGrid.flexGridSelectionChanging.addHandler(flexGridSelectionChangingHandler, for: self)
+        //self.flexGrid.flexGridSelectionChanging.addHandler(flexGridSelectionChangingHandler, for: self)
     }
 
     func removeHandlers() {
         guard flexGrid != nil else {
             return
         }
-        self.flexGrid.flexGridSelectionChanging.removeHandler(flexGridSelectionChangingHandler, forObject: self)
+        self.flexGrid.flexGridSelectionChanging.removeHandler(flexGridSelectionChangingHandler, for: self)
     }
     
     func addNotifications() {
@@ -179,14 +189,20 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     
     
     func filterData() {
-        SwiftSpinner.show("Searching...", animated: false) {
-            [unowned self]_ in
-            //self.searchBar.resignFirstResponder()
-            self.filterGrid(self.searchBar.text ?? "")
-            DispatchQueue.main.async {
-                SwiftSpinner.hide()
-            }
+        SwiftSpinner.show("Searching...", animated: false)
+        filterGrid(self.searchBar.text ?? "")
+        DispatchQueue.main.async {
+            SwiftSpinner.hide()
         }
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Searching...", animated: false) {
+//            [unowned self]_ in
+//            //self.searchBar.resignFirstResponder()
+//            self.filterGrid(self.searchBar.text ?? "")
+//            DispatchQueue.main.async {
+//                SwiftSpinner.hide()
+//            }
+//        }
     }
     
     func filterIndex(){
@@ -225,11 +241,11 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     
 
     func resetGrid() {
-        selectModeSegment.enabled = flexGrid.isSelectionVisible()
+        selectModeSegment.isEnabled = flexGrid.isSelectionVisible()
         //resetSelectionMode()
         clearSelectedCells()
         if flexGrid.rows.count > 0 {
-           flexGrid.scrollIntoView(0, c: 0)
+           flexGrid.scroll(intoView: 0, c: 0)
         }
     }
     
@@ -317,7 +333,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         }
     }
     
-    func cellTapped(_ sender: FlexGrid, panel: GridPanel, forRange range: GridCellRange?) -> Bool {
+    func cellTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange?) -> Bool {
         //guard panel != nil && flexGrid.rows.count > 0 else {
         guard flexGrid.rows.count > 0 else {
             return true
@@ -426,32 +442,32 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
     
     func showFilterActionSheet(column: DataGridColumn, rowIndex: Int32, panel: GridPanel, flexGrid: FlexGrid) {
-        let actionSheet = UIAlertController(title: column.header, message: nil, preferredStyle: .ActionSheet)
+        let actionSheet = UIAlertController(title: column.header, message: nil, preferredStyle: .actionSheet)
         let filterButton = UIAlertAction(title: "Filter", style: .default) {
             [unowned self](alert) -> Void in
             self.performSegue(withIdentifier: "showFiltersViewController", sender: column)
         }
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { (alert) -> Void in
         }
-        let rect = panel.getCellRectForRow(rowIndex, inColumn: column.index)
+        let rect = panel.getCellRect(forRow: rowIndex, inColumn: column.index)
         actionSheet.addAction(filterButton)
         actionSheet.addAction(cancelButton)
         if let popoverController = actionSheet.popoverPresentationController {
             popoverController.sourceView = flexGrid
             popoverController.sourceRect = rect
         }
-        presentViewController(actionSheet, animated: true, completion: nil)
+        present(actionSheet, animated: true, completion: nil)
     }
     
     func copyData(_ flexGrid: FlexGrid, moduleType: Module) {
         if let stringSelection = DataExport.copyGrid(copySelection: true, flexGrid: flexGrid, classType: classType, moduleType: moduleType, isManager: isManager) {
-            UIPasteboard.generalPasteboard().string = stringSelection
+            UIPasteboard.general.string = stringSelection
         }
     }
     
     func emailData(_ flexGrid: FlexGrid, moduleType: Module) {
-        SwiftSpinner.show("Exporting...", animated: false) {
-            _ in
+        
+        SwiftSpinner.show("Exporting...", animated: false)
             DispatchQueue.main.async {
                 [unowned self] in
                 guard let mailComposer = DataExport.excelExport(flexGrid: flexGrid, classType: self.classType, moduleType: moduleType, isManager: self.isManager) else {
@@ -459,20 +475,34 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
                     return
                 }
                 mailComposer.mailComposeDelegate = self
-                self.presentViewController(mailComposer, animated: true, completion: nil)
+                self.present(mailComposer, animated: true, completion: nil)
                 SwiftSpinner.hide()
             }
-        }
+
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Exporting...", animated: false) {
+//            _ in
+//            DispatchQueue.main.async {
+//                [unowned self] in
+//                guard let mailComposer = DataExport.excelExport(flexGrid: flexGrid, classType: self.classType, moduleType: moduleType, isManager: self.isManager) else {
+//                    SwiftSpinner.hide()
+//                    return
+//                }
+//                mailComposer.mailComposeDelegate = self
+//                self.presentViewController(mailComposer, animated: true, completion: nil)
+//                SwiftSpinner.hide()
+//            }
+//        }
     }
 
     
     func showShareActionSheet(flexGrid: FlexGrid, moduleType: Module, sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "Copy / Email Data", message: nil, preferredStyle: .actionSheet)
-        let copyButton = UIAlertAction(title: "Copy", style: .Default) {
+        let copyButton = UIAlertAction(title: "Copy", style: .default) {
             [unowned self] (alert) -> Void in
                 self.copyData(flexGrid, moduleType: moduleType)
         }
-        let emailButton = UIAlertAction(title: "Email", style: .Default) {
+        let emailButton = UIAlertAction(title: "Email", style: .default) {
             [unowned self] (alert) -> Void in
                 self.emailData(flexGrid, moduleType: moduleType)
         }
@@ -521,41 +551,25 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
             return
         }
         let filterImage = flexGrid.hasFilters() ? UIImage(named: "Full Filters") : UIImage(named: "Clear Filters")
-        SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] _ in
-            DispatchQueue.main.async {
-                [unowned self] in
-                self.filterGrid(self.searchBar?.text ?? "")
-                self.removeFilterButton.image = filterImage
-                SwiftSpinner.hide()
-            }
+        SwiftSpinner.show("Loading...", animated: false)
+        DispatchQueue.main.async {
+            [unowned self] in
+            self.filterGrid(self.searchBar?.text ?? "")
+            self.removeFilterButton.image = filterImage
+            SwiftSpinner.hide()
         }
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Loading...", animated: false) {
+//            [unowned self] _ in
+//            DispatchQueue.main.async {
+//                [unowned self] in
+//                self.filterGrid(self.searchBar?.text ?? "")
+//                self.removeFilterButton.image = filterImage
+//                SwiftSpinner.hide()
+//            }
+//        }
     }
     
-//    func saveColumnSettings() -> [[String : AnyObject]] {
-//        var myColumnSettings = [[String : AnyObject]]()
-//        myColumnSettings.append(["version":flexGrid.tag])
-//        for col: UInt in 0 ..< flexGrid.columns.count {
-//            var myDict = [String : AnyObject]()
-//            let column = flexGrid.columns.objectAtIndex(UInt(col)) as! GridColumn
-//            myDict["name"] = column.name
-//            myDict["visible"] = column.visible
-//            if column.visible {
-//                myDict["width"] = column.width
-//            }
-//            myColumnSettings.append(myDict)
-//        }
-//        return myColumnSettings
-//    }
-    
-//    func longPressInitialize() {
-//        longPress = UILongPressGestureRecognizer(target: self, action: #selector(DataGridViewController.handleLongPress(_:)))
-//        longPress.numberOfTouchesRequired = 1
-//        longPress.minimumPressDuration = 1.0
-//        longPress.allowableMovement = 10
-//        longPress.delegate = self
-//        flexGrid.addGestureRecognizer(longPress)
-//    }
     
     
     func getBackgroundColor(_ row: Int32) -> UIColor? {
@@ -584,9 +598,9 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         }
         return UIColor.black
     }
-    func  formatItem(_ sender: FlexGrid, panel: GridPanel, forRange range: GridCellRange, inContext context: CGContext)  -> Bool {
+    func  formatItem(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange, in context: CGContext)  -> Bool {
         //guard panel != nil && panel.cellType == GridCellType.Cell else {
-        guard panel.cellType == GridCellType.Cell else {
+        guard panel.cellType == GridCellType.cell else {
             return false
         }
         let isSelected = panel.fillColor == flexGrid.selectionBackgroundColor ? true : false
@@ -594,8 +608,8 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         let backgroundColor = getBackgroundColor(range.row)
         panel.textAttributes[NSForegroundColorAttributeName] = getTextColor(range.row, col: range.col) ?? panel.fillColor
         if !isSelected && backgroundColor != nil {
-            context.setFillColor(backgroundColor!.CGColor)
-            let r = panel.getCellRectForRow(range.row, inColumn: range.col)
+            context.setFillColor(backgroundColor!.cgColor)
+            let r = panel.getCellRect(forRow: range.row, inColumn: range.col)
             context.fill(r)
         }
         if range.row == 0 || (range.col==range.rightCol && lastFormattedRow < range.bottomRow && flexGrid.rows.count > 0)
@@ -610,10 +624,13 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     func loadedRows(_ sender: FlexGrid) {
         DispatchQueue.main.async {
             [weak self] in
-            guard self?.flexGrid != nil && self?.flexGrid.rows.count > 0 else {
+            guard let flexGrid = self?.flexGrid else {
                 return
             }
-            self?.flexGrid.autoSizeRows()
+            guard flexGrid.rows.count > 0 else {
+                return
+            }
+            flexGrid.autoSizeRows()
         }
         resetLastFormattedRow()
     }
@@ -630,7 +647,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
 //    }
     
     
-    func selectionChanged(_ sender: FlexGrid, panel:GridPanel, forRange range: GridCellRange?) {
+    func selectionChanged(_ sender: FlexGrid, panel:GridPanel, for range: GridCellRange?) {
         //guard !isSelectionModeChanging else {
         //    return
         //}
@@ -641,33 +658,58 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         setItemLabels(selectedRow: range.row)
     }
     
-    func sortingColumn(_ sender: FlexGrid, panel:GridPanel, forRange range:GridCellRange) -> Bool {
+    func sortingColumn(_ sender: FlexGrid, panel:GridPanel, for range:GridCellRange) -> Bool {
         //print(flexGrid.frame.origin.y)
         guard let collectionView = flexGrid.collectionView else {
             return true
         }
-        SwiftSpinner.show("Sorting...", animated: false) {
+        SwiftSpinner.show("Sorting...", animated: false)
+        DispatchQueue.main.async {
             [unowned self] in
-            DispatchQueue.main.async {
-                [unowned self] in
-                guard let col = self.flexGrid.columns.objectAtIndex(UInt(range.col)) as? DataGridColumn else {
-                    return
-                }
-                if range.col == self.lastSortedColumn {
-                    self.isSortAscending = !self.isSortAscending
-                } else {
-                    self.isSortAscending = true
-                }
-                self.lastSortedColumn = range.col
-                let binding = col.sortMemberPath ?? col.binding
-                let sd = XuniSortDescription(property: binding, ascending: self.isSortAscending)
-                collectionView.sortDescriptions.removeAllObjects()
-                collectionView.sortDescriptions.addObject(sd)
-                self.flexGrid.setNeedsDisplay()
-                //self.autoSizeColumns()
+            guard let col = self.flexGrid.columns.object(at: UInt(range.col)) as? DataGridColumn else {
                 SwiftSpinner.hide()
+                return
             }
+            if range.col == self.lastSortedColumn {
+                self.isSortAscending = !self.isSortAscending
+            } else {
+                self.isSortAscending = true
+            }
+            self.lastSortedColumn = range.col
+            let binding = col.sortMemberPath ?? col.binding
+            collectionView.sortDescriptions.removeAllObjects()
+            guard let sd = XuniSortDescription(property: binding, ascending: self.isSortAscending) else {
+                SwiftSpinner.hide()
+                return
+            }
+            collectionView.sortDescriptions.add(sd)
+            self.flexGrid.setNeedsDisplay()
+            //self.autoSizeColumns()
+            SwiftSpinner.hide()
         }
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Sorting...", animated: false) {
+//            [unowned self] in
+//            DispatchQueue.main.async {
+//                [unowned self] in
+//                guard let col = self.flexGrid.columns.objectAtIndex(UInt(range.col)) as? DataGridColumn else {
+//                    return
+//                }
+//                if range.col == self.lastSortedColumn {
+//                    self.isSortAscending = !self.isSortAscending
+//                } else {
+//                    self.isSortAscending = true
+//                }
+//                self.lastSortedColumn = range.col
+//                let binding = col.sortMemberPath ?? col.binding
+//                let sd = XuniSortDescription(property: binding, ascending: self.isSortAscending)
+//                collectionView.sortDescriptions.removeAllObjects()
+//                collectionView.sortDescriptions.addObject(sd)
+//                self.flexGrid.setNeedsDisplay()
+//                //self.autoSizeColumns()
+//                SwiftSpinner.hide()
+//            }
+//        }
         return true
     }
     
@@ -681,17 +723,17 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
 //        }
 //    }
 
-    func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, forRange range: GridCellRange?) -> Bool {
+    func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange?) -> Bool {
         guard let range = range else {
             return false
         }
         guard range.col >= 0 else {
             return false
         }
-        guard panel.cellType == GridCellType.ColumnHeader else {
+        guard panel.cellType == GridCellType.columnHeader else {
             return false
         }
-        guard let column = flexGrid.columns.objectAtIndex(UInt(range.col)) as? DataGridColumn else {
+        guard let column = flexGrid.columns.object(at: UInt(range.col)) as? DataGridColumn else {
             return false
         }
         showFilterActionSheet(column: column, rowIndex: range.row, panel: panel)
@@ -703,21 +745,21 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
 
     func showFilterActionSheet(column: DataGridColumn, rowIndex: Int32, panel: GridPanel) {
-        let actionSheet = UIAlertController(title: column.header, message: nil, preferredStyle: .ActionSheet)
+        let actionSheet = UIAlertController(title: column.header, message: nil, preferredStyle: .actionSheet)
         let filterButton = UIAlertAction(title: "Filter", style: .default) {
             [unowned self] (alert) -> Void in
             self.performSegue(withIdentifier: "showFiltersViewController", sender: column)
         }
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { (alert) -> Void in
         }
-        let rect = panel.getCellRectForRow(rowIndex, inColumn: column.index)
+        let rect = panel.getCellRect(forRow: rowIndex, inColumn: column.index)
         actionSheet.addAction(filterButton)
         actionSheet.addAction(cancelButton)
         if let popoverController = actionSheet.popoverPresentationController {
             popoverController.sourceView = flexGrid
             popoverController.sourceRect = rect
         }
-        presentViewController(actionSheet, animated: true, completion: nil)
+        present(actionSheet, animated: true, completion: nil)
     }
     
     func showGroupActionSheet(_ row: GridGroupRow, panel: GridPanel) {
@@ -729,37 +771,37 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
 //        guard let colIndex = columnIndex else {
 //            return
 //        }
-        guard let column = flexGrid.columns.objectAtIndex(UInt(colIndex)) as? DataGridColumn else {
+        guard let column = flexGrid.columns.object(at: UInt(colIndex)) as? DataGridColumn else {
             return
         }
-        let actionSheet = UIAlertController(title: column.header, message: nil, preferredStyle: .ActionSheet)
-        let filterButton = UIAlertAction(title: "Filter", style: .Default) {
+        let actionSheet = UIAlertController(title: column.header, message: nil, preferredStyle: .actionSheet)
+        let filterButton = UIAlertAction(title: "Filter", style: .default) {
             [unowned self] (alert) -> Void in
-            self.performSegueWithIdentifier("showFiltersViewController", sender: column)
+            self.performSegue(withIdentifier: "showFiltersViewController", sender: column)
         }
-        let sortButton = UIAlertAction(title: "Sort", style: .Default) {
+        let sortButton = UIAlertAction(title: "Sort", style: .default) {
             [unowned self] (alert) -> Void in
             self.sortGroup(column)
         }
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { (alert) -> Void in
         }
-        let rect = panel.getCellRectForRow(row.index, inColumn: flexGrid.firstVisibleColumn())
+        let rect = panel.getCellRect(forRow: row.index, inColumn: flexGrid.firstVisibleColumn())
         actionSheet.addAction(filterButton)
         actionSheet.addAction(sortButton)
         actionSheet.addAction(cancelButton)
         if let popoverController = actionSheet.popoverPresentationController {
             popoverController.sourceView = flexGrid
             popoverController.sourceRect = rect
-            popoverController.permittedArrowDirections = UIPopoverArrowDirection.Up
+            popoverController.permittedArrowDirections = UIPopoverArrowDirection.up
         }
-        presentViewController(actionSheet, animated: true, completion: nil)
+        present(actionSheet, animated: true, completion: nil)
     }
 
     
     func groupRows() {
         var groupDict = [Int : String]()
         for col: UInt in 0 ..< flexGrid.columns.count {
-            let gridCol = flexGrid.columns.objectAtIndex(col) as! DataGridColumn
+            let gridCol = flexGrid.columns.object(at: col) as! DataGridColumn
             if let groupLevel = isManager ? gridCol.groupLevelManager : gridCol.groupLevel {
                 groupDict[groupLevel] = gridCol.binding
             }
@@ -771,7 +813,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         flexGrid.groupHeaderFormat = "{value}"
         for group in groupArray {
             if let collectionView = flexGrid.collectionView {
-                collectionView.groupDescriptions.addObject(XuniPropertyGroupDescription(property: groupDict[group]))
+                collectionView.groupDescriptions.add(XuniPropertyGroupDescription(property: groupDict[group]))
             }
         }
     }
@@ -781,31 +823,55 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         guard let collectionView = flexGrid.collectionView else {
             return
         }
-        SwiftSpinner.show("Sorting...", animated: false) {
+        SwiftSpinner.show("Sorting...", animated: false)
+        DispatchQueue.main.async {
             [unowned self] in
-            DispatchQueue.main.async {
-                [unowned self] in
-                if column.index == self.lastSortedColumn {
-                    self.isSortAscending = !self.isSortAscending
-                } else {
-                    self.isSortAscending = true
-                }
-                self.lastSortedColumn = column.index
-                collectionView.sortDescriptions.removeAllObjects()
-                let sd: XuniSortDescription = XuniSortDescription(property: column.binding, ascending: self.isSortAscending)
-                collectionView.sortDescriptions.addObject(sd)
-                self.flexGrid.setNeedsDisplay()
-                //self.autoSizeColumns()
-                SwiftSpinner.hide()
+            if column.index == self.lastSortedColumn {
+                self.isSortAscending = !self.isSortAscending
+            } else {
+                self.isSortAscending = true
             }
+            self.lastSortedColumn = column.index
+            collectionView.sortDescriptions.removeAllObjects()
+            let sd: XuniSortDescription = XuniSortDescription(property: column.binding, ascending: self.isSortAscending)
+            collectionView.sortDescriptions.add(sd)
+            self.flexGrid.setNeedsDisplay()
+            //self.autoSizeColumns()
+            SwiftSpinner.hide()
         }
+
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Sorting...", animated: false) {
+//            [unowned self] in
+//            DispatchQueue.main.async {
+//                [unowned self] in
+//                if column.index == self.lastSortedColumn {
+//                    self.isSortAscending = !self.isSortAscending
+//                } else {
+//                    self.isSortAscending = true
+//                }
+//                self.lastSortedColumn = column.index
+//                collectionView.sortDescriptions.removeAllObjects()
+//                let sd: XuniSortDescription = XuniSortDescription(property: column.binding, ascending: self.isSortAscending)
+//                collectionView.sortDescriptions.addObject(sd)
+//                self.flexGrid.setNeedsDisplay()
+//                //self.autoSizeColumns()
+//                SwiftSpinner.hide()
+//            }
+//        }
+
+        
     }
 
     func loadingData(_ isSynched: Bool) {
-        SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] in
-            self.loadData(isSynched: isSynched)
-        }
+        SwiftSpinner.show("Loading...", animated: false)
+        self.loadData(isSynched: isSynched)
+// SWIFTSPINNER COMPLETION
+//        SwiftSpinner.show("Loading...", animated: false) {
+//            [unowned self] in
+//            self.loadData(isSynched: isSynched)
+//        }
+
     }
     
     func displayLogIn() {

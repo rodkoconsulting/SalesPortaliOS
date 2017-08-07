@@ -30,7 +30,7 @@ class OrderSavedViewController: DataGridViewController {
         super.touchesBegan(touches, with: event)
     }
     
-    override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, forRange range: GridCellRange!) -> Bool {
+    override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange!) -> Bool {
         guard let range = range else {
             return false
         }
@@ -41,11 +41,11 @@ class OrderSavedViewController: DataGridViewController {
             return false
         }
         switch panel.cellType {
-        case GridCellType.ColumnHeader:
+        case GridCellType.columnHeader:
             showFilterActionSheet(column: column, rowIndex: range.row, panel: panel)
-        case GridCellType.Cell:
-            guard let row = flexGrid.rows.objectAtIndex(UInt(range.row)) as? GridRow,
-            let orderSaved = row.dataItem as? OrderSavedList else {
+        case GridCellType.cell:
+            let row = flexGrid.rows.object(at: UInt(range.row))
+            guard let orderSaved = row.dataItem as? OrderSavedList else {
                 return false
             }
             showSavedOrderActionSheet(column: column, rowIndex: range.row, savedOrder: orderSaved, panel: panel, flexGrid: flexGrid)
@@ -102,7 +102,7 @@ class OrderSavedViewController: DataGridViewController {
         }
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { (alert) -> Void in
         }
-        let rect = panel.getCellRectForRow(rowIndex, inColumn: column.index)
+        let rect = panel.getCellRect(forRow: rowIndex, inColumn: column.index)
         actionSheet.addAction(editButton)
         actionSheet.addAction(deleteButton)
         actionSheet.addAction(cancelButton)

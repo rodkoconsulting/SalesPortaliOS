@@ -20,7 +20,7 @@ struct ApiService {
         let apiOperation = ApiOperation(url: apiBaseURL!, credentials: credentialDict)
         apiOperation.downloadJSONFromURL {
             (JSONDictionary, error) in
-            completion(data: JSONDictionary, error: error)
+            completion(JSONDictionary, error)
         }
     }
     
@@ -50,7 +50,7 @@ struct ApiService {
         let apiOperation = ApiOperation(url: apiURL, credentials: credentialDict)
         apiOperation.downloadJSONFromURL {
             (JSONDictionary, error) in
-            completion(data: JSONDictionary, error: error)
+            completion(JSONDictionary, error)
         }
     }
     
@@ -77,7 +77,7 @@ struct ApiService {
         let apiOperation = ApiOperation(url: apiURL, credentials: credentialDict)
         apiOperation.downloadJSONFromURL {
             (JSONDictionary, error) in
-            completion(data: JSONDictionary, error: error)
+            completion(JSONDictionary, error)
         }
     }
     
@@ -98,7 +98,7 @@ struct ApiService {
         let apiOperation = ApiOperation(url: apiURL, credentials: credentialDict)
         apiOperation.downloadJSONFromURL {
             (JSONDictionary, error) in
-            completion(data: JSONDictionary, error: error)
+            completion(JSONDictionary, error)
         }
     }
     
@@ -125,7 +125,7 @@ struct ApiService {
         let apiOperation = ApiOperation(url: apiURL, credentials: credentialDict)
         apiOperation.downloadJSONFromURL {
             (JSONDictionary, error) in
-            completion(data: JSONDictionary, error: error)
+            completion(JSONDictionary, error)
         }
     }
     
@@ -137,7 +137,7 @@ struct ApiService {
         let apiOperation = ApiOperation(url: apiURL, credentials: credentialDict)
         apiOperation.uploadJSONToURL(jsonData) {
             (success, error) in
-            completion(success: success, error: error)
+            completion(success, error)
         }
     }
 }

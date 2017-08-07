@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0779DE231F38FC84006BEEF2 /* Dictionary_Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE1D1F38FC84006BEEF2 /* Dictionary_Initializers.swift */; };
+		0779DE241F38FC84006BEEF2 /* LocksmithAccessibleOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE1E1F38FC84006BEEF2 /* LocksmithAccessibleOption.swift */; };
+		0779DE251F38FC84006BEEF2 /* LocksmithError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE1F1F38FC84006BEEF2 /* LocksmithError.swift */; };
+		0779DE261F38FC84006BEEF2 /* LocksmithInternetAuthenticationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE201F38FC84006BEEF2 /* LocksmithInternetAuthenticationType.swift */; };
+		0779DE271F38FC84006BEEF2 /* LocksmithInternetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE211F38FC84006BEEF2 /* LocksmithInternetProtocol.swift */; };
+		0779DE281F38FC84006BEEF2 /* LocksmithSecurityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE221F38FC84006BEEF2 /* LocksmithSecurityClass.swift */; };
 		C300D4B81E490D5100183B32 /* SampleOrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300D4B71E490D5100183B32 /* SampleOrderHeaderViewController.swift */; };
 		C300D4BA1E494DE700183B32 /* AccountOrderHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300D4B91E494DE700183B32 /* AccountOrderHistoryViewController.swift */; };
 		C302B98A1D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302B9891D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift */; };
@@ -22,7 +28,6 @@
 		C33791181DAC5B14009EA4C1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33791171DAC5B14009EA4C1 /* OpenGLES.framework */; };
 		C33A556B1E31422E00C6C28A /* SampleOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A556A1E31422E00C6C28A /* SampleOrder.swift */; };
 		C33A58A41CBD90E300644ED3 /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A58A21CBD90E300644ED3 /* Locksmith.swift */; };
-		C33A58A51CBD90E300644ED3 /* LocksmithRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A58A31CBD90E300644ED3 /* LocksmithRequest.swift */; };
 		C344AF9B1E4A2F1B00BB1E6D /* AccountOrderInventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C344AF9A1E4A2F1B00BB1E6D /* AccountOrderInventoryViewController.swift */; };
 		C344AF9D1E4A7C7100BB1E6D /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = C344AF9C1E4A7C7000BB1E6D /* Order.swift */; };
 		C344AFA11E4B91C500BB1E6D /* OrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C344AFA01E4B91C500BB1E6D /* OrderHeaderViewController.swift */; };
@@ -115,6 +120,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0779DE1D1F38FC84006BEEF2 /* Dictionary_Initializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary_Initializers.swift; sourceTree = "<group>"; };
+		0779DE1E1F38FC84006BEEF2 /* LocksmithAccessibleOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithAccessibleOption.swift; sourceTree = "<group>"; };
+		0779DE1F1F38FC84006BEEF2 /* LocksmithError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithError.swift; sourceTree = "<group>"; };
+		0779DE201F38FC84006BEEF2 /* LocksmithInternetAuthenticationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithInternetAuthenticationType.swift; sourceTree = "<group>"; };
+		0779DE211F38FC84006BEEF2 /* LocksmithInternetProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithInternetProtocol.swift; sourceTree = "<group>"; };
+		0779DE221F38FC84006BEEF2 /* LocksmithSecurityClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithSecurityClass.swift; sourceTree = "<group>"; };
 		C300D4B71E490D5100183B32 /* SampleOrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderHeaderViewController.swift; sourceTree = "<group>"; };
 		C300D4B91E494DE700183B32 /* AccountOrderHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderHistoryViewController.swift; sourceTree = "<group>"; };
 		C302B9891D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderHeaderViewController.swift; sourceTree = "<group>"; };
@@ -130,7 +141,6 @@
 		C33791171DAC5B14009EA4C1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		C33A556A1E31422E00C6C28A /* SampleOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrder.swift; sourceTree = "<group>"; };
 		C33A58A21CBD90E300644ED3 /* Locksmith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locksmith.swift; sourceTree = "<group>"; };
-		C33A58A31CBD90E300644ED3 /* LocksmithRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithRequest.swift; sourceTree = "<group>"; };
 		C344AF9A1E4A2F1B00BB1E6D /* AccountOrderInventoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderInventoryViewController.swift; sourceTree = "<group>"; };
 		C344AF9C1E4A7C7000BB1E6D /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		C344AFA01E4B91C500BB1E6D /* OrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHeaderViewController.swift; sourceTree = "<group>"; };
@@ -379,8 +389,13 @@
 		C37F4A521CF3755D00665ED0 /* Locksmith */ = {
 			isa = PBXGroup;
 			children = (
+				0779DE1D1F38FC84006BEEF2 /* Dictionary_Initializers.swift */,
+				0779DE1E1F38FC84006BEEF2 /* LocksmithAccessibleOption.swift */,
+				0779DE1F1F38FC84006BEEF2 /* LocksmithError.swift */,
+				0779DE201F38FC84006BEEF2 /* LocksmithInternetAuthenticationType.swift */,
+				0779DE211F38FC84006BEEF2 /* LocksmithInternetProtocol.swift */,
+				0779DE221F38FC84006BEEF2 /* LocksmithSecurityClass.swift */,
 				C33A58A21CBD90E300644ED3 /* Locksmith.swift */,
-				C33A58A31CBD90E300644ED3 /* LocksmithRequest.swift */,
 			);
 			name = Locksmith;
 			sourceTree = "<group>";
@@ -548,7 +563,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Polaner Selections";
 				TargetAttributes = {
 					C3ED0A851CBBECCF00B9520E = {
@@ -613,11 +628,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3D45EC71D0ECC1F0023E234 /* InitialViewController.swift in Sources */,
-				C33A58A51CBD90E300644ED3 /* LocksmithRequest.swift in Sources */,
 				C3ED0AAE1CBD8DEC00B9520E /* ApiOperation.swift in Sources */,
 				C3EAC00F1CF8846A0054D031 /* MainTabBarController.swift in Sources */,
 				C3EAC0191CF8A9A80054D031 /* BoolFiltersTableViewCell.swift in Sources */,
 				C37F4A721CF39BAB00665ED0 /* ColumnSettings.swift in Sources */,
+				0779DE271F38FC84006BEEF2 /* LocksmithInternetProtocol.swift in Sources */,
 				C33A556B1E31422E00C6C28A /* SampleOrder.swift in Sources */,
 				C37F4A471CF34DAA00665ED0 /* License.swift in Sources */,
 				C37F4A701CF39B9F00665ED0 /* GridFilter.swift in Sources */,
@@ -638,6 +653,7 @@
 				C3EAC0131CF8A9610054D031 /* FiltersViewController.swift in Sources */,
 				C3AE55521CC18404000859E7 /* FMDatabase.m in Sources */,
 				C34AF3E21D2FFBFA00294278 /* OrderList.swift in Sources */,
+				0779DE261F38FC84006BEEF2 /* LocksmithInternetAuthenticationType.swift in Sources */,
 				C344AFA11E4B91C500BB1E6D /* OrderHeaderViewController.swift in Sources */,
 				C3ED0A9D1CBBEE1500B9520E /* LoginViewController.swift in Sources */,
 				C37F4A511CF3750400665ED0 /* SwiftSpinner.swift in Sources */,
@@ -678,6 +694,7 @@
 				C37F4A541CF377A900665ED0 /* Inventory.swift in Sources */,
 				C3AE55441CC175A1000859E7 /* Account.swift in Sources */,
 				C37F4A6A1CF39A8300665ED0 /* ColumnData.swift in Sources */,
+				0779DE231F38FC84006BEEF2 /* Dictionary_Initializers.swift in Sources */,
 				C37F4A601CF390FF00665ED0 /* DatabaseService.swift in Sources */,
 				C302B98A1D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift in Sources */,
 				C37F4A621CF3913C00665ED0 /* DatabaseOperation.swift in Sources */,
@@ -691,12 +708,15 @@
 				C3EAC01D1CF8B6DC0054D031 /* ColumnsTableViewCell.swift in Sources */,
 				C3F372F51D36C62000E7F39A /* MoboList.swift in Sources */,
 				C37F4A661CF399B700665ED0 /* Extensions.swift in Sources */,
+				0779DE251F38FC84006BEEF2 /* LocksmithError.swift in Sources */,
 				C36C7AC91E52564C00985F1F /* SampleOrderInventoryViewController.swift in Sources */,
 				C3AE55531CC18404000859E7 /* FMResultSet.m in Sources */,
+				0779DE241F38FC84006BEEF2 /* LocksmithAccessibleOption.swift in Sources */,
 				C3AE55561CC18404000859E7 /* FMDatabasePool.m in Sources */,
 				C3EAC0151CF8A9820054D031 /* FiltersTableViewCell.swift in Sources */,
 				C3CFF7921D47F1AA00802784 /* OrderSaved.swift in Sources */,
 				C3F716811E2E8420001933D9 /* SampleOrderInventoryService.swift in Sources */,
+				0779DE281F38FC84006BEEF2 /* LocksmithSecurityClass.swift in Sources */,
 				C3E3866D1D076631009FEB20 /* AccountOrderInventoryService.swift in Sources */,
 				C3ED0AA21CBC27E200B9520E /* ErrorCode.swift in Sources */,
 				C35A73751D21A498000644F6 /* OrderHistoryViewController.swift in Sources */,
@@ -740,8 +760,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -790,8 +812,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -813,6 +837,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = arm64;
@@ -829,7 +854,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = /Users/administrator/Documents/Xuni/iOS/Controls;
+				FRAMEWORK_SEARCH_PATHS = /Users/andrewrodko/Documents/Xuni/iOS/Controls;
 				INFOPLIST_FILE = SalesPortal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -855,7 +880,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = /Users/administrator/Documents/Xuni/iOS/Controls;
+				FRAMEWORK_SEARCH_PATHS = /Users/andrewrodko/Documents/Xuni/iOS/Controls;
 				INFOPLIST_FILE = SalesPortal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

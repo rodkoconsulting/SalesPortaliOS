@@ -41,22 +41,22 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
         flexGrid.saveUserDefaults(moduleType)
     }
     
-    override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, forRange range: GridCellRange!) -> Bool {
+    override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange!) -> Bool {
         guard let range = range else {
             return false
         }
         guard range.col >= 0 else {
             return false
         }
-        guard let column = flexGrid.columns.objectAtIndex(UInt(range.col)) as? DataGridColumn else {
+        guard let column = flexGrid.columns.object(at: UInt(range.col)) as? DataGridColumn else {
             return false
         }
-
         switch panel.cellType {
-        case GridCellType.ColumnHeader:
+        case GridCellType.columnHeader:
             showFilterActionSheet(column: column, rowIndex: range.row, panel: panel)
-        case GridCellType.Cell:
-            guard let row = flexGrid.rows.objectAtIndex(UInt(range.row)) as? GridRow, let mobo = row.dataItem as? MoboList else {
+        case GridCellType.cell:
+            let row = flexGrid.rows.object(at: UInt(range.row))
+            guard let mobo = row.dataItem as? MoboList else {
                 return false
             }
             if isMoboException(moboDetail: mobo){
@@ -108,7 +108,7 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
         }
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { (alert) -> Void in
         }
-        let rect = panel.getCellRectForRow(rowIndex, inColumn: column.index)
+        let rect = panel.getCellRect(forRow: rowIndex, inColumn: column.index)
         actionSheet.addAction(shipAllButton)
         actionSheet.addAction(cancelButton)
         if let popoverController = actionSheet.popoverPresentationController {
@@ -141,7 +141,7 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
         guard selectedRow >= 0 && UInt(selectedRow) < flexGrid.rows.count else {
             return
         }
-        let flexRow = flexGrid.rows.objectAtIndex(UInt(selectedRow)) as! GridRow
+        let flexRow = flexGrid.rows.object(at: UInt(selectedRow))
         let inventory = flexRow.dataItem as! MoboList
         if descriptionLabel != nil {
             descriptionLabel.text = inventory.itemDescription
@@ -153,8 +153,8 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
         guard panel != nil else {
             return false
         }
-        guard let flexRow = flexGrid.rows.objectAtIndex(UInt(range.row)) as? GridRow,
-            let moboDetail = flexRow.dataItem as? MoboList else {
+        let flexRow = flexGrid.rows.object(at: UInt(range.row))
+        guard let moboDetail = flexRow.dataItem as? MoboList else {
                 return false
         }
         if isMoboException(moboDetail: moboDetail){
@@ -166,7 +166,7 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
             return true
         }
         moboDetail.delegate = order
-        activeField = panel.getCellRectForRow(range.row, inColumn: range.col)
+        activeField = panel.getCellRect(forRow: range.row, inColumn: range.col)
         return false
     }
     

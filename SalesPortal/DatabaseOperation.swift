@@ -12,7 +12,9 @@ struct DbOperation {
     
         
     static func databaseClear(_ tableName: String) throws {
-        let dB = FMDatabase(path: Constants.databasePath as String)
+        guard let dB = FMDatabase(path: Constants.databasePath as String) else {
+            throw ErrorCode.dbError
+        }
         guard dB.open() else {
             throw ErrorCode.dbError
         }
@@ -37,7 +39,9 @@ struct DbOperation {
         guard !FileManager.default.fileExists(atPath: Constants.filePath) else {
             return nil
         }
-        let dB = FMDatabase(path: Constants.databasePath as String)
+        guard let dB = FMDatabase(path: Constants.databasePath as String) else {
+            return nil
+        }
         guard dB.open() else {
             throw ErrorCode.dbError
         }

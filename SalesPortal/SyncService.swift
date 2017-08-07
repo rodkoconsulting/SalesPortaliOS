@@ -23,7 +23,7 @@ protocol OrderSyncServiceType: SyncServiceType {
 }
 
 protocol SyncRows {
-    init(dict: [String: AnyObject]?)
+    init(dict: [String: Any]?)
     
     var getDbDelete: String? { get }
     var getDbInsert: String? { get }
@@ -35,7 +35,7 @@ struct Sync<T: SyncRows> {
     var addedRows: [T]?
     var deletedRows: [T]?
     
-    init(dict: [String: AnyObject]?) {
+    init(dict: [String: Any]?) {
         syncTime = dict?["Time"] as? String
         let dictOperation = dict?["Op"] as? String
         operation = ApiOperationEnum(rawValue: dictOperation ?? "Error") ?? .Error

@@ -33,7 +33,7 @@ class DataGridColumn: GridColumn {
     }
     
     
-    class func getGridColumn(_ columnDict : [String : AnyObject], columnSettings: ColumnSettings?) -> DataGridColumn {
+    class func getGridColumn(_ columnDict : [String : Any], columnSettings: ColumnSettings?) -> DataGridColumn {
         let filterType = FilterType(rawValue: (columnDict[kType] as? String ?? "String"))
         let gridColumn = DataGridColumn(myName: columnDict[kName] as! String , myHeader: columnDict[kHeader] as! String, myFilterType: filterType)
         if let width = columnDict[kWidth] as? Int {
@@ -44,7 +44,7 @@ class DataGridColumn: GridColumn {
             gridColumn.minWidth = Int32(minwidth)
         }
         if let alignment = columnDict[kAlignment] as? String, alignment == "right" {
-                gridColumn.dataType = XuniDataType.Number
+                gridColumn.dataType = XuniDataType.number
         }
         if let format = columnDict[kFormat] as? String {
             switch format {
@@ -57,9 +57,9 @@ class DataGridColumn: GridColumn {
         if let aggregate = columnDict[kAgg] as? String {
             switch aggregate {
                 case "Count":
-                    gridColumn.aggregate = XuniAggregate.Cnt
+                    gridColumn.aggregate = XuniAggregate.cnt
                 default:
-                    gridColumn.aggregate = XuniAggregate.Sum
+                    gridColumn.aggregate = XuniAggregate.sum
             }
         }
         if let sortMemberPath = columnDict[kSort] as? String {

@@ -60,7 +60,7 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
     override func viewDidLoad() {
         super.viewDidLoad()
         do {
-            try DbOperation.databaseInit()
+            try _ = DbOperation.databaseInit()
         } catch {
             sendAlert(ErrorCode.dbError)
         }
@@ -94,8 +94,10 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
         guard selectedRow >= 0 && UInt(selectedRow) < flexGrid.rows.count else {
             return
         } // 11/21
-        let flexRow = flexGrid.rows.objectAtIndex(UInt(selectedRow)) as! GridRow
-        let inventory = flexRow.dataItem as! Inventory
+        let flexRow = flexGrid.rows.object(at: UInt(selectedRow))
+        guard let inventory = flexRow.dataItem as? Inventory else {
+            return
+        }
         if descriptionLabel != nil {
             descriptionLabel.text = inventory.itemDescription
             restrictionLabel.text = inventory.restrictedList

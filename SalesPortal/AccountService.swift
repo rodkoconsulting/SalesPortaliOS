@@ -15,7 +15,9 @@ class AccountService: SyncService, SyncServiceType {
     }
     
     func queryDb() -> (gridData:NSMutableArray?, searchData: [[String : String]]?, isManager: Bool) {
-        let dB = FMDatabase(path: Constants.databasePath)
+        guard let dB = FMDatabase(path: Constants.databasePath) else {
+            return (nil, nil, false)
+        }
         let accountList = NSMutableArray()
         var accountSearch = [[String : String]]()
         if dB.open() {
@@ -42,10 +44,10 @@ class AccountService: SyncService, SyncServiceType {
                 let invoiceDetailDict = accountDict["HistD"] as? [String : AnyObject],
                 let itemsInactiveDict = accountDict["Inact"] as? [String : AnyObject]
                 else {
-                    completion(data: nil, error: errorCode)
+                    completion(nil, errorCode)
                     return
             }
-            completion(data: AccountSync(listDict: listDict, invoiceHeaderDict: invoiceHeaderDict, invoiceDetailDict: invoiceDetailDict, itemsInactiveDict: itemsInactiveDict), error: nil)
+            completion(AccountSync(listDict: listDict, invoiceHeaderDict: invoiceHeaderDict, invoiceDetailDict: invoiceDetailDict, itemsInactiveDict: itemsInactiveDict), nil)
         }
     }
     

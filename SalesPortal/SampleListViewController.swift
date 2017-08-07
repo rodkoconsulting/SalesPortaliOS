@@ -179,7 +179,7 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
        // }
     }
     
-    override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, forRange range: GridCellRange!) -> Bool {
+    override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange!) -> Bool {
         guard let range = range else {
             return false
         }

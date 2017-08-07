@@ -52,7 +52,7 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFiltersViewController" {
             guard let index = sender as? IndexPath,
-                let column =  columnSettings?.objectAtIndex(UInt(index.row)) as? DataGridColumn else {
+                let column =  columnSettings?.object(at: UInt(index.row)) as? DataGridColumn else {
                 return
             }
             //let index = (columnsTableView.indexPathForSelectedRow)?.row
@@ -68,7 +68,7 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any!) -> Bool {
         if identifier == "showFiltersViewController" {
-            guard let index = (columnsTableView.indexPathForSelectedRow)?.row, let _ =  columnSettings?.objectAtIndex(UInt(index)) as? DataGridColumn else {
+            guard let index = (columnsTableView.indexPathForSelectedRow)?.row, let _ =  columnSettings?.object(at: UInt(index)) as? DataGridColumn else {
                 return false
             }
         }
@@ -112,7 +112,7 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         columnSettings?.removeAllObjects()
         let (columns, _) = DataGridColumn.generateColumns(nil, module: module)
         for column in columns {
-            columnSettings?.addObject(column)
+            columnSettings?.add(column)
         }
         changedAllFilters()
     }
@@ -207,11 +207,11 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func moveColumnAtIndex(_ fromIndex: Int, toIndex: Int) {
-        guard let movedItem = columnSettings?.objectAtIndex(UInt(fromIndex)) else {
+        guard let movedItem = columnSettings?.object(at: UInt(fromIndex)) else {
             return
         }
-        columnSettings?.removeObjectAtIndex(UInt(fromIndex))
-        columnSettings?.insertObject(movedItem, atIndex: UInt(toIndex))
+        columnSettings?.removeObject(at: UInt(fromIndex))
+        columnSettings?.insert(movedItem, at: UInt(toIndex))
 
     }
    
@@ -256,12 +256,12 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         guard let myColumnSettings = columnSettings else {
             return cell
         }
-        let col = myColumnSettings.objectAtIndex(UInt(row)) as! DataGridColumn
+        let col = myColumnSettings.object(at: UInt(row)) as! DataGridColumn
         cell.columnsLabel.text = col.header
-        cell.columnsSwitch.on = col.visible
-        cell.filterImage.hidden = col.columnFilters.filterList.count == 0
+        cell.columnsSwitch.isOn = col.visible
+        cell.filterImage.isHidden = col.columnFilters.filterList.count == 0
         cell.stateLabel.text = col.visible ? "Visible" : "Hidden"
-        cell.stateLabel.textColor = col.visible ? UIColor.blackColor()  : UIColor.redColor()
+        cell.stateLabel.textColor = col.visible ? UIColor.black  : UIColor.red
         return cell
     }
     
@@ -285,10 +285,10 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func didChangeSwitchState(_ sender: ColumnsTableViewCell, isOn: Bool) {
-        guard let indexPath = columnsTableView.indexPath(for: sender),
-                let col = columnSettings!.objectAtIndex(UInt(indexPath.row)) as? GridColumn else {
+        guard let indexPath = columnsTableView.indexPath(for: sender) else {
             return
         }
+        let col = columnSettings!.object(at: UInt(indexPath.row))
         col.visible = isOn
         col.allowResizing = isOn
         //if !col.visible {
@@ -300,11 +300,11 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func changedFilters(columnIndex: Int) {
         let columnIndexPath = IndexPath(row: columnIndex, section: 0)
         columnsDelegate?.changedColumnFilters()
-        guard let column =  columnSettings?.objectAtIndex(UInt(columnIndex)) as? DataGridColumn,
+        guard let column =  columnSettings?.object(at: UInt(columnIndex)) as? DataGridColumn,
             let cell = columnsTableView.cellForRow(at: columnIndexPath) as? ColumnsTableViewCell else {
                 return
         }
-        cell.filterImage.hidden = column.columnFilters.filterList.count == 0
+        cell.filterImage.isHidden = column.columnFilters.filterList.count == 0
         columnsTableView.reloadData()
     }
     

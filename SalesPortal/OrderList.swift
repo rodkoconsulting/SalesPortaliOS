@@ -72,7 +72,7 @@ extension OrderListFilter {
         let coopNo: String?
         let comment: String?
         
-        required init(dict: [String: AnyObject]?) {
+        required init(dict: [String: Any]?) {
             division = dict?["Div"] as? String
             customerNo = dict?["CustNo"] as? String
             orderNo = dict?["OrderNo"] as? String
@@ -118,7 +118,7 @@ class OrderDetail: SyncRows {
     let total: Double?
     let comment: String?
     
-    required init(dict: [String: AnyObject]?) {
+    required init(dict: [String: Any]?) {
         orderNo = dict?["OrderNo"] as? String
         lineNo = dict?["Line"] as? String
         itemCode = dict?["Item"] as? String
@@ -157,7 +157,7 @@ struct OrderListSync {
     let orderHeaderSync: Sync<OrderHeader>
     let orderDetailSync: Sync<OrderDetail>
     
-    init(orderHeaderDict: [String : AnyObject], orderDetailDict: [String : AnyObject]) {
+    init(orderHeaderDict: [String : Any], orderDetailDict: [String : Any]) {
         orderHeaderSync = Sync<OrderHeader>(dict: orderHeaderDict)
         orderDetailSync = Sync<OrderDetail>(dict: orderDetailDict)
     }
@@ -348,11 +348,11 @@ class OrderList : NSObject {
         customerNo = queryResult?.string(forColumn: "customer_no") ?? ""
         customerName = queryResult?.string(forColumn: "customer_name") ?? ""
         let orderDateString = queryResult?.string(forColumn: "order_date") ?? ""
-        orderDate = orderDateString.getShipDate() as! Date
+        orderDate = orderDateString.getShipDate()
         let shipExpireDateString = queryResult?.string(forColumn: "ship_date") ?? ""
-        shipExpireDate = shipExpireDateString.getShipDate() as! Date
+        shipExpireDate = shipExpireDateString.getShipDate()
         let poEtaString = queryResult?.string(forColumn: "po_eta") ?? ""
-        poEta = poEtaString.getDate() as! Date
+        poEta = poEtaString.getDate()
         orderStatus = queryResult?.string(forColumn: "status") ?? ""
         holdCodeRaw = queryResult?.string(forColumn: "hold") ?? ""
         coopNo = queryResult?.string(forColumn: "coop") ?? ""

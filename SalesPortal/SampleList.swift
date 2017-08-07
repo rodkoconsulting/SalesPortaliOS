@@ -36,7 +36,7 @@ class SampleHeader: SyncRows {
     let rep: String?
     let shipTo: String?
     
-    required init(dict: [String: AnyObject]?) {
+    required init(dict: [String: Any]?) {
         orderNo = dict?["OrderNo"] as? String
         shipDate = dict?["Date"] as? String
         rep = dict?["Rep"] as? String
@@ -70,7 +70,7 @@ class SampleDetail: SyncRows {
     let quantity: Double?
     let comment: String?
     
-    required init(dict: [String: AnyObject]?) {
+    required init(dict: [String: Any]?) {
         orderNo = dict?["OrderNo"] as? String
         lineNo = dict?["Line"] as? String
         itemCode = dict?["Item"] as? String
@@ -109,7 +109,7 @@ class SampleAddress: SyncRows {
     let isRep: Int?
     let isActive: Int?
     
-    required init(dict: [String: AnyObject]?) {
+    required init(dict: [String: Any]?) {
         shipToCode = dict?["Code"] as? String
         shipToRep = dict?["Rep"] as? String
         shipToName = dict?["Name"] as? String
@@ -157,7 +157,7 @@ class SampleItemsInactive: SyncRows {
     let region: String?
     let appellation: String?
     
-    required init(dict: [String: AnyObject]?)
+    required init(dict: [String: Any]?)
     {
         itemCode = dict?["Code"] as? String
         description = dict?["Desc"] as? String
@@ -210,7 +210,7 @@ struct SampleListSync {
     let sampleAddressSync: Sync<SampleAddress>
     let sampleItemsInactiveSync: Sync<SampleItemsInactive>
     
-    init(sampleHeaderDict: [String : AnyObject], sampleDetailDict: [String : AnyObject], sampleAddressDict: [String : AnyObject], sampleItemsInactiveDict: [String : AnyObject]) {
+    init(sampleHeaderDict: [String : Any], sampleDetailDict: [String : Any], sampleAddressDict: [String : Any], sampleItemsInactiveDict: [String : Any]) {
         sampleHeaderSync = Sync<SampleHeader>(dict: sampleHeaderDict)
         sampleDetailSync = Sync<SampleDetail>(dict: sampleDetailDict)
         sampleAddressSync = Sync<SampleAddress>(dict: sampleAddressDict)
@@ -305,7 +305,7 @@ class SampleList : NSObject {
     init(queryResult: FMResultSet?) {
         orderNo = queryResult?.string(forColumn: "order_no") ?? ""
         let shipDateString = queryResult?.string(forColumn: "ship_date") ?? ""
-        shipDate = shipDateString.getShipDate() as! Date
+        shipDate = shipDateString.getShipDate()
         isFocusString = queryResult?.string(forColumn: "focus") ?? ""
         itemCode = queryResult?.string(forColumn: "item_code") ?? ""
         itemDescriptionRaw = queryResult?.string(forColumn: "desc") ?? ""
