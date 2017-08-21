@@ -27,7 +27,7 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         flexGrid.invalidate()
-        if  isFilterChanged {
+        if isFilterChanged {
             filterRefresh()
         }
     }
@@ -37,20 +37,6 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
         flexGrid.finishEditing(false)
         flexGrid.saveUserDefaults(moduleType)
     }
-    
-//    override func handleLongPress(sender: UILongPressGestureRecognizer) {
-//        let pressedPoint = sender.locationInView(flexGrid)
-//        let hit = GridHitTestInfo(grid: flexGrid, atPoint: pressedPoint)
-//        guard hit.column >= 0 else {
-//            return
-//        }
-//        if sender.state == UIGestureRecognizerState.Began && hit.cellType == GridCellType.ColumnHeader {
-//            guard let column = flexGrid.columns.objectAtIndex(UInt(hit.column)) as? DataGridColumn else {
-//                return
-//            }
-//            showFilterActionSheet(column: column, rowIndex: hit.row, panel: hit.gridPanel, flexGrid: flexGrid)
-//        }
-//    }
     
     override func setItemLabels(selectedRow: Int32) {
         guard selectedRow >= 0 && UInt(selectedRow) < flexGrid.rows.count else {
@@ -78,14 +64,6 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
         gridData = order.orderInventory
         searchData = order.searchData
     }
-    
-//    init() {
-//        super.init(nibName: nil, bundle: nil)
-//        self.moduleType = Module.OrderHistory
-//        self.classType = OrderInventory.self
-//    }
-    
-    
 
     override func setTitleLabel() {
         if let order = order, let account = order.account {
@@ -101,7 +79,6 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
         flexGrid.sortColumns()
         filterGrid("")
     }
-
     
     override func filterGridColumns<T: NSObject>(_ searchText: String?, classType: T.Type, isIndex: Bool = false) {
         guard let collectionView = flexGrid.collectionView else {

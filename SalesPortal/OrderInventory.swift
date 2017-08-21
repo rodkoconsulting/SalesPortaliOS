@@ -34,6 +34,7 @@ class OrderInventory: Inventory, isOrderInventory {
     let lastDate: Date
     var comment: String?
     let groupKey: String = ""
+    var isReversal: Bool = false
     
     var isGridUpdate: Bool = true
     
@@ -41,12 +42,19 @@ class OrderInventory: Inventory, isOrderInventory {
     
     var bottles: Int {
         didSet {
+            guard !isReversal else {
+                return
+            }
             if bottles < 0  {
+                isReversal = true
                 bottles = oldValue
+                isReversal = false
                 return
             }
             if isOverSold(bottles)  {
+                isReversal = true
                 bottles = oldValue
+                isReversal = false
                 errorDelegate?.sendAlert(.noQuantity(itemCode: itemCode))
                 return
             }

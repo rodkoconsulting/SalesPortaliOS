@@ -17,13 +17,10 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
     override func viewDidLoad() {
         super.viewDidLoad()
         initComboBox()
-        SwiftSpinner.show("Loading...", animated: false)
-        self.displayView()
-// SWIFTSPINNER COMPLETION
-//        SwiftSpinner.show("Loading...", animated: false) {
-//            [unowned self] _ in
-//            self.displayView()
-//        }
+        SwiftSpinner.show("Loading...", animated: false) {
+            [unowned self] _ in
+            self.displayView()
+        }
     }
     
     fileprivate func initComboBox() {
@@ -77,7 +74,6 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
                 return false
             }
             guard !isIndex else {
-                //return (row.itemCode == searchText || row.customerNo == searchText)
                 return self.flexGrid.filterIndex(searchText, row: row, moduleType: self.moduleType) && self.flexGrid.filterColumns(nil, row: row)
             }
             return self.flexGrid.filterColumns(searchText, row: row)
@@ -85,28 +81,12 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
         resetGrid()
     }
     
-    
-//    func filterGridColumns<T: NSObject>(searchText: String?, classType: T.Type, isIndex: Bool = false) {
-//        flexGrid.collectionView.filter = {[unowned self](item : NSObject?) -> Bool in
-//            guard let row = item as? T else {
-//                return false
-//            }
-//            if isIndex {
-//                return self.flexGrid.filterIndex(searchText, row: row, moduleType: self.moduleType)
-//            } else {
-//                return self.flexGrid.filterColumns(searchText, row: row)
-//            }
-//            } as IXuniPredicate
-//        resetGrid()
-//    }
-    
-
     func selectedIndexChanged(_ sender: XuniComboBox!) {
         let index = Int(sender.selectedIndex)
         let rawValue = OrderListFilter.rawValues[index]
         if let orderFilter = OrderListFilter(rawValue: rawValue) {
             self.orderFilter = orderFilter
-            filterData()
+            self.filterGrid(self.searchBar.text ?? "")
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -127,7 +107,6 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
     }
     
     override func groupRows() {
-        //super.groupRows()
         guard let collectionView = flexGrid.collectionView else {
             return
         }
@@ -183,25 +162,10 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
         DispatchQueue.main.async {
             SwiftSpinner.hide()
         }
-        
     }
 
-    
-    
-    //override func clearSelectedCells() {
-    //    guard flexGrid.rows.count > 0 && flexGrid.columns.count > 0 else {
-    //        return
-    //    }
-    //    flexGrid.selection = GridCellRange(row: -1, col: -1)
-    //}
-    
     func displayView() {
-        //do {
-        //    try DbOperation.databaseInit()
-            loadData(isSynched: false)
-        //} catch {
-       //     sendAlert(ErrorCode.DbError)
-        //}
+        loadData(isSynched: false)
     }
     
     override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange!) -> Bool {
@@ -224,7 +188,6 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
             showGroupActionSheet(row, panel: panel)
         default:
             return false
-            
         }
         return false
     }

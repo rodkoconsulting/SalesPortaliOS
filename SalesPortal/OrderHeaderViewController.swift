@@ -9,29 +9,6 @@
 import UIKit
 import XuniFlexGridKit
 import XuniInputKit
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
 
 
 class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniDropDownDelegate,XuniComboBoxDelegate,OrderInventoryErrorDelegate {
@@ -44,8 +21,8 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     
     
     @IBAction func unwindToOrderHeader(_ sender: UIStoryboardSegue){
-        flexGrid.invalidate()
-        filterGrid("")
+        //flexGrid.invalidate()
+        //filterGrid("")
     }
     
     func setComboBoxItemsSource() {
@@ -89,40 +66,29 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     fileprivate func loadViews() {
-        SwiftSpinner.show("Loading...", animated: false)
-        loadMyView()
-        loadAllViews()
-        loadSavedData()
-        DispatchQueue.main.async {
-            SwiftSpinner.hide()
-            self.sendOverSellAlert()
+        SwiftSpinner.show("Loading...", animated: false) {
+            self.loadMyView()
+            self.loadAllViews()
+            self.loadSavedData()
+            DispatchQueue.main.async {
+                SwiftSpinner.hide()
+                self.sendOverSellAlert()
+            }
         }
     }
     
-        
-// SWIFTSPINNER WITH COMPLETION
-//        SwiftSpinner.show("Loading...", animated: false) {
-//            [unowned self] _ in
-//            self.loadMyView()
-//            self.loadAllViews()
-//            self.loadSavedData()
-//            DispatchQueue.main.async {
-//                SwiftSpinner.hide()
-//                self.sendOverSellAlert()
-//            }
-//        }
-//    }
-    
     func sendOverSellAlert() {
-        if order?.overSoldItems.characters.count > 0 {
-            guard let overSoldList = order?.overSoldItems[(order?.overSoldItems.startIndex)!..<(order?.overSoldItems.characters.index((order?.overSoldItems.startIndex)!, offsetBy: (order?.overSoldItems.characters.count)! - 1))!] else {
+        guard let count = order?.overSoldItems.characters.count else {
+            return
+        }
+        if count > 0 {
+            guard let overSoldList = order?.overSoldItems[(order?.overSoldItems.startIndex)!..<(order?.overSoldItems.characters.index((order?.overSoldItems.startIndex)!, offsetBy: count - 1))!] else {
                 return
             }
             sendAlert(ErrorCode.noQuantity(itemCode: overSoldList))
         }
     }
 
-    
     override func exitVc() {
         flexGrid.finishEditing(false)
         flexGrid.saveUserDefaults(moduleType)
@@ -212,10 +178,9 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         }
         let flexRow = flexGrid.rows.object(at: UInt(range.row))
         guard let inventory = flexRow.dataItem as? OrderInventory else {
-                return false
+            return false
         }
         activeField = panel.getCellRect(forRow: range.row, inColumn: range.col)
-        
         inventory.errorDelegate = self
         return false
     }
@@ -223,8 +188,6 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     func cellEditEnded(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!) {
         activeField = nil
     }
-    
-    
     
     func loadAllViews() {
         autoreleasepool{
@@ -261,14 +224,9 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     func loadMyView() {
-        //do {
-        //    try DbOperation.databaseInit()
-            loadData(isSynched: false)
-            loadGrid()
-            filterGrid("")
-        //} catch {
-         //   sendAlert(ErrorCode.DbError)
-        //}
+        loadData(isSynched: false)
+        loadGrid()
+        filterGrid("")
     }
     
     override func initGrid() {
@@ -391,7 +349,6 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                 }
             }
         }
-        
     }
     
     
@@ -444,68 +401,40 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
             completionError(ErrorCode.noCredentials)
             return
         }
-        SwiftSpinner.show("Transmitting...", animated: false)
-        let orderService = OrderService(order: order, apiCredentials: credentials)
-        do {
-            try order.saveOrder()
-            orderService.sendOrder() {
-                [unowned self](success, error) in
-                guard success else {
-                    self.completionError(error ?? ErrorCode.noInternet)
-                    return
+        SwiftSpinner.show("Transmitting...", animated: false) {
+            let orderService = OrderService(order: order, apiCredentials: credentials)
+            do {
+                try order.saveOrder()
+                orderService.sendOrder() {
+                    [unowned self](success, error) in
+                    guard success else {
+                        self.completionError(error ?? ErrorCode.noInternet)
+                        return
+                    }
+                    orderService.depleteDb()
+                    try! self.order?.deleteOrder()
+                    DispatchQueue.main.async {
+                        SwiftSpinner.hide(){
+                            [unowned self] in
+                            self.sendMessage(title: "Transmit Order", message: "Order Sent!")
+                        }
+                    }
                 }
-                orderService.depleteDb()
-                try! self.order?.deleteOrder()
+            } catch {
                 DispatchQueue.main.async {
-                    SwiftSpinner.hide(){
+                    SwiftSpinner.hide() {
                         [unowned self] in
-                        self.sendMessage(title: "Transmit Order", message: "Order Sent!")
+                        self.completionError(ErrorCode.dbError)
                     }
                 }
             }
-        } catch {
-            DispatchQueue.main.async {
-                SwiftSpinner.hide() {
-                    [unowned self] in
-                    self.completionError(ErrorCode.dbError)
-                }
-            }
         }
-        
-// SWIFTSPINNER COMPLETION
-//        SwiftSpinner.show("Transmitting...", animated: false) {
-//            let orderService = OrderService(order: order, apiCredentials: credentials)
-//            do {
-//                try self.order?.saveOrder()
-//                orderService.sendOrder() {
-//                    [unowned self](success, error) in
-//                    guard success else {
-//                        self.completionError(error ?? ErrorCode.noInternet)
-//                        return
-//                    }
-//                    orderService.depleteDb()
-//                    try! self.order?.deleteOrder()
-//                    DispatchQueue.main.async {
-//                        SwiftSpinner.hide(){
-//                            [unowned self] in
-//                            self.sendMessage(title: "Transmit Order", message: "Order Sent!")
-//                        }
-//                    }
-//                }
-//            } catch {
-//                DispatchQueue.main.async {
-//                    SwiftSpinner.hide() {
-//                        [unowned self] in
-//                        self.completionError(ErrorCode.dbError)
-//                    }
-//                }
-//            }
-//        }
     }
     
     
     fileprivate func deleteOrder() {
-        SwiftSpinner.show("Deleting...", animated: false)
+        SwiftSpinner.show("Deleting...", animated: false) {
+            [unowned self] in
             DispatchQueue.main.async {
                 [unowned self] in
                 do {
@@ -521,26 +450,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                     }
                 }
             }
-    
-// SWIFTSPINNER COMPLETION
-//        SwiftSpinner.show("Deleting...", animated: false) {
-//            [unowned self] in
-//            DispatchQueue.main.async {
-//                [unowned self] in
-//                do {
-//                    try self.order?.deleteOrder()
-//                    SwiftSpinner.hide() {
-//                        [unowned self] in
-//                        self.sendMessage(title: "Delete Order", message: "Order Deleted!")
-//                    }
-//                } catch {
-//                    SwiftSpinner.hide() {
-//                        [unowned self] in
-//                        self.completionError(ErrorCode.dbError)
-//                    }
-//                }
-//            }
-//        }
+        }
     }
     
     fileprivate func cancelOrder() {
@@ -549,7 +459,8 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     fileprivate func saveOrder() {
-        SwiftSpinner.show("Saving...", animated: false)
+        SwiftSpinner.show("Saving...", animated: false) {
+            [unowned self] _ in
             DispatchQueue.main.async {
                 [unowned self] in
                 do {
@@ -565,32 +476,12 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                     }
                 }
             }
-        
-// SWIFTSPINNER COMPLETION
-//        SwiftSpinner.show("Saving...", animated: false) {
-//            [unowned self] _ in
-//            DispatchQueue.main.async {
-//                [unowned self] in
-//                do {
-//                    try self.order?.saveOrder()
-//                    SwiftSpinner.hide() {
-//                        [unowned self] in
-//                        self.sendMessage(title: "Save Order", message: "Order Saved!")
-//                    }
-//                } catch {
-//                    SwiftSpinner.hide() {
-//                        [unowned self] in
-//                        self.completionError(ErrorCode.dbError)
-//                    }
-//                }
-//            }
-//        }
+        }
     }
     
     
     override func showShareActionSheet(flexGrid: FlexGrid, moduleType: Module, sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "Send Data", message: nil, preferredStyle: .actionSheet)
-        //let cancelTitle = order?.orderNo == nil ? "Cancel Order" : "Cancel Changes"
         let cancelTitle = "Cancel Order"
         let copyButton = UIAlertAction(title: "Copy", style: .default) {
             [unowned self] (alert) -> Void in
@@ -637,7 +528,5 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
             popoverController.barButtonItem = sender
         }
         present(actionSheet, animated: true, completion: nil)
-    }
-    
-    
+    } 
 }

@@ -148,7 +148,8 @@ struct OrderSavedService<T: isOrderType> {
                     "UNION ALL " +
                     "SELECT h.ORDER_NO, '\(OrderType.Sample.rawValue)', h.SAVE_TIME, h.SHIP_DATE, h.TOTAL_QTY, h.TOTAL_PRICE, " +
                     "sa.NAME " +
-                    "FROM ORDER_HEADER h INNER JOIN SAMPLE_ADDRESSES sa on h.CUSTOMER_NO = sa.CODE WHERE h.TYPE='\(OrderType.Sample.rawValue)'"
+                    "FROM ORDER_HEADER h INNER JOIN SAMPLE_ADDRESSES sa on h.CUSTOMER_NO = sa.CODE WHERE h.TYPE='\(OrderType.Sample.rawValue)' " +
+                    "ORDER BY h.ORDER_NO DESC"
             let results: FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             while results?.next() == true {
                 guard let orderSavedList = OrderSavedList(queryResult: results!) else {

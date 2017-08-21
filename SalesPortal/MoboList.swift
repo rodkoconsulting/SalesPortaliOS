@@ -18,15 +18,23 @@ class MoboList :  OrderList {
     weak var delegate: MoboListDelegate?
     
     var isGridUpdate: Bool = true
+    var isReversal: Bool = false
     
     var cases: Int {
         didSet {
+            guard !isReversal else {
+                return
+            }
             if isOverSold  {
+                isReversal = true
                 cases = oldValue
+                isReversal = false
                 return
             }
             if cases < 0 {
+                isReversal = true
                 cases = 0
+                isReversal = false
                 return
             }
             if isGridUpdate {
@@ -37,12 +45,19 @@ class MoboList :  OrderList {
     
     var bottles: Int {
         didSet {
+            guard !isReversal else {
+                return
+            }
             if bottlesExceedCase || isOverSold  {
+                isReversal = true
                 bottles = oldValue
+                isReversal = false
                 return
             }
             if bottles < 0 {
+                isReversal = true
                 bottles = 0
+                isReversal = false
                 return
             }
             if isGridUpdate {

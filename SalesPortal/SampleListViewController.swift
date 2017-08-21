@@ -19,13 +19,10 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
     override func viewDidLoad() {
         super.viewDidLoad()
         initComboBox()
-        SwiftSpinner.show("Loading...", animated: false)
-        displayView()
-//  SWIFTSPINNER WITH COMPLETION
-//        SwiftSpinner.show("Loading...", animated: false) {
-//            [unowned self] _ in
-//            self.displayView()
-//        }
+        SwiftSpinner.show("Loading...", animated: false) {
+            [unowned self] _ in
+            self.displayView()
+        }
     }
     
     fileprivate func initComboBox() {
@@ -35,7 +32,6 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
         sampleFilterComboBox.isEditable = false
         sampleFilterComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
         sampleFilterComboBox.dropDownHeight = Double(self.sampleFilterComboBox.itemsSource.count * Constants.ComboCellHeight)
-        
     }
     
     override func setItemLabels(selectedRow: Int32) {
@@ -92,7 +88,7 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
         let rawValue = SampleListFilter.rawValues[index]
         if let sampleFilter = SampleListFilter(rawValue: rawValue) {
             self.sampleFilter = sampleFilter
-            filterData()
+            self.filterGrid(self.searchBar.text ?? "")
         }
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -111,13 +107,6 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
-    
-//    override func groupRows() {
-//        let gd: XuniPropertyGroupDescription = XuniPropertyGroupDescription(property: "totalGroupLabel")
-//        flexGrid.collectionView.groupDescriptions.addObject(gd)
-//        super.groupRows()
-//    }
-    
     
     @IBAction func refreshGrid(_ sender: AnyObject) {
         syncSampleList()
@@ -159,24 +148,15 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
                 self.sampleFilterComboBox.selectedIndex = UInt(sampleFilterIndex)
             }
         }
-        //} else {
-        //    filterGrid(self.searchBar.text ?? "")
-        //
         filterGrid(self.searchBar.text ?? "")
         isLoaded = true
         DispatchQueue.main.async {
             SwiftSpinner.hide()
         }
-        
     }
     
     func displayView() {
-        //do {
-        //    try DbOperation.databaseInit()
-            loadData(isSynched: false)
-        //} catch {
-        //    sendAlert(ErrorCode.DbError)
-       // }
+        loadData(isSynched: false)
     }
     
     override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange!) -> Bool {
@@ -199,12 +179,9 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
             showGroupActionSheet(row, panel: panel)
         default:
             return false
-            
         }
         return false
     }
-    
-    
     
     func syncSampleList() {
         guard let credentials = Credentials.getCredentials(), let _ = credentials["state"] else {
@@ -233,8 +210,6 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
             completionError(ErrorCode.dbError)
         }
     }
-    
-
     
     override func showShareActionSheet(flexGrid: FlexGrid, moduleType: Module, sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "Order / Copy / Email", message: nil, preferredStyle: .actionSheet)

@@ -18,8 +18,12 @@ class InitialViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         SwiftSpinner.show("Loading...", animated: false)
-        performSegue(withIdentifier: "showMainTabBarController", sender: self)
-        
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.performSegue(withIdentifier: "showMainTabBarController", sender: self)
+            DispatchQueue.main.async {
+                SwiftSpinner.hide()
+            }
+        }
         // SWIFTSPINNER WITH COMPLETION
 //        SwiftSpinner.show("Loading...", animated: false) {
 //           [unowned self] in

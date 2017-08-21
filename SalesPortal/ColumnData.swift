@@ -224,7 +224,7 @@ struct ColumnData {
         [kName:"scoreList", kHeader:"Scores", kAlignment:"right", kWidth: 200]
     ]
     static let accountColumns: [[String : Any]] = [
-        [kName:"version", kValue: 4],
+        [kName:"version", kValue: 5],
         [kName:"statusString", kHeader: "Status"],
         [kName:"customerNo", kHeader: "Account #"],
         [kName:"customerName", kHeader: "Account Name", kWidth: 300],
@@ -239,11 +239,11 @@ struct ColumnData {
         [kName:"buyer3Phone", kHeader: "Wine Buyer 3 Phone"],
         [kName:"affil", kHeader: "Affiliations"],
         [kName:"coopString", kHeader: "Coops"],
-        [kName:"rep", kHeader: "Rep", kWidth: 45, kManagerGroup: 1],
+        [kName:"rep", kHeader: "Rep", kWidth: 45, kManagerGroup: 0],
     ]
     static let orderListColumns: [[String : Any]] = [
-        [kName:"version", kValue: 11],
-        [kName:"customerName", kHeader: "Account", kWidth: 250, kGroup: 1, kManagerGroup: 3],
+        [kName:"version", kValue: 13],
+        [kName:"customerName", kHeader: "Account", kWidth: 250, kGroup: 0, kManagerGroup: 3],
         [kName:"orderNo", kHeader: "Order #", kWidth: 60],
         [kName:"orderType", kHeader: "Type", kWidth: 35],
         [kName:"holdCode", kHeader: "Hold", kWidth: 45],    
@@ -260,7 +260,7 @@ struct ColumnData {
         [kName:"territory", kHeader: "Territory", kWidth: 45, kManagerGroup: 1]
     ]
     static let sampleListColumns: [[String : Any]] = [
-        [kName:"version", kValue: 3],
+        [kName:"version", kValue: 4],
         [kName:"shipDate", kHeader: "Date", kAlignment:"right", kWidth: 70, kType: "NumberDate"],
         [kName:"itemCode", kHeader: "Item", kWidth: 70],
         [kName:"itemDescription", kHeader: "Description", kWidth: 250],
@@ -273,7 +273,7 @@ struct ColumnData {
         [kName:"masterVendor", kHeader: "Master Vendor"],
         [kName:"isFocus", kHeader:"Focus", kType:"StringBool"],
         [kName:"shipToName", kHeader:"Ship To"],
-        [kName:"rep", kHeader: "Rep", kWidth: 45, kManagerGroup: 1]
+        [kName:"rep", kHeader: "Rep", kWidth: 45, kManagerGroup: 0]
     ]
     static let orderMoboColumns: [[String : Any]] = [
         [kName:"orderNo", kHeader: "Order #", kWidth: 60],

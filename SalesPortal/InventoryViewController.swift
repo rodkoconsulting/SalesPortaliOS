@@ -65,10 +65,7 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
             sendAlert(ErrorCode.dbError)
         }
         setTitleLabel()
-        //SwiftSpinner.show("Loading...", animated: false) {
-        //    _ in
-            displayView()
-        //}
+        displayView()
     }
     
     override func loadSettings() {
@@ -93,7 +90,7 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
     override func setItemLabels(selectedRow: Int32) {
         guard selectedRow >= 0 && UInt(selectedRow) < flexGrid.rows.count else {
             return
-        } // 11/21
+        }
         let flexRow = flexGrid.rows.object(at: UInt(selectedRow))
         guard let inventory = flexRow.dataItem as? Inventory else {
             return
@@ -122,12 +119,7 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
     
     
     func displayView() {
-        //do {
-        //    try DbOperation.databaseInit()
-            loadData(isSynched: false)
-        //} catch {
-        //    sendAlert(ErrorCode.DbError)
-        //}
+        loadData(isSynched: false)
     }
 
     
@@ -164,20 +156,11 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
             itemsSource.removeAllObjects()
         }
         flexGrid.itemsSource = gridData
-        //flexGrid.collectionView.removeAllObjects()
-        //flexGrid.collectionView = nil
-        //self.flexGrid.itemsSource.removeAllObjects()
-        //self.flexGrid.itemsSource = nil
-        
-        
-        //inventory?.removeAllObjects()
-        //inventory = nil
         isFilterChanged = false
         filterGridColumns(searchBar.text!, classType: classType)
         DispatchQueue.main.async {
             SwiftSpinner.hide()
         }
-        
     }
     
     func syncInventory() {
@@ -191,30 +174,28 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
             return
         }
         dataSettings.repState = States(rawValue: credentialState) ?? States.NY
-        SwiftSpinner.show("Syncing...", animated: false)
-        let inventoryService = InventoryService(module: moduleType, apiCredentials: credentials, date: dataSettings.date)
-        do {
-            let lastAllSync = try inventoryService.queryAllLastSync()
-            inventoryService.getApi(lastAllSync) {
-                [unowned self](inventorySyncCompletion, error) in
-                guard let inventorySync = inventorySyncCompletion else  {
-                    self.completionError(error ?? ErrorCode.unknownError)
-                    return
+        SwiftSpinner.show("Syncing...", animated: false) {
+            let inventoryService = InventoryService(module: self.moduleType, apiCredentials: credentials, date: dataSettings.date)
+            do {
+                let lastAllSync = try inventoryService.queryAllLastSync()
+                inventoryService.getApi(lastAllSync) {
+                    [unowned self](inventorySyncCompletion, error) in
+                    guard let inventorySync = inventorySyncCompletion else  {
+                        self.completionError(error ?? ErrorCode.unknownError)
+                        return
+                    }
+                    do {
+                        try inventoryService.updateDb(inventorySync)
+                    } catch {
+                        self.completionError(ErrorCode.dbError)
+                    }
+                    inventoryService.updateLastSync()
+                    self.loadData(isSynched: true)
                 }
-                do {
-                    try inventoryService.updateDb(inventorySync)
-                } catch {
-                    self.completionError(ErrorCode.dbError)
-                }
-                //let invLastSync = NSDate().getDateTimeString()
-                inventoryService.updateLastSync()
-                self.loadData(isSynched: true)
+            } catch {
+                self.completionError(ErrorCode.dbError)
             }
-        } catch {
-            completionError(ErrorCode.dbError)
+            self.isSettingsChanged = false
         }
-        isSettingsChanged = false
     }
-
-    
 }

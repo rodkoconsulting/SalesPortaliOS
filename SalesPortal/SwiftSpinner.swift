@@ -139,7 +139,7 @@ public class SwiftSpinner: UIView {
     // Show the spinner activity on screen, if visible only update the title
     //
     @discardableResult
-    public class func show(_ title: String, animated: Bool = true) -> SwiftSpinner {
+    public class func show(_ title: String, animated: Bool = true, completion: (() -> Void)? = nil) -> SwiftSpinner {
         
         let spinner = SwiftSpinner.sharedInstance
         
@@ -166,7 +166,7 @@ public class SwiftSpinner: UIView {
                 spinner.blurView.contentView.alpha = 1
                 spinner.blurView.effect = spinner.blurEffect
                 
-            }, completion: nil)
+            }, completion: { _ in completion?()})
             
             #if os(iOS)
                 // Orientation change observer

@@ -32,35 +32,20 @@ class SampleOrderHeaderViewController: OrderHeaderViewController {
     }
     
     override func shipMonthChanged() {
-        SwiftSpinner.show("Loading...", animated: false)
-        shipMonthSave()
-        loadData(isSynched: true)
-        clearAllGridSource()
-        order?.loadSavedLines()
-        setAllGridSource()
-        loadGroup()
-        filterGrid("")
-        DispatchQueue.main.async {
-            SwiftSpinner.hide()
+        SwiftSpinner.show("Loading...", animated: false) {
+            self.shipMonthSave()
+            self.loadData(isSynched: true)
+            self.clearAllGridSource()
+            self.order?.loadSavedLines()
+            self.setAllGridSource()
+            self.loadGroup()
+            self.filterGrid("")
+            DispatchQueue.main.async {
+                SwiftSpinner.hide()
+            }
         }
     }
         
-// SWIFTSPINNER WITH COMPLETION
-//        SwiftSpinner.show("Loading...", animated: false) {
-//            [unowned self] _ in
-//            self.shipMonthSave()
-//            self.loadData(isSynched: true)
-//            self.clearAllGridSource()
-//            self.order?.loadSavedLines()
-//            self.setAllGridSource()
-//            self.loadGroup()
-//            self.filterGrid("")
-//            DispatchQueue.main.async {
-//                SwiftSpinner.hide()
-//            }
-//        }
-//   }
-    
     override func initOrder() {
         accountLabel.text = "Sample Order"
         shipDateButton.setTitle(order?.shipDate?.getShipDatePrint(), for: UIControlState())

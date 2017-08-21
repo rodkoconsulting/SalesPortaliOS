@@ -231,7 +231,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         guard let orderInventory = self.orderInventory else {   
             return
         }
-        let orderTotal = Int(self.orderTotal.rounded())
+        let orderTotal = Int(self.orderTotal.roundedCases())
         let coopTotal = self.coopCases ?? 0
         let caseThreshold = Constants.njCaseThreshold
         var totalPricing: Int;
@@ -300,7 +300,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         }
         let total = mixItem + quantityDelta
         mixPriceDict[mixDesc] = total
-        let totalRounded = total.rounded()
+        let totalRounded = total.roundedCases()
         for line in orderInventory where (line as? AccountOrderInventory)?.bottleTotal > 0 && (line as? OrderInventory)?.mixDescription == mixDesc {
             setPrice(quantity: totalRounded, item: line as AnyObject)
         }

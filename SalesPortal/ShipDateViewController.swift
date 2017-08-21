@@ -46,11 +46,6 @@ class ShipDateViewController: UIViewController, XuniCalendarDelegate {
         currentDate = calendar.selectedDate
         updateDateLabel()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func dismiss(_ sender: AnyObject) {
         if let order  = order,
@@ -61,7 +56,8 @@ class ShipDateViewController: UIViewController, XuniCalendarDelegate {
                 delegate?.shipMonthChanged()
             }
         }
-        performSegue(withIdentifier: "unwindToOrderHeader", sender: self)
+        self.dismiss(animated: false, completion: nil)
+        //performSegue(withIdentifier: "unwindToOrderHeader", sender: self) 8/16/17
     }
     
     func updateDateLabel() {

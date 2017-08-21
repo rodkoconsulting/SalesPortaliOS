@@ -246,7 +246,7 @@ extension Double
         return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
     }
     
-    func rounded()-> Double
+    func roundedCases()-> Double
     {
         return self.roundToPlaces(4).truncate(0)
     }

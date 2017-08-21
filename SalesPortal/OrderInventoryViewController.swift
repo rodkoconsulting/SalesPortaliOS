@@ -23,8 +23,7 @@ class OrderInventoryViewController: DataGridViewController, OrderInventoryErrorD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         flexGrid.invalidate()
-
-       if  isFilterChanged {
+        if  isFilterChanged {
             filterRefresh()
         }
     }
@@ -46,20 +45,6 @@ class OrderInventoryViewController: DataGridViewController, OrderInventoryErrorD
         gridData = order.orderInventory
         searchData = order.searchData
     }
-    
-//    override func handleLongPress(sender: UILongPressGestureRecognizer) {
-//        let pressedPoint = sender.locationInView(flexGrid)
-//        let hit = GridHitTestInfo(grid: flexGrid, atPoint: pressedPoint)
-//        guard hit.column >= 0 else {
-//            return
-//        }
-//        if sender.state == UIGestureRecognizerState.Began && hit.cellType == GridCellType.ColumnHeader {
-//            guard let column = flexGrid.columns.objectAtIndex(UInt(hit.column)) as? DataGridColumn else {
-//                return
-//            }
-//            showFilterActionSheet(column: column, rowIndex: hit.row, panel: hit.gridPanel, flexGrid: flexGrid)
-//        }
-//    }
     
     func saveOrder() {
         guard let order = order else {
@@ -91,21 +76,6 @@ class OrderInventoryViewController: DataGridViewController, OrderInventoryErrorD
         filterGrid("")
     }
     
-//    init() {
-//        super.init(nibName: nil, bundle: nil)
-//        self.moduleType = Module.Accounts
-//        self.classType = Account.self
-//    }
-    
-        
-
-    //func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-    //    flexGrid.finishEditing(false)
-    //    if clearFilterButton.enabled == false {
-    //        clearFilterButton.enabled = true
-    //    }
-    //}
-  
     override func filterGridColumns<T: NSObject>(_ searchText: String?, classType: T.Type, isIndex: Bool = false) {
         guard let collectionView = flexGrid.collectionView else {
             return
@@ -154,7 +124,6 @@ class OrderInventoryViewController: DataGridViewController, OrderInventoryErrorD
     
     func cellEditEnding(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!, cancel: Bool) -> Bool {
         activeField = nil
-        //topCell = nil
         return false
     }
 }

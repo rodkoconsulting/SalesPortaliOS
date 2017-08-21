@@ -21,12 +21,19 @@ class AccountOrderInventory: OrderInventory {
     var orderType: OrderType?
     override var cases: Int {
         didSet {
+            guard !isReversal else {
+                return
+            }
             if cases < 0 {
+                isReversal = true
                 cases = oldValue
+                isReversal = false
                 return
             }
             if isGridUpdate && isOverSold(bottleTotal)  {
+                isReversal = true
                 cases = oldValue
+                isReversal = false
                 errorDelegate?.sendAlert(.noQuantity(itemCode: itemCode))
                 return
             }
@@ -42,12 +49,19 @@ class AccountOrderInventory: OrderInventory {
     
     override var bottles: Int {
         didSet {
+            guard !isReversal else {
+                return
+            }
             if bottlesExceedCase() || bottles < 0  {
+                isReversal = true
                 bottles = oldValue
+                isReversal = false
                 return
             }
             if isGridUpdate && isOverSold(bottleTotal)  {
+                isReversal = true
                 bottles = oldValue
+                isReversal = false
                 errorDelegate?.sendAlert(.noQuantity(itemCode: itemCode))
                 return
             }

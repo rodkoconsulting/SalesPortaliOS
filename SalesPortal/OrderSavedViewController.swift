@@ -51,7 +51,6 @@ class OrderSavedViewController: DataGridViewController {
             showSavedOrderActionSheet(column: column, rowIndex: range.row, savedOrder: orderSaved, panel: panel, flexGrid: flexGrid)
         default:
             return false
-            
         }
         return false
     }
@@ -65,8 +64,6 @@ class OrderSavedViewController: DataGridViewController {
     }
     
     override func loadData(isSynched: Bool) {
-        //SwiftSpinner.show("Loading...", animated: false) {
-        //    [unowned self] in
             self.gridData?.removeAllObjects()
             let orderSavedQuery = OrderSavedService<AccountOrder>.queryOrderSavedList()
             self.gridData = orderSavedQuery.gridData
@@ -82,11 +79,6 @@ class OrderSavedViewController: DataGridViewController {
             self.flexGrid.itemsSource = self.gridData
             self.isFilterChanged = false
             self.filterGridColumns(self.searchBar.text!, classType: self.classType)
-       //     dispatch_async(dispatch_get_main_queue()) {
-       //         SwiftSpinner.hide()
-       //     }
-       // }
-        
     }
     
     
@@ -145,6 +137,4 @@ class OrderSavedViewController: DataGridViewController {
             orderTabBarController.order = OrderSavedService<SampleOrder>.queryOrderSaved(orderNo: orderNo)
         }
     }
-    
-
 }
