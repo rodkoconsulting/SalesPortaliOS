@@ -10,7 +10,7 @@ import UIKit
 import XuniFlexGridKit
 import XuniInputKit
 
-class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate {
+class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate, isOrderHeaderVc {
 
     
     required init?(coder aDecoder: NSCoder){

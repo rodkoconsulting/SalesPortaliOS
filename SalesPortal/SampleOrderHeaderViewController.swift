@@ -8,7 +8,7 @@
 
 import XuniInputKit
 
-class SampleOrderHeaderViewController: OrderHeaderViewController {
+class SampleOrderHeaderViewController: OrderHeaderViewController, isOrderHeaderVc {
     
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)

@@ -10,6 +10,9 @@ import UIKit
 import XuniFlexGridKit
 import XuniInputKit
 
+protocol isOrderHeaderVc: class {
+    func setComboBoxItemsSource()
+}
 
 class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniDropDownDelegate,XuniComboBoxDelegate,OrderInventoryErrorDelegate {
     
@@ -21,12 +24,11 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     
     
     @IBAction func unwindToOrderHeader(_ sender: UIStoryboardSegue){
-        //flexGrid.invalidate()
-        //filterGrid("")
+        
     }
     
     func setComboBoxItemsSource() {
-        // implement in child
+        
     }
     
     func saveOrderDelegate() {
