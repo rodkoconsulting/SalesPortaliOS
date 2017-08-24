@@ -1,30 +1,5 @@
 
-    
-    import Foundation
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
+import Foundation
 
 enum OrderListFilter: String {
     case All = "All Orders"
@@ -228,7 +203,7 @@ class OrderList : NSObject {
     
     lazy var boEta : Date? = {
         [unowned self] in
-        guard self.holdCode == "BO" && self.poEta?.getYearInt() > 2000 else {
+        guard self.holdCode == "BO" && (self.poEta?.getYearInt() ?? 0) > 2000 else {
             return nil
         }
         return self.poEta
