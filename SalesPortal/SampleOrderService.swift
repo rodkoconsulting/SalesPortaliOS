@@ -7,30 +7,6 @@
 //
 
 import Foundation
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 struct SampleOrderService {
     
@@ -67,7 +43,7 @@ struct SampleOrderService {
         guard let orderInventory = sampleOrder.orderInventory else {
             return
         }
-        for line in orderInventory where (line as? OrderInventory)?.bottles > 0 {
+        for line in orderInventory where ((line as? OrderInventory)?.bottles ?? 0) > 0 {
             guard let item = line as? OrderInventory else {
                 return
             }
