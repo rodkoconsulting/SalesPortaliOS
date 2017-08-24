@@ -7,39 +7,6 @@
 //
 
 import Foundation
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
-
-
-//protocol OrderTypeErrorDelegate: class {
-//    func sendAlert(error: ErrorCode)
-//}
-
-//protocol OrderDelegate: class {
-//    func orderTypeChanged(orderType orderType: OrderType)
-//}
 
 typealias SampleOrderSavedResults = (headerResults: FMResultSet, detailResults: [FMResultSet])?
 
@@ -57,10 +24,6 @@ class SampleOrder: isOrderType {
     var searchData: [[String : String]] = [[String : String]]()
     var overSoldItems = ""
     var orderType = OrderType.Sample
-    
-    //weak var errorDelegate: OrderTypeErrorDelegate?
-    //weak var orderDelegate: OrderDelegate?
-    
     
     init() {
         self.shipToList = OrderAddressService.getAddressList()
@@ -85,7 +48,7 @@ class SampleOrder: isOrderType {
         guard let orderInventory = orderInventory else {
             return (cases: cases, bottles: bottles)
         }
-        for line in orderInventory where (line as? SampleOrderInventory)?.bottles > 0 {
+        for line in orderInventory where ((line as? SampleOrderInventory)?.bottles ?? 0) > 0 {
             guard let item = line as? SampleOrderInventory else {
                 return (cases: cases, bottles: bottles)
             }
@@ -100,7 +63,7 @@ class SampleOrder: isOrderType {
             return
         }
         savedDetailDict.removeAll()
-        for line in orderInventory where (line as? SampleOrderInventory)?.bottleTotal > 0 {
+        for line in orderInventory where ((line as? SampleOrderInventory)?.bottleTotal ?? 0) > 0 {
             guard let item = line as? SampleOrderInventory else {
                 return
             }
@@ -137,8 +100,8 @@ class SampleOrder: isOrderType {
         if let orderNo = queryHeaderResult?.int(forColumn: "order_no") {
             self.orderNo = Int(orderNo)
         }
-        if let shipDate = queryHeaderResult?.string(forColumn: "ship_date") {
-            let nextShipDate = self.orderType.shipDate(account: account)
+        if let shipDate = queryHeaderResult?.string(forColumn: "ship_date"),
+            let nextShipDate = self.orderType.shipDate(account: account) {
             self.shipDate = shipDate < nextShipDate ? nextShipDate : shipDate
         }
         let shipToCode = queryHeaderResult?.string(forColumn: "customer_no")
@@ -164,7 +127,7 @@ class SampleOrder: isOrderType {
             let orderNo = orderNo else {
                 return nil
         }
-        for line in orderInventory where (line as? SampleOrderInventory)?.bottles > 0 {
+        for line in orderInventory where ((line as? SampleOrderInventory)?.bottles ?? 0) > 0 {
             guard let inventory = line as? SampleOrderInventory else {
                 return nil
             }
@@ -222,7 +185,7 @@ class SampleOrder: isOrderType {
         orderDict["date"] = shipDate as AnyObject
         orderDict["note"] = notes as AnyObject
         orderDict["id"] = id as AnyObject
-        for line in orderInventory where (line as? SampleOrderInventory)?.bottles > 0 {
+        for line in orderInventory where ((line as? SampleOrderInventory)?.bottles ?? 0) > 0 {
             guard let line = line as? SampleOrderInventory else {
                 continue
             }
