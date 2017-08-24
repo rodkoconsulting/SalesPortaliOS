@@ -15,7 +15,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    //var isEntryController = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,34 +22,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //checkCredentials()
         userNameField.text = ""
         passwordField.text = ""
     }
     
-   // func checkCredentials() {
-   //     guard Credentials.getCredentials() != nil else {
-   //         return
-   //     }
-        //performSegue()
-   //     dismissViewControllerAnimated(true, completion: nil)
-   // }
-    
-    //override func didReceiveMemoryWarning() {
-    //    super.didReceiveMemoryWarning()
-   // }
     
     func performSegue() {
-        //if isEntryController {
-    //        SwiftSpinner.show("Loading...", animated: true) {
-    //            _ in
-    //            dispatch_async(dispatch_get_main_queue()) {
-    //                self.performSegueWithIdentifier("showMainTabBarController", sender: self)
-    //            }
-    //        }
-    //    } else {
-    //        dismissViewControllerAnimated(true, completion: nil)
-    //    }
         self.performSegue(withIdentifier: "unwindFromLogin", sender: self)
    }
     
@@ -79,11 +56,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.performSegue()
         }
     }
-    
-    //@IBAction func unwindToLogin(sender: UIStoryboardSegue) {
-    //    userNameField.text = ""
-    //    passwordField.text = ""
-    //}
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let length = textField.text!.characters.count - range.length + string.characters.count

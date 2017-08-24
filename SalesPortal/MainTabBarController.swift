@@ -14,12 +14,4 @@ class MainTabBarController: UITabBarController {
     var inventoryDataSettings: InventoryDataSettings = InventoryDataSettings()
     var accounts: NSMutableArray?
     
-    //override func viewDidLoad() {
-        //SwiftSpinner.show("Loading", animated: false) {
-        //       _ in
-   //     super.viewDidLoad()
-        //SwiftSpinner.hide()
-        //}
-   // }
-    
 }

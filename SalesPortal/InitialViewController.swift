@@ -24,14 +24,6 @@ class InitialViewController: UIViewController {
                 SwiftSpinner.hide()
             }
         }
-        // SWIFTSPINNER WITH COMPLETION
-//        SwiftSpinner.show("Loading...", animated: false) {
-//           [unowned self] in
-//            DispatchQueue.main.async {
-//                [unowned self] in
-//                self.performSegue(withIdentifier: "showMainTabBarController", sender: self)
-//            }
-//        }
     }
     
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
