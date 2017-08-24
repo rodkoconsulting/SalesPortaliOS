@@ -7,30 +7,6 @@
 //
 
 import Foundation
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 enum OrderType: String {
     case Standard = "S"
@@ -156,7 +132,6 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         self.orderTotal = 0.0
     }
     
-    //func updateOrderPricing(mixDesc mixDesc: String, mixBrand: String, quantityDelta: Double) {
     func updateOrderPricing(mixDesc: String, quantityDelta: Double) {
         orderTotal += quantityDelta
         guard orderType != OrderType.BillHold else {
@@ -167,7 +142,6 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         }
         switch priceLevel {
             case States.NJ:
-                //updateMixBrand(mixBrand: mixBrand, quantityDelta: quantityDelta)
                 repriceNJ()
             case States.NY:
                 repriceMix(mixDesc: mixDesc, quantityDelta: quantityDelta)
@@ -198,13 +172,13 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             moboList.deleteAll()
         }
     }
-    
+
     fileprivate func checkOrderTypeLines() {
         guard let orderInventory = orderInventory else {
             return
         }
         var overSoldItems = ""
-        for line in orderInventory where (line as? AccountOrderInventory)?.bottleTotal > 0 {
+        for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 {
             guard let item = line as? AccountOrderInventory else {
                 return
             }
@@ -218,15 +192,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             errorDelegate?.sendAlert(ErrorCode.noQuantity(itemCode: overSoldList))
         }
     }
-    
-    //private func updateMixBrand(mixBrand mixBrand: String, quantityDelta: Double) {
-    //    if let mixItem = mixPriceDict[mixBrand] {
-    //        mixPriceDict[mixBrand] = mixItem + quantityDelta
-    //    } else {
-    //        mixPriceDict[mixBrand] = quantityDelta
-    //    }
-    //}
-    
+
     fileprivate func repriceNJ() {
         guard let orderInventory = self.orderInventory else {   
             return
@@ -235,14 +201,12 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         let coopTotal = self.coopCases ?? 0
         let caseThreshold = Constants.njCaseThreshold
         var totalPricing: Int;
-        for line in orderInventory where (line as? AccountOrderInventory)?.bottleTotal > 0 {
+        for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 {
             guard let line = line as? AccountOrderInventory else {
                 continue
             }
-            //let brandTotal = Int((mixPriceDict[line.brand] ?? 0).rounded())
             if (orderTotal > caseThreshold)
             {
-                //totalPricing = brandTotal > caseThreshold ? brandTotal : caseThreshold
                 totalPricing = line.cases > caseThreshold ? line.cases : caseThreshold
             } else {
                 totalPricing = orderTotal > coopTotal ? orderTotal : coopTotal
@@ -264,7 +228,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             return 0
         }
         var total = 0.0
-        for line in orderInventory where (line as? AccountOrderInventory)?.bottleTotal > 0 {
+        for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 {
             guard let line = line as? AccountOrderInventory else {
                 return 0
             }
@@ -285,7 +249,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         guard let orderInventory = orderInventory else {
             return
         }
-        for line in orderInventory where (line as? AccountOrderInventory)?.bottleTotal > 0 {
+        for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 {
             setPrice(quantity: total, item: line as AnyObject)
         }
     }
@@ -301,7 +265,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         let total = mixItem + quantityDelta
         mixPriceDict[mixDesc] = total
         let totalRounded = total.roundedCases()
-        for line in orderInventory where (line as? AccountOrderInventory)?.bottleTotal > 0 && (line as? OrderInventory)?.mixDescription == mixDesc {
+        for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 && ((line as? OrderInventory)?.mixDescription ?? "") == mixDesc {
             setPrice(quantity: totalRounded, item: line as AnyObject)
         }
     }
@@ -311,7 +275,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             return
         }
         savedDetailDict.removeAll()
-        for line in orderInventory where (line as? AccountOrderInventory)?.bottleTotal > 0 {
+        for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 {
             guard let item = line as? AccountOrderInventory else {
                 return
             }
@@ -351,7 +315,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             return
         }
         savedMoboDict.removeAll()
-        for line in orderInventory where (line as? AccountOrderInventory)?.moboListArray.count > 0 {
+        for line in orderInventory where ((line as? AccountOrderInventory)?.moboListArray.count ?? 0) > 0 {
             guard let line = line as? AccountOrderInventory else {
                 return
             }
@@ -380,10 +344,8 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
                     moboList.delegate = self
                     let quantityDelta = quantityBottles - quantityDepleted
                     let amountToDeplete = moboList.moboBottleTotal >= quantityDelta ? quantityDelta : moboList.moboBottleTotal
-                    //moboList.isGridUpdate = false
                     moboList.depleteBottles(amountToDeplete)
                     quantityDepleted += amountToDeplete
-                    //moboList.isGridUpdate = true
                 }
                 if quantityDepleted == quantityBottles {
                     break
@@ -399,7 +361,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         guard let orderInventory = orderInventory else {
             return
         }
-        for moboList in orderMobos where (moboList as? MoboList)?.orderBottleTotal > 0 {
+        for moboList in orderMobos where ((moboList as? MoboList)?.orderBottleTotal ?? 0) > 0 {
             guard let moboList = moboList as? MoboList else {
                 return
             }
@@ -421,8 +383,8 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             let orderType = OrderType(rawValue: orderTypeRaw) {
             self.orderType = orderType
         }
-        if let shipDate = queryHeaderResult?.string(forColumn: "ship_date") {
-            let nextShipDate = self.orderType.shipDate(account: account)
+        if let shipDate = queryHeaderResult?.string(forColumn: "ship_date"),
+            let nextShipDate = self.orderType.shipDate(account: account) {
             self.shipDate = shipDate < nextShipDate ? nextShipDate : shipDate
         }
         notes = queryHeaderResult?.string(forColumn: "notes") 
@@ -474,7 +436,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             let orderNo = orderNo else {
             return nil
         }
-        for line in orderInventory where (line as? OrderInventory)?.bottleTotal > 0 {
+        for line in orderInventory where ((line as? OrderInventory)?.bottleTotal ?? 0) > 0 {
             guard let inventory = line as? OrderInventory else {
                 return nil
             }
@@ -534,7 +496,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         orderDict["coop"] = coopNo ?? ""
         orderDict["po"] = poNo ?? ""
         orderDict["id"] = orderId ?? ""
-        for line in orderInventory where (line as? AccountOrderInventory)?.bottleTotal > 0 {
+        for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0) > 0 {
             guard let line = line as? AccountOrderInventory else {
                 continue
             }
