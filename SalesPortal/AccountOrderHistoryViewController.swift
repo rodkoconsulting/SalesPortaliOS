@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AccountOrderHistoryViewController: OrderHistoryViewController {
+class AccountOrderHistoryViewController: OrderHistoryViewController, isOrderHistoryVc {
     
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)

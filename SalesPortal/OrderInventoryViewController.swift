@@ -3,6 +3,10 @@ import UIKit
 import XuniFlexGridKit
 import MessageUI
 
+protocol isOrderInventoryVc {
+    func setAccountInventoryDelegate(_ orderInventory: OrderInventory)
+}
+
 class OrderInventoryViewController: DataGridViewController, OrderInventoryErrorDelegate  {
     
     @IBOutlet weak var myTabBarItem: UITabBarItem!

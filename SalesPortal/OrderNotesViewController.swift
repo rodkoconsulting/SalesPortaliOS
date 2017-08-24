@@ -9,6 +9,12 @@
 import UIKit
 import XuniInputKit
 
+protocol isOrderNotesVc {
+    func callChildDismiss()
+    func callChildViewDidLoad()
+    func callChildInitNotes()
+}
+
 class OrderNotesViewController: UIViewController, UITextFieldDelegate  {
     
     @IBOutlet weak var notesTextField: UITextField!

@@ -9,7 +9,7 @@
 import UIKit
 import XuniInputKit
 
-class SampleOrderNotesViewController: OrderNotesViewController  {
+class SampleOrderNotesViewController: OrderNotesViewController, isOrderNotesVc  {
     
     override func callChildViewDidLoad() {
         navigationBar.title = "Sample Notes"
@@ -20,5 +20,11 @@ class SampleOrderNotesViewController: OrderNotesViewController  {
         return super.textField(textField, shouldChangeCharactersIn: range, replacementString: string)
     }
     
+    override func callChildDismiss() {
 
+    }
+
+    override func callChildInitNotes() {
+    
+    }
 }

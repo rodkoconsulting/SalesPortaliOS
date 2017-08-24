@@ -3,6 +3,10 @@ import UIKit
 import XuniFlexGridKit
 import MessageUI
 
+protocol isOrderHistoryVc: class {
+    func setAccountInventoryDelegate(_ orderInventory: OrderInventory)
+}
+
 class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDelegate {
     
     @IBOutlet weak var myTabBarItem: UITabBarItem!
@@ -110,7 +114,7 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
     
     func setAccountInventoryDelegate(_ orderInventory: OrderInventory) {
         // implement in child
-        }
+    }
     
     func beginningEdit(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!) -> Bool {
         guard panel != nil else {

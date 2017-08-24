@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AccountOrderInventoryViewController: OrderInventoryViewController {
+class AccountOrderInventoryViewController: OrderInventoryViewController, isOrderInventoryVc {
     
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)

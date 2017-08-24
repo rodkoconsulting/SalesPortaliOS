@@ -12,6 +12,13 @@ import XuniInputKit
 
 protocol isOrderHeaderVc: class {
     func setComboBoxItemsSource()
+    func initOrder()
+    func selectedIndexChanged(_ sender: XuniComboBox!)
+    func orderTypeChanged(orderType: OrderType)
+    func getfilterPredicate(_ orderInventory: OrderInventory) -> Bool
+    func getOrderInventoryService(_ order: isOrderType, credentials: [String :  String]) -> OrderSyncServiceType?
+    func shipMonthSave()
+    func shipMonthChanged()
 }
 
 class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniDropDownDelegate,XuniComboBoxDelegate,OrderInventoryErrorDelegate {
@@ -28,7 +35,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     func setComboBoxItemsSource() {
-        
+        // implement in child
     }
     
     func saveOrderDelegate() {
@@ -209,7 +216,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     func getfilterPredicate(_ orderInventory: OrderInventory) -> Bool {
-        //implement in child
+        // implement in child
         return false
     }
     

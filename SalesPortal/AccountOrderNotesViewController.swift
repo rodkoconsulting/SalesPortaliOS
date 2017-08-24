@@ -32,8 +32,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
-class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDelegate, XuniComboBoxDelegate  {
+class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDelegate, XuniComboBoxDelegate, isOrderNotesVc {
 
 
     @IBOutlet weak var poNoTextField: UITextField!
