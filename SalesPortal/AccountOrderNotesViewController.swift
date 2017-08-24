@@ -8,29 +8,7 @@
 
 import UIKit
 import XuniInputKit
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
 
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
 
 class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDelegate, XuniComboBoxDelegate, isOrderNotesVc {
 
@@ -70,7 +48,7 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
             return
         }
         poNoTextField.text = accountOrder.poNo
-        guard order?.account?.coopList.count > 0 else {
+        guard (order?.account?.coopList.count ?? 0) > 0 else {
             HideCoop()
             return
         }
