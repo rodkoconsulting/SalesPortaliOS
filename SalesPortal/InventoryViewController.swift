@@ -164,7 +164,6 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
     }
     
     func syncInventory() {
-        //[][0]  crash test
         guard let credentials = Credentials.getCredentials(), let credentialState = credentials["state"] else {
             displayLogIn()
             return
