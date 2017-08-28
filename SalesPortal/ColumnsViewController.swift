@@ -20,6 +20,7 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func unwindFromColumns(_ sender: AnyObject) {
         self.performSegue(withIdentifier: "unwindFromColumns", sender: self)
     }
+    
     lazy var longPress: UILongPressGestureRecognizer = {
         let recognizer = UILongPressGestureRecognizer()
         return recognizer
@@ -29,9 +30,6 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     weak var columnsDelegate: ColumnsDelegate?
     
     var module: Module?
-    //var gridFilter: [ColumnFilters]?
-    //var filterSettings :
-    
     var sourceIndexPath: IndexPath? = nil
     var topVisibleIndexPath: IndexPath? = nil
     var snapshot: UIView? = nil
@@ -40,13 +38,7 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         longPress.addTarget(self, action: #selector(ColumnsViewController.longPressGestureRecognized(_:)))
         columnsTableView.addGestureRecognizer(longPress)
-        
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        columnsTableView.allowsSelection = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,9 +47,6 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let column =  columnSettings?.object(at: UInt(index.row)) as? DataGridColumn else {
                 return
             }
-            //let index = (columnsTableView.indexPathForSelectedRow)?.row
-            //let column =  columnSettings?.objectAtIndex(UInt(index!)) as? GridColumn
-            
             let columnFilters = column.columnFilters
             let filtersViewController = segue.destination as! FiltersViewController
             filtersViewController.filterDelegate = self
@@ -74,36 +63,6 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         return true
     }
-    
-//    @IBAction func unwindFromFilters(segue: UIStoryboardSegue) {
-//        guard let indexPath = columnsTableView.indexPathForSelectedRow,
-//                let column =  columnSettings?.objectAtIndex(UInt(indexPath.row)) as? GridColumn,
-//                let cell = columnsTableView.cellForRowAtIndexPath(indexPath) as? ColumnsTableViewCell else {
-//            return
-//        }
-//        cell.filterImage.hidden = column.columnFilters.filterList.count == 0
-//    }
-    
-//    @IBAction func removeFilters(sender: AnyObject) {
-//        var isFilterChanged = false
-//        guard let myColumnSettings = columnSettings else {
-//            return
-//        }
-//        for index in 0...myColumnSettings.count - 1 {
-//            guard let column = myColumnSettings.objectAtIndex(index) as? DataGridColumn else {
-//                continue
-//            }
-//            if column.columnFilters.filterList.count > 0 {
-//                isFilterChanged = true
-//            }
-//            column.columnFilters.filterList.removeAll()
-//        }
-//        guard isFilterChanged else {
-//            return
-//        }
-//        changedAllFilters()
-//
-//    }
 
     @IBAction func defaultView(_ sender: AnyObject) {
         guard let module = module else {
@@ -120,19 +79,9 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func longPressGestureRecognized(_ gesture: UILongPressGestureRecognizer) {
         let state: UIGestureRecognizerState = gesture.state;
         let location: CGPoint = gesture.location(in: columnsTableView)
-        
-        //if location.y < 0 {
-        //    location.y = CGFloat(0)
-        //}
-        
         let indexPath: IndexPath? = columnsTableView.indexPathForRow(at: location)
         
-        //if indexPath == nil {
-        //    indexPath = NSIndexPath(forRow: Int(columnSettings!.count) - 1, inSection: 0)
-        //}
-        
         switch (state) {
-            
         case UIGestureRecognizerState.began:
             guard let indexPath = indexPath else {
                 return
@@ -153,9 +102,6 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.snapshot?.alpha = 0.98
                 cell.alpha = 0.0
             })
-            
-            
-        
         case UIGestureRecognizerState.changed:
             guard let indexPath = indexPath, let superview = columnsTableView.superview  else {
                 return
@@ -169,16 +115,10 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
             center.y = location.y
             snapshot?.center = center
             if topVisibleIndexPath != sourceIndexPath {
-                // ... update data source.
                 moveColumnAtIndex(sourceIndexPath!.row, toIndex: topVisibleIndexPath!.row)
-                // ... move the rows.
                 columnsTableView.moveRow(at: sourceIndexPath!, to: topVisibleIndexPath!)
-                // ... and update source so it is in sync with UI changes.
                 sourceIndexPath = topVisibleIndexPath;
             }
-            
-            
-            
         default:
             guard let cell = columnsTableView.cellForRow(at: sourceIndexPath!)  else {
                 return
@@ -196,13 +136,6 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self.snapshot?.removeFromSuperview()
                     self.snapshot = nil;
             })
-            
-            // Clean up.
-            //guard let cell = columnsTableView.cellForRowAtIndexPath(indexPath!) else {
-            //    return
-            //}
-            //let cell = columnsTableView.cellForRowAtIndexPath(indexPath!)!
-            //break
         }
     }
     
@@ -212,12 +145,9 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         columnSettings?.removeObject(at: UInt(fromIndex))
         columnSettings?.insert(movedItem, at: UInt(toIndex))
-
     }
    
     func customSnapshotFromView(_ inputView: UIView) -> UIView {
-        
-        // Make an image from the input view.
         UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, false, 0)
         if let context = UIGraphicsGetCurrentContext()
         {
@@ -225,15 +155,12 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext();
-        
-        // Create an image view.
         let snapshot = UIImageView(image: image)
         snapshot.layer.masksToBounds = false
         snapshot.layer.cornerRadius = 0.0
         snapshot.layer.shadowOffset = CGSize(width: -5.0, height: 0.0)
         snapshot.layer.shadowRadius = 5.0
         snapshot.layer.shadowOpacity = 0.4
-        
         return snapshot
     }
     
@@ -291,10 +218,6 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let col = columnSettings!.object(at: UInt(indexPath.row))
         col.visible = isOn
         col.allowResizing = isOn
-        //if !col.visible {
-        //    moveColumnAtIndex(indexPath.row, toIndex: NSIndexPath(forRow: Int(columnSettings!.count) - 1, inSection: 0).row)
-        //}
-        //columnsTableView.reloadData()
     }
 
     func changedFilters(columnIndex: Int) {
