@@ -57,12 +57,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //filtersTableView.rowHeight = 125
         if let columnFilters = columnFilters {
             filtersNavigationItem.title = "Filters - " + columnFilters.header
-            //if columnFilters.filterType == .Date {
-            //   filtersTableView.rowHeight = 200
-            //}
         }
     }
     
@@ -159,7 +155,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 filterCell.operatorComboBox.tag =  operatorTag
                 filterCell.operatorComboBox.itemsSource = operatorItemsSource
                 filterCell.operatorComboBox.selectedIndex = operatorIndex
-                filterCell.operatorComboBox.dropDownHeight = operatorHeight
+                filterCell.operatorComboBox.dropDownHeight = row == 0 ? 0 : operatorHeight
                 filterCell.operatorComboBox.isHidden = row == 0
                 return filterCell
             case .Date:
@@ -173,7 +169,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 dateCell.operatorComboBox.tag =  operatorTag
                 dateCell.operatorComboBox.itemsSource = operatorItemsSource
                 dateCell.operatorComboBox.selectedIndex = operatorIndex
-                dateCell.operatorComboBox.dropDownHeight = operatorHeight
+                dateCell.operatorComboBox.dropDownHeight = row == 0 ? 0 : operatorHeight
                 dateCell.operatorComboBox.isHidden = row == 0
                 dateCell.dateButton.tag = row
                 let filterDate = filter.value.getGridDate() ?? Date()
@@ -191,7 +187,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 boolCell.operatorComboBox.tag =  operatorTag
                 boolCell.operatorComboBox.itemsSource = operatorItemsSource
                 boolCell.operatorComboBox.selectedIndex = operatorIndex
-                boolCell.operatorComboBox.dropDownHeight = operatorHeight
+                boolCell.operatorComboBox.dropDownHeight = row == 0 ? 0 : operatorHeight
                 boolCell.operatorComboBox.isHidden = row == 0
                 initComboBox(boolCell.boolComboBox)
                 boolCell.boolComboBox.tag =  boolTag
@@ -208,7 +204,6 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         commit editingStyle: UITableViewCellEditingStyle,
         forRowAt indexPath: IndexPath) {
             resignTextField()
-            // If the table view is asking to commit a delete command...
             if editingStyle == .delete {
                 if let filter = columnFilters?.filterList[indexPath.row] {
                     removeFilter(filter)
@@ -219,7 +214,6 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                         return
                 }
                 filterDelegate?.changedFilters(columnIndex: columnIndex)
-                //filtersTableView.reloadData()
             }
     }
     
