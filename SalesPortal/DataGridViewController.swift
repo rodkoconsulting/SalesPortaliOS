@@ -199,8 +199,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         if flexGrid.rows.count > 0 {
            flexGrid.scroll(intoView: 0, c: 0)
         }
-        //setItemLabels(selectedRow: flexGrid.selection.row)
-        
     }
     
     func searchTextChanged() {
@@ -395,37 +393,24 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
     
     func emailData(_ flexGrid: FlexGrid, moduleType: Module) {
-        
-        SwiftSpinner.show("Exporting...", animated: false)
-        DispatchQueue.global(qos: .userInitiated).async  {
-            guard let mailComposer = DataExport.excelExport(flexGrid: flexGrid, classType: self.classType, moduleType: moduleType, isManager: self.isManager) else {
+        SwiftSpinner.show("Exporting...", animated: false) {
+            _ in
+            DispatchQueue.main.async {
+                [unowned self] in
+                guard let mailComposer = DataExport.excelExport(flexGrid: flexGrid, classType: self.classType, moduleType: moduleType, isManager: self.isManager) else {
+                    DispatchQueue.main.async {
+                        SwiftSpinner.hide()
+                    }
+                    return
+                }
+                mailComposer.mailComposeDelegate = self
+                self.present(mailComposer, animated: true, completion: nil)
                 DispatchQueue.main.async {
                     SwiftSpinner.hide()
                 }
-                return
-            }
-            mailComposer.mailComposeDelegate = self
-            self.present(mailComposer, animated: true, completion: nil)
-            DispatchQueue.main.async {
-                SwiftSpinner.hide()
+
             }
         }
-        
-
-// SWIFTSPINNER COMPLETION
-//        SwiftSpinner.show("Exporting...", animated: false) {
-//            _ in
-//            DispatchQueue.main.async {
-//                [unowned self] in
-//                guard let mailComposer = DataExport.excelExport(flexGrid: flexGrid, classType: self.classType, moduleType: moduleType, isManager: self.isManager) else {
-//                    SwiftSpinner.hide()
-//                    return
-//                }
-//                mailComposer.mailComposeDelegate = self
-//                self.presentViewController(mailComposer, animated: true, completion: nil)
-//                SwiftSpinner.hide()
-//            }
-//        }
     }
 
     
@@ -493,8 +478,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
             }
         }
     }
-    
-    
     
     func getBackgroundColor(_ row: Int32) -> UIColor? {
         var backgroundColor: UIColor? = nil
