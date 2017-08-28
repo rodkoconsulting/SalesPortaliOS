@@ -117,6 +117,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clear
         cell.selectedBackgroundView = backgroundView
+        cell.selectionStyle = .none
+        cell.textLabel?.backgroundColor = UIColor.clear
         let defaultConditionIndex = myColumnFilters.conditionList.index{$0 == filter.condition} ?? 0
         let conditionItemsSource = ComboData.filterConditionData(myColumnFilters.conditionList)
         let conditionIndex = UInt(myColumnFilters.conditionList.startIndex.distance(to: defaultConditionIndex))
