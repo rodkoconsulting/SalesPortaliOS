@@ -133,6 +133,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    
+    
         func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
             toggleFilterCellUi(indexPath: indexPath, enable: false)
         }
@@ -187,6 +189,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let filterCell = cell as! FiltersTableViewCell
                 filterCell.valueText.delegate = self
                 filterCell.valueText.text = filter.value
+                filterCell.isUserInteractionEnabled = true;
                 filterCell.valueText.tag = row
                 filterCell.valueText.layer.borderWidth = 2
                 filterCell.valueText.layer.borderColor = UIColor(red: 192/255.0, green: 192/255.0, blue: 192/255.0, alpha: 1.0).cgColor
@@ -220,6 +223,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 dateCell.operatorComboBox.selectedIndex = operatorIndex
                 dateCell.operatorComboBox.dropDownHeight = row == 0 ? 0 : operatorHeight
                 dateCell.operatorComboBox.isHidden = row == 0
+                dateCell.dateButton.isUserInteractionEnabled = true;
                 dateCell.dateButton.tag = row
                 let filterDate = filter.value.getGridDate() ?? Date()
                 dateCell.dateButton.setTitle(filterDate.getDateShipPrint(), for: UIControlState())

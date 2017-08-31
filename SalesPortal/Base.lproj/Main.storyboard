@@ -415,15 +415,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAi-vl-pw3" customClass="XuniComboBox">
-                                                    <rect key="frame" x="3" y="7" width="45" height="30"/>
+                                                    <rect key="frame" x="3" y="10" width="70" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="45" id="dYD-lS-AH4"/>
+                                                        <constraint firstAttribute="width" constant="70" id="dYD-lS-AH4"/>
                                                         <constraint firstAttribute="height" constant="30" id="rkp-sI-Abo"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECP-Tp-INk" customClass="XuniComboBox">
-                                                    <rect key="frame" x="53" y="7" width="125" height="30"/>
+                                                    <rect key="frame" x="78" y="10" width="125" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Bvv-Dk-bVy"/>
@@ -431,7 +431,7 @@
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0f-xE-9Eo">
-                                                    <rect key="frame" x="183" y="7" width="152" height="30"/>
+                                                    <rect key="frame" x="208" y="10" width="127" height="30"/>
                                                     <state key="normal" title="Date"/>
                                                     <connections>
                                                         <segue destination="ODM-a0-ZFh" kind="presentation" identifier="showFilterDateViewController" id="0QR-LZ-WX4"/>
@@ -462,15 +462,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBH-1e-3Jd" customClass="XuniComboBox">
-                                                    <rect key="frame" x="5" y="7" width="45" height="30"/>
+                                                    <rect key="frame" x="5" y="10" width="70" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="ASG-T3-1gd"/>
-                                                        <constraint firstAttribute="width" constant="45" id="mcG-cI-nAG"/>
+                                                        <constraint firstAttribute="width" constant="70" id="mcG-cI-nAG"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6W7-rw-bni" customClass="XuniComboBox">
-                                                    <rect key="frame" x="55" y="7" width="125" height="30"/>
+                                                    <rect key="frame" x="80" y="10" width="125" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="125" id="4PR-gU-GJB"/>
@@ -478,7 +478,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kio-X5-nSd" customClass="XuniComboBox">
-                                                    <rect key="frame" x="185" y="0.0" width="125" height="43"/>
+                                                    <rect key="frame" x="210" y="3.5" width="125" height="43"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="43" id="Ly1-ED-aLS"/>
