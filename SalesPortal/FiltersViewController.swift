@@ -61,6 +61,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             filtersNavigationItem.title = "Filters - " + columnFilters.header
         }
     }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
@@ -97,6 +98,52 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         comboBox.isEditable = false
         comboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
     }
+    
+    func toggleFilterCellUi(indexPath: IndexPath, enable: Bool) {
+        guard let cell = filtersTableView.cellForRow(at: indexPath),
+            let myColumnFilters = columnFilters else {
+                return
+        }
+        let conditionItemsSource = ComboData.filterConditionData(myColumnFilters.conditionList)
+        let operatorItemsSource = ComboData.filterOperatorData(myColumnFilters.operatorList)
+        let operatorHeight = Double(operatorItemsSource.count * Constants.ComboCellHeight)
+        let conditionHeight = Double(conditionItemsSource.count * Constants.ComboCellHeight)
+        switch myColumnFilters.filterType {
+        case .String, .Number:
+            guard let textCell = cell as? FiltersTableViewCell else {
+                return
+            }
+            textCell.valueText.isUserInteractionEnabled = enable;
+            textCell.conditionComboBox.dropDownHeight = enable ? conditionHeight : 0
+            textCell.operatorComboBox.dropDownHeight = enable ? operatorHeight : 0
+        case .Date:
+            guard let dateCell = cell as? DateFiltersTableViewCell else {
+                return
+            }
+            dateCell.dateButton.isUserInteractionEnabled = enable;
+            dateCell.conditionComboBox.dropDownHeight = enable ? conditionHeight : 0
+            dateCell.operatorComboBox.dropDownHeight = enable ? operatorHeight : 0
+        case .Bool:
+            guard let boolCell = cell as? BoolFiltersTableViewCell else {
+                return
+            }
+            boolCell.boolComboBox.isUserInteractionEnabled = enable;
+            boolCell.conditionComboBox.dropDownHeight = enable ? conditionHeight : 0
+            boolCell.operatorComboBox.dropDownHeight = enable ? operatorHeight : 0
+        }
+    }
+    
+        func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+            toggleFilterCellUi(indexPath: indexPath, enable: false)
+        }
+        
+        func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?)  {
+            guard let indexPath = indexPath else {
+                return
+            }
+            toggleFilterCellUi(indexPath: indexPath, enable: true)
+        }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
@@ -316,6 +363,4 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             
         }
     }
-
-    
 }
