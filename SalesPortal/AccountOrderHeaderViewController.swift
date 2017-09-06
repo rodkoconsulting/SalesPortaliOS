@@ -61,32 +61,19 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
     }
     
     override func shipMonthChanged() {
-        SwiftSpinner.show("Loading...", animated: false)
-        shipMonthSave()
-        loadData(isSynched: true)
-        clearAllGridSource()
-        order?.loadSavedLines()
-        setAllGridSource()
-        loadGroup()
-        filterGrid("")
-        DispatchQueue.main.async {
-            SwiftSpinner.hide()
+        SwiftSpinner.show("Loading...", animated: false) {
+            [unowned self] _ in
+            self.shipMonthSave()
+            self.loadData(isSynched: true)
+            self.clearAllGridSource()
+            self.order?.loadSavedLines()
+            self.setAllGridSource()
+            self.loadGroup()
+            self.filterGrid("")
+            DispatchQueue.main.async {
+                SwiftSpinner.hide()
+            }
         }
-// SWIFTSPINNER COMPLETION
-//        SwiftSpinner.show("Loading...", animated: false) {
-//            [unowned self] _ in
-//            self.shipMonthSave()
-//            self.loadData(isSynched: true)
-//            self.clearAllGridSource()
-//            self.order?.loadSavedLines()
-//            self.setAllGridSource()
-//            self.loadGroup()
-//            self.filterGrid("")
-//            DispatchQueue.main.async {
-//                SwiftSpinner.hide()
-//            }
-//        }
-
     }
 
     override func orderTypeChanged(orderType: OrderType) {
@@ -184,51 +171,4 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
         accountOrder.saveMoboList()
     }
 
-    
-        
-    
-//    func syncAccounts() {
-//        guard let credentials = Credentials.getCredentials(), let _ = credentials["state"] else {
-//            displayLogIn()
-//            return
-//        }
-//        SwiftSpinner.show("Syncing...", animated: false)
-//        let accountService = AccountService(module: moduleType, apiCredentials: credentials)
-//        let orderListService = OrderListService(module: Module.OrderList, apiCredentials: credentials)
-//        do {
-//            let lastAccountSync = try accountService.queryAllLastSync()
-//            let lastOrderListSync = try orderListService.queryAllLastSync()
-//            accountService.getApi(lastAccountSync) {
-//                [unowned self](let accountSyncCompletion, error) in
-//                guard let accountSync = accountSyncCompletion else  {
-//                    self.completionError(error ?? ErrorCode.UnknownError)
-//                    return
-//                }
-//                do {
-//                    try accountService.updateDb(accountSync)
-//                } catch {
-//                    self.completionError(ErrorCode.DbError)
-//                }
-//                accountService.updateLastSync()
-//                orderListService.getApi(lastOrderListSync) {
-//                    (let orderListSyncCompletion, error) in
-//                    guard let orderListSync = orderListSyncCompletion else  {
-//                        self.completionError(error ?? ErrorCode.UnknownError)
-//                        return
-//                    }
-//                    do {
-//                        try orderListService.updateDb(orderListSync)
-//                    } catch {
-//                        self.completionError(ErrorCode.DbError)
-//                    }
-//                    orderListService.updateLastSync()
-//                    self.loadData(isSynched: true)
-//                }
-//            }
-//        } catch {
-//            completionError(ErrorCode.DbError)
-//        }
-//    }
-
-    
 }

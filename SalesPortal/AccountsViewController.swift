@@ -94,28 +94,11 @@ class AccountsViewController: DataGridViewController {
         return true
     }
 
-
-//    override func handleLongPress(sender: UILongPressGestureRecognizer) {
-//        let pressedPoint = sender.locationInView(flexGrid)
-//        let hit = GridHitTestInfo(grid: flexGrid, atPoint: pressedPoint)
-//        guard hit.column >= 0 else {
-//            return
-//        }
-//        if sender.state == UIGestureRecognizerState.Began && hit.cellType == GridCellType.ColumnHeader {
-//            guard let column = flexGrid.columns.objectAtIndex(UInt(hit.column)) as? DataGridColumn else {
-//                return
-//            }
-//            showFilterActionSheet(column: column, rowIndex: hit.row, panel: hit.gridPanel, flexGrid: flexGrid)
-//        }
-//    }
   
     @IBAction func refreshGrid(_ sender: AnyObject) {
         syncAccounts()
     }
     
-//    init() {
-//        super.init(nibName: nil, bundle: nil)
-//    }
     
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
@@ -123,29 +106,8 @@ class AccountsViewController: DataGridViewController {
         classType = Account.self
     }
     
-    
-    //func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-    //    if clearFilterButton.enabled == false {
-    //        clearFilterButton.enabled = true
-    //    }
-    // }
-    
-    //override func clearSelectedCells() {
-    //    guard flexGrid.rows.count > 0 && flexGrid.columns.count > 0 else {
-    //        return
-    //    }
-    //    flexGrid.selection = GridCellRange(row: 0, col: 1)
-    //    flexGrid.selection = GridCellRange(row: 0, col: 0)
-    //}
-    
-    
     func displayView() {
-        //do {
-            //try DbOperation.databaseInit()
-            loadData(isSynched: false)
-        //} catch {
-           // sendAlert(ErrorCode.DbError)
-        //}
+        loadData(isSynched: false)
     }
     
     override func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange!) -> Bool {

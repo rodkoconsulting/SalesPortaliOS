@@ -27,8 +27,6 @@ class AccountInfoViewController: UIViewController {
         guard let account = account else {
             return
         }
-        //let address2 = account.addr2.characters.count > 0 ? "\(account.addr2)\r\n" : ""
-        //addressTextView.text = "\(account.addr1)\r\n\(address2)\(account.city), \(account.state) \(account.zip)"
         addressTextView.text = "\(account.addr1)\r\n\(account.city), \(account.state) \(account.zip)"
         navigationBar.title = account.customerName
         guard account.buyer1.characters.count > 0 else {
@@ -46,13 +44,6 @@ class AccountInfoViewController: UIViewController {
             return
         }
         wineBuyer3TextView.text = "\(account.buyer3)\r\n\(account.buyer3Phone)\r\n\(account.buyer3Email)"
-        // Do any additional setup after loading the view.
-    }
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func dismiss(_ sender: AnyObject) {
@@ -73,15 +64,4 @@ class AccountInfoViewController: UIViewController {
     func disableWineBuyer3() {
         wineBuyer3Label.text = ""
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
