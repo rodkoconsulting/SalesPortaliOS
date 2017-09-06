@@ -8,15 +8,10 @@ class AccountsViewController: DataGridViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        SwiftSpinner.show("Loading...", animated: false)
-        displayView()
-        
-// SWIFTSPINNER COMPLETION
-//        SwiftSpinner.show("Loading...", animated: false) {
-//            [unowned self] _ in
-//            self.displayView()
-//        }
+        SwiftSpinner.show("Loading...", animated: false) {
+            [unowned self] _ in
+            self.displayView()
+        }
     }
     
     override func loadSettings() {
