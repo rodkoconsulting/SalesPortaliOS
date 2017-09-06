@@ -77,6 +77,7 @@ protocol OrderTypeErrorDelegate: class {
 
 protocol OrderDelegate: class {
     func orderTypeChanged(orderType: OrderType)
+    func coopCasesChanged()
 }
 
 typealias OrderSavedResults = (headerResults: FMResultSet, detailResults: [FMResultSet])?
@@ -109,6 +110,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
     var coopCases: Int? {
         didSet {
             repriceNJ()
+            orderDelegate?.coopCasesChanged()
         }
     }
     

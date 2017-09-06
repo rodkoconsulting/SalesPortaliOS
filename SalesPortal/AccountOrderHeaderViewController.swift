@@ -84,6 +84,10 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
         filterGrid("")
     }
     
+    func coopCasesChanged() {
+        flexGrid.invalidate()
+    }
+    
     fileprivate func toggleNonBillHoldViews(enabled: Bool) {
         let orderTabBarController = tabBarController as! OrderTabBarController
         if let myViewControllers = orderTabBarController.viewControllers {
