@@ -62,8 +62,14 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         flexGrid.invalidate()
-        filterGrid("")
+        filterRefresh()
         isLoaded = true
+    }
+    
+    override func filterRefresh(){
+        let filterImage = flexGrid.hasFilters() ? UIImage(named: "Full Filters") : UIImage(named: "Clear Filters")
+        filterGrid("")
+        removeFilterButton.image = filterImage
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -227,7 +233,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         }
         collectionView.filter = {(item : NSObject?) -> Bool in
             unowned let row = item as! OrderInventory
-            return self.getfilterPredicate(row)
+            return self.getfilterPredicate(row) && self.flexGrid.filterColumns(nil, row: row)
             } as IXuniPredicate
         resetGrid()
     }
