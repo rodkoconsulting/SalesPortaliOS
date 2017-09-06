@@ -28,9 +28,9 @@ struct DataExport {
                 let column = flexGrid.columns.object(at: UInt(index))
                 if column.visible {
                     headerString += column.header ?? ""
-                }
-                if index < flexGrid.columns.count - 1 {
-                    headerString += "\t"
+                    if index < flexGrid.columns.count - 1 {
+                        headerString += "\t"
+                    }
                 }
             }
             headerString += "\n"
@@ -85,10 +85,11 @@ struct DataExport {
                 let flexColumn = flexGrid.columns.object(at: UInt(column))
                 if flexColumn.visible {
                     text += getCellText(row: row, column: column, flexGrid: flexGrid, classType: classType, isManager: isManager)
+                    if column != columnEnd {
+                        text += "\t"
+                    }
                 }
-                if column != columnEnd {
-                    text += "\t"
-                } else if column == columnEnd && row != rowEnd {
+                if column == columnEnd && row != rowEnd {
                     text += "\n"
                 }
             }
