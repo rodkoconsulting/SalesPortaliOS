@@ -106,8 +106,8 @@ class SampleAddress: SyncRows {
     let shipToName: String?
     let shipToAddress: String?
     let repRegion: String?
-    let isRep: Int?
-    let isActive: Int?
+    let isRep: Bool?
+    let isActive: Bool?
     
     required init(dict: [String: Any]?) {
         shipToCode = dict?["Code"] as? String
@@ -115,8 +115,8 @@ class SampleAddress: SyncRows {
         shipToName = dict?["Name"] as? String
         shipToAddress = dict?["Addr"] as? String
         repRegion = dict?["Reg"] as? String
-        isRep = dict?["isRep"] as? Int
-        isActive = dict?["isAct"] as? Int
+        isRep = dict?["isRep"] as? Bool
+        isActive = dict?["isAct"] as? Bool
     }
     
     lazy var getDbDelete: String? = {
