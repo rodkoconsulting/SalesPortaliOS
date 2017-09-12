@@ -164,17 +164,17 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
         }
         cell.backgroundColor = UIColor.clear
         let dataForRowAtIndexPath = self.applyFilterWithSearchQuery(str)[indexPath.row]
-        guard let displayText = dataForRowAtIndexPath["DisplayText"],
-            let displaySubText = dataForRowAtIndexPath["DisplaySubText"] else {
+//        guard let displayText = dataForRowAtIndexPath["DisplayText"],
+//            let displaySubText = dataForRowAtIndexPath["DisplaySubText"] else {
+//                return cell
+//        }
+        let displaySubText = dataForRowAtIndexPath["DisplaySubText"]
+        guard let displayText = dataForRowAtIndexPath["DisplayText"] else {
                 return cell
         }
-        
-        //cell.textLabel?.font = cell.textLabel?.font.fontWithSize(12)
         cell.textLabel!.text = displayText
         cell.textLabel?.numberOfLines = 0
-        //cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        //cell.detailTextLabel?.font = cell.detailTextLabel?.font.fontWithSize(12)
-        cell.detailTextLabel!.text = displaySubText
+        cell.detailTextLabel!.text = displaySubText ?? ""
         return cell
     }
     
@@ -186,8 +186,12 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
     func applyFilterWithSearchQuery(_ filter : String) -> [[String : String]]
     {
         let filteredData = data.filter({
-                if let matchText = $0["DisplayText"],
-                    let matchSubText = $0["DisplaySubText"] {
+//            if let matchText = $0["DisplayText"],
+//                let matchSubText = $0["DisplaySubText"] {
+//                return (matchText.lowercased().range(of: (filter as String).lowercased()) != nil) || (matchSubText.lowercased().range(of: (filter as String).lowercased()) != nil)
+//            }
+                let matchSubText = $0["DisplaySubText"] ?? ""
+                if let matchText = $0["DisplayText"] {
                     return (matchText.lowercased().range(of: (filter as String).lowercased()) != nil) || (matchSubText.lowercased().range(of: (filter as String).lowercased()) != nil)
                 }
                 else{
@@ -218,6 +222,7 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
     
     func handleExit(){
         let selectedIndexPath = self.tableViewController?.tableView.indexPathForSelectedRow
+        var isIndex = true
         guard let str = self.text else {
             return
         }
@@ -234,9 +239,12 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
                 let selectedData = self.applyFilterWithSearchQuery(str)[indexPath.row]
                 if let displayText = selectedData["DisplaySubText"] {
                     self.text = displayText
+                } else {
+                    self.text = selectedData["DisplayText"]
+                    isIndex = false
                 }
             }
-            mDelegate?.textFieldDidEndEditing?(self, isIndex: true )
+            mDelegate?.textFieldDidEndEditing?(self, isIndex: isIndex )
         }
 
     }
