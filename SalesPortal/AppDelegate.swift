@@ -19,7 +19,7 @@
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
             // Override point for customization after application launch.
             XuniLicenseManager.setKey(License().key)
-            //TestFairy.begin("83214e25cc75ac626e343dd7738c46b1f37c920e")
+            TestFairy.begin("83214e25cc75ac626e343dd7738c46b1f37c920e")
             NSTimeZone.default = TimeZone(identifier: "America/New_York")!
             return true
         }

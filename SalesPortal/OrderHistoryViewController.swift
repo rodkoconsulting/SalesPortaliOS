@@ -47,7 +47,7 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
             return
         }
         let flexRow = flexGrid.rows.object(at: UInt(selectedRow))
-        guard let inventory = flexRow.dataItem as? Inventory else {
+        guard let inventory = flexRow.dataItem as? OrderInventory else {
             return
         }
         if descriptionLabel != nil {
