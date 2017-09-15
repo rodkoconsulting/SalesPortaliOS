@@ -134,7 +134,8 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
             searchData = orderListSearchData
         }
         let orderListLastSync = orderListService.queryLastSync
-        guard orderListLastSync != nil && gridData != nil else {
+        //guard orderListLastSync != nil && gridData != nil else {
+        guard orderListLastSync != nil else {
             guard !isSynched else {
                 completionError(ErrorCode.dbError)
                 return

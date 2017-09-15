@@ -126,7 +126,7 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
             searchData = sampleListSearchData
         }
         let sampleListLastSync = sampleListService.queryLastSync
-        guard sampleListLastSync != nil && gridData != nil else {
+        guard sampleListLastSync != nil else {
             guard !isSynched else {
                 completionError(ErrorCode.dbError)
                 return
