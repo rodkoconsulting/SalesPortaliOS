@@ -38,7 +38,6 @@ extension FlexGrid {
         self.font = GridSettings.defaultFont!
         self.columnHeaderFont = GridSettings.columnHeaderFont!
         let defaults = UserDefaults.standard
-        //let defaultColumnSettings : [ColumnSettings]?  = nil
         let defaultColumnSettings = ColumnSettings.generateColumnSettings(defaults.object(forKey: moduleType.columnSettings) as? [[String : AnyObject]])
         let (columns, tag) = DataGridColumn.generateColumns(defaultColumnSettings, module: moduleType)
         self.tag = tag

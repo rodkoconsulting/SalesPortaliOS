@@ -78,28 +78,6 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
         return false
     }
     
-    
-//    override func handleLongPress(sender: UILongPressGestureRecognizer) {
-//        let pressedPoint = sender.locationInView(flexGrid)
-//        let hit = GridHitTestInfo(grid: flexGrid, atPoint: pressedPoint)
-//        guard hit.column >= 0 else {
-//            return
-//        }
-//        guard let column = flexGrid.columns.objectAtIndex(UInt(hit.column)) as? DataGridColumn else {
-//            return
-//        }
-//        if sender.state == UIGestureRecognizerState.Began && hit.cellType == GridCellType.ColumnHeader {
-//            showFilterActionSheet(column: column, rowIndex: hit.row, panel: hit.gridPanel, flexGrid: flexGrid)
-//        }
-//        if sender.state == UIGestureRecognizerState.Began && hit.cellType == GridCellType.Cell {
-//            guard let row = flexGrid.rows.objectAtIndex(UInt(hit.row)) as? GridRow,
-//                let mobo = row.dataItem as? MoboList else {
-//                return
-//            }
-//            showMoboActionSheet(column: column, rowIndex: hit.row, mobo: mobo, panel: hit.gridPanel, flexGrid: flexGrid)
-//        }
-//    }
-    
     func showMoboActionSheet(column: DataGridColumn, rowIndex: Int32, mobo: MoboList, panel: GridPanel, flexGrid: FlexGrid) {
         let actionSheet = UIAlertController(title: mobo.itemCode, message: nil, preferredStyle: .actionSheet)
         let shipAllButton = UIAlertAction(title: "Ship All", style: .default) {
@@ -172,7 +150,6 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
     
     func cellEditEnding(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!, cancel: Bool) -> Bool {
         activeField = nil
-        //topCell = nil
         return false
     }
     

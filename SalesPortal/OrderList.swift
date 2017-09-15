@@ -147,7 +147,6 @@ class OrderList : NSObject {
     let customerNo: String
     let customerName: String
     let shipExpireDate: Date?
-    //let orderTypeRaw: String
     let orderStatus: String
     let holdCodeRaw: String
     let coopNo: String

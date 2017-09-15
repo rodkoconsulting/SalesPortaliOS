@@ -164,10 +164,6 @@ struct OrderSavedService<T: isOrderType> {
         return orderSavedArray.count > 0 ? (orderSavedArray, orderSavedSearch) : (nil, nil)
     }
     
-//    static func queryOrdersSavedPreviousDb() -> [isOrderType?] {
-//        
-//    }
-    
     static func queryOrderSaved(orderNo: Int) -> isOrderType? {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return nil

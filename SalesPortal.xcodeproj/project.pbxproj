@@ -64,7 +64,6 @@
 		C37F4A771CF3A17F00665ED0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C37F4A751CF3A0BB00665ED0 /* libsqlite3.tbd */; };
 		C37F4A791CF3A2CC00665ED0 /* XuniCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C37F4A781CF3A2CC00665ED0 /* XuniCoreKit.framework */; };
 		C37F4A7B1CF3A2E700665ED0 /* XuniFlexGridKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C37F4A7A1CF3A2E700665ED0 /* XuniFlexGridKit.framework */; };
-		C37F4A7D1CF3A47100665ED0 /* GridDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A7C1CF3A47100665ED0 /* GridDataSource.swift */; };
 		C37F4A7F1CF3A48100665ED0 /* DataGridColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A7E1CF3A48100665ED0 /* DataGridColumn.swift */; };
 		C37F4A811CF3A49A00665ED0 /* DataExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37F4A801CF3A49A00665ED0 /* DataExport.swift */; };
 		C383DD651E0B23C40020E6B3 /* SampleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C383DD641E0B23C40020E6B3 /* SampleList.swift */; };
@@ -178,7 +177,6 @@
 		C37F4A751CF3A0BB00665ED0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		C37F4A781CF3A2CC00665ED0 /* XuniCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XuniCoreKit.framework; path = ../Xuni/iOS/Controls/XuniCoreKit.framework; sourceTree = "<group>"; };
 		C37F4A7A1CF3A2E700665ED0 /* XuniFlexGridKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XuniFlexGridKit.framework; path = ../Xuni/iOS/Controls/XuniFlexGridKit.framework; sourceTree = "<group>"; };
-		C37F4A7C1CF3A47100665ED0 /* GridDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridDataSource.swift; sourceTree = "<group>"; };
 		C37F4A7E1CF3A48100665ED0 /* DataGridColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataGridColumn.swift; sourceTree = "<group>"; };
 		C37F4A801CF3A49A00665ED0 /* DataExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExport.swift; sourceTree = "<group>"; };
 		C383DD641E0B23C40020E6B3 /* SampleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleList.swift; sourceTree = "<group>"; };
@@ -502,7 +500,6 @@
 				C37F4A6B1CF39B5600665ED0 /* DataSettings.swift */,
 				C3ED0AA11CBC27E200B9520E /* ErrorCode.swift */,
 				C37F4A651CF399B700665ED0 /* Extensions.swift */,
-				C37F4A7C1CF3A47100665ED0 /* GridDataSource.swift */,
 				C37F4A6F1CF39B9F00665ED0 /* GridFilter.swift */,
 				C37F4A6D1CF39B8B00665ED0 /* GridSettings.swift */,
 				C37F4A531CF377A900665ED0 /* Inventory.swift */,
@@ -702,7 +699,6 @@
 				C3EAC0211CF8CB9C0054D031 /* InventorySettingsTableViewCell.swift in Sources */,
 				C383DD671E0B37670020E6B3 /* SampleListService.swift in Sources */,
 				C3EAC0171CF8A9A00054D031 /* DateFiltersTableViewCell.swift in Sources */,
-				C37F4A7D1CF3A47100665ED0 /* GridDataSource.swift in Sources */,
 				C31F1F3D1E3BDE3400F1ACC0 /* SampleOrderService.swift in Sources */,
 				C3F632111D874C8E007BC756 /* CalendarModalView.swift in Sources */,
 				C3EAC01D1CF8B6DC0054D031 /* ColumnsTableViewCell.swift in Sources */,

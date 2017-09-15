@@ -12,14 +12,12 @@ import XuniFlexGridKit
 class DataGridColumn: GridColumn {
     
     var alignment: NSTextAlignment?
-    //var autosize: Bool
     var isSortAscending: Bool?
     var columnFilters: ColumnFilters
     var groupLevel: Int?
     var groupLevelManager: Int?
     
     init(myName: String, myHeader: String, myFilterType: FilterType?){
-        //autosize = true
         columnFilters  = ColumnFilters(header: myHeader)
         super.init()
         binding = myName
@@ -38,7 +36,6 @@ class DataGridColumn: GridColumn {
         let gridColumn = DataGridColumn(myName: columnDict[kName] as! String , myHeader: columnDict[kHeader] as! String, myFilterType: filterType)
         if let width = columnDict[kWidth] as? Int {
             gridColumn.width = Double(width)
-            //gridColumn.autosize = false
         }
         if let minwidth = columnDict[kMinWidth] as? Int {
             gridColumn.minWidth = Int32(minwidth)

@@ -390,7 +390,6 @@ class Inventory : NSObject {
     
     
     lazy var getPriceTupleArray : [(price: Double, unit: Int)] = {
-        //let isBottlePricing = self.isBottlePricing
         [unowned self] in
         var tupleArray:[(price: Double, unit: Int)] = []
         for priceBreak in self.priceArray {
@@ -412,9 +411,7 @@ class Inventory : NSObject {
     
     lazy var priceBreaks : priceBreakType = {
         [unowned self] in
-        //let isBottlePricing = self.isBottlePricing
         let priceCaseTuple: (price: Double, discount: Double)
-        //let priceTupleArray = self.getPriceTupleArray
             if self.getPriceTupleArray.isEmpty {
                 priceCaseTuple = (0, 0)
             } else if !self.isBottlePricing {

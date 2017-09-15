@@ -18,7 +18,6 @@ class SampleOrderInventory: OrderInventory {
     
     override func getDbDetailInsert(_ orderNo: Int) -> String {
         let comment = (self.comment ?? "").replacingOccurrences(of: "'", with: "''")
-        //return "(\(orderNo), '" + itemCode + "', \(bottleTotal), 0.0, '" + "''" + "', 0, 0)"
         return "(\(orderNo), '" + itemCode + "', \(bottleTotal), 0.0, '" + "''" + "', 0, 0, '" + comment + "')"
     }
 

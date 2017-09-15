@@ -35,7 +35,6 @@ struct Credentials {
             return
         }
         credentials["state"] = String(state[state.characters.index(before: state.endIndex)])
-        //Credentials.deleteCredentials()
         try! Locksmith.updateData(data: credentials as [String : Any], forUserAccount: "polPortal")
     }
     

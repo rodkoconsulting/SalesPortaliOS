@@ -82,11 +82,6 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
             tableViewController!.tableView.reloadData()
         }
         else if self.applyFilterWithSearchQuery(str).count > 0{
-            //let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(MPGTextField_Swift.tapped(_:)))
-            //tapRecognizer.numberOfTapsRequired = 1
-            //tapRecognizer.cancelsTouchesInView = false
-            //tapRecognizer.delegate = self
-            //superView.addGestureRecognizer(tapRecognizer)
             self.tableViewController = UITableViewController()
             self.tableViewController!.tableView.delegate = self
             self.tableViewController!.tableView.dataSource = self
@@ -121,18 +116,6 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
         }
     }
     
-//    func tapped (sender : UIGestureRecognizer!){
-//        if let table = self.tableViewController{
-//            if !CGRectContainsPoint(table.tableView.frame, sender.locationInView(self.superview)) && self.isFirstResponder(){
-//                if self.tableViewController != nil {
-//                    self.tableViewController!.tableView.removeFromSuperview()
-//                    self.tableViewController = nil
-//                }
-//                super.resignFirstResponder()
-//            }
-//        }
-//    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         guard let str = self.text else {
             return 0
@@ -164,10 +147,6 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
         }
         cell.backgroundColor = UIColor.clear
         let dataForRowAtIndexPath = self.applyFilterWithSearchQuery(str)[indexPath.row]
-//        guard let displayText = dataForRowAtIndexPath["DisplayText"],
-//            let displaySubText = dataForRowAtIndexPath["DisplaySubText"] else {
-//                return cell
-//        }
         let displaySubText = dataForRowAtIndexPath["DisplaySubText"]
         guard let displayText = dataForRowAtIndexPath["DisplayText"] else {
                 return cell
@@ -186,10 +165,6 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
     func applyFilterWithSearchQuery(_ filter : String) -> [[String : String]]
     {
         let filteredData = data.filter({
-//            if let matchText = $0["DisplayText"],
-//                let matchSubText = $0["DisplaySubText"] {
-//                return (matchText.lowercased().range(of: (filter as String).lowercased()) != nil) || (matchSubText.lowercased().range(of: (filter as String).lowercased()) != nil)
-//            }
                 let matchSubText = $0["DisplaySubText"] ?? ""
                 if let matchText = $0["DisplayText"] {
                     return (matchText.lowercased().range(of: (filter as String).lowercased()) != nil) || (matchSubText.lowercased().range(of: (filter as String).lowercased()) != nil)

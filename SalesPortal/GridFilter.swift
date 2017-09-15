@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//import XuniFlexGridKit
 
 enum FilterOperator : String {
     case And = "And"

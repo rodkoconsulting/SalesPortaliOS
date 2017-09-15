@@ -7,15 +7,6 @@
 //
 
 import Foundation
-//
-//  OrderInventory.swift
-//  SalesPortal
-//
-//  Created by administrator on 6/7/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
-
-import Foundation
 
 protocol OrderInventoryErrorDelegate: class {
     func sendAlert(_ error: ErrorCode)

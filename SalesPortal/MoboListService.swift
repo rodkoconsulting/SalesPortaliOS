@@ -35,10 +35,6 @@ class OrderMoboService: SyncService, SyncServiceType {
             "ORDER BY a.CUSTOMER_NAME, h.ORDER_NO desc, i.DESC"
             let results: FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             while results?.next() == true {
-//                guard let  moboList = MoboList(queryResult: results!),
-//                        let itemDescription = moboList.itemDescription else {
-//                    continue
-//                }
                 let  moboList = MoboList(queryResult: results!)
                 let itemDescription = moboList.itemDescription ?? ""
                 let moboListDict = ["DisplayText": itemDescription, "DisplaySubText": moboList.itemCode]

@@ -232,7 +232,6 @@ class SampleList : NSObject {
     let shipDate: Date?
     let damagedNotes: String
     let quantity: Double
-    //let totalGroupLabel: String = "Total:"
     let rep: String
     let region: String
     let isFocusString: String

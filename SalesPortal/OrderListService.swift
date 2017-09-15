@@ -10,33 +10,6 @@ import Foundation
 
 class OrderListService: SyncService, SyncServiceType {
     
-//    func queryDb() -> (gridData:NSMutableArray?, searchData: [[String : AnyObject]]?) {
-//        let dB = FMDatabase(path: Constants.databasePath)
-//        let orderListArray = NSMutableArray()
-//        var orderListSearch = [[String : AnyObject]]()
-//        if dB.open() {
-//            let sqlQuery =
-//                "SELECT H.ORDER_NO, h.ORDER_DATE, h.SHIP_DATE, h.TYPE, h.STATUS, h.HOLD, h.COOP, h.COMMENT, " +
-//                    "d.ITEM_CODE, d.QTY, d.PRICE, d.TOTAL " +
-//                    "i.DESC, i.BRAND, i.PRICE, i.VINTAGE, i.UOM, i.SIZE, i.DAMAGED_NOTES " +
-//                    "a.CUSTOMER_NAME " +
-//                    "FROM ACCOUNTS_LIST a INNER JOIN ORDER_LIST_HEADER h ON a.DIVISION_NO = h.DIVISION_NO and a.CUSTOMER_NO = h.CUSTOMER_NO " +
-//                    "INNER JOIN ORDER_LIST_DETAIL d ON h.ORDER_NO = d.ORDER_NO " +
-//            "LEFT OUTER JOIN INV_DESC i ON d.ITEM_CODE = i.ITEM_CODE "
-//            let results: FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsInArray: nil)
-//            while results?.next() == true {
-//                guard let orderList = OrderList(queryResult: results!) else {
-//                    continue
-//                }
-//                let orderListDict = ["DisplayText": orderList.customerName]
-//                orderListArray.addObject(orderList)
-//                orderListSearch.append(orderListDict)
-//            }
-//            dB.close()
-//        }
-//        return orderListArray.count > 0 ? (orderListArray, orderListSearch) : (nil, nil)
-//    }
-    
     func queryDb() -> (gridData:NSMutableArray?, searchData: [[String : String]]?, isManager: Bool) {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return (nil, nil, false)
@@ -85,9 +58,6 @@ class OrderListService: SyncService, SyncServiceType {
             "ORDER BY a.REGION, a.REP, a.CUSTOMER_NAME, hoi.ORDER_DATE desc"
             let results: FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             while results?.next() == true {
-//                guard let orderList = OrderList(queryResult: results!) else {
-//                    continue
-//                }
                 let orderList = OrderList(queryResult: results!)
                 if !isMultipleReps {
                     if previousRep.characters.count > 0 && previousRep != orderList.rep {
@@ -97,19 +67,16 @@ class OrderListService: SyncService, SyncServiceType {
                         previousRep = orderList.rep
                     }
                 }
-                //if !orderListSearch.contains({ $0.values.contains(orderList.customerNo) }) {
                 let customerListDict = ["DisplayText": orderList.customerName, "DisplaySubText": orderList.customerNo]
                 if !orderListSearch.contains(where: {$0 == customerListDict}) {
                     orderListSearch.append(customerListDict)
                 }
-                //if !orderListSearch.contains({ $0.values.contains(orderList.itemCode) }) {
                 if let itemDescription = orderList.itemDescription {
                     let itemListDict = ["DisplayText": itemDescription, "DisplaySubText": orderList.itemCode]
                     if !orderListSearch.contains(where: {$0 == itemListDict}) {
                         orderListSearch.append(itemListDict)
                     }
                 }
-                //}
                 orderListArray.add(orderList)
             }
             dB.close()
