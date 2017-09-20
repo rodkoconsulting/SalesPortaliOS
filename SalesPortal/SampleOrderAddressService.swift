@@ -17,7 +17,7 @@ class OrderAddressService {
         var addressList = [OrderAddress]()
         if dB.open() {
             let sqlQuery =
-                "SELECT CODE, REP, NAME, ADDRESS, REGION FROM SAMPLE_ADDRESSES WHERE IS_REP = 1 AND IS_ACTIVE = 1"
+                "SELECT CODE, REP, NAME, ADDRESS, REGION FROM SAMPLE_ADDRESSES WHERE IS_REP = 'true' AND IS_ACTIVE = 'true'"
             let results:FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             while results?.next() == true {
                 addressList.append(OrderAddress(queryResult: results!))
