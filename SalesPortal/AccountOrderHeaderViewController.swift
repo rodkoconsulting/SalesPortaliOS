@@ -157,7 +157,6 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
         }
     }
     
-    
     override func clearAllGridSource() {
         guard let accountOrder = order as? AccountOrder else {
                 return

@@ -494,6 +494,11 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        flexGrid.finishEditing(false)
+        flexGrid.saveUserDefaults(moduleType)
+    }
     
     override func showShareActionSheet(flexGrid: FlexGrid, moduleType: Module, sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "Send Data", message: nil, preferredStyle: .actionSheet)
