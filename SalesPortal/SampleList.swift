@@ -275,6 +275,9 @@ class SampleList : NSObject {
     
     lazy var itemDescription : String? = {
         [unowned self] in
+        guard !self.itemDescriptionRaw.isEmpty else {
+            return ""
+        }
         return self.brand + " " + self.itemDescriptionRaw + " " + self.vintage + " (" + self.uomString + "/" + self.sizeDescription + ")" + self.damagedNotes
         }()
     

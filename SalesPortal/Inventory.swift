@@ -356,7 +356,10 @@ class Inventory : NSObject {
 
     lazy var itemDescription : String = {
         [unowned self] in
-            return self.brand + " " + self.descriptionRaw + " " + self.vintage + " " + "(" + self.uomString + "/" + self.sizeDescription + ")" + self.damagedNotes
+        guard !self.descriptionRaw.isEmpty else {
+            return ""
+        }
+        return self.brand + " " + self.descriptionRaw + " " + self.vintage + " " + "(" + self.uomString + "/" + self.sizeDescription + ")" + self.damagedNotes
     }()
     
     lazy var mixDescription : String = {
