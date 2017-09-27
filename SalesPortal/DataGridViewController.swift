@@ -263,7 +263,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         guard ((keyboard.origin.y + keyboard.size.height) <= height) else {
             return
         }
-        let kbSize = (sender.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let kbSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size
         keyboardHeight = kbSize!.height
         guard let activeField = activeField else {
             return
