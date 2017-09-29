@@ -401,6 +401,9 @@ extension Date
         guard let shipDays = shipDays else {
             return true
         }
+        guard shipDays.count > 0 else {
+            return true
+        }
         let dayInt = (Calendar.current as NSCalendar).components(.weekday, from: self).weekday
         guard let dayEnum = ShipDays(rawValue: dayInt!) else {
             return false
