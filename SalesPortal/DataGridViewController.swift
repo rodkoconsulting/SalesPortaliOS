@@ -716,8 +716,17 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         self.view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
-
     
+    func cancelDeleteOrderWarning(title: String, message: String, handler: @escaping CancelDeleteOrderHandler) {
+        let messageController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: handler )
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (alert) -> Void in }
+        messageController.addAction(ok)
+        messageController.addAction(cancel)
+        let viewController = parent ?? self
+        viewController.present(messageController, animated: true, completion: nil)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showColumnsViewController" {
             guard let columnsViewController = segue.destination as? ColumnsViewController else {

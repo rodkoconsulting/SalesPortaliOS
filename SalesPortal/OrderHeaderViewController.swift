@@ -21,6 +21,8 @@ protocol isOrderHeaderVc: class {
     func shipMonthChanged()
 }
 
+typealias CancelDeleteOrderHandler = (UIAlertAction) -> Void
+
 class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniDropDownDelegate,XuniComboBoxDelegate,OrderInventoryErrorDelegate {
     
     @IBOutlet weak var accountLabel: UILabel!
@@ -468,6 +470,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         }
     }
     
+        
     fileprivate func cancelOrder() {
         let message = order?.orderNo == nil ? "Order Cancelled!" : "Changes Cancelled!"
         sendMessage(title: "Cancel", message: message)
@@ -523,11 +526,11 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         }
         let deleteButton = UIAlertAction(title: "Delete", style: .destructive) {
             [unowned self] (alert) -> Void in
-            self.deleteOrder()
+            self.cancelDeleteOrderWarning(title: "Delete Warning", message: "Delete Order?", handler: {[unowned self] (action) -> Void in self.deleteOrder()})
         }
         let cancelOrderButton = UIAlertAction(title: cancelTitle, style: .destructive) {
             [unowned self] (alert) -> Void in
-            self.cancelOrder()
+             self.cancelDeleteOrderWarning(title: "Cancel Warning", message: "Cancel Order?", handler: {[unowned self] (action) -> Void in self.cancelOrder()})
         }
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) {
             (alert) -> Void in

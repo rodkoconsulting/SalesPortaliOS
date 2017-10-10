@@ -90,7 +90,7 @@ class OrderSavedViewController: DataGridViewController {
         }
         let deleteButton = UIAlertAction(title: "Delete", style: .destructive) {
             [unowned self] (alert) -> Void in
-            self.deleteOrder(orderNo: savedOrder.orderNo)
+            self.cancelDeleteOrderWarning(title: "Delete Warning", message: "Delete Order?", handler: {[unowned self] (action) -> Void in self.deleteOrder(orderNo: savedOrder.orderNo)})
         }
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { (alert) -> Void in
         }
