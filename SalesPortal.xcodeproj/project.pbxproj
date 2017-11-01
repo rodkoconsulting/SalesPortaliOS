@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		070AAA7E1F6DB9440095B42B /* NSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070AAA7D1F6DB9440095B42B /* NSLog.swift */; };
-		070AAA821F6DB9DC0095B42B /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 070AAA7F1F6DB9DC0095B42B /* libTestFairy.a */; };
-		070AAA831F6DB9DC0095B42B /* upload-dsym.sh in Resources */ = {isa = PBXBuildFile; fileRef = 070AAA811F6DB9DC0095B42B /* upload-dsym.sh */; };
 		0779DE231F38FC84006BEEF2 /* Dictionary_Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE1D1F38FC84006BEEF2 /* Dictionary_Initializers.swift */; };
 		0779DE241F38FC84006BEEF2 /* LocksmithAccessibleOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE1E1F38FC84006BEEF2 /* LocksmithAccessibleOption.swift */; };
 		0779DE251F38FC84006BEEF2 /* LocksmithError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE1F1F38FC84006BEEF2 /* LocksmithError.swift */; };
@@ -23,6 +21,8 @@
 		C309FC131D05E294002868BD /* XuniCalendarKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309FC121D05E294002868BD /* XuniCalendarKit.framework */; };
 		C31734571DA2A1AB00C60830 /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31734561DA2A1AB00C60830 /* OrderListViewController.swift */; };
 		C318DB961DD0E83900DB7812 /* AccountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318DB951DD0E83900DB7812 /* AccountInfoViewController.swift */; };
+		C31EFF111F979DE900073814 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C31EFF0E1F979DE900073814 /* libTestFairy.a */; };
+		C31EFF121F979DE900073814 /* upload-dsym.sh in Resources */ = {isa = PBXBuildFile; fileRef = C31EFF101F979DE900073814 /* upload-dsym.sh */; };
 		C31F1F3D1E3BDE3400F1ACC0 /* SampleOrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31F1F3C1E3BDE3300F1ACC0 /* SampleOrderService.swift */; };
 		C33791101DAC5AD2009EA4C1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C337910F1DAC5AD1009EA4C1 /* CoreMedia.framework */; };
 		C33791121DAC5ADA009EA4C1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33791111DAC5ADA009EA4C1 /* CoreMotion.framework */; };
@@ -121,9 +121,6 @@
 
 /* Begin PBXFileReference section */
 		070AAA7D1F6DB9440095B42B /* NSLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLog.swift; sourceTree = "<group>"; };
-		070AAA7F1F6DB9DC0095B42B /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
-		070AAA801F6DB9DC0095B42B /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
-		070AAA811F6DB9DC0095B42B /* upload-dsym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-dsym.sh"; sourceTree = "<group>"; };
 		0779DE1D1F38FC84006BEEF2 /* Dictionary_Initializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary_Initializers.swift; sourceTree = "<group>"; };
 		0779DE1E1F38FC84006BEEF2 /* LocksmithAccessibleOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithAccessibleOption.swift; sourceTree = "<group>"; };
 		0779DE1F1F38FC84006BEEF2 /* LocksmithError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithError.swift; sourceTree = "<group>"; };
@@ -137,6 +134,9 @@
 		C309FC121D05E294002868BD /* XuniCalendarKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XuniCalendarKit.framework; path = ../Xuni/iOS/Controls/XuniCalendarKit.framework; sourceTree = "<group>"; };
 		C31734561DA2A1AB00C60830 /* OrderListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderListViewController.swift; sourceTree = "<group>"; };
 		C318DB951DD0E83900DB7812 /* AccountInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoViewController.swift; sourceTree = "<group>"; };
+		C31EFF0E1F979DE900073814 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
+		C31EFF0F1F979DE900073814 /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
+		C31EFF101F979DE900073814 /* upload-dsym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-dsym.sh"; sourceTree = "<group>"; };
 		C31F1F3C1E3BDE3300F1ACC0 /* SampleOrderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderService.swift; sourceTree = "<group>"; };
 		C337910F1DAC5AD1009EA4C1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		C33791111DAC5ADA009EA4C1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -254,7 +254,7 @@
 				C33791101DAC5AD2009EA4C1 /* CoreMedia.framework in Frameworks */,
 				C3D424951D426221000BE982 /* XuniInputKit.framework in Frameworks */,
 				C309FC131D05E294002868BD /* XuniCalendarKit.framework in Frameworks */,
-				070AAA821F6DB9DC0095B42B /* libTestFairy.a in Frameworks */,
+				C31EFF111F979DE900073814 /* libTestFairy.a in Frameworks */,
 				C37F4A7B1CF3A2E700665ED0 /* XuniFlexGridKit.framework in Frameworks */,
 				C37F4A791CF3A2CC00665ED0 /* XuniCoreKit.framework in Frameworks */,
 				C37F4A771CF3A17F00665ED0 /* libsqlite3.tbd in Frameworks */,
@@ -378,9 +378,9 @@
 		C33791091DAC5A07009EA4C1 /* TestFairy */ = {
 			isa = PBXGroup;
 			children = (
-				070AAA7F1F6DB9DC0095B42B /* libTestFairy.a */,
-				070AAA801F6DB9DC0095B42B /* TestFairy.h */,
-				070AAA811F6DB9DC0095B42B /* upload-dsym.sh */,
+				C31EFF0E1F979DE900073814 /* libTestFairy.a */,
+				C31EFF0F1F979DE900073814 /* TestFairy.h */,
+				C31EFF101F979DE900073814 /* upload-dsym.sh */,
 				070AAA7D1F6DB9440095B42B /* NSLog.swift */,
 			);
 			name = TestFairy;
@@ -600,7 +600,7 @@
 				C36448201D02181C00A545DD /* Holidays.plist in Resources */,
 				C3ED0A911CBBECCF00B9520E /* Assets.xcassets in Resources */,
 				C3ED0A8F1CBBECCF00B9520E /* Main.storyboard in Resources */,
-				070AAA831F6DB9DC0095B42B /* upload-dsym.sh in Resources */,
+				C31EFF121F979DE900073814 /* upload-dsym.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

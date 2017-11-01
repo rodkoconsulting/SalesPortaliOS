@@ -40,16 +40,24 @@ class ApiOperation : NSObject, URLSessionDelegate {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: {
             (data, response, error) in
-            guard let _ = response, let data = data else {
-                completion(false, ErrorCode.noInternet)
+            guard let httpResponse = response as? HTTPURLResponse/*, let data = data */ else {
+                completion(false, ErrorCode.serverError)
                 return
             }
-            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves)) as? [String: AnyObject],
-                let _ = jsonDictionary["success"] as? Bool else {
-                    completion(false, ErrorCode.serverError)
-                    return
+//            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves)) as? [String: AnyObject],
+//                let _ = jsonDictionary["success"] as? Bool else {
+//                    completion(false, ErrorCode.serverError)
+//                    return
+//            }
+//            completion(true, nil)
+            switch(httpResponse.statusCode){
+            case 200:
+                completion(true, nil)
+            case 401:
+                completion(false, ErrorCode.httpError(statusCode: 401))
+            default:
+                completion(false, ErrorCode.httpError(statusCode: httpResponse.statusCode as Int))
             }
-            completion(true, nil)
         })
         dataTask.resume()
     }
