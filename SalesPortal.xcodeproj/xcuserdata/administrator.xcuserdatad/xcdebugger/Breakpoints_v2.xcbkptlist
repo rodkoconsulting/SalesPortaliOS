@@ -2092,11 +2092,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SalesPortal/InventoryViewController.swift"
-            timestampString = "537390216.876193"
+            timestampString = "537390913.559152"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "syncInventory()"
             landmarkType = "7">
             <Locations>
