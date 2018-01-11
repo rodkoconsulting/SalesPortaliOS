@@ -168,6 +168,7 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
             displayLogIn()
             return
         }
+        TestFairy.setUserId(credentials["username"] ?? "")
         guard let dataSettings = dataSettings else {
             completionError(ErrorCode.unknownError)
             return

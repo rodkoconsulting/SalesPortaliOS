@@ -12,7 +12,7 @@ struct ApiService {
     
     init(apiString: String) {
         apiInit = apiString
-        //apiBaseURL = URL(string: "http://10.0.4.112:8000/" + apiInit)
+        //apiBaseURL = URL(string: "http://10.0.4.135:8000/" + apiInit)
         apiBaseURL = URL(string: "https://api.polanerselections.com:8443/" + apiInit)
     }
     
