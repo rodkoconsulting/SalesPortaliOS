@@ -151,6 +151,11 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         }
     }
     
+    func searchBarTextBeganEditing() {
+        self.view.endEditing(true)
+        flexGrid.finishEditing(false)
+    }
+    
     func initGrid() {
         flexGrid.isReadOnly = true
         flexGrid.delegate = self

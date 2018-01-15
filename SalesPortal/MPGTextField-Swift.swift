@@ -11,6 +11,7 @@ import UIKit
 @objc protocol MPGTextFieldDelegate{
     func dataForPopoverInTextField(_ textfield: MPGTextField_Swift) -> [[String : String]]
     func searchTextChanged()
+    func searchBarTextBeganEditing()
     @objc optional func textFieldDidEndEditing(_ textField: MPGTextField_Swift, isIndex: Bool)
     @objc optional func textFieldShouldSelect(_ textField: MPGTextField_Swift) -> Bool
     
@@ -178,6 +179,13 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         handleExit()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        guard let mDelegate = mDelegate else {
+                return
+        }
+        mDelegate.searchBarTextBeganEditing()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
