@@ -152,7 +152,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
     
     func searchBarTextBeganEditing() {
-        self.view.endEditing(true)
+        //self.view.endEditing(true)
         flexGrid.finishEditing(false)
     }
     
