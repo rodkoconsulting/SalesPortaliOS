@@ -1,3 +1,4 @@
+@objcMembers
 class OrderSavedList : NSObject {
     
     let orderNo: Int

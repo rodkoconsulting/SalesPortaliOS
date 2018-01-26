@@ -139,3 +139,4 @@ public enum LocksmithInternetProtocol: RawRepresentable {
         }
     }
 }
+

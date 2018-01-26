@@ -33,10 +33,10 @@ struct ApiService {
             return
         }
         
-        let qtySyncArray = qtyDateTime.characters.split{$0 == " "}.map { String($0) }
-        let descSyncArray = descDateTime.characters.split{$0 == " "}.map { String($0) }
-        let priceSyncArray = priceDateTime.characters.split{$0 == " "}.map { String($0) }
-        let poSyncArray = poDateTime.characters.split{$0 == " "}.map { String($0) }
+        let qtySyncArray = qtyDateTime.split{$0 == " "}.map { String($0) }
+        let descSyncArray = descDateTime.split{$0 == " "}.map { String($0) }
+        let priceSyncArray = priceDateTime.split{$0 == " "}.map { String($0) }
+        let poSyncArray = poDateTime.split{$0 == " "}.map { String($0) }
         
         let apiString = qtySyncArray[0] + "/" + qtySyncArray[1] + "/" +
             priceSyncArray[0] + "/" + priceSyncArray[1] + "/" +
@@ -62,10 +62,10 @@ struct ApiService {
             completion(nil, ErrorCode.dbError)
             return
         }
-        let listSyncArray = listDateTime.characters.split{$0 == " "}.map { String($0) }
-        let invHeadSyncArray = invHeadDateTime.characters.split{$0 == " "}.map { String($0) }
-        let invDetSyncArray = invDetDateTime.characters.split{$0 == " "}.map { String($0) }
-        let itemsInactiveSyncArray = itemsInactiveDateTime.characters.split{$0 == " "}.map { String($0) }
+        let listSyncArray = listDateTime.split{$0 == " "}.map { String($0) }
+        let invHeadSyncArray = invHeadDateTime.split{$0 == " "}.map { String($0) }
+        let invDetSyncArray = invDetDateTime.split{$0 == " "}.map { String($0) }
+        let itemsInactiveSyncArray = itemsInactiveDateTime.split{$0 == " "}.map { String($0) }
         let apiString = listSyncArray[0] + "/" + listSyncArray[1] + "/" +
             invHeadSyncArray[0] + "/" + invHeadSyncArray[1] + "/" +
             invDetSyncArray[0] + "/" + invDetSyncArray[1] + "/" +
@@ -87,8 +87,8 @@ struct ApiService {
                 completion(nil, ErrorCode.dbError)
                 return
         }
-        let headerSyncArray = headerDateTime.characters.split{$0 == " "}.map { String($0) }
-        let detailSyncArray = detailDateTime.characters.split{$0 == " "}.map { String($0) }
+        let headerSyncArray = headerDateTime.split{$0 == " "}.map { String($0) }
+        let detailSyncArray = detailDateTime.split{$0 == " "}.map { String($0) }
         let apiString = headerSyncArray[0] + "/" + headerSyncArray[1] + "/" +
             detailSyncArray[0] + "/" + detailSyncArray[1] + "/"
         guard let apiURL = URL(string: apiString, relativeTo: apiBaseURL) else {
@@ -110,10 +110,10 @@ struct ApiService {
                 completion(nil, ErrorCode.dbError)
                 return
         }
-        let headerSyncArray = headerDateTime.characters.split{$0 == " "}.map { String($0) }
-        let detailSyncArray = detailDateTime.characters.split{$0 == " "}.map { String($0) }
-        let addressSyncArray = addressDateTime.characters.split{$0 == " "}.map { String($0) }
-        let inactiveItemsSyncArray = inactiveItemsDateTime.characters.split{$0 == " "}.map { String($0) }
+        let headerSyncArray = headerDateTime.split{$0 == " "}.map { String($0) }
+        let detailSyncArray = detailDateTime.split{$0 == " "}.map { String($0) }
+        let addressSyncArray = addressDateTime.split{$0 == " "}.map { String($0) }
+        let inactiveItemsSyncArray = inactiveItemsDateTime.split{$0 == " "}.map { String($0) }
         let apiString = headerSyncArray[0] + "/" + headerSyncArray[1] + "/" +
             detailSyncArray[0] + "/" + detailSyncArray[1] + "/" +
             addressSyncArray[0] + "/" + addressSyncArray[1] + "/" +

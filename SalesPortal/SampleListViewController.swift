@@ -20,8 +20,8 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
         super.viewDidLoad()
         initComboBox()
         SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] _ in
-            self.displayView()
+            [unowned self] () -> Void in
+                self.displayView()
         }
     }
     

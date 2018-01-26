@@ -18,7 +18,7 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
         super.viewDidLoad()
         initComboBox()
         SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] _ in
+            [unowned self] () -> Void in
             self.displayView()
         }
     }

@@ -16,7 +16,7 @@ class InventoryService: SyncService, SyncServiceType {
         guard let repState = self.apiCredentials["state"] else {
             return (nil, nil, false)
         }
-        guard repState.characters.count > 0 else {
+        guard repState.count > 0 else {
             return (nil, nil, false)
         }
         guard let dB = FMDatabase(path: Constants.databasePath) else {

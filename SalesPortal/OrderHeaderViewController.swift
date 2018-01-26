@@ -95,14 +95,14 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     func sendOverSellAlert() {
-        guard let count = order?.overSoldItems.characters.count else {
+        guard let count = order?.overSoldItems.count else {
             return
         }
         if count > 0 {
-            guard let overSoldList = order?.overSoldItems[(order?.overSoldItems.startIndex)!..<(order?.overSoldItems.characters.index((order?.overSoldItems.startIndex)!, offsetBy: count - 1))!] else {
+            guard let overSoldList = order?.overSoldItems[(order?.overSoldItems.startIndex)!..<(order?.overSoldItems.index((order?.overSoldItems.startIndex)!, offsetBy: count - 1))!] else {
                 return
             }
-            sendAlert(ErrorCode.noQuantity(itemCode: overSoldList))
+            sendAlert(ErrorCode.noQuantity(itemCode: String(overSoldList)))
         }
     }
 
@@ -478,7 +478,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     
     fileprivate func saveOrder() {
         SwiftSpinner.show("Saving...", animated: false) {
-            [unowned self] _ in
+            [unowned self] () -> Void in
             DispatchQueue.main.async {
                 [unowned self] in
                 do {
@@ -524,6 +524,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
             [unowned self] (alert) -> Void in
             self.saveOrder()
         }
+        
         let deleteButton = UIAlertAction(title: "Delete", style: .destructive) {
             [unowned self] (alert) -> Void in
             self.cancelDeleteOrderWarning(title: "Delete Warning", message: "Delete Order?", handler: {[unowned self] (action) -> Void in self.deleteOrder()})

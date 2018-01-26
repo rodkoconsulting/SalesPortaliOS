@@ -29,17 +29,17 @@ class AccountInfoViewController: UIViewController {
         }
         addressTextView.text = "\(account.addr1)\r\n\(account.city), \(account.state) \(account.zip)"
         navigationBar.title = account.customerName
-        guard account.buyer1.characters.count > 0 else {
+        guard account.buyer1.count > 0 else {
             disableWineBuyer123()
             return
         }
         wineBuyer1TextView.text = "\(account.buyer1)\r\n\(account.buyer1Phone)\r\n\(account.buyer1Email)"
-        guard account.buyer2.characters.count > 0 else {
+        guard account.buyer2.count > 0 else {
             disableWineBuyer23()
             return
         }
         wineBuyer2TextView.text = "\(account.buyer2)\r\n\(account.buyer2Phone)\r\n\(account.buyer2Email)"
-        guard account.buyer3.characters.count > 0 else {
+        guard account.buyer3.count > 0 else {
             disableWineBuyer3()
             return
         }

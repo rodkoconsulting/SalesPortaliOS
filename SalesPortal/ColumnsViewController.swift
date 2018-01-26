@@ -76,7 +76,7 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         changedAllFilters()
     }
     
-    func longPressGestureRecognized(_ gesture: UILongPressGestureRecognizer) {
+    @objc func longPressGestureRecognized(_ gesture: UILongPressGestureRecognizer) {
         let state: UIGestureRecognizerState = gesture.state;
         let location: CGPoint = gesture.location(in: columnsTableView)
         let indexPath: IndexPath? = columnsTableView.indexPathForRow(at: location)

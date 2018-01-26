@@ -138,7 +138,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     
     func textFieldDidEndEditing(_ textField: MPGTextField_Swift, isIndex: Bool = false){
         SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] _ in
+            [unowned self] () -> Void in
             self.isFilterIndex = isIndex && !self.flexGrid.hasFilters()
             if self.isFilterIndex {
                 self.filterIndex()
@@ -259,7 +259,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
 
 
-    func keyboardWillShow(_ sender: Notification) {
+    @objc func keyboardWillShow(_ sender: Notification) {
         guard let kbFrame = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
@@ -297,7 +297,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         return false
     }
     
-    func keyboardWillHide(_ sender: Notification) {
+    @objc func keyboardWillHide(_ sender: Notification) {
         if changedY {
             view.frame.origin.y += keyboardHeight
         }
@@ -399,7 +399,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     
     func emailData(_ flexGrid: FlexGrid, moduleType: Module) {
         SwiftSpinner.show("Exporting...", animated: false) {
-            _ in
+            () -> Void in
             DispatchQueue.main.async {
                 [unowned self] in
                 guard let mailComposer = DataExport.excelExport(flexGrid: flexGrid, classType: self.classType, moduleType: moduleType, isManager: self.isManager) else {
@@ -474,7 +474,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         }
         let filterImage = flexGrid.hasFilters() ? UIImage(named: "Full Filters") : UIImage(named: "Clear Filters")
         SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] _ in
+            [unowned self] () -> Void in
             DispatchQueue.main.async {
                 [unowned self] in
                 self.filterGrid(self.searchBar?.text ?? "")
@@ -516,7 +516,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         }
         let isSelected = panel.fillColor == flexGrid.selectionBackgroundColor ? true : false
         let backgroundColor = getBackgroundColor(range.row)
-        panel.textAttributes[NSForegroundColorAttributeName] = getTextColor(range.row, col: range.col) ?? panel.fillColor
+        panel.textAttributes[NSAttributedStringKey.foregroundColor] = getTextColor(range.row, col: range.col) ?? panel.fillColor
         if !isSelected && backgroundColor != nil {
             context.setFillColor(backgroundColor!.cgColor)
             let r = panel.getCellRect(forRow: range.row, inColumn: range.col)

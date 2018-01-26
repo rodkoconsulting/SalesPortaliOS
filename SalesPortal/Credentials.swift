@@ -34,7 +34,7 @@ struct Credentials {
         guard var credentials = Credentials.getCredentials() else {
             return
         }
-        credentials["state"] = String(state[state.characters.index(before: state.endIndex)])
+        credentials["state"] = String(state[state.index(before: state.endIndex)])
         try! Locksmith.updateData(data: credentials as [String : Any], forUserAccount: "polPortal")
     }
     
@@ -42,7 +42,7 @@ struct Credentials {
         guard let credentials = Credentials.getCredentials(), let credentialState = credentials["state"] else {
             return "Y"
         }
-        guard credentialState.characters.count > 0 else {
+        guard credentialState.count > 0 else {
             return "Y"
         }
         return credentialState

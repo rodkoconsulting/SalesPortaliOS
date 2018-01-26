@@ -285,7 +285,8 @@ class InventoryPo {
     }
 
 }
-
+    
+@objcMembers
 class Inventory : NSObject {
     typealias priceBreakType = (priceCase: Double, discountCase: Double, priceBottle: Double, discountBottle: Double)
     typealias poDictType = [(onPo: Double, poEta: String, poDate: String)]
@@ -340,7 +341,7 @@ class Inventory : NSObject {
     
     lazy var sizeDescription : String = {
         [unowned self] in
-            let bottleSizeArray = self.size.characters.split(maxSplits: Int.max, omittingEmptySubsequences: true, whereSeparator: { $0 == " " }).map { String($0) }
+            let bottleSizeArray = self.size.split(maxSplits: Int.max, omittingEmptySubsequences: true, whereSeparator: { $0 == " " }).map { String($0) }
             guard bottleSizeArray.count > 0 else {
                 return ""
             }
@@ -354,7 +355,7 @@ class Inventory : NSObject {
             return self.uom.replacingOccurrences(of: "C", with: "")
     }()
 
-    lazy var itemDescription : String = {
+    @objc lazy var itemDescription : String = {
         [unowned self] in
         guard !self.descriptionRaw.isEmpty else {
             return ""
@@ -370,7 +371,7 @@ class Inventory : NSObject {
     lazy var priceArray : [String] = {
         [unowned self] in
             let priceStripped = self.priceString.replacingOccurrences(of: " ", with: "")
-            return priceStripped.characters.split {$0 == ","}.map { String($0) }
+            return priceStripped.split {$0 == ","}.map { String($0) }
     }()
     
     lazy var uomInt : Int = {
@@ -397,7 +398,7 @@ class Inventory : NSObject {
         var tupleArray:[(price: Double, unit: Int)] = []
         for priceBreak in self.priceArray {
             let breakArray: [String]
-            breakArray = priceBreak.contains("/") ? priceBreak.characters.split{ $0 == "/" }.map { String($0) } : [priceBreak, "1"]
+            breakArray = priceBreak.contains("/") ? priceBreak.split{ $0 == "/" }.map { String($0) } : [priceBreak, "1"]
             let priceWrapped: Double? = Double(breakArray[0])
             let unitWrapped: Int?
             if self.isBottlePricing {
@@ -574,7 +575,7 @@ class Inventory : NSObject {
                 return ""
             }
             var offSaleString = "Offsale"
-            if self.restrictOffSaleNotes.characters.count > 0 {
+            if self.restrictOffSaleNotes.count > 0 {
                 offSaleString = offSaleString + "/" + self.restrictOffSaleNotes
             }
             offSaleString += "; "
@@ -593,12 +594,12 @@ class Inventory : NSObject {
     
     lazy var state : String = {
         [unowned self] in
-            return self.restrictState.characters.count > 0 ? self.restrictState + "; " : ""
+            return self.restrictState.count > 0 ? self.restrictState + "; " : ""
     }()
     
     lazy var approval : String = {
         [unowned self] in
-            guard self.restrictApproval.characters.count > 0 else {
+            guard self.restrictApproval.count > 0 else {
                 return ""
             }
             if self.restrictApproval=="SPECIAL ORDER" {
@@ -637,54 +638,54 @@ class Inventory : NSObject {
     lazy var restrictedList : String = {
         [unowned self] in
             let restricted = self.offSale + self.allocated + self.premise + self.state + self.approval + self.maxCases + self.noSample + self.noBackOrders + self.noMasterOrders
-            guard restricted.characters.count > 0 else {
+            guard restricted.count > 0 else {
                 return ""
             }
-            return restricted[restricted.startIndex..<restricted.characters.index(restricted.startIndex, offsetBy: restricted.characters.count - 2)]
+            return String(restricted[restricted.startIndex..<restricted.index(restricted.startIndex, offsetBy: restricted.count - 2)])
     }()
     
     lazy var isRestricted : Bool = {
         [unowned self] in
-        return self.restrictedList.characters.count > 0 && self.restrictedList != "NS"
+        return self.restrictedList.count > 0 && self.restrictedList != "NS"
     }()
     
     lazy var scoreWa : String = {
         [unowned self] in
-            return self.scoreWaRaw.characters.count > 0 ? self.scoreWaRaw + "(WA);" : ""
+            return self.scoreWaRaw.count > 0 ? self.scoreWaRaw + "(WA);" : ""
     }()
     
     lazy var scoreWs : String = {
         [unowned self] in
-            return self.scoreWsRaw.characters.count > 0 ? self.scoreWsRaw + "(WS);" : ""
+            return self.scoreWsRaw.count > 0 ? self.scoreWsRaw + "(WS);" : ""
     }()
     
     lazy var scoreIwc : String = {
         [unowned self] in
-            return self.scoreIwcRaw.characters.count > 0 ? self.scoreIwcRaw + "(IWC);" : ""
+            return self.scoreIwcRaw.count > 0 ? self.scoreIwcRaw + "(IWC);" : ""
     }()
     
     lazy var scoreBh : String = {
         [unowned self] in
-            return self.scoreBhRaw.characters.count > 0 ? self.scoreBhRaw + "(BH);" : ""
+            return self.scoreBhRaw.count > 0 ? self.scoreBhRaw + "(BH);" : ""
     }()
     
     lazy var scoreVm : String = {
         [unowned self] in
-            return self.scoreVmRaw.characters.count > 0 ? self.scoreVmRaw + "(VM);" : ""
+            return self.scoreVmRaw.count > 0 ? self.scoreVmRaw + "(VM);" : ""
     }()
     
     lazy var scoreOther : String  = {
         [unowned self] in
-            return self.scoreOtherRaw.characters.count > 0 ? self.scoreOtherRaw + ";" : ""
+            return self.scoreOtherRaw.count > 0 ? self.scoreOtherRaw + ";" : ""
     }()
     
     lazy var scoreList : String  = {
         [unowned self] in
             let scores = self.scoreWa + self.scoreWs + self.scoreIwc + self.scoreBh + self.scoreVm + self.scoreOther
-            guard scores.characters.count > 0 else {
+            guard scores.count > 0 else {
                 return ""
             }
-            return scores[scores.startIndex..<scores.characters.index(scores.startIndex, offsetBy: scores.characters.count - 1)]
+            return String(scores[scores.startIndex..<scores.index(scores.startIndex, offsetBy: scores.count - 1)])
     }()
   
     lazy var getPricing:(Double) -> Double = {
@@ -701,7 +702,7 @@ class Inventory : NSObject {
     
     lazy var hasPriceBreaks : Bool = {
         [unowned self] in
-       return self.discountList.characters.count > 0
+       return self.discountList.count > 0
     }()
     
     lazy var isBottlePricing : Bool = {

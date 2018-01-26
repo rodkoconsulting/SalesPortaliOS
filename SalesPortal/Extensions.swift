@@ -187,7 +187,7 @@ extension FlexGrid {
                     continue
             }
             let filters = column.columnFilters.filterList
-            var valueArray = "\(columnValue)".characters.split{$0 == "\n"}.map { String($0) }
+            var valueArray = "\(columnValue)".split{$0 == "\n"}.map { String($0) }
             if valueArray.count == 0 {
                 valueArray.append("")
             }

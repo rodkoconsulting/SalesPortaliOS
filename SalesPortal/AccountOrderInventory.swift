@@ -145,8 +145,8 @@ class AccountOrderInventory: OrderInventory {
         for moboList in moboListArray {
             mobos = mobos + moboList.orderNo + ","
         }
-        if mobos.characters.count > 0 {
-            mobos = mobos[mobos.startIndex..<mobos.characters.index(mobos.startIndex, offsetBy: mobos.characters.count - 1)]
+        if mobos.count > 0 {
+            mobos = String(mobos[mobos.startIndex..<mobos.index(mobos.startIndex, offsetBy: mobos.count - 1)])
         }
         return mobos
     }

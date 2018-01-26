@@ -133,10 +133,10 @@ class SampleOrder: isOrderType {
             }
             details = details + inventory.getDbDetailInsert(orderNo) + ","
         }
-        guard details.characters.count > 0 else {
+        guard details.count > 0 else {
             return nil
         }
-        return details[details.startIndex..<details.characters.index(details.startIndex, offsetBy: details.characters.count - 1)]
+        return String(details[details.startIndex..<details.index(details.startIndex, offsetBy: details.count - 1)])
     }
     
     func getDbHeaderUpdate() ->  String? {

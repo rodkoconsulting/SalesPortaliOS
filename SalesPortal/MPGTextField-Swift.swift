@@ -23,7 +23,7 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
     var tableViewController : UITableViewController?
     var data = [[String : String]]()
     @IBInspectable var popoverBackgroundColor : UIColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 1.0)
-    @IBInspectable var popoverSize : CGRect?
+    @IBInspectable var popoverSize : CGRect = CGRect.null
     @IBInspectable var seperatorColor : UIColor = UIColor(white: 0.95, alpha: 1.0)
 
 
@@ -90,7 +90,8 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
             self.tableViewController!.tableView.separatorColor = self.seperatorColor
             self.tableViewController!.tableView.estimatedRowHeight = 89
             self.tableViewController!.tableView.rowHeight = UITableViewAutomaticDimension
-            if let frameSize = self.popoverSize{
+            let frameSize = self.popoverSize
+            if frameSize != CGRect.null {
                 self.tableViewController!.tableView.frame = frameSize
             } else {
                 var frameForPresentation = self.frame
@@ -194,7 +195,7 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
                 removeFromView()
                 return
         }
-        guard str.characters.count > 0 && self.isFirstResponder else {
+        guard str.count > 0 && self.isFirstResponder else {
             removeFromView()
             return
         }

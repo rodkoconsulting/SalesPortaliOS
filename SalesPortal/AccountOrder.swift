@@ -189,9 +189,9 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
                 overSoldItems = overSoldItems + itemCode + ","
             }
         }
-        if overSoldItems.characters.count > 0 {
-            let overSoldList = overSoldItems[overSoldItems.startIndex..<overSoldItems.characters.index(overSoldItems.startIndex, offsetBy: overSoldItems.characters.count - 1)]
-            errorDelegate?.sendAlert(ErrorCode.noQuantity(itemCode: overSoldList))
+        if overSoldItems.count > 0 {
+            let overSoldList = overSoldItems[overSoldItems.startIndex..<overSoldItems.index(overSoldItems.startIndex, offsetBy: overSoldItems.count - 1)]
+            errorDelegate?.sendAlert(ErrorCode.noQuantity(itemCode: String(overSoldList)))
         }
     }
 
@@ -333,7 +333,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             var quantityDepleted : Int = 0
             let moboString = moboTuple.list
             let quantityBottles = moboTuple.bottles
-            let moboArray = moboString.characters.split{$0 == ","}.map { String($0) }
+            let moboArray = moboString.split{$0 == ","}.map { String($0) }
             for mobo in moboArray {
                 
                 for moboList in orderMobos where (moboList as? MoboList)?.itemCode == item  && (moboList as? MoboList)?.orderNo == mobo {
@@ -392,7 +392,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         notes = queryHeaderResult?.string(forColumn: "notes") 
         coopCases = Int(queryHeaderResult?.int(forColumn: "coop_qty") ?? 0)
         if let coopNo = queryHeaderResult?.string(forColumn: "coop_no") {
-            if coopNo.characters.count > 0 {
+            if coopNo.count > 0 {
                 self.coopNo = coopNo
             }
         }
@@ -444,10 +444,10 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             }
             details = details + inventory.getDbDetailInsert(orderNo) + ","
         }
-        guard details.characters.count > 0 else {
+        guard details.count > 0 else {
             return nil
         }
-        return details[details.startIndex..<details.characters.index(details.startIndex, offsetBy: details.characters.count - 1)]
+        return String(details[details.startIndex..<details.index(details.startIndex, offsetBy: details.count - 1)])
     }
     
     func getDbHeaderUpdate() ->  String? {

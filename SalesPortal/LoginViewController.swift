@@ -58,7 +58,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let length = textField.text!.characters.count - range.length + string.characters.count
+        let length = textField.text!.count - range.length + string.count
         if length > 0 {
             submitButton.isEnabled = true
         } else {

@@ -60,7 +60,7 @@ class OrderListService: SyncService, SyncServiceType {
             while results?.next() == true {
                 let orderList = OrderList(queryResult: results!)
                 if !isMultipleReps {
-                    if previousRep.characters.count > 0 && previousRep != orderList.rep {
+                    if previousRep.count > 0 && previousRep != orderList.rep {
                         isMultipleReps = true
                     } else
                     {

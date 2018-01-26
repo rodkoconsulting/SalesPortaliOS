@@ -298,6 +298,7 @@
         }
     }
     
+    @objcMembers
     class Account : NSObject {
         
         let divisionNo: String
@@ -361,7 +362,7 @@
         lazy var shipDays : [ShipDays] = {
             [unowned self] in
             var shipDayArray: [ShipDays] = [ShipDays]()
-            for (index, day) in self.shipDaysRaw.characters.enumerated() {
+            for (index, day) in self.shipDaysRaw.enumerated() {
                 if let shipDay = ShipDays(rawValue: index + 2 ), day == "Y" {
                     shipDayArray.append(shipDay)
                 }
@@ -376,7 +377,7 @@
         
         lazy var coopList: [String] = {
             [unowned self] in
-            return self.coopString.characters.split(maxSplits: Int.max, omittingEmptySubsequences: true, whereSeparator: { $0 == "," }).map { String($0) }
+            return self.coopString.split(maxSplits: Int.max, omittingEmptySubsequences: true, whereSeparator: { $0 == "," }).map { String($0) }
         }()
         
         lazy var statusString: String = {

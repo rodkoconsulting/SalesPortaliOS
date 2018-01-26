@@ -99,7 +99,7 @@ struct DatabaseService: DatabaseServiceType {
                 }
                 sqlInsert = sqlInsert + dbInsert + ","
             }
-            sqlInsert = sqlInsert[sqlInsert.startIndex..<sqlInsert.characters.index(sqlInsert.startIndex, offsetBy: sqlInsert.characters.count - 1)]
+            sqlInsert = String(sqlInsert[sqlInsert.startIndex..<sqlInsert.index(sqlInsert.startIndex, offsetBy: sqlInsert.count - 1)])
             let isInserted = dB.executeUpdate(sqlInsert, withArgumentsIn: nil)
             guard isInserted else {
                 syncReset(dB)

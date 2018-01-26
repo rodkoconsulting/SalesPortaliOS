@@ -9,7 +9,7 @@ class AccountsViewController: DataGridViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] _ in
+            [unowned self] () -> Void in
             self.displayView()
         }
     }

@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objcMembers
 class ComboData: NSObject {
     var name: String
     

@@ -42,7 +42,7 @@ class SampleListService: SyncService, SyncServiceType {
             while results?.next() == true {
                 let sampleList = SampleList(queryResult: results!)
                 if !isMultipleReps {
-                    if previousRep.characters.count > 0 && previousRep != sampleList.rep {
+                    if previousRep.count > 0 && previousRep != sampleList.rep {
                         isMultipleReps = true
                     } else
                     {

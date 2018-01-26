@@ -62,7 +62,7 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
     
     override func shipMonthChanged() {
         SwiftSpinner.show("Loading...", animated: false) {
-            [unowned self] _ in
+            [unowned self] () -> Void in
             self.shipMonthSave()
             self.loadData(isSynched: true)
             self.clearAllGridSource()

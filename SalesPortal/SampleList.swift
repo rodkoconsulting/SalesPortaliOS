@@ -218,7 +218,7 @@ struct SampleListSync {
     }
 }
 
-
+@objcMembers
 class SampleList : NSObject {
     
     let orderNo: String
@@ -264,7 +264,7 @@ class SampleList : NSObject {
     
     lazy var sizeDescription : String = {
         [unowned self] in
-        let bottleSizeArray = self.size.characters.split(maxSplits: Int.max, omittingEmptySubsequences: true, whereSeparator: { $0 == " " }).map { String($0) }
+        let bottleSizeArray = self.size.split(maxSplits: Int.max, omittingEmptySubsequences: true, whereSeparator: { $0 == " " }).map { String($0) }
         guard bottleSizeArray.count > 0 else {
             return "750"
         }

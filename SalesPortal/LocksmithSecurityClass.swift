@@ -37,3 +37,4 @@ public enum LocksmithSecurityClass: RawRepresentable {
         }
     }
 }
+
