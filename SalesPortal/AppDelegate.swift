@@ -18,9 +18,9 @@
         
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
             XuniLicenseManager.setKey(License().key)
-            //let credentials = Credentials.getCredentials()
-            //TestFairy.setUserId(credentials?["username"] ?? "New user")
-            //TestFairy.begin("83214e25cc75ac626e343dd7738c46b1f37c920e")
+            let credentials = Credentials.getCredentials()
+            TestFairy.setUserId(credentials?["username"] ?? "New user")
+            TestFairy.begin("83214e25cc75ac626e343dd7738c46b1f37c920e")
             NSTimeZone.default = TimeZone(identifier: "America/New_York")!
             return true
         }
