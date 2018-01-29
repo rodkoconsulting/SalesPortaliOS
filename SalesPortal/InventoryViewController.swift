@@ -159,7 +159,7 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
         isFilterChanged = false
         filterGridColumns(searchBar.text!, classType: classType)
         DispatchQueue.main.async {
-            SwiftSpinner.hide()
+                SwiftSpinner.hide()
         }
     }
     

@@ -128,7 +128,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     
     
     func dataForPopoverInTextField(_ textfield: MPGTextField_Swift) -> [[String : String]]
-    {
+    {   
         return searchData
     }
     
@@ -285,6 +285,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
             changedY = true
         }
     }
+    
     
     func cellTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange?) -> Bool {
         guard flexGrid.rows.count > 0 else {
@@ -710,6 +711,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
             }
         }
     }
+
     
     func displayLogIn() {
         performSegue(withIdentifier: "showLogin", sender: self)

@@ -166,7 +166,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         // implement in child
     }
     
-    func groupCollapsedChanging(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!) -> Bool {
+    func groupCollapsedChanging(_ sender: FlexGrid!, panel: GridPanel!, for range: GridCellRange!) -> Bool {
         return true
     }
     
@@ -189,10 +189,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         }
     }
     
-    func beginningEdit(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!) -> Bool {
-        guard panel != nil else {
-            return false
-        }
+    func beginningEdit(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange) -> Bool {
         let flexRow = flexGrid.rows.object(at: UInt(range.row))
         guard let inventory = flexRow.dataItem as? OrderInventory else {
             return false
@@ -202,7 +199,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         return false
     }
     
-    func cellEditEnded(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!) {
+    func cellEditEnded(_ sender: FlexGrid!, panel: GridPanel!, for range: GridCellRange!) {
         activeField = nil
     }
     

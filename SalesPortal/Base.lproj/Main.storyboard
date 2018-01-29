@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MJS-tV-g0k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MJS-tV-g0k">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
+            <string>HelveticaNeue-Italic</string>
+        </array>
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-ThinItalic</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -220,7 +230,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="GHR-RF-eqs"/>
                                     <barButtonItem style="plain" id="V2Y-mj-G0M">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="bar" selectedSegmentIndex="1" id="72h-tm-hEI">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="281" y="7" width="78" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -369,19 +379,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter filter criteria" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Ry1-ou-aZC">
-                                                    <rect key="frame" x="233" y="7" width="102" height="30"/>
+                                                    <rect key="frame" x="240" y="7" width="88" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNl-mM-nhL" customClass="XuniComboBox">
-                                                    <rect key="frame" x="3" y="7" width="70" height="30"/>
+                                                    <rect key="frame" x="10" y="7" width="70" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="JiI-VU-5ey"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ey-Mk-HHv" customClass="XuniComboBox">
-                                                    <rect key="frame" x="78" y="7" width="150" height="30"/>
+                                                    <rect key="frame" x="85" y="7" width="150" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="150" id="vkI-1g-dgv"/>
@@ -414,7 +424,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAi-vl-pw3" customClass="XuniComboBox">
-                                                    <rect key="frame" x="3" y="7" width="45" height="30"/>
+                                                    <rect key="frame" x="10" y="7" width="45" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="dYD-lS-AH4"/>
@@ -422,7 +432,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECP-Tp-INk" customClass="XuniComboBox">
-                                                    <rect key="frame" x="53" y="7" width="125" height="30"/>
+                                                    <rect key="frame" x="60" y="7" width="125" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Bvv-Dk-bVy"/>
@@ -430,7 +440,7 @@
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0f-xE-9Eo">
-                                                    <rect key="frame" x="183" y="7" width="152" height="30"/>
+                                                    <rect key="frame" x="190" y="7" width="145" height="30"/>
                                                     <state key="normal" title="Date"/>
                                                     <connections>
                                                         <segue destination="ODM-a0-ZFh" kind="presentation" identifier="showFilterDateViewController" id="0QR-LZ-WX4"/>
@@ -567,25 +577,25 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWQ-Kj-Mvx">
-                                                    <rect key="frame" x="33" y="12" width="40" height="19"/>
+                                                    <rect key="frame" x="40" y="12" width="40" height="19"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hje-dV-qtR">
-                                                    <rect key="frame" x="275" y="13" width="35" height="17"/>
+                                                    <rect key="frame" x="268" y="13" width="35" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="971-HL-Ie4">
-                                                    <rect key="frame" x="216" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="209" y="9" width="51" height="26"/>
                                                     <connections>
                                                         <action selector="switchChanged:" destination="9ll-24-Xgx" eventType="valueChanged" id="FyI-Mb-wLE"/>
                                                     </connections>
                                                 </switch>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter_indicator" translatesAutoresizingMaskIntoConstraints="NO" id="0e4-vk-sTd">
-                                                    <rect key="frame" x="181" y="9" width="25" height="25"/>
+                                                    <rect key="frame" x="174" y="9" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="3EW-OA-NYp"/>
                                                         <constraint firstAttribute="height" constant="25" id="6pZ-JL-QY1"/>
@@ -754,7 +764,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dataLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbC-wx-oFt">
-                                                    <rect key="frame" x="8" y="12" width="200" height="19"/>
+                                                    <rect key="frame" x="15" y="12" width="200" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="150" id="f3E-9e-Ui2"/>
                                                         <constraint firstAttribute="width" constant="200" id="zqo-Ww-scu"/>
@@ -769,7 +779,7 @@
                                                     </variation>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0iy-Ev-T4q" customClass="XuniComboBox">
-                                                    <rect key="frame" x="98" y="10" width="240" height="23"/>
+                                                    <rect key="frame" x="91" y="10" width="240" height="23"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="240" id="2qV-nx-B6t"/>
@@ -1052,7 +1062,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Hfd-AW-KHf"/>
                                     <barButtonItem style="plain" id="03o-BP-DQg">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="qXB-H3-z54">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="278" y="7" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -1198,7 +1208,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="SYF-Ne-Y17"/>
                                     <barButtonItem style="plain" id="dmU-PJ-72l">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="qv2-Ub-TRb">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="278" y="7" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -1500,7 +1510,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Tpx-Xm-YBj"/>
                                     <barButtonItem style="plain" id="Lot-AP-uK3">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="zOT-BI-0vD">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="278" y="7" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -1777,7 +1787,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="CEk-Er-yBa"/>
                                     <barButtonItem style="plain" id="IbP-fb-DYP">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="Z8p-ib-g5T">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="278" y="7" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -1945,7 +1955,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Fa4-Em-OdI"/>
                                     <barButtonItem style="plain" id="xfH-ni-p12">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="ys6-yu-lsc">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="278" y="7" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2084,7 +2094,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="gAZ-Jv-Pgl"/>
                                     <barButtonItem style="plain" id="RNh-kS-9uS">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="QPd-mU-21F">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="278" y="7" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2306,7 +2316,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Z3G-C7-kPf"/>
                                     <barButtonItem style="plain" id="W2N-Vs-Zf1">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="3Pv-6f-aAc">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="278" y="7" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2468,7 +2478,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="s0Q-xK-Kkn"/>
                                     <barButtonItem style="plain" id="t3Y-4h-X0s">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="Oi2-He-0zn">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="278" y="7" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2658,7 +2668,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="5FC-Mp-Qm2"/>
                                     <barButtonItem style="plain" id="9uO-XJ-65M">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="QeC-RO-X9l">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="278" y="7" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2928,7 +2938,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="HHd-NY-DhC"/>
                                     <barButtonItem style="plain" id="FV5-FS-cd7">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="ATm-hr-d5H">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="278" y="7" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -3107,7 +3117,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="a7E-Az-foU"/>
                                     <barButtonItem style="plain" id="AQ8-9M-Hst">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="GlJ-VD-5Wa">
-                                            <rect key="frame" x="289" y="7" width="70" height="30"/>
+                                            <rect key="frame" x="278" y="7" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -3231,11 +3241,11 @@
         <image name="wooden_beer_keg" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oPF-NX-9wd"/>
         <segue reference="pMn-Ln-0Vj"/>
-        <segue reference="yee-gK-aaR"/>
         <segue reference="6d6-nC-Exh"/>
-        <segue reference="Kxj-Si-Lph"/>
         <segue reference="VE3-RF-sBK"/>
+        <segue reference="M2f-Ff-W0w"/>
+        <segue reference="aGn-An-9fI"/>
+        <segue reference="oPF-NX-9wd"/>
     </inferredMetricsTieBreakers>
 </document>

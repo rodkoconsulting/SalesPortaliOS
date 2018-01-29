@@ -127,10 +127,7 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
     }
     
     
-    func beginningEdit(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!) -> Bool {
-        guard panel != nil else {
-            return false
-        }
+    func beginningEdit(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange) -> Bool {
         let flexRow = flexGrid.rows.object(at: UInt(range.row))
         guard let moboDetail = flexRow.dataItem as? MoboList else {
                 return false
@@ -148,7 +145,7 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
         return false
     }
     
-    func cellEditEnding(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!, cancel: Bool) -> Bool {
+    func cellEditEnding(_ sender: FlexGrid!, panel: GridPanel!, for range: GridCellRange!, cancel: Bool) -> Bool {
         activeField = nil
         return false
     }

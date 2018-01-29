@@ -116,10 +116,7 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
         // implement in child
     }
     
-    func beginningEdit(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!) -> Bool {
-        guard panel != nil else {
-            return false
-        }
+    func beginningEdit(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange) -> Bool {
         let flexRow = flexGrid.rows.object(at: UInt(range.row))
         guard let inventory = flexRow.dataItem as? OrderInventory else {
                 return false
@@ -130,7 +127,7 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
         return false
     }
     
-    func cellEditEnding(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!, cancel: Bool) -> Bool {
+    func cellEditEnding(_ sender: FlexGrid!, panel: GridPanel!, for range: GridCellRange!, cancel: Bool) -> Bool {
         activeField = nil
         return false
     }

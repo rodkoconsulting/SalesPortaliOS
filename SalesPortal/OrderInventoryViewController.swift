@@ -112,13 +112,10 @@ class OrderInventoryViewController: DataGridViewController, OrderInventoryErrorD
         // implement in child
     }
     
-    func beginningEdit(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!) -> Bool {
-        guard panel != nil else {
-            return false
-        }
+    func beginningEdit(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange) -> Bool {
         let flexRow = flexGrid.rows.object(at: UInt(range.row))
         guard let inventory = flexRow.dataItem as? OrderInventory else {
-                return false
+            return false
         }
         activeField = panel.getCellRect(forRow: range.row, inColumn: range.col)
         inventory.errorDelegate = self
@@ -126,7 +123,7 @@ class OrderInventoryViewController: DataGridViewController, OrderInventoryErrorD
         return false
     }
     
-    func cellEditEnding(_ sender: FlexGrid!, panel: GridPanel!, forRange range: GridCellRange!, cancel: Bool) -> Bool {
+    func cellEditEnding(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange, cancel: Bool) -> Bool  {
         activeField = nil
         return false
     }
