@@ -33,6 +33,7 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
     }
     
     
+    
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
     }
