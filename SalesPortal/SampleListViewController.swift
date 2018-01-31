@@ -31,6 +31,7 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
         sampleFilterComboBox.itemsSource = ComboData.sampleListFilterData()
         sampleFilterComboBox.isEditable = false
         sampleFilterComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
+        sampleFilterComboBox.selectedBackgroundColor = Constants.comboBoxSelectedColor
         sampleFilterComboBox.dropDownHeight = Double(self.sampleFilterComboBox.itemsSource.count * Constants.ComboCellHeight)
     }
     

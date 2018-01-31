@@ -62,6 +62,7 @@ class InventorySettingsViewController: UIViewController, UITableViewDelegate, UI
         cell.settingsComboBox.displayMemberPath = "name"
         cell.settingsComboBox.isEditable = false
         cell.settingsComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
+        cell.settingsComboBox.backgroundColor = Constants.comboBoxSelectedColor
         cell.settingsComboBox.tag = settingTags[row]
         if let myDataSettings = dataSettings {
             if settingTags[row] == kMONTHTAG {

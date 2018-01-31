@@ -28,6 +28,7 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
         orderFilterComboBox.displayMemberPath = "name"
         orderFilterComboBox.itemsSource = ComboData.orderListFilterData()
         orderFilterComboBox.isEditable = false
+        orderFilterComboBox.selectedBackgroundColor = Constants.comboBoxSelectedColor
         orderFilterComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
         orderFilterComboBox.dropDownHeight = Double(self.orderFilterComboBox.itemsSource.count * Constants.ComboCellHeight)
         
