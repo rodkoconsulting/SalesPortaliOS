@@ -56,6 +56,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         headerComboBox.displayMemberPath = "name"
         headerComboBox.isEditable = false
         headerComboBox.textFont = GridSettings.defaultFont
+        headerComboBox.selectedBackgroundColor = Constants.comboBoxSelectedColor
         headerComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
         let listCount = headerComboBox.itemsSource.count > 6 ? 6 : headerComboBox.itemsSource.count
         headerComboBox.dropDownHeight = Double(listCount * Constants.ComboCellHeight)

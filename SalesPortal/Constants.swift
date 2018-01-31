@@ -271,4 +271,5 @@ struct Constants {
     static let dbVersion = 44
     static let sampleOrderSegue = "showSampleOrderTabBarController"
     static let accountOrderSegue = "showAccountOrderTabBarController"
+    static let comboBoxSelectedColor = UIColor.lightGray
 }
