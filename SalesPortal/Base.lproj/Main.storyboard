@@ -765,7 +765,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dataLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbC-wx-oFt">
-                                                    <rect key="frame" x="15" y="12" width="200" height="19"/>
+                                                    <rect key="frame" x="15" y="12" width="305" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="f3E-9e-Ui2"/>
                                                     </constraints>
@@ -1167,7 +1167,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mb2-kr-fkZ" customClass="XuniComboBox">
-                                <rect key="frame" x="107" y="56" width="160" height="30"/>
+                                <rect key="frame" x="117" y="56" width="140" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="140" id="Ash-Nt-DUt"/>
                                     <constraint firstAttribute="height" constant="100" id="dLb-0b-66s"/>
@@ -1274,7 +1274,6 @@
                             <constraint firstItem="Mb2-kr-fkZ" firstAttribute="leading" secondItem="okH-n5-Njy" secondAttribute="trailing" constant="94" id="hIn-Az-Xqv"/>
                             <constraint firstItem="Mb2-kr-fkZ" firstAttribute="centerY" secondItem="okH-n5-Njy" secondAttribute="centerY" id="hUN-lG-iaN"/>
                             <constraint firstAttribute="trailing" secondItem="7kB-vP-dR6" secondAttribute="trailing" id="hZj-jU-dlC"/>
-                            <constraint firstItem="okH-n5-Njy" firstAttribute="baseline" secondItem="bwW-UZ-N3U" secondAttribute="baseline" id="hmb-9X-sTR"/>
                             <constraint firstAttribute="trailing" secondItem="q6z-M4-2Qg" secondAttribute="trailing" id="jJy-wQ-auZ"/>
                             <constraint firstItem="Mb2-kr-fkZ" firstAttribute="leading" secondItem="okH-n5-Njy" secondAttribute="trailing" constant="100" id="lDZ-PX-mVK"/>
                             <constraint firstItem="Mb2-kr-fkZ" firstAttribute="top" secondItem="RkE-0Q-l6o" secondAttribute="bottom" constant="8" id="mGd-6f-i8M"/>
@@ -1282,6 +1281,7 @@
                             <constraint firstItem="q6z-M4-2Qg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7kB-vP-dR6" secondAttribute="bottom" id="o8o-K1-jFj"/>
                             <constraint firstItem="okH-n5-Njy" firstAttribute="top" secondItem="Mb2-kr-fkZ" secondAttribute="top" id="qvl-HT-ukS"/>
                             <constraint firstItem="Mb2-kr-fkZ" firstAttribute="top" secondItem="RkE-0Q-l6o" secondAttribute="bottom" constant="10" id="rJ0-lZ-QzZ"/>
+                            <constraint firstItem="bwW-UZ-N3U" firstAttribute="centerY" secondItem="Mb2-kr-fkZ" secondAttribute="centerY" id="tnS-Tp-di0"/>
                             <constraint firstAttribute="bottom" secondItem="Mb2-kr-fkZ" secondAttribute="bottom" constant="514" id="uF5-yQ-CyA"/>
                             <constraint firstItem="Mb2-kr-fkZ" firstAttribute="height" secondItem="okH-n5-Njy" secondAttribute="height" id="uPj-Dv-T7c"/>
                             <constraint firstItem="5PH-nw-eVb" firstAttribute="top" secondItem="7kB-vP-dR6" secondAttribute="bottom" constant="44" id="vhx-Ba-ojt"/>
@@ -1453,7 +1453,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkU-f8-sjO">
-                                <rect key="frame" x="8" y="70" width="0.0" height="0.0"/>
+                                <rect key="frame" x="8" y="70" width="359" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1731,7 +1731,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qaa-vF-boe">
-                                <rect key="frame" x="8" y="70" width="0.0" height="0.0"/>
+                                <rect key="frame" x="8" y="70" width="359" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2620,7 +2620,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJY-h3-ngb">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJY-h3-ngb">
                                 <rect key="frame" x="8" y="56" width="66" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Ship Date"/>
@@ -2628,7 +2628,7 @@
                                     <segue destination="RNy-vE-4aD" kind="presentation" identifier="showShipDateViewController" id="VE3-RF-sBK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnJ-mJ-hjR">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnJ-mJ-hjR">
                                 <rect key="frame" x="319" y="56" width="40" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Notes"/>
@@ -2711,11 +2711,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="FnJ-mJ-hjR" secondAttribute="trailing" id="6h0-V5-VTE"/>
                             <constraint firstItem="F9L-Eg-mdx" firstAttribute="baseline" secondItem="UJY-h3-ngb" secondAttribute="baseline" id="7ts-dK-oVe"/>
                             <constraint firstItem="QwW-B2-Djf" firstAttribute="top" secondItem="F9L-Eg-mdx" secondAttribute="bottom" constant="10" id="Ahw-HW-zsd"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UJY-h3-ngb" secondAttribute="trailingMargin" id="BAi-0i-i1Q"/>
                             <constraint firstItem="F9L-Eg-mdx" firstAttribute="height" relation="greaterThanOrEqual" secondItem="UJY-h3-ngb" secondAttribute="height" id="BxT-8X-fic"/>
                             <constraint firstItem="QwW-B2-Djf" firstAttribute="top" secondItem="ILf-Ms-mfB" secondAttribute="bottom" constant="106" id="CQ5-3q-L0R"/>
                             <constraint firstItem="F9L-Eg-mdx" firstAttribute="height" secondItem="UJY-h3-ngb" secondAttribute="height" id="DRG-OU-qcc"/>
                             <constraint firstItem="QwW-B2-Djf" firstAttribute="centerY" secondItem="CoS-ih-pl2" secondAttribute="centerY" id="DuJ-Qs-kWv"/>
                             <constraint firstItem="F9L-Eg-mdx" firstAttribute="centerY" secondItem="FnJ-mJ-hjR" secondAttribute="centerY" id="ERM-5A-suI"/>
+                            <constraint firstItem="FnJ-mJ-hjR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CoS-ih-pl2" secondAttribute="leadingMargin" id="F0G-Rm-LXk"/>
                             <constraint firstItem="F9L-Eg-mdx" firstAttribute="baseline" secondItem="FnJ-mJ-hjR" secondAttribute="baseline" id="Faj-Lr-RME"/>
                             <constraint firstItem="QwW-B2-Djf" firstAttribute="top" secondItem="UJY-h3-ngb" secondAttribute="bottom" constant="8" symbolic="YES" id="FrP-B0-asI"/>
                             <constraint firstItem="F9L-Eg-mdx" firstAttribute="leading" secondItem="UJY-h3-ngb" secondAttribute="trailing" constant="100" id="H4o-Cd-SFD"/>
@@ -2733,7 +2735,6 @@
                             <constraint firstAttribute="trailing" secondItem="F9L-Eg-mdx" secondAttribute="trailing" constant="8" id="XNd-gM-amc"/>
                             <constraint firstItem="F9L-Eg-mdx" firstAttribute="leading" secondItem="UJY-h3-ngb" secondAttribute="trailing" constant="94" id="bRL-a9-HNP"/>
                             <constraint firstItem="vYU-10-Dge" firstAttribute="top" secondItem="htl-St-yBo" secondAttribute="bottom" id="bUJ-Mp-GbQ"/>
-                            <constraint firstItem="FnJ-mJ-hjR" firstAttribute="leading" secondItem="UJY-h3-ngb" secondAttribute="trailing" priority="999" constant="8" id="d3Y-tS-JYO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="F9L-Eg-mdx" secondAttribute="trailing" constant="-8" id="dMf-6s-6iS"/>
                             <constraint firstItem="F9L-Eg-mdx" firstAttribute="top" secondItem="Sq1-5X-f8u" secondAttribute="bottom" constant="8" id="ePe-Az-N7o"/>
                             <constraint firstItem="QwW-B2-Djf" firstAttribute="top" secondItem="F9L-Eg-mdx" secondAttribute="bottom" constant="8" id="eb7-Kd-lFP"/>
@@ -2884,7 +2885,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTZ-OB-Jfc">
-                                <rect key="frame" x="8" y="70" width="0.0" height="0.0"/>
+                                <rect key="frame" x="8" y="70" width="359" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -3064,7 +3065,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSb-JR-lF2">
-                                <rect key="frame" x="8" y="70" width="0.0" height="0.0"/>
+                                <rect key="frame" x="8" y="70" width="359" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -3249,9 +3250,9 @@
     <inferredMetricsTieBreakers>
         <segue reference="pMn-Ln-0Vj"/>
         <segue reference="6d6-nC-Exh"/>
-        <segue reference="gPt-uJ-Ar3"/>
-        <segue reference="BSS-Cz-DJv"/>
-        <segue reference="wQZ-MD-GC1"/>
+        <segue reference="VE3-RF-sBK"/>
+        <segue reference="M2f-Ff-W0w"/>
+        <segue reference="aGn-An-9fI"/>
         <segue reference="oPF-NX-9wd"/>
     </inferredMetricsTieBreakers>
 </document>
