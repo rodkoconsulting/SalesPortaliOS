@@ -35,7 +35,7 @@ class AccountOrderInventoryService: SyncService, OrderSyncServiceType {
         poDict = self.poListToDict(poList)
         if dB.open() {
             let sqlQuery = "WITH INVOICES AS (" +
-                "SELECT d.ITEM_CODE, h.INVOICE_DATE, d.Price, SUM(d.QUANTITY) AS QUANTITY FROM ACCOUNTS_INV_HEAD h INNER JOIN ACCOUNTS_INV_DET d ON h.INVOICE_NO = d.INVOICE_NO and h.HEADER_SEQ_NO = d.HEADER_SEQ_NO WHERE h.DIVISION_NO = '" + self.account.divisionNo + "' and h.CUSTOMER_NO = '" + self.account.customerNoRaw + "'" +
+                "SELECT d.ITEM_CODE, h.INVOICE_DATE, d.Price, SUM(d.QUANTITY) AS QUANTITY FROM ACCOUNTS_INV_HEAD h INNER JOIN ACCOUNTS_INV_DET d ON h.INVOICE_NO = d.INVOICE_NO and h.HEADER_SEQ_NO = d.HEADER_SEQ_NO WHERE d.Price > 0 and h.DIVISION_NO = '" + self.account.divisionNo + "' and h.CUSTOMER_NO = '" + self.account.customerNoRaw + "'" +
                 "GROUP BY h.INVOICE_DATE, d.ITEM_CODE " +
                 "HAVING SUM(d.QUANTITY) > 0" +
                 "), ITEMS AS (" +

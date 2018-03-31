@@ -2620,7 +2620,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJY-h3-ngb">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJY-h3-ngb">
                                 <rect key="frame" x="8" y="56" width="66" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Ship Date"/>
@@ -2628,7 +2628,7 @@
                                     <segue destination="RNy-vE-4aD" kind="presentation" identifier="showShipDateViewController" id="VE3-RF-sBK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnJ-mJ-hjR">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnJ-mJ-hjR">
                                 <rect key="frame" x="319" y="56" width="40" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Notes"/>
@@ -3251,8 +3251,8 @@
         <segue reference="pMn-Ln-0Vj"/>
         <segue reference="6d6-nC-Exh"/>
         <segue reference="VE3-RF-sBK"/>
-        <segue reference="M2f-Ff-W0w"/>
-        <segue reference="aGn-An-9fI"/>
+        <segue reference="L2H-40-xOX"/>
+        <segue reference="Lst-PL-vaL"/>
         <segue reference="oPF-NX-9wd"/>
     </inferredMetricsTieBreakers>
 </document>
