@@ -210,6 +210,9 @@ class OrderList : NSObject {
     
     lazy var orderType : String = {
         [unowned self] in
+        guard (self.comment.range(of:"BILL & HOLD") == nil) else {
+            return "BH"
+        }
         guard !(self.total == 0 && !["MO", "IN", "BO","SM","MOAPP"].contains(self.holdCodeRaw)) else {
             return "BH"
         }
