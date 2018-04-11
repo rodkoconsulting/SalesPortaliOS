@@ -146,6 +146,7 @@ class OrderList : NSObject {
     let poEta: Date?
     let customerNo: String
     let customerName: String
+    let affiliations: String
     let shipExpireDate: Date?
     let orderStatus: String
     let holdCodeRaw: String
@@ -327,6 +328,7 @@ class OrderList : NSObject {
         orderNo = queryResult?.string(forColumn: "order_no") ?? ""
         customerNo = queryResult?.string(forColumn: "customer_no") ?? ""
         customerName = queryResult?.string(forColumn: "customer_name") ?? ""
+        affiliations = queryResult?.string(forColumn: "affil") ?? ""
         let orderDateString = queryResult?.string(forColumn: "order_date") ?? ""
         orderDate = orderDateString.getShipDate()
         let shipExpireDateString = queryResult?.string(forColumn: "ship_date") ?? ""
