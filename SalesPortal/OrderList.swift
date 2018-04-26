@@ -211,7 +211,7 @@ class OrderList : NSObject {
     
     lazy var orderType : String = {
         [unowned self] in
-        guard (self.comment.range(of:"BILL & HOLD INVOICE") == nil) else {
+        guard (self.comment.range(of:"BILL & HOLD INVOICE") == nil && (self.comment.range(of:"BILL & HOLD") == nil || self.total == 0 || self.orderStatus != "I")) else {
             return "BHI"
         }
         guard (self.comment.range(of:"BILL & HOLD TRANSFER") == nil) else {
