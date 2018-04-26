@@ -69,8 +69,8 @@ struct OrderService {
             }
             let transmittedBottles = item.bottleTotal - moboTotal
             if transmittedBottles > 0 {
-                let quantityAvailable = order.orderType == .Standard || order.orderType == .Master || order.orderType == .Sample ? Double(Int((item.quantityAvailable * Double(item.uomInt)).roundedBottles()) - transmittedBottles) / Double(item.uomInt) : item.quantityAvailable
-                let quantityOnSo = order.orderType == .Standard ? Double(Int((item.onSo * Double(item.uomInt)).roundedBottles()) + transmittedBottles) / Double(item.uomInt) : item.onSo
+                let quantityAvailable = order.orderType == .Standard || order.orderType == .Master || order.orderType == .Sample || order.orderType == .BillHoldInvoice ? Double(Int((item.quantityAvailable * Double(item.uomInt)).roundedBottles()) - transmittedBottles) / Double(item.uomInt) : item.quantityAvailable
+                let quantityOnSo = order.orderType == .Standard || order.orderType == .BillHoldInvoice  ? Double(Int((item.onSo * Double(item.uomInt)).roundedBottles()) + transmittedBottles) / Double(item.uomInt) : item.onSo
                 let quantityOnMo = order.orderType == .Master ? Double(Int((item.onMo * Double(item.uomInt)).roundedBottles()) + transmittedBottles) / Double(item.uomInt) : item.onMo
                 let quantityOnBo = order.orderType == .Back ? Double(Int((item.onBo * Double(item.uomInt)).roundedBottles()) + transmittedBottles) / Double(item.uomInt) : item.onBo
                 updateDbInventory(item.itemCode, quantityAvailable: quantityAvailable, quantityOnSo: quantityOnSo, quantityOnMo: quantityOnMo, quantityOnBo: quantityOnBo)

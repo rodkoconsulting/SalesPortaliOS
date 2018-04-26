@@ -19,6 +19,8 @@
 		C302B98A1D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302B9891D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift */; };
 		C309FC111D05DBB5002868BD /* ShipDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C309FC101D05DBB5002868BD /* ShipDateViewController.swift */; };
 		C309FC131D05E294002868BD /* XuniCalendarKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C309FC121D05E294002868BD /* XuniCalendarKit.framework */; };
+		C314E1A2208FFC4700613D80 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C314E19F208FFC4700613D80 /* libTestFairy.a */; };
+		C314E1A3208FFC4700613D80 /* upload-dsym.sh in Resources */ = {isa = PBXBuildFile; fileRef = C314E1A1208FFC4700613D80 /* upload-dsym.sh */; };
 		C31734571DA2A1AB00C60830 /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31734561DA2A1AB00C60830 /* OrderListViewController.swift */; };
 		C318DB961DD0E83900DB7812 /* AccountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318DB951DD0E83900DB7812 /* AccountInfoViewController.swift */; };
 		C31F1F3D1E3BDE3400F1ACC0 /* SampleOrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31F1F3C1E3BDE3300F1ACC0 /* SampleOrderService.swift */; };
@@ -29,8 +31,6 @@
 		C33791181DAC5B14009EA4C1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33791171DAC5B14009EA4C1 /* OpenGLES.framework */; };
 		C33A556B1E31422E00C6C28A /* SampleOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A556A1E31422E00C6C28A /* SampleOrder.swift */; };
 		C33A58A41CBD90E300644ED3 /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A58A21CBD90E300644ED3 /* Locksmith.swift */; };
-		C33DF20D2007EE9900B3B4E4 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C33DF20A2007EE9900B3B4E4 /* libTestFairy.a */; };
-		C33DF20E2007EE9900B3B4E4 /* upload-dsym.sh in Resources */ = {isa = PBXBuildFile; fileRef = C33DF20C2007EE9900B3B4E4 /* upload-dsym.sh */; };
 		C344AF9B1E4A2F1B00BB1E6D /* AccountOrderInventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C344AF9A1E4A2F1B00BB1E6D /* AccountOrderInventoryViewController.swift */; };
 		C344AF9D1E4A7C7100BB1E6D /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = C344AF9C1E4A7C7000BB1E6D /* Order.swift */; };
 		C344AFA11E4B91C500BB1E6D /* OrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C344AFA01E4B91C500BB1E6D /* OrderHeaderViewController.swift */; };
@@ -132,6 +132,9 @@
 		C302B9891D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderHeaderViewController.swift; sourceTree = "<group>"; };
 		C309FC101D05DBB5002868BD /* ShipDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShipDateViewController.swift; sourceTree = "<group>"; };
 		C309FC121D05E294002868BD /* XuniCalendarKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XuniCalendarKit.framework; path = ../Xuni/iOS/Controls/XuniCalendarKit.framework; sourceTree = "<group>"; };
+		C314E19F208FFC4700613D80 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
+		C314E1A0208FFC4700613D80 /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
+		C314E1A1208FFC4700613D80 /* upload-dsym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-dsym.sh"; sourceTree = "<group>"; };
 		C31734561DA2A1AB00C60830 /* OrderListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderListViewController.swift; sourceTree = "<group>"; };
 		C318DB951DD0E83900DB7812 /* AccountInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoViewController.swift; sourceTree = "<group>"; };
 		C31F1F3C1E3BDE3300F1ACC0 /* SampleOrderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderService.swift; sourceTree = "<group>"; };
@@ -142,9 +145,6 @@
 		C33791171DAC5B14009EA4C1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		C33A556A1E31422E00C6C28A /* SampleOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrder.swift; sourceTree = "<group>"; };
 		C33A58A21CBD90E300644ED3 /* Locksmith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locksmith.swift; sourceTree = "<group>"; };
-		C33DF20A2007EE9900B3B4E4 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
-		C33DF20B2007EE9900B3B4E4 /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
-		C33DF20C2007EE9900B3B4E4 /* upload-dsym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-dsym.sh"; sourceTree = "<group>"; };
 		C344AF9A1E4A2F1B00BB1E6D /* AccountOrderInventoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderInventoryViewController.swift; sourceTree = "<group>"; };
 		C344AF9C1E4A7C7000BB1E6D /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		C344AFA01E4B91C500BB1E6D /* OrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHeaderViewController.swift; sourceTree = "<group>"; };
@@ -254,7 +254,7 @@
 				C33791101DAC5AD2009EA4C1 /* CoreMedia.framework in Frameworks */,
 				C3D424951D426221000BE982 /* XuniInputKit.framework in Frameworks */,
 				C309FC131D05E294002868BD /* XuniCalendarKit.framework in Frameworks */,
-				C33DF20D2007EE9900B3B4E4 /* libTestFairy.a in Frameworks */,
+				C314E1A2208FFC4700613D80 /* libTestFairy.a in Frameworks */,
 				C37F4A7B1CF3A2E700665ED0 /* XuniFlexGridKit.framework in Frameworks */,
 				C37F4A791CF3A2CC00665ED0 /* XuniCoreKit.framework in Frameworks */,
 				C37F4A771CF3A17F00665ED0 /* libsqlite3.tbd in Frameworks */,
@@ -378,9 +378,9 @@
 		C33791091DAC5A07009EA4C1 /* TestFairy */ = {
 			isa = PBXGroup;
 			children = (
-				C33DF20A2007EE9900B3B4E4 /* libTestFairy.a */,
-				C33DF20B2007EE9900B3B4E4 /* TestFairy.h */,
-				C33DF20C2007EE9900B3B4E4 /* upload-dsym.sh */,
+				C314E19F208FFC4700613D80 /* libTestFairy.a */,
+				C314E1A0208FFC4700613D80 /* TestFairy.h */,
+				C314E1A1208FFC4700613D80 /* upload-dsym.sh */,
 				070AAA7D1F6DB9440095B42B /* NSLog.swift */,
 			);
 			name = TestFairy;
@@ -545,7 +545,7 @@
 				C3ED0A821CBBECCF00B9520E /* Sources */,
 				C3ED0A831CBBECCF00B9520E /* Frameworks */,
 				C3ED0A841CBBECCF00B9520E /* Resources */,
-				C308C58F1E81888D00CD3E11 /* ShellScript */,
+				C314E19E208FE40F00613D80 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -563,7 +563,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Polaner Selections";
 				TargetAttributes = {
 					C3ED0A851CBBECCF00B9520E = {
@@ -600,14 +600,14 @@
 				C36448201D02181C00A545DD /* Holidays.plist in Resources */,
 				C3ED0A911CBBECCF00B9520E /* Assets.xcassets in Resources */,
 				C3ED0A8F1CBBECCF00B9520E /* Main.storyboard in Resources */,
-				C33DF20E2007EE9900B3B4E4 /* upload-dsym.sh in Resources */,
+				C314E1A3208FFC4700613D80 /* upload-dsym.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C308C58F1E81888D00CD3E11 /* ShellScript */ = {
+		C314E19E208FE40F00613D80 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -759,12 +759,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -774,7 +776,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -817,12 +819,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -839,6 +843,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -864,7 +869,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETSA5LDZGS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = /Users/administrator/Documents/Xuni/iOS/Controls;
@@ -893,6 +898,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETSA5LDZGS;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = /Users/administrator/Documents/Xuni/iOS/Controls;

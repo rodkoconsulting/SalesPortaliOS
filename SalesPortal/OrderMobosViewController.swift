@@ -63,8 +63,8 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
                 sendAlert(ErrorCode.moboException)
                 return false
             }
-            if isBillHoldException(moboDetail: mobo){
-                sendAlert(ErrorCode.billHoldException)
+            if isBillHoldShipException(moboDetail: mobo){
+                sendAlert(ErrorCode.billHoldShipException)
                 return false
             }
             guard column.isReadOnly == true else {
@@ -136,8 +136,8 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
             sendAlert(ErrorCode.moboException)
             return true
         }
-        if isBillHoldException(moboDetail: moboDetail){
-            sendAlert(ErrorCode.billHoldException)
+        if isBillHoldShipException(moboDetail: moboDetail){
+            sendAlert(ErrorCode.billHoldShipException)
             return true
         }
         moboDetail.delegate = order
@@ -151,11 +151,11 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
     }
     
     fileprivate func isMoboException(moboDetail: MoboList) -> Bool {
-        return order?.orderType != .Standard && moboDetail.price > 0
+        return order?.orderType != .Standard && order?.orderType != .BillHoldInvoice && moboDetail.price > 0
     }
     
-    fileprivate func isBillHoldException(moboDetail: MoboList) -> Bool {
-        return (order?.orderType != .BillHold && moboDetail.price == 0) || (order?.orderType == .BillHold && moboDetail.price > 0) || (order?.orderType != .BillHold && moboDetail.orderType == "BH")
+    fileprivate func isBillHoldShipException(moboDetail: MoboList) -> Bool {
+        return (order?.orderType != .BillHoldShip && moboDetail.price == 0) || (order?.orderType == .BillHoldShip && moboDetail.price > 0) || (order?.orderType != .BillHoldShip && moboDetail.orderType == "BH")
     }
 
 }

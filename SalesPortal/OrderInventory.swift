@@ -15,7 +15,7 @@ protocol OrderInventoryErrorDelegate: class {
 
 
 protocol isOrderInventory {
-    weak var errorDelegate: OrderInventoryErrorDelegate? { get set }
+    var errorDelegate: OrderInventoryErrorDelegate? { get set }
 }
 
 

@@ -11,7 +11,7 @@ enum ErrorCode: CustomStringConvertible, Error {
     case noCredentials
     case noQuantity(itemCode: String)
     case moboException
-    case billHoldException
+    case billHoldShipException
     
     var description: String {
         switch self {
@@ -37,9 +37,9 @@ enum ErrorCode: CustomStringConvertible, Error {
         case .noQuantity(let itemCode):
             return itemCode + ": Insufficient quantity available"
         case .moboException:
-            return "Can only ship MOBOs on Standard Orders"
-        case .billHoldException:
-            return "Can only ship Bill and Hold items on Bill and Hold orders"
+            return "Can only ship MOBOs on Standard or BH Orders"
+        case .billHoldShipException:
+            return "Can only ship Bill and Hold items on B&H ship orders"
         }
         
 

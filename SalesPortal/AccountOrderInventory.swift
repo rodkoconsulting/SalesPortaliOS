@@ -85,13 +85,13 @@ class AccountOrderInventory: OrderInventory {
             return false
         }
         switch orderType {
-            case .Standard:
+            case .Standard, .BillHoldInvoice:
                 return bottleTotal > bottleQuantityAvailable + moboTotal.available
             case .Master:
                 return bottleTotal > bottleQuantityAvailable
             case .Back:
                 return bottleTotal > backOrderQuantityAvailable
-            case .BillHold:
+            case .BillHoldShip:
                 return bottleTotal > moboTotal.available
             default:
                 return false
@@ -109,13 +109,13 @@ class AccountOrderInventory: OrderInventory {
             return (0, 0)
         }
         switch orderType {
-        case .Standard:
+        case .Standard, .BillHoldInvoice:
             return CasesBottlesFromTotal(bottleQuantityAvailable + moboTotal.available)
         case .Master:
             return CasesBottlesFromTotal(bottleQuantityAvailable)
         case .Back:
             return CasesBottlesFromTotal(backOrderQuantityAvailable)
-        case .BillHold:
+        case .BillHoldShip:
             return CasesBottlesFromTotal(moboTotal.available)
         default:
             return (0, 0)
@@ -164,7 +164,7 @@ class AccountOrderInventory: OrderInventory {
         guard let orderType = orderType else {
             return
         }
-        unitPrice = orderType != .BillHold ? linePricing : 0
+        unitPrice = orderType != .BillHoldShip ? linePricing : 0
         delegate?.updateOrderPricing(mixDesc: mixDescription, quantityDelta: quantityDelta)
     }
     
@@ -198,7 +198,7 @@ class AccountOrderInventory: OrderInventory {
     
     fileprivate func setUnitPrice() {
         if let orderType = orderType {
-            if orderType == OrderType.BillHold {
+            if orderType == OrderType.BillHoldShip {
                 unitPrice = 0
             }
         }

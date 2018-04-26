@@ -211,10 +211,16 @@ class OrderList : NSObject {
     
     lazy var orderType : String = {
         [unowned self] in
-        guard (self.comment.range(of:"BILL & HOLD") == nil) else {
-            return "BH"
+        guard (self.comment.range(of:"BILL & HOLD INVOICE") == nil) else {
+            return "BHI"
         }
-        guard !(self.total == 0 && !["MO", "IN", "BO","SM","MOAPP"].contains(self.holdCodeRaw)) else {
+        guard (self.comment.range(of:"BILL & HOLD TRANSFER") == nil) else {
+            return "BHT"
+        }
+        guard !(self.total == 0 && self.comment.range(of:"B&H HOLD") == nil && ["NSQTY", "NOTE", "PO","DNT","AM",""].contains(self.holdCodeRaw)) else {
+            return "BHS"
+        }
+        guard !(self.total == 0 && ["NSQTY", "APP", "NOTE", "CRED","BH"].contains(self.holdCodeRaw)) else {
             return "BH"
         }
         if self.orderStatus == "I" {
@@ -225,16 +231,16 @@ class OrderList : NSObject {
             return "BO"
         case "MOAPP":
             return "MO"
-        case "BH", "MO", "SM":
+        case "MO", "SM":
             return self.holdCodeRaw
         default:
             return "S"
         }
     }()
     
-    lazy var isShippingBh : Bool = {
+    lazy var isBhShip : Bool = {
         [unowned self] in
-        return self.orderType == "BH" && self.holdCode != "BH"
+        return self.orderType == "BHI" || self.orderType == "BHT" || self.orderType == "BHS"
     }()
     
     lazy var textColor : UIColor? = {
@@ -285,7 +291,7 @@ class OrderList : NSObject {
         if self.orderType == "I" {
             return true
         }
-        if (self.orderType == "S" || self.isShippingBh) && self.shipDate?.getDateString() == Date().getDailySalesDate().getDateString() {
+        if (self.orderType == "S" || self.isBhShip) && self.shipDate?.getDateString() == Date().getDailySalesDate().getDateString() {
             return true
         }
         return false
@@ -293,12 +299,12 @@ class OrderList : NSObject {
     
     lazy var isMoBo : Bool = {
         [unowned self] in
-        return (self.orderType == "MO" || self.orderType == "BO" || self.orderType == "BH" ) && !self.isShippingBh
+        return (self.orderType == "MO" || self.orderType == "BO" || self.orderType == "BH" ) && !self.isBhShip
     }()
   
     lazy var isFutureOrder : Bool = {
         [unowned self] in
-        return self.orderType == "S" || self.orderType == "I" || self.isShippingBh
+        return self.orderType == "S" || self.orderType == "I" || self.isBhShip
     }()
     
     lazy var isSampleOrder : Bool = {

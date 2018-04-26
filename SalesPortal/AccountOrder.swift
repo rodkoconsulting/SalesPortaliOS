@@ -14,11 +14,12 @@ enum OrderType: String {
     case Back = "BO"
     case PickUp = "P"
     case Unsaleable = "U"
-    case BillHold = "BH"
+    case BillHoldShip = "BHS"
+    case BillHoldInvoice = "BHI"
     case Sample = "SMP"
     
-    static let allValues = [Standard.orderText, Master.orderText, Back.orderText, PickUp.orderText, Unsaleable.orderText, BillHold.orderText]
-    static let rawValues = [Standard.rawValue, Master.rawValue, Back.rawValue, PickUp.rawValue, Unsaleable.rawValue, BillHold.rawValue]
+    static let allValues = [Standard.orderText, Master.orderText, Back.orderText, PickUp.orderText, Unsaleable.orderText, BillHoldShip.orderText, BillHoldInvoice.orderText]
+    static let rawValues = [Standard.rawValue, Master.rawValue, Back.rawValue, PickUp.rawValue, Unsaleable.rawValue, BillHoldShip.rawValue, BillHoldInvoice.rawValue]
     
 }
 
@@ -35,8 +36,10 @@ extension OrderType {
             return "Pick Up"
         case .Unsaleable:
             return "Unsaleable"
-        case .BillHold:
-            return "Bill and Hold"
+        case .BillHoldInvoice:
+            return "BH Order"
+        case .BillHoldShip:
+            return "BH Ship"
         case .Sample:
             return "Sample"
         }
@@ -58,9 +61,9 @@ extension OrderType {
     
     func shipDate(account: Account?) -> String? {
         switch self {
-        case .Standard, .PickUp, .BillHold:
+        case .Standard, .PickUp, .BillHoldShip:
             return Date().getNextShip(account?.shipDays).shipDate
-        case .Master, .Back, .Unsaleable:
+        case .Master, .Back, .Unsaleable, .BillHoldInvoice:
             return nil
         case .Sample:
             return Date().getNextShip().shipDate
@@ -117,7 +120,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
     var orderType: OrderType {
         didSet {
             checkOrderTypeLines()
-            if oldValue == .Standard || oldValue == .BillHold {
+            if oldValue == .Standard || oldValue == .BillHoldShip || oldValue == .BillHoldInvoice {
                 deleteMobos()
             }
             orderTypeChanged()
@@ -136,7 +139,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
     
     func updateOrderPricing(mixDesc: String, quantityDelta: Double) {
         orderTotal += quantityDelta
-        guard orderType != OrderType.BillHold else {
+        guard orderType != OrderType.BillHoldShip else {
             return
         }
         guard let priceLevel = account?.priceLevel else {
@@ -492,7 +495,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         var detailArray = [[String : Any]]()
         let notes = (self.notes ?? "").replacingOccurrences(of: "'", with: "")
         orderDict["custNo"] = account?.customerNoRaw ?? ""
-        orderDict["type"] = orderType.rawValue 
+        orderDict["type"] = orderType.rawValue
         orderDict["date"] = shipDate ?? ""
         orderDict["note"] = notes 
         orderDict["coop"] = coopNo ?? ""

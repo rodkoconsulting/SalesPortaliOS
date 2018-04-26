@@ -77,8 +77,8 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
     }
 
     override func orderTypeChanged(orderType: OrderType) {
-        toggleNonBillHoldViews(enabled: orderType != .BillHold)
-        toggleMoboView(enabled: orderType == .Standard || orderType == .BillHold)
+        toggleNonBillHoldShipViews(enabled: orderType != .BillHoldShip)
+        toggleMoboView(enabled: orderType == .Standard || orderType == .BillHoldShip || orderType == .BillHoldInvoice)
         toggleShipDate()
         flexGrid.invalidate()
         filterGrid("")
@@ -88,7 +88,7 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
         flexGrid.invalidate()
     }
     
-    fileprivate func toggleNonBillHoldViews(enabled: Bool) {
+    fileprivate func toggleNonBillHoldShipViews(enabled: Bool) {
         let orderTabBarController = tabBarController as! OrderTabBarController
         if let myViewControllers = orderTabBarController.viewControllers {
             for viewController in myViewControllers {
