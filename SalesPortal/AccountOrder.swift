@@ -123,9 +123,18 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             if oldValue == .Standard || oldValue == .BillHoldShip || oldValue == .BillHoldInvoice {
                 deleteMobos()
             }
+            if (orderType != .Standard) {
+                clearCoop()
+            }
             orderTypeChanged()
             orderDelegate?.orderTypeChanged(orderType: orderType)
         }
+    }
+    
+    private func clearCoop()
+    {
+        coopCases = 0;
+        coopNo = "";
     }
     
     init(account: Account) {
