@@ -203,7 +203,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             return
         }
         let orderTotal = Int(self.orderTotal.roundedCases())
-        let coopTotal = self.coopCases ?? 0
+        let coopTotal = orderType == .Standard ? (self.coopCases ?? 0) : 0;
         let caseThreshold = Constants.njCaseThreshold
         var totalPricing: Int;
         for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 {

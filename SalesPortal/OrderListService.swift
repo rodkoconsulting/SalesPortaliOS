@@ -16,7 +16,7 @@ class OrderListService: SyncService, SyncServiceType {
         }
         let orderListArray = NSMutableArray()
         var orderListSearch = [[String : String]]()
-        let date = Date().getDailySalesDateString()
+        //let date = Date().getDailySalesDateString()
         var isMultipleReps = false
         var previousRep : String = ""
         if dB.open() {
@@ -33,13 +33,13 @@ class OrderListService: SyncService, SyncServiceType {
             "INNER JOIN ORDER_LIST_DETAIL d ON h.ORDER_NO = d.ORDER_NO " +
             "LEFT OUTER JOIN INV_PO p ON d.ITEM_CODE = p.ITEM_CODE " +
             "WHERE (p.PO_ETA ISNULL or p.PO_ETA = (SELECT PO_ETA FROM INV_PO AS p2 WHERE p2.ITEM_CODE = p.ITEM_CODE ORDER BY PO_ETA LIMIT 1)) " +
-            "UNION ALL " +
-            "SELECT hi.DIVISION_NO, hi.CUSTOMER_NO, hi.INVOICE_NO, hi.INVOICE_DATE, hi.INVOICE_DATE, " +
-            "null, 'I', null, '', hi.COMMENT, di.ITEM_CODE, di.DETAIL_SEQ_NO, di.QUANTITY, di.PRICE, di.TOTAL, '' AS LINE_COMMENT " +
-            "FROM ACCOUNTS_INV_HEAD hi " +
-            "INNER JOIN ACCOUNTS_INV_DET di " +
-            "ON hi.INVOICE_NO = di.INVOICE_NO and hi.HEADER_SEQ_NO = di.HEADER_SEQ_NO " +
-            "WHERE hi.INVOICE_DATE = '" + date + "'" +
+            //"UNION ALL " +
+            ///"SELECT hi.DIVISION_NO, hi.CUSTOMER_NO, hi.INVOICE_NO, hi.INVOICE_DATE, hi.INVOICE_DATE, " +
+            //"null, 'I', null, '', hi.COMMENT, di.ITEM_CODE, di.DETAIL_SEQ_NO, di.QUANTITY, di.PRICE, di.TOTAL, '' AS LINE_COMMENT " +
+            //"FROM ACCOUNTS_INV_HEAD hi " +
+            //"INNER JOIN ACCOUNTS_INV_DET di " +
+            //"ON hi.INVOICE_NO = di.INVOICE_NO and hi.HEADER_SEQ_NO = di.HEADER_SEQ_NO " +
+            //"WHERE hi.INVOICE_DATE = '" + date + "'" +
             ") hoi " +
             "INNER JOIN " +
             "(" +

@@ -201,23 +201,23 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
             return
         }
         SwiftSpinner.show("Syncing...", animated: false)
-        let accountService = AccountService(module: Module.accounts, apiCredentials: credentials)
+        //let accountService = AccountService(module: Module.accounts, apiCredentials: credentials)
         let orderListService = OrderListService(module: Module.orderList, apiCredentials: credentials)
         do {
-            let lastAccountSync = try accountService.queryAllLastSync()
+            //let lastAccountSync = try accountService.queryAllLastSync()
             let lastOrderListSync = try orderListService.queryAllLastSync()
-            accountService.getApi(lastAccountSync) {
-                [unowned self](accountSyncCompletion, error) in
-                guard let accountSync = accountSyncCompletion else  {
-                    self.completionError(error ?? ErrorCode.unknownError)
-                    return
-                }
-                do {
-                    try accountService.updateDb(accountSync)
-                } catch {
-                    self.completionError(ErrorCode.dbError)
-                }
-                accountService.updateLastSync()
+            //accountService.getApi(lastAccountSync) {
+                //[unowned self](accountSyncCompletion, error) in
+                //guard let accountSync = accountSyncCompletion else  {
+                    //self.completionError(error ?? ErrorCode.unknownError)
+                    //return
+                //}
+                //do {
+                //    try accountService.updateDb(accountSync)
+                //} catch {
+                //    self.completionError(ErrorCode.dbError)
+                //}
+                //accountService.updateLastSync()
                 orderListService.getApi(lastOrderListSync) {
                     (orderListSyncCompletion, error) in
                     guard let orderListSync = orderListSyncCompletion else  {
@@ -231,7 +231,7 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
                     }
                     orderListService.updateLastSync()
                     self.loadData(isSynched: true)
-                }
+                //}
             }
         } catch {
             completionError(ErrorCode.dbError)

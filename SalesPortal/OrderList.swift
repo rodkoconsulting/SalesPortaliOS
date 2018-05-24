@@ -288,10 +288,10 @@ class OrderList : NSObject {
     
     lazy var isDailySale : Bool = {
         [unowned self] in
-        if self.orderType == "I" {
-            return true
-        }
-        if (self.orderType == "S" || self.isBhShip) && self.shipDate?.getDateString() == Date().getDailySalesDate().getDateString() {
+        //if self.orderType == "I" {
+        //    return true
+        //}
+        if (self.orderType == "S" || self.isBhShip || self.orderType == "I") && self.shipDate?.getDateString() == Date().getDailySalesDate().getDateString() {
             return true
         }
         return false
