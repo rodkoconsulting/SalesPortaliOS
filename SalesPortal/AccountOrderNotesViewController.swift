@@ -48,7 +48,7 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
             return
         }
         poNoTextField.text = accountOrder.poNo
-        guard (order?.account?.coopList.count ?? 0) > 0 else {
+        guard (order?.orderType == .Standard ? (order?.account?.coopList.count ?? 0) : 0) > 0 else {
             HideCoop()
             return
         }
