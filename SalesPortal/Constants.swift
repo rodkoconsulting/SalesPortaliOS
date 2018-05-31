@@ -267,8 +267,8 @@ struct Constants {
     static let noCoopText = "None"
     static let njCaseThreshold = 5
     static let ComboCellHeight = 45
-    static let dbVersionPrevious = 42
-    static let dbVersion = 44
+    static let dbVersionPrevious = 44
+    static let dbVersion = 45
     static let sampleOrderSegue = "showSampleOrderTabBarController"
     static let accountOrderSegue = "showAccountOrderTabBarController"
 }

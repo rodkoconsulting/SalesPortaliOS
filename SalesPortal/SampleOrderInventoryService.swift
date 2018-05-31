@@ -4,7 +4,7 @@ import Foundation
 
 
 class SampleOrderInventoryService: SyncService, OrderSyncServiceType {
-    typealias poDictType = [(onPo: Double, poEta: String, poDate: String)]
+    typealias poDictType = [(onPo: Double, poEta: String, poDate: String, poComment: String)]
     let date: String
     
     init(module: Module, apiCredentials: [String : String], date: String) {
@@ -22,7 +22,7 @@ class SampleOrderInventoryService: SyncService, OrderSyncServiceType {
         var poList: [InventoryPo] = []
         var poDict: [String:poDictType]
         if dB.open() {
-            let poQuery = "SELECT ITEM_CODE, ON_PO, PO_NO, PO_ETA, PO_DATE FROM INV_PO ORDER BY ITEM_CODE, PO_ETA, PO_DATE"
+            let poQuery = "SELECT ITEM_CODE, ON_PO, PO_NO, PO_ETA, PO_DATE, PO_CMT FROM INV_PO ORDER BY ITEM_CODE, PO_ETA, PO_DATE"
             let poResults:FMResultSet? = dB.executeQuery(poQuery, withArgumentsIn: nil)
             while poResults?.next() == true {
                 let purchaseOrder = InventoryPo(queryResult: poResults!)
@@ -64,9 +64,9 @@ class SampleOrderInventoryService: SyncService, OrderSyncServiceType {
         var poDict = [String:poDictType]()
         for po in poList {
             if po.itemCode != previousItem {
-                poDict[po.itemCode] = [(po.onPo, po.poEta, po.poDate)]
+                poDict[po.itemCode] = [(po.onPo, po.poEta, po.poDate, po.poComment)]
             } else {
-                poDict[po.itemCode]! += [(po.onPo, po.poEta, po.poDate)]
+                poDict[po.itemCode]! += [(po.onPo, po.poEta, po.poDate, po.poComment)]
             }
             previousItem = po.itemCode
         }

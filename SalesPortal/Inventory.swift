@@ -58,6 +58,7 @@ import Foundation
         let onPo: Double?
         let eta: String?
         let poDate: String?
+        let poComment: String?
         
         required init(dict: [String: Any]?)
         {
@@ -66,6 +67,7 @@ import Foundation
             poNo = dict?["PoNo"] as? String
             eta = dict?["Eta"] as? String
             poDate = dict?["PoDate"] as? String
+            poComment = dict?["PoCmt"] as? String
         }
         
         lazy var getDbDelete: String?  = {
@@ -83,11 +85,12 @@ import Foundation
                     let poNo = self.poNo,
                     let onPo = self.onPo,
                     let eta = self.eta,
-                    let poDate = self.poDate
+                    let poDate = self.poDate,
+                    let poComment = self.poComment
                     else {
                         return nil
                 }
-                return "('" + itemCode + "', '" + poNo + "', " + "\(onPo)" + ", '" + eta + "', '"  + poDate + "')"
+                return "('" + itemCode + "', '" + poNo + "', " + "\(onPo)" + ", '" + eta + "', '"  + poDate + "', '"  + poComment + "')"
         }()
         
     }
@@ -275,6 +278,7 @@ class InventoryPo {
     let onPo: Double
     let poEta: String
     let poDate: String
+    let poComment: String
     
     init(queryResult: FMResultSet) {
             itemCode = queryResult.string(forColumn: "item_code")
@@ -282,6 +286,7 @@ class InventoryPo {
             onPo = queryResult.double(forColumn: "on_po")
             poEta = queryResult.string(forColumn: "po_eta")
             poDate = queryResult.string(forColumn: "po_date")
+            poComment = queryResult.string(forColumn: "po_cmt")
     }
 
 }
@@ -289,7 +294,7 @@ class InventoryPo {
 @objcMembers
 class Inventory : NSObject {
     typealias priceBreakType = (priceCase: Double, discountCase: Double, priceBottle: Double, discountBottle: Double)
-    typealias poDictType = [(onPo: Double, poEta: String, poDate: String)]
+    typealias poDictType = [(onPo: Double, poEta: String, poDate: String, poComment: String)]
     let poDict: poDictType?
     let itemCode: String
     let quantityAvailable: Double
@@ -474,6 +479,21 @@ class Inventory : NSObject {
             }
             return poString
     }()
+    
+    lazy var poComment : String = {
+        [unowned self] in
+        guard let poDict = self.poDict else {
+            return ""
+        }
+        var poComment = ""
+        for (index, po) in poDict.enumerated() {
+            poComment += po.poComment
+            if index <  poDict.count - 1 {
+                poComment += "\n"
+            }
+        }
+        return poComment
+        }()
     
     lazy var onPoTotal: Double = {
         [unowned self] in
