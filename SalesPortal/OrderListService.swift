@@ -16,30 +16,22 @@ class OrderListService: SyncService, SyncServiceType {
         }
         let orderListArray = NSMutableArray()
         var orderListSearch = [[String : String]]()
-        //let date = Date().getDailySalesDateString()
         var isMultipleReps = false
         var previousRep : String = ""
         if dB.open() {
             let sqlQuery =
-            "SELECT hoi.ORDER_NO, a.CUSTOMER_NAME, a.CUSTOMER_NO, a.AFFIL, hoi.ORDER_DATE, hoi.SHIP_DATE, hoi.PO_ETA, hoi.STATUS, hoi.HOLD, hoi.COOP, " +
+            "SELECT hoi.ORDER_NO, a.CUSTOMER_NAME, a.CUSTOMER_NO, a.AFFIL, hoi.ORDER_DATE, hoi.SHIP_DATE, hoi.ARR_DATE, hoi.PO_ETA, hoi.STATUS, hoi.HOLD, hoi.COOP, " +
             "hoi.COMMENT, hoi.ITEM_CODE, " +
             "i.DESC, i.BRAND, i.VINTAGE, i.UOM, i.SIZE, i.DAMAGED_NOTES, " +
             "hoi.QTY, hoi.PRICE, hoi.TOTAL, " +
             "a.REP, a.REGION " +
             "FROM (" +
-            "SELECT DISTINCT h.DIVISION_NO, h.CUSTOMER_NO, h.ORDER_NO, h.ORDER_DATE, h.SHIP_DATE, p.PO_ETA, h.STATUS, h.HOLD, h.COOP, h.COMMENT, " +
+            "SELECT DISTINCT h.DIVISION_NO, h.CUSTOMER_NO, h.ORDER_NO, h.ORDER_DATE, h.SHIP_DATE, h.ARR_DATE, p.PO_ETA, h.STATUS, h.HOLD, h.COOP, h.COMMENT, " +
             "d.ITEM_CODE, d.LINE_NO, d.QTY, d.PRICE, d.TOTAL, d.COMMENT AS LINE_COMMENT " +
             "FROM ORDER_LIST_HEADER h " +
             "INNER JOIN ORDER_LIST_DETAIL d ON h.ORDER_NO = d.ORDER_NO " +
             "LEFT OUTER JOIN INV_PO p ON d.ITEM_CODE = p.ITEM_CODE " +
             "WHERE (p.PO_ETA ISNULL or p.PO_ETA = (SELECT PO_ETA FROM INV_PO AS p2 WHERE p2.ITEM_CODE = p.ITEM_CODE ORDER BY PO_ETA LIMIT 1)) " +
-            //"UNION ALL " +
-            ///"SELECT hi.DIVISION_NO, hi.CUSTOMER_NO, hi.INVOICE_NO, hi.INVOICE_DATE, hi.INVOICE_DATE, " +
-            //"null, 'I', null, '', hi.COMMENT, di.ITEM_CODE, di.DETAIL_SEQ_NO, di.QUANTITY, di.PRICE, di.TOTAL, '' AS LINE_COMMENT " +
-            //"FROM ACCOUNTS_INV_HEAD hi " +
-            //"INNER JOIN ACCOUNTS_INV_DET di " +
-            //"ON hi.INVOICE_NO = di.INVOICE_NO and hi.HEADER_SEQ_NO = di.HEADER_SEQ_NO " +
-            //"WHERE hi.INVOICE_DATE = '" + date + "'" +
             ") hoi " +
             "INNER JOIN " +
             "(" +

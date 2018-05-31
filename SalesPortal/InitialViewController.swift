@@ -17,13 +17,13 @@ class InitialViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        SwiftSpinner.show("Loading...", animated: false)
-        DispatchQueue.global(qos: .userInitiated).async {
+        //SwiftSpinner.show("Loading...", animated: false)
+        //DispatchQueue.global(qos: .userInitiated).async {
             self.performSegue(withIdentifier: "showMainTabBarController", sender: self)
-            DispatchQueue.main.async {
-                SwiftSpinner.hide()
-            }
-        }
+            //DispatchQueue.main.async {
+            //    SwiftSpinner.hide()
+            //}
+       // }
     }
     
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {

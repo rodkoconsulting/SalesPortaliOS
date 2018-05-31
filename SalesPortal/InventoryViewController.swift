@@ -57,15 +57,19 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
         }
     }
    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        do {
-            try _ = DbOperation.databaseInit()
-        } catch {
-            sendAlert(ErrorCode.dbError)
+        SwiftSpinner.show("Loading...", animated: false) {
+            [unowned self] () -> Void in
+            do {
+                try _ = DbOperation.databaseInit()
+            } catch {
+                self.sendAlert(ErrorCode.dbError)
+            }
+            self.setTitleLabel()
+            self.displayView()
         }
-        setTitleLabel()
-        displayView()
     }
     
     override func loadSettings() {
@@ -173,7 +177,7 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
             return
         }
         dataSettings.repState = States(rawValue: credentialState) ?? States.NY
-        SwiftSpinner.show("Syncing...", animated: false) {
+        SwiftSpinner.show("Syncing...", animated: false)
             let inventoryService = InventoryService(module: self.moduleType, apiCredentials: credentials, date: dataSettings.date)
             do {
                 let lastAllSync = try inventoryService.queryAllLastSync()
@@ -195,6 +199,5 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
                 self.completionError(ErrorCode.dbError)
             }
             self.isSettingsChanged = false
-        }
     }
 }

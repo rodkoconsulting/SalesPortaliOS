@@ -28,6 +28,7 @@ let kManagerGroup = "groupLevelManager"
 
 struct ColumnData {
     static let inventoryColumns: [[String : Any]] = [
+        [kName:"version", kValue: 2],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"quantityAvailable", kHeader: "Avail", kType: "Number"],
@@ -62,6 +63,7 @@ struct ColumnData {
         [kName:"scoreList", kHeader:"Scores", kAlignment:"right", kWidth: 200]
     ]
     static let accountOrderInventoryColumns: [[String : Any]] = [
+        [kName:"version", kValue: 2],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"cases", kHeader: "Cases", kType: "Number", kReadOnly: false],
@@ -98,7 +100,7 @@ struct ColumnData {
         [kName:"scoreList", kHeader:"Scores", kAlignment:"right", kWidth: 200]
     ]
     static let sampleOrderInventoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 2],
+        [kName:"version", kValue: 3],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"bottles", kHeader: "Bottles", kType: "Number", kReadOnly: false],
@@ -151,6 +153,7 @@ struct ColumnData {
         [kName:"comment", kHeader: "Comment", kReadOnly: false]
     ]
     static let accountOrderHistoryColumns: [[String : Any]] = [
+        [kName:"version", kValue: 2],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"cases", kHeader: "Cases", kType: "Number", kReadOnly: false],
@@ -190,7 +193,7 @@ struct ColumnData {
         [kName:"scoreList", kHeader:"Scores", kAlignment:"right", kWidth: 200]
     ]
     static let sampleOrderHistoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 3],
+        [kName:"version", kValue: 4],
         [kName:"itemDescription", kHeader: "Description",  kWidth: 300],
         [kName:"itemCode" as AnyObject, kHeader: "Item" as AnyObject],
         [kName:"bottles", kHeader: "Bottles", kType: "Number", kReadOnly: false],
@@ -247,13 +250,14 @@ struct ColumnData {
         [kName:"rep", kHeader: "Rep", kWidth: 45, kManagerGroup: 0],
     ]
     static let orderListColumns: [[String : Any]] = [
-        [kName:"version", kValue: 14],
+        [kName:"version", kValue: 16],
         [kName:"customerName", kHeader: "Account", kWidth: 250, kGroup: 0, kManagerGroup: 3],
         [kName:"orderNo", kHeader: "Order #", kWidth: 60],
         [kName:"orderType", kHeader: "Type", kWidth: 35],
         [kName:"holdCode", kHeader: "Hold", kWidth: 45],    
         [kName:"orderDate", kHeader: "Order Date", kAlignment:"right", kWidth: 70, kType: "NumberDate"],
         [kName:"shipExpireDate", kHeader: "Ship/Exp Date", kAlignment:"right", kWidth: 90, kType: "NumberDate"],
+        [kName:"arrivalDate", kHeader: "Arr. Date", kAlignment:"right", kWidth: 90, kType: "NumberDate"],
         [kName:"boEta", kHeader: "BO ETA", kAlignment:"right", kWidth: 90, kType: "NumberDate"],
         [kName:"itemCode", kHeader: "Item", kWidth: 70],
         [kName:"itemDescription", kHeader: "Description", kWidth: 250],

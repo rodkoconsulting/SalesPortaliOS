@@ -42,6 +42,7 @@ extension OrderListFilter {
         let orderNo: String?
         let orderDate: String?
         let shipExpireDate: String?
+        let arrivalDate: String?
         let orderStatus: String?
         let holdCode: String?
         let coopNo: String?
@@ -53,6 +54,7 @@ extension OrderListFilter {
             orderNo = dict?["OrderNo"] as? String
             orderDate = dict?["OrderDate"] as? String
             shipExpireDate = dict?["ShipDate"] as? String
+            arrivalDate = dict?["ArrDate"] as? String
             orderStatus = dict?["Status"] as? String
             holdCode = dict?["Hold"] as? String
             coopNo = dict?["Coop"] as? String
@@ -74,13 +76,14 @@ extension OrderListFilter {
                 let customerNo = self.customerNo,
                 let orderDate = self.orderDate,
                 let shipExpireDate = self.shipExpireDate,
+                let arrivalDate = self.arrivalDate,
                 let orderStatus = self.orderStatus,
                 let holdCode = self.holdCode,
                 let coopNo = self.coopNo,
                 let comment = self.comment else {
                     return nil
             }
-            return "('" + orderNo + "', '" + orderDate + "', '" + shipExpireDate + "', '" + division + "', '" + customerNo + "', '" + orderStatus + "', '" + holdCode + "', '" + coopNo + "', '" + comment + "')"
+            return "('" + orderNo + "', '" + orderDate + "', '" + shipExpireDate + "', '" + arrivalDate + "', '" + division + "', '" + customerNo + "', '" + orderStatus + "', '" + holdCode + "', '" + coopNo + "', '" + comment + "')"
             }()
     }
 
@@ -148,6 +151,7 @@ class OrderList : NSObject {
     let customerName: String
     let affiliations: String
     let shipExpireDate: Date?
+    let arrivalDateString: String
     let orderStatus: String
     let holdCodeRaw: String
     let coopNo: String
@@ -179,6 +183,19 @@ class OrderList : NSObject {
         }
         return nil
     }()
+    
+    lazy var arrivalDate : Date? = {
+        [unowned self] in
+        guard let arrivalDate = arrivalDateString.getShipDate() else {
+            return nil
+        }
+        let year = arrivalDate.getYearInt()
+        if year > 2000 {
+            return arrivalDate
+        }
+        return nil
+        }()
+    
     
     lazy var isSampleApproved : Bool = {
         return self.orderStatus == "O" && self.holdCodeRaw == "SM"
@@ -339,6 +356,7 @@ class OrderList : NSObject {
         orderDate = orderDateString.getShipDate()
         let shipExpireDateString = queryResult?.string(forColumn: "ship_date") ?? ""
         shipExpireDate = shipExpireDateString.getShipDate()
+        arrivalDateString = queryResult?.string(forColumn: "arr_date") ?? ""
         let poEtaString = queryResult?.string(forColumn: "po_eta") ?? ""
         poEta = poEtaString.getDate()
         orderStatus = queryResult?.string(forColumn: "status") ?? ""
