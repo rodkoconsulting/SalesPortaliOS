@@ -12,8 +12,8 @@ struct ApiService {
     
     init(apiString: String) {
         apiInit = apiString
-        apiBaseURL = URL(string: "http://10.0.4.148:8000/" + apiInit)
-        //apiBaseURL = URL(string: "https://api.polanerselections.com:8443/" + apiInit)
+        //apiBaseURL = URL(string: "http://10.0.4.148:8000/" + apiInit)
+        apiBaseURL = URL(string: "https://api.polanerselections.com:8443/" + apiInit)
     }
     
     func getApiUser(_ credentialDict: CredentialDict, completion: @escaping (JSONDictionaryCompletion)) {

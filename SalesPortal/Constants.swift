@@ -268,7 +268,7 @@ struct Constants {
     static let njCaseThreshold = 5
     static let ComboCellHeight = 45
     static let dbVersionPrevious = 44
-    static let dbVersion = 47
+    static let dbVersion = 48
     static let sampleOrderSegue = "showSampleOrderTabBarController"
     static let accountOrderSegue = "showAccountOrderTabBarController"
 }

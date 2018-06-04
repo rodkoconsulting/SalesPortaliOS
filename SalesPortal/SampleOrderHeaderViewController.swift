@@ -55,6 +55,7 @@ class SampleOrderHeaderViewController: OrderHeaderViewController, isOrderHeaderV
     }
     
     override func selectedIndexChanged(_ sender: XuniComboBox!) {
+        flexGrid.finishEditing(false)
         guard let order = order, let shipToList = order.shipToList else {
             return
         }

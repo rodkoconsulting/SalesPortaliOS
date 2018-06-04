@@ -77,6 +77,7 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
     }
 
     override func orderTypeChanged(orderType: OrderType) {
+        flexGrid.finishEditing(false)
         toggleNonBillHoldShipViews(enabled: orderType != .BillHoldShip)
         toggleMoboView(enabled: orderType == .Standard || orderType == .BillHoldShip || orderType == .BillHoldInvoice)
         toggleShipDate()
