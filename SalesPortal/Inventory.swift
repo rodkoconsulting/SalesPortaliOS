@@ -365,7 +365,7 @@ class Inventory : NSObject {
         guard !self.descriptionRaw.isEmpty else {
             return ""
         }
-        return self.brand + " " + self.descriptionRaw + " " + self.vintage + " " + "(" + self.uomString + "/" + self.sizeDescription + ")" + self.damagedNotes
+        return self.brand + " " + self.descriptionRaw + " " + self.vintage + " " + "(" + self.uomString + "/" + self.sizeDescription + ") " + self.damagedNotes
     }()
     
     lazy var mixDescription : String = {
