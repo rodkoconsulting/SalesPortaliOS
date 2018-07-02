@@ -21,7 +21,7 @@ class AccountService: SyncService, SyncServiceType {
         let accountList = NSMutableArray()
         var accountSearch = [[String : String]]()
         if dB.open() {
-            let sqlQuery = "SELECT DIVISION_NO, CUSTOMER_NO, CUSTOMER_NAME, SHIP_DAYS, PRICE_LEVEL, COOP_LIST, STATUS, BUYER1, BUYER2, BUYER3, BUYER1EMAIL, BUYER2EMAIL, BUYER3EMAIL, BUYER1PHONE, BUYER2PHONE, BUYER3PHONE, AFFIL, ADDR1, ADDR2, CITY, STATE, ZIP, REP, REGION FROM ACCOUNTS_LIST ORDER BY CUSTOMER_NAME"
+            let sqlQuery = "SELECT DIVISION_NO, CUSTOMER_NO, CUSTOMER_NAME, SHIP_DAYS, PRICE_LEVEL, COOP_LIST, STATUS, BUYER1, BUYER2, BUYER3, BUYER1EMAIL, BUYER2EMAIL, BUYER3EMAIL, BUYER1PHONE, BUYER2PHONE, BUYER3PHONE, AFFIL, ADDR1, ADDR2, CITY, STATE, ZIP, REP, REGION, SHIP_TO FROM ACCOUNTS_LIST ORDER BY CUSTOMER_NAME"
             let results: FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             while results?.next() == true {
                 let account = Account(queryResult: results)
@@ -42,12 +42,13 @@ class AccountService: SyncService, SyncServiceType {
                 let listDict = accountDict["List"] as? [String : AnyObject],
                 let invoiceHeaderDict = accountDict["HistH"] as? [String : AnyObject],
                 let invoiceDetailDict = accountDict["HistD"] as? [String : AnyObject],
-                let itemsInactiveDict = accountDict["Inact"] as? [String : AnyObject]
+                let itemsInactiveDict = accountDict["Inact"] as? [String : AnyObject],
+                let addressDict = accountDict["A"] as? [String : AnyObject]
                 else {
                     completion(nil, errorCode)
                     return
             }
-            completion(AccountSync(listDict: listDict, invoiceHeaderDict: invoiceHeaderDict, invoiceDetailDict: invoiceDetailDict, itemsInactiveDict: itemsInactiveDict), nil)
+            completion(AccountSync(listDict: listDict, invoiceHeaderDict: invoiceHeaderDict, invoiceDetailDict: invoiceDetailDict, itemsInactiveDict: itemsInactiveDict, addressDict: addressDict), nil)
         }
     }
     
@@ -56,11 +57,13 @@ class AccountService: SyncService, SyncServiceType {
         let accountInvoiceHeaderService = DatabaseService(tableName: DatabaseTable.AccountInvoiceHeader)
         let accountInvoiceDetailService = DatabaseService(tableName: DatabaseTable.AccountInvoiceDetail)
         let accountItemsInactiveService = DatabaseService(tableName: DatabaseTable.AccountItemsInactive)
+        let accountAddressService = DatabaseService(tableName: DatabaseTable.AccountAddress)
         do {
             try accountListService.updateDb(accountSync.listSync)
             try accountInvoiceHeaderService.updateDb(accountSync.invoiceHeaderSync)
             try accountInvoiceDetailService.updateDb(accountSync.invoiceDetailSync)
             try accountItemsInactiveService.updateDb(accountSync.itemsInactiveSync)
+            try accountAddressService.updateDb(accountSync.addressSync)
         } catch ErrorCode.serverError {
             throw ErrorCode.serverError
         } catch {

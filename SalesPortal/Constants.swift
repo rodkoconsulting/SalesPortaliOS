@@ -177,13 +177,13 @@ extension Module {
         case .accountOrderInventory, .sampleOrderInventory:
             return "inventory/"
         case .accountOrder:
-            return "transmit_new/"
+            return "transmit/"
         case .sampleOrder:
             return "transmit_sample/"
         case .accountOrderHistory, .sampleOrderHistory:
             return "inventory/"
         case .accounts:
-            return "account/"
+            return "account/2/"
         case .orderList:
             return "orders/"
         case .orderMobos:
@@ -237,7 +237,7 @@ extension Module {
             case .inventory, .accountOrderInventory, .sampleOrderInventory, .accountOrderHistory, .sampleOrderHistory, .accountOrder,.sampleOrder:
                 return ["qty":"INV_QTY","price":"INV_PRICE","desc":"INV_DESC","po":"INV_PO"]
             case .accounts:
-                return ["list":"ACCOUNTS_LIST", "HistH":"ACCOUNTS_INV_HEAD", "HistD":"ACCOUNTS_INV_DET", "Inact": "ACCOUNTS_ITEMS_INACTIVE"  ]
+                return ["list":"ACCOUNTS_LIST", "HistH":"ACCOUNTS_INV_HEAD", "HistD":"ACCOUNTS_INV_DET", "Inact": "ACCOUNTS_ITEMS_INACTIVE", "A": "ACCOUNT_ADDRESSES"  ]
             case .orderList:
                 return ["H":"ORDER_LIST_HEADER", "D":"ORDER_LIST_DETAIL"]
             case .orderMobos:
@@ -267,8 +267,8 @@ struct Constants {
     static let noCoopText = "None"
     static let njCaseThreshold = 5
     static let ComboCellHeight = 45
-    static let dbVersionPrevious = 44
-    static let dbVersion = 48
+    static let dbVersionPrevious = 48
+    static let dbVersion = 53
     static let sampleOrderSegue = "showSampleOrderTabBarController"
     static let accountOrderSegue = "showAccountOrderTabBarController"
 }

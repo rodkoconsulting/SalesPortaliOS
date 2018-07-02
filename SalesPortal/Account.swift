@@ -187,6 +187,47 @@
         
     }
     
+    class AccountAddress: SyncRows {
+        let division: String?
+        let customerNo: String?
+        let shipToCode: String?
+        let shipToName: String?
+        let shipToAddress: String?
+        
+        required init(dict: [String: Any]?) {
+            division = dict?["Div"] as? String
+            customerNo = dict?["CustNo"] as? String
+            shipToCode = dict?["Code"] as? String
+            shipToName = dict?["Name"] as? String
+            shipToAddress = dict?["Addr"] as? String
+        }
+        
+        lazy var getDbDelete: String? = {
+            [unowned self] in
+            
+            guard let division = self.division,
+                let customerNo = self.customerNo,
+                let shipToCode = self.shipToCode else {
+                    return nil
+            }
+            return "DIVISION_NO='" + division + "' and CUSTOMER_NO='" + customerNo + "' and CODE='" + shipToCode + "'"
+            }()
+        
+        lazy var getDbInsert: String? = {
+            [unowned self] in
+            guard let division = self.division,
+                let customerNo = self.customerNo,
+                let shipToCode = self.shipToCode,
+                let shipToName = self.shipToName,
+                let shipToAddress = self.shipToAddress
+                else {
+                    return nil
+            }
+            return "('" + division + "', '" + customerNo + "', '" + shipToCode + "', '" + shipToName + "', '" + shipToAddress + "')"
+            }()
+    }
+
+    
     class AccountList: SyncRows {
         let division: String?
         let customerNo: String?
@@ -212,6 +253,7 @@
         let zip: String?
         let rep: String?
         let region: String?
+        let shipTo: String?
         
         required init(dict: [String: Any]?) {
             division = dict?["Div"] as? String
@@ -238,6 +280,7 @@
             zip = dict?["Zip"] as? String
             rep = dict?["Rep"] as? String
             region = dict?["Region"] as? String
+            shipTo = dict?["ShipTo"] as? String
         }
         
         lazy var getDbDelete: String?  = {
@@ -275,10 +318,11 @@
                 let state = self.state,
                 let zip = self.zip,
                 let rep = self.rep,
-                let region = self.region else {
+                let region = self.region,
+                let shipTo = self.shipTo else {
                     return nil
             }
-            return "('" + division + "', '" + customerNo + "', '" + customerName + "', '" + shipDays + "', '" + priceLevel + "', '" + coopList + "', '" + status + "', '" + buyer1 + "', '" + buyer2 + "', '" + buyer3 + "', '" + buyer1Email + "', '" + buyer2Email + "', '" + buyer3Email + "', '" + buyer1Phone + "', '" + buyer2Phone + "', '" + buyer3Phone + "', '" + affil + "', '" + addr1 + "', '" + addr2 + "', '" + city + "', '" + state + "', '" + zip + "', '" + rep + "', '" + region + "')"
+            return "('" + division + "', '" + customerNo + "', '" + customerName + "', '" + shipDays + "', '" + priceLevel + "', '" + coopList + "', '" + status + "', '" + buyer1 + "', '" + buyer2 + "', '" + buyer3 + "', '" + buyer1Email + "', '" + buyer2Email + "', '" + buyer3Email + "', '" + buyer1Phone + "', '" + buyer2Phone + "', '" + buyer3Phone + "', '" + affil + "', '" + addr1 + "', '" + addr2 + "', '" + city + "', '" + state + "', '" + zip + "', '" + rep + "', '" + region + "', '" + shipTo + "')"
             }()
 
     }
@@ -289,12 +333,14 @@
         let invoiceHeaderSync: Sync<AccountInvoiceHeader>
         let invoiceDetailSync: Sync<AccountInvoiceDetail>
         let itemsInactiveSync: Sync<AccountItemsInactive>
+        let addressSync: Sync<AccountAddress>
         
-        init(listDict: [String : Any], invoiceHeaderDict: [String : Any], invoiceDetailDict: [String : Any], itemsInactiveDict: [String : Any]) {
+        init(listDict: [String : Any], invoiceHeaderDict: [String : Any], invoiceDetailDict: [String : Any], itemsInactiveDict: [String : Any], addressDict: [String : Any]) {
             listSync = Sync<AccountList>(dict: listDict)
             invoiceHeaderSync = Sync<AccountInvoiceHeader>(dict: invoiceHeaderDict)
             invoiceDetailSync = Sync<AccountInvoiceDetail>(dict: invoiceDetailDict)
             itemsInactiveSync = Sync<AccountItemsInactive>(dict: itemsInactiveDict)
+            addressSync = Sync<AccountAddress>(dict: addressDict)
         }
     }
     
@@ -325,6 +371,7 @@
         let zip: String
         let rep: String
         let region: String
+        let shipTo: String
         
         
         init(queryResult: FMResultSet?) {
@@ -352,6 +399,7 @@
             zip = queryResult?.string(forColumn: "zip") ?? ""
             rep = queryResult?.string(forColumn: "rep") ?? ""
             region = queryResult?.string(forColumn: "region") ?? ""
+            shipTo = queryResult?.string(forColumn: "ship_to") ?? ""
         }
         
         lazy var customerNo : String = {

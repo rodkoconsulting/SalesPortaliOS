@@ -9,6 +9,8 @@
 import UIKit
 import XuniInputKit
 
+let kSHIPTOTAG = 0
+let kCOOPTAG = 1
 
 class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDelegate, XuniComboBoxDelegate, isOrderNotesVc {
 
@@ -16,6 +18,8 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
     @IBOutlet weak var poNoTextField: UITextField!
     @IBOutlet weak var coopNoComboBox: XuniComboBox!
     @IBOutlet weak var coopNoLabel: UILabel!
+    @IBOutlet weak var shipToComboBox: XuniComboBox!
+    @IBOutlet weak var shipToLabel: UILabel!
     
     override func callChildDismiss() {
         guard let accountOrder = order as? AccountOrder else {
@@ -28,19 +32,38 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
         navigationBar.title = order?.account?.customerName
     }
     
-    func selectedIndexChanged(_ sender: XuniComboBox!) {
+    func coopIndexChanged(index: Int) {
         guard let accountOrder = order as? AccountOrder,
-              let coopList = accountOrder.account?.coopList else {
+            let coopList = accountOrder.account?.coopList else {
             return
         }
-        let selectedIndex = Int(sender.selectedIndex)
-        guard selectedIndex != 0 else {
+        guard index != 0 else {
             accountOrder.coopNo = "None"
             accountOrder.coopCases = 0
             return
         }
-        accountOrder.coopNo = coopList[selectedIndex - 1]
+        accountOrder.coopNo = coopList[index - 1]
         accountOrder.coopCases = 5
+    }
+    
+    func shipToIndexChanged(index: Int) {
+        guard let accountOrder = order as? AccountOrder,
+            let shipToList = accountOrder.shipToList else {
+            return
+        }
+        accountOrder.shipTo = shipToList[index]
+    }
+    
+    func selectedIndexChanged(_ sender: XuniComboBox!) {
+        let selectedIndex = Int(sender.selectedIndex)
+        switch (sender.tag) {
+            case kCOOPTAG:
+                coopIndexChanged(index: selectedIndex)
+            case kSHIPTOTAG:
+                shipToIndexChanged(index: selectedIndex)
+            default:
+                return
+        }
     }
     
     override func callChildInitNotes() {
@@ -48,37 +71,60 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
             return
         }
         poNoTextField.text = accountOrder.poNo
-        guard (order?.orderType == .Standard ? (order?.account?.coopList.count ?? 0) : 0) > 0 else {
-            HideCoop()
+        initCoopNo()
+        initShipTo()
+
+    }
+    
+    func initShipTo() {
+        var index : Int? = nil
+        var selectedIndex: UInt = 0
+        guard let shipToList = order?.shipToList as? [AccountOrderAddress],
+            let shipTo = order?.shipTo as? AccountOrderAddress else {
+            HideShipTo()
             return
         }
-        initCoopNo()
-
+        index = shipToList.index(of: shipTo)
+        if let index = index {
+            selectedIndex = UInt(shipToList.startIndex.distance(to: index))
+        }
+        shipToComboBox.delegate = self
+        shipToComboBox.tag = kSHIPTOTAG
+        shipToComboBox.headerBorderColor = UIColor.black
+        shipToComboBox.backgroundColor = UIColor.white
+        shipToComboBox.buttonColor = UIColor.black
+        shipToComboBox.displayMemberPath = "name"
+        shipToComboBox.isEditable = false
+        shipToComboBox.textFont = GridSettings.smallFont
+        shipToComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
+        shipToComboBox.itemsSource = ComboData.addressData(shipToList)
+        shipToComboBox.selectedIndex = selectedIndex
+        shipToComboBox.dropDownHeight = Double(4 * Constants.ComboCellHeight)
     }
     
     func initCoopNo() {
         var index : Int? = nil
         var selectedIndex: UInt = 0
-        guard let accountOrder = order as? AccountOrder else {
+        
+        guard (order?.orderType == .Standard && (order?.account?.coopList.count ?? 0) > 0 ) else {
+            HideCoop()
             return
         }
-        guard let coopList = accountOrder.account?.coopList else {
-            coopNoComboBox.isHidden = true
-            return
-        }
-        if let coopNo = accountOrder.coopNo {
-            index = accountOrder.account?.coopList.index(of: coopNo)
+        let accountOrder = order as? AccountOrder
+        if let coopNo = accountOrder?.coopNo {
+            index = accountOrder?.account?.coopList.index(of: coopNo)
         }
         if let index = index {
-            selectedIndex = UInt(accountOrder.account?.coopList.startIndex.distance(to: index + 1) ?? 0)
+            selectedIndex = UInt(accountOrder?.account?.coopList.startIndex.distance(to: index + 1) ?? 0)
         }
         coopNoComboBox.delegate = self
+        coopNoComboBox.tag = kCOOPTAG
         coopNoComboBox.headerBorderColor = UIColor.black
         coopNoComboBox.buttonColor = UIColor.black
         coopNoComboBox.displayMemberPath = "name"
         coopNoComboBox.isEditable = false
         coopNoComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
-        coopNoComboBox.itemsSource = ComboData.coopNoData(coopList)
+        coopNoComboBox.itemsSource = ComboData.coopNoData(accountOrder?.account?.coopList)
         coopNoComboBox.selectedIndex = selectedIndex
         coopNoComboBox.dropDownHeight = Double(coopNoComboBox.itemsSource.count * Constants.ComboCellHeight)
     }
@@ -86,6 +132,11 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
     func HideCoop() {
         coopNoLabel.isHidden = true
         coopNoComboBox.isHidden = true
+    }
+    
+    func HideShipTo() {
+        shipToLabel.isHidden = true
+        shipToComboBox.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -100,18 +151,19 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
     
     override func exitVc() {
         super.exitVc()
-        guard coopNoComboBox != nil else {
-            return
+        if coopNoComboBox != nil && coopNoComboBox.itemsSource != nil {
+            coopNoComboBox.selectedItem = nil
+            coopNoComboBox.itemsSource.removeAllObjects()
+            coopNoComboBox.collectionView.removeAllObjects()
+            coopNoComboBox.delegate = nil
         }
-        guard coopNoComboBox.itemsSource != nil else {
-            coopNoComboBox = nil
-            return
+        if shipToComboBox != nil && shipToComboBox.itemsSource != nil {
+            shipToComboBox.selectedItem = nil
+            shipToComboBox.itemsSource.removeAllObjects()
+            shipToComboBox.collectionView.removeAllObjects()
+            shipToComboBox.delegate = nil
         }
-        coopNoComboBox.selectedItem = nil
-        coopNoComboBox.itemsSource.removeAllObjects()
-        coopNoComboBox.collectionView.removeAllObjects()
-        coopNoComboBox.delegate = nil
         coopNoComboBox = nil
-        
+        shipToComboBox = nil
     }
 }

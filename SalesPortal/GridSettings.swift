@@ -28,6 +28,7 @@ struct GridSettings {
     static let defaultSelectionMode = GridSelectionMode.cellRange
     static let selectionTextColor = UIColor.black
     static let defaultFont = UIFont(name: "HelveticaNeue-Thin", size:15)
+    static let smallFont = UIFont(name: "HelveticaNeue-Thin", size:12)
     static let columnHeaderFont = UIFont(name: "HelveticaNeue", size:13)
     static let selectionModes = [GridSelectionMode.rowRange, GridSelectionMode.cellRange]
 }

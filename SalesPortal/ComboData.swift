@@ -16,7 +16,7 @@ class ComboData: NSObject {
         self.name = name
     }
     
-    class func addressData(_ addresses: [OrderAddress]) -> NSMutableArray {
+    class func addressData(_ addresses: [isOrderAddress]) -> NSMutableArray {
         let dataArray = NSMutableArray()
         for i in 0 ..< addresses.count {
             let addressDisplay = "\(addresses[i].name): \(addresses[i].address)"
@@ -62,8 +62,11 @@ class ComboData: NSObject {
         return dataArray
     }
     
-    class func coopNoData(_ coopNos: [String]) -> NSMutableArray {
+    class func coopNoData(_ coopNos: [String]?) -> NSMutableArray {
         let dataArray = NSMutableArray()
+        guard let coopNos = coopNos else {
+            return dataArray
+        }
         dataArray.add(ComboData(name: "None"))
         for i in 0 ..< coopNos.count {
             let data = ComboData(name: coopNos[i])

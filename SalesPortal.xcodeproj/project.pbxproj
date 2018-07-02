@@ -35,8 +35,8 @@
 		C344AF9D1E4A7C7100BB1E6D /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = C344AF9C1E4A7C7000BB1E6D /* Order.swift */; };
 		C344AFA11E4B91C500BB1E6D /* OrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C344AFA01E4B91C500BB1E6D /* OrderHeaderViewController.swift */; };
 		C34AF3E21D2FFBFA00294278 /* OrderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34AF3E11D2FFBFA00294278 /* OrderList.swift */; };
-		C354DBA61E36740800497C9D /* SampleOrderAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354DBA51E36740800497C9D /* SampleOrderAddress.swift */; };
-		C354DBA81E367D7F00497C9D /* SampleOrderAddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354DBA71E367D7F00497C9D /* SampleOrderAddressService.swift */; };
+		C354DBA61E36740800497C9D /* OrderAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354DBA51E36740800497C9D /* OrderAddress.swift */; };
+		C354DBA81E367D7F00497C9D /* OrderAddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C354DBA71E367D7F00497C9D /* OrderAddressService.swift */; };
 		C35A73751D21A498000644F6 /* OrderHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35A73741D21A498000644F6 /* OrderHistoryViewController.swift */; };
 		C35A9EFB1E45205A00C5BC1C /* SampleOrderNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35A9EFA1E45205A00C5BC1C /* SampleOrderNotesViewController.swift */; };
 		C35A9EFD1E48E91500C5BC1C /* OrderTabBarController_new.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35A9EFC1E48E91500C5BC1C /* OrderTabBarController_new.swift */; };
@@ -149,8 +149,8 @@
 		C344AF9C1E4A7C7000BB1E6D /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		C344AFA01E4B91C500BB1E6D /* OrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHeaderViewController.swift; sourceTree = "<group>"; };
 		C34AF3E11D2FFBFA00294278 /* OrderList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderList.swift; sourceTree = "<group>"; };
-		C354DBA51E36740800497C9D /* SampleOrderAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderAddress.swift; sourceTree = "<group>"; };
-		C354DBA71E367D7F00497C9D /* SampleOrderAddressService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderAddressService.swift; sourceTree = "<group>"; };
+		C354DBA51E36740800497C9D /* OrderAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderAddress.swift; sourceTree = "<group>"; };
+		C354DBA71E367D7F00497C9D /* OrderAddressService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderAddressService.swift; sourceTree = "<group>"; };
 		C35A73741D21A498000644F6 /* OrderHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHistoryViewController.swift; sourceTree = "<group>"; };
 		C35A9EFA1E45205A00C5BC1C /* SampleOrderNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderNotesViewController.swift; sourceTree = "<group>"; };
 		C35A9EFC1E48E91500C5BC1C /* OrderTabBarController_new.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderTabBarController_new.swift; sourceTree = "<group>"; };
@@ -520,8 +520,8 @@
 				C39D06D91D3EB294008D4DB7 /* OrderService.swift */,
 				C3CFF78F1D47EA2500802784 /* OrderSavedService.swift */,
 				C3E3866C1D076631009FEB20 /* AccountOrderInventoryService.swift */,
-				C354DBA51E36740800497C9D /* SampleOrderAddress.swift */,
-				C354DBA71E367D7F00497C9D /* SampleOrderAddressService.swift */,
+				C354DBA51E36740800497C9D /* OrderAddress.swift */,
+				C354DBA71E367D7F00497C9D /* OrderAddressService.swift */,
 				C383DD641E0B23C40020E6B3 /* SampleList.swift */,
 				C383DD661E0B37670020E6B3 /* SampleListService.swift */,
 				C33A556A1E31422E00C6C28A /* SampleOrder.swift */,
@@ -664,7 +664,7 @@
 				C3AE55541CC18404000859E7 /* FMDatabaseQueue.m in Sources */,
 				C3ED0A8A1CBBECCF00B9520E /* AppDelegate.swift in Sources */,
 				C37F4A6C1CF39B5600665ED0 /* DataSettings.swift in Sources */,
-				C354DBA61E36740800497C9D /* SampleOrderAddress.swift in Sources */,
+				C354DBA61E36740800497C9D /* OrderAddress.swift in Sources */,
 				C3F372F31D3581A700E7F39A /* OrderMobosViewController.swift in Sources */,
 				C364481E1D02005300A545DD /* AccountOrder.swift in Sources */,
 				C37F4A7F1CF3A48100665ED0 /* DataGridColumn.swift in Sources */,
@@ -689,7 +689,7 @@
 				070AAA7E1F6DB9440095B42B /* NSLog.swift in Sources */,
 				C3AEC95E1D105E3300E3EB41 /* AccountOrderNotesViewController.swift in Sources */,
 				C31734571DA2A1AB00C60830 /* OrderListViewController.swift in Sources */,
-				C354DBA81E367D7F00497C9D /* SampleOrderAddressService.swift in Sources */,
+				C354DBA81E367D7F00497C9D /* OrderAddressService.swift in Sources */,
 				C36C7ACB1E5263ED00985F1F /* SampleOrderHistoryViewController.swift in Sources */,
 				C3E386691D071779009FEB20 /* OrderInventoryViewController.swift in Sources */,
 				C37F4A541CF377A900665ED0 /* Inventory.swift in Sources */,

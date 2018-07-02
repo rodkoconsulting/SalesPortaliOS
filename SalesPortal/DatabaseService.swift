@@ -18,6 +18,7 @@ enum DatabaseTable: String {
     case AccountInvoiceHeader = "ACCOUNTS_INV_HEAD"
     case AccountInvoiceDetail = "ACCOUNTS_INV_DET"
     case AccountItemsInactive = "ACCOUNTS_ITEMS_INACTIVE"
+    case AccountAddress = "ACCOUNT_ADDRESSES"
     case OrderListHeader = "ORDER_LIST_HEADER"
     case OrderListDetail = "ORDER_LIST_DETAIL"
     case SampleListHeader = "SAMPLE_LIST_HEADER"

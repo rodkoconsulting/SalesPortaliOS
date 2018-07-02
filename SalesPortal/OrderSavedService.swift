@@ -142,11 +142,11 @@ struct OrderSavedService<T: isOrderType> {
         var orderSavedSearch = [[String : String]]()
         if dB.open() {
             let sqlQuery =
-                "SELECT h.ORDER_NO, h.TYPE, h.SAVE_TIME, h.SHIP_DATE, h.TOTAL_QTY, h.TOTAL_PRICE, " +
+                "SELECT h.ORDER_NO, h.TYPE, h.SAVE_TIME, h.SHIP_DATE, h.TOTAL_QTY, h.TOTAL_PRICE, h.SHIP_TO, " +
                     "a.CUSTOMER_NAME " +
                     "FROM ORDER_HEADER h INNER JOIN ACCOUNTS_LIST a ON h.DIVISION_NO = a.DIVISION_NO and h.CUSTOMER_NO = a.CUSTOMER_NO " +
                     "UNION ALL " +
-                    "SELECT h.ORDER_NO, '\(OrderType.Sample.rawValue)', h.SAVE_TIME, h.SHIP_DATE, h.TOTAL_QTY, h.TOTAL_PRICE, " +
+                    "SELECT h.ORDER_NO, '\(OrderType.Sample.rawValue)', h.SAVE_TIME, h.SHIP_DATE, h.TOTAL_QTY, h.TOTAL_PRICE, h.CUSTOMER_NO, " +
                     "sa.NAME " +
                     "FROM ORDER_HEADER h INNER JOIN SAMPLE_ADDRESSES sa on h.CUSTOMER_NO = sa.CODE WHERE h.TYPE='\(OrderType.Sample.rawValue)' " +
                     "ORDER BY h.ORDER_NO DESC"
@@ -178,7 +178,7 @@ struct OrderSavedService<T: isOrderType> {
             "FROM ACCOUNTS_LIST a INNER JOIN ORDER_HEADER h ON a.DIVISION_NO = h.DIVISION_NO and a.CUSTOMER_NO = h.CUSTOMER_NO " +
             "WHERE h.ORDER_NO = \(orderNo)"
         let sqlHeaderQuery =
-            "SELECT h.ORDER_NO, h.TYPE, h.DIVISION_NO, h.CUSTOMER_NO, h.SHIP_DATE, h.NOTES, h.COOP_QTY, h.COOP_NO, h.PO_NO " +
+            "SELECT h.ORDER_NO, h.TYPE, h.DIVISION_NO, h.CUSTOMER_NO, h.SHIP_DATE, h.NOTES, h.COOP_QTY, h.COOP_NO, h.PO_NO, h.SHIP_TO " +
                 "FROM ORDER_HEADER h " +
                 "WHERE h.ORDER_NO = \(orderNo)"
         let sqlDetailQuery =

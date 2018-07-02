@@ -48,9 +48,9 @@ extension OrderType {
     var apiString: String {
         switch self {
         case .Sample:
-            return "transmit_sample/"
+            return Module.sampleOrder.apiInit
         default:
-            return "transmit_new/"
+            return Module.accountOrder.apiInit
         }
         
     }
@@ -94,8 +94,8 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
     var orderInventory: NSMutableArray?
     var orderMobos: NSMutableArray?
     var orderTotal: Double
-    var shipToList: [OrderAddress]? = nil
-    var shipTo: OrderAddress? = nil
+    var shipToList: [isOrderAddress]? = nil
+    var shipTo: isOrderAddress? = nil
     var mixPriceDict: [String : Double] = [:]
     var savedDetailDict: DetailDictType = [:]
     var savedMoboDict: MoboDictType = [:]
@@ -144,6 +144,9 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         self.minShipDate = self.shipDate
         self.orderInventory = NSMutableArray()
         self.orderTotal = 0.0
+        let shipToTuple = AccountOrderAddressService.getAddressList(account: account)
+        self.shipToList = shipToTuple.list
+        self.shipTo = shipToTuple.primary
     }
     
     func updateOrderPricing(mixDesc: String, quantityDelta: Double) {
@@ -401,6 +404,10 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             let nextShipDate = self.orderType.shipDate(account: account) {
             self.shipDate = shipDate < nextShipDate ? nextShipDate : shipDate
         }
+        if let address = queryHeaderResult?.string(forColumn: "ship_to") {
+            let addressIndex = shipToList?.index{$0.code == address} ?? 0
+            self.shipTo = shipToList?[addressIndex]
+        }
         notes = queryHeaderResult?.string(forColumn: "notes") 
         coopCases = Int(queryHeaderResult?.int(forColumn: "coop_qty") ?? 0)
         if let coopNo = queryHeaderResult?.string(forColumn: "coop_no") {
@@ -434,13 +441,14 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
                 return ""
         }
         let notes = (self.notes ?? "").replacingOccurrences(of: "'", with: "''")
-        let columns = "(TYPE, DIVISION_NO, CUSTOMER_NO, SAVE_TIME, SHIP_DATE, NOTES, COOP_QTY, COOP_NO, TOTAL_QTY, TOTAL_PRICE, PO_NO) "
+        let columns = "(TYPE, DIVISION_NO, CUSTOMER_NO, SAVE_TIME, SHIP_DATE, NOTES, COOP_QTY, COOP_NO, TOTAL_QTY, TOTAL_PRICE, PO_NO, SHIP_TO) "
         let orderType = self.orderType.rawValue
         let shipDate = self.shipDate ?? ""
         let coopCases = "\(self.coopCases ?? 0)"
         let coopNo = self.coopNo ?? ""
         let poNo = self.poNo ?? ""
-        let values =  "VALUES ('" + orderType + "', '" + divisionNo + "', '" + customerNo + "', '" + saveTime + "', '" + shipDate + "', '" + notes + "', '" + coopCases + "', '" + coopNo + "', \(orderTotal), \(priceTotal), '" + poNo + "')"
+        let shipTo = self.shipTo?.code ?? ""
+        let values =  "VALUES ('" + orderType + "', '" + divisionNo + "', '" + customerNo + "', '" + saveTime + "', '" + shipDate + "', '" + notes + "', '" + coopCases + "', '" + coopNo + "', \(orderTotal), \(priceTotal), '" + poNo + "', '" + shipTo + "')"
         return columns + values
     }
     
@@ -472,7 +480,8 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         let shipDate = self.shipDate ?? ""
         let coopCases = "\(self.coopCases ?? 0)"
         let coopNo = self.coopNo ?? ""
-        return "TYPE='" + orderType + "', SAVE_TIME='" + saveTime + "', SHIP_DATE='" + shipDate + "', NOTES='" + notes + "', COOP_QTY='" + coopCases + "', COOP_NO='" + coopNo + "', TOTAL_QTY=\(orderTotal), TOTAL_PRICE=\(priceTotal), PO_NO='" + (poNo ?? "") + "' WHERE ORDER_NO=\(orderNo)"
+        let shipTo = self.shipTo?.code ?? ""
+        return "TYPE='" + orderType + "', SAVE_TIME='" + saveTime + "', SHIP_DATE='" + shipDate + "', NOTES='" + notes + "', COOP_QTY='" + coopCases + "', COOP_NO='" + coopNo + "', TOTAL_QTY=\(orderTotal), TOTAL_PRICE=\(priceTotal), PO_NO='" + (poNo ?? "") + "', SHIP_TO='" + shipTo + "' WHERE ORDER_NO=\(orderNo)"
     }
     
     func saveOrder() throws {
@@ -509,6 +518,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         orderDict["note"] = notes 
         orderDict["coop"] = coopNo ?? ""
         orderDict["po"] = poNo ?? ""
+        orderDict["shipTo"] = shipTo?.code ?? ""
         orderDict["id"] = orderId ?? ""
         for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0) > 0 {
             guard let line = line as? AccountOrderInventory else {

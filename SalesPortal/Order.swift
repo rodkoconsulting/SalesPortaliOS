@@ -11,8 +11,8 @@ import Foundation
 protocol isOrderType : class {
     var orderNo: Int? { get set }
     var shipDate: String? { get set }
-    var shipToList: [OrderAddress]? { get }
-    var shipTo: OrderAddress? { get set }
+    var shipToList: [isOrderAddress]? { get }
+    var shipTo: isOrderAddress? { get set }
     var minShipDate: String? { get set }
     var notes: String? { get set }
     var isSaved: Bool { get set }

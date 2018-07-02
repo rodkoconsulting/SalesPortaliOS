@@ -12,7 +12,7 @@ struct ApiService {
     
     init(apiString: String) {
         apiInit = apiString
-        //apiBaseURL = URL(string: "http://10.0.4.148:8000/" + apiInit)
+        //apiBaseURL = URL(string: "http://10.0.4.245:8000/" + apiInit)
         apiBaseURL = URL(string: "https://api.polanerselections.com:8443/" + apiInit)
     }
     
@@ -58,7 +58,8 @@ struct ApiService {
         guard let listDateTime = timeSyncDict["list"],
                 let invHeadDateTime = timeSyncDict["HistH"],
                 let invDetDateTime = timeSyncDict["HistD"],
-                let itemsInactiveDateTime = timeSyncDict["Inact"] else {
+                let itemsInactiveDateTime = timeSyncDict["Inact"],
+                let addressDateTime = timeSyncDict["A"] else {
             completion(nil, ErrorCode.dbError)
             return
         }
@@ -66,10 +67,12 @@ struct ApiService {
         let invHeadSyncArray = invHeadDateTime.split{$0 == " "}.map { String($0) }
         let invDetSyncArray = invDetDateTime.split{$0 == " "}.map { String($0) }
         let itemsInactiveSyncArray = itemsInactiveDateTime.split{$0 == " "}.map { String($0) }
+        let addressSyncArray = addressDateTime.split{$0 == " "}.map { String($0) }
         let apiString = listSyncArray[0] + "/" + listSyncArray[1] + "/" +
             invHeadSyncArray[0] + "/" + invHeadSyncArray[1] + "/" +
             invDetSyncArray[0] + "/" + invDetSyncArray[1] + "/" +
-            itemsInactiveSyncArray[0] + "/" + itemsInactiveSyncArray[1] + "/"
+            itemsInactiveSyncArray[0] + "/" + itemsInactiveSyncArray[1] + "/" +
+            addressSyncArray[0] + "/" + addressSyncArray[1] + "/"
         guard let apiURL = URL(string: apiString, relativeTo: apiBaseURL) else {
             completion(nil, ErrorCode.unknownError)
             return

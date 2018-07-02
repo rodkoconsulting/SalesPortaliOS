@@ -11,11 +11,12 @@ import Foundation
 typealias SampleOrderSavedResults = (headerResults: FMResultSet, detailResults: [FMResultSet])?
 
 class SampleOrder: isOrderType {
+    
     var orderNo: Int?
     let account: Account? = nil
     var isSaved: Bool = false
-    let shipToList: [OrderAddress]?
-    var shipTo: OrderAddress?
+    let shipToList: [isOrderAddress]?
+    var shipTo: isOrderAddress?
     var minShipDate: String?
     var shipDate: String?
     var orderInventory: NSMutableArray?
@@ -26,7 +27,7 @@ class SampleOrder: isOrderType {
     var orderType = OrderType.Sample
     
     init() {
-        self.shipToList = OrderAddressService.getAddressList()
+        self.shipToList = SampleOrderAddressService.getAddressList()
         self.shipTo = shipToList?[0]
         self.shipDate = OrderType.Standard.shipDate(account: nil)
         self.minShipDate = self.shipDate
