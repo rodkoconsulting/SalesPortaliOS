@@ -88,6 +88,7 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
         if let index = index {
             selectedIndex = UInt(shipToList.startIndex.distance(to: index))
         }
+        let rowCount = shipToList.count > 4 ? 4 : shipToList.count;
         shipToComboBox.delegate = self
         shipToComboBox.tag = kSHIPTOTAG
         shipToComboBox.headerBorderColor = UIColor.black
@@ -99,7 +100,7 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
         shipToComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
         shipToComboBox.itemsSource = ComboData.addressData(shipToList)
         shipToComboBox.selectedIndex = selectedIndex
-        shipToComboBox.dropDownHeight = Double(4 * Constants.ComboCellHeight)
+        shipToComboBox.dropDownHeight = Double(rowCount * Constants.ComboCellHeight)
     }
     
     func initCoopNo() {
