@@ -8,6 +8,7 @@ class AccountsViewController: DataGridViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        beginBackgroundTask()
         SwiftSpinner.show("Loading...", animated: false) {
             [unowned self] () -> Void in
             self.displayView()
@@ -165,7 +166,10 @@ class AccountsViewController: DataGridViewController {
         isFilterChanged = false
         filterGridColumns(searchBar.text!, classType: classType)
         DispatchQueue.main.async {
-            SwiftSpinner.hide()
+            SwiftSpinner.hide(){
+                [unowned self] in
+                self.endBackgroundTask()
+            }
         }
         
     }
@@ -174,6 +178,9 @@ class AccountsViewController: DataGridViewController {
         guard let credentials = Credentials.getCredentials(), let _ = credentials["state"] else {
             displayLogIn()
             return
+        }
+        if (backgroundTask == UIBackgroundTaskInvalid) {
+            beginBackgroundTask()
         }
         SwiftSpinner.show("Syncing...", animated: false)
         let accountService = AccountService(module: moduleType, apiCredentials: credentials)

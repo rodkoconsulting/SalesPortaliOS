@@ -19,6 +19,7 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
     override func viewDidLoad() {
         super.viewDidLoad()
         initComboBox()
+        beginBackgroundTask()
         SwiftSpinner.show("Loading...", animated: false) {
             [unowned self] () -> Void in
                 self.displayView()
@@ -151,7 +152,10 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
         filterGrid(self.searchBar.text ?? "")
         isLoaded = true
         DispatchQueue.main.async {
-            SwiftSpinner.hide()
+            SwiftSpinner.hide(){
+                [unowned self] in
+                self.endBackgroundTask()
+            }
         }
     }
     
@@ -187,6 +191,9 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
         guard let credentials = Credentials.getCredentials(), let _ = credentials["state"] else {
             displayLogIn()
             return
+        }
+        if (backgroundTask == UIBackgroundTaskInvalid) {
+            beginBackgroundTask()
         }
         SwiftSpinner.show("Syncing...", animated: false)
         let sampleListService = SampleListService(module: Module.sampleList, apiCredentials: credentials)

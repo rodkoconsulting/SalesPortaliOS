@@ -36,6 +36,8 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         
     }
     
+
+    
     func setComboBoxItemsSource() {
         // implement in child
     }
@@ -83,13 +85,17 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     fileprivate func loadViews() {
+        beginBackgroundTask()
         SwiftSpinner.show("Loading...", animated: false) {
             self.loadMyView()
             self.loadAllViews()
             self.loadSavedData()
             DispatchQueue.main.async {
-                SwiftSpinner.hide()
-                self.sendOverSellAlert()
+                SwiftSpinner.hide() {
+                    [unowned self] in
+                    self.sendOverSellAlert()
+                    self.endBackgroundTask()
+                }
             }
         }
     }
@@ -133,7 +139,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         if headerComboBox.itemsSource != nil {
             headerComboBox.itemsSource.removeAllObjects()
             headerComboBox.collectionView.removeAllObjects()
-        }
+        }   
         headerComboBox.delegate = nil
         headerComboBox = nil
     }
@@ -385,6 +391,9 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     
     
     func syncData(orderInventoryService: OrderSyncServiceType) {
+        if (backgroundTask == UIBackgroundTaskInvalid) {
+            beginBackgroundTask()
+        }
         SwiftSpinner.show("Syncing...", animated: false)
         do {
             let lastInventorySync = try orderInventoryService.queryAllLastSync()
@@ -415,6 +424,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
             completionError(ErrorCode.noCredentials)
             return
         }
+        beginBackgroundTask()
         SwiftSpinner.show("Transmitting...", animated: false) {
             let orderService = OrderService(order: order, apiCredentials: credentials)
             do {
@@ -423,6 +433,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                     [unowned self](success, error) in
                     guard success else {
                         self.completionError(error ?? ErrorCode.noInternet)
+                        self.endBackgroundTask()
                         return
                     }
                     orderService.depleteDb()
@@ -431,6 +442,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                         SwiftSpinner.hide(){
                             [unowned self] in
                             self.sendMessage(title: "Transmit Order", message: "Order Sent!")
+                            self.endBackgroundTask()
                         }
                     }
                 }
@@ -439,6 +451,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                     SwiftSpinner.hide() {
                         [unowned self] in
                         self.completionError(ErrorCode.dbError)
+                        self.endBackgroundTask()
                     }
                 }
             }
@@ -447,6 +460,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     
     
     fileprivate func deleteOrder() {
+        beginBackgroundTask()
         SwiftSpinner.show("Deleting...", animated: false) {
             [unowned self] in
             DispatchQueue.main.async {
@@ -456,11 +470,13 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                     SwiftSpinner.hide() {
                         [unowned self] in
                         self.sendMessage(title: "Delete Order", message: "Order Deleted!")
+                        self.endBackgroundTask()
                     }
                 } catch {
                     SwiftSpinner.hide() {
                         [unowned self] in
                         self.completionError(ErrorCode.dbError)
+                        self.endBackgroundTask()
                     }
                 }
             }
@@ -474,6 +490,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     fileprivate func saveOrder() {
+        beginBackgroundTask()
         SwiftSpinner.show("Saving...", animated: false) {
             [unowned self] () -> Void in
             DispatchQueue.main.async {
@@ -483,11 +500,13 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                     SwiftSpinner.hide() {
                         [unowned self] in
                         self.sendMessage(title: "Save Order", message: "Order Saved!")
+                        self.endBackgroundTask()
                     }
                 } catch {
                     SwiftSpinner.hide() {
                         [unowned self] in
                         self.completionError(ErrorCode.dbError)
+                        self.endBackgroundTask()
                     }
                 }
             }

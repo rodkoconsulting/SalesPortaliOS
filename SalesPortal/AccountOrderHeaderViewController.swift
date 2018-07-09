@@ -61,6 +61,7 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
     }
     
     override func shipMonthChanged() {
+        beginBackgroundTask()
         SwiftSpinner.show("Loading...", animated: false) {
             [unowned self] () -> Void in
             self.shipMonthSave()
@@ -71,7 +72,10 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
             self.loadGroup()
             self.filterGrid("")
             DispatchQueue.main.async {
-                SwiftSpinner.hide()
+                SwiftSpinner.hide(){
+                    [unowned self] in
+                    self.endBackgroundTask()
+                }
             }
         }
     }

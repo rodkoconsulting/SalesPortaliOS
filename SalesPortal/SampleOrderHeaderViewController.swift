@@ -32,6 +32,7 @@ class SampleOrderHeaderViewController: OrderHeaderViewController, isOrderHeaderV
     }
     
     override func shipMonthChanged() {
+        beginBackgroundTask()
         SwiftSpinner.show("Loading...", animated: false) {
             self.shipMonthSave()
             self.loadData(isSynched: true)
@@ -41,7 +42,10 @@ class SampleOrderHeaderViewController: OrderHeaderViewController, isOrderHeaderV
             self.loadGroup()
             self.filterGrid("")
             DispatchQueue.main.async {
-                SwiftSpinner.hide()
+                SwiftSpinner.hide() {
+                    [unowned self] in
+                    self.endBackgroundTask()
+                }
             }
         }
     }

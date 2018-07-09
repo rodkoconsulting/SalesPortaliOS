@@ -22,6 +22,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     @IBOutlet weak var selectModeSegment: UISegmentedControl! = nil
     @IBOutlet weak var titleLabel: UILabel! = nil
     
+
     
     @IBAction func clearFilter() {
             self.searchBar.text = ""
@@ -82,6 +83,18 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     var isFilterIndex = false
     var isManager = false
     
+    var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
+    
+    func beginBackgroundTask() {
+        backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "BackgroundTask") {
+            self.endBackgroundTask()
+        }
+    }
+    func endBackgroundTask() {
+        UIApplication.shared.endBackgroundTask(backgroundTask)
+        backgroundTask = UIBackgroundTaskInvalid
+    }
+    
     var flexGridSelectionChangingHandler: ((_ eventContainer: XuniEventContainer<GridCellRangeEventArgs>?)-> Void)!  = {
         (eventContainer: XuniEventContainer<GridCellRangeEventArgs>?)-> Void  in
             let eventContainerEventArgs = eventContainer!.eventArgs!
@@ -137,6 +150,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
     
     func textFieldDidEndEditing(_ textField: MPGTextField_Swift, isIndex: Bool = false){
+        beginBackgroundTask()
         SwiftSpinner.show("Loading...", animated: false) {
             [unowned self] () -> Void in
             self.isFilterIndex = isIndex && !self.flexGrid.hasFilters()
@@ -146,7 +160,10 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
                 self.filterGrid(self.searchBar.text ?? "")
             }
             DispatchQueue.main.async {
-                SwiftSpinner.hide()
+                SwiftSpinner.hide(){
+                    [unowned self] in
+                    self.endBackgroundTask()
+                }
             }
         }
     }
@@ -367,6 +384,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
                 Credentials.deleteCredentials()
                 self.clearData()
             }
+            self.endBackgroundTask()
         }
     }
     
@@ -399,20 +417,25 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
     
     func emailData(_ flexGrid: FlexGrid, moduleType: Module) {
+        beginBackgroundTask()
         SwiftSpinner.show("Exporting...", animated: false) {
             () -> Void in
             DispatchQueue.main.async {
                 [unowned self] in
                 guard let mailComposer = DataExport.excelExport(flexGrid: flexGrid, classType: self.classType, moduleType: moduleType, isManager: self.isManager) else {
                     DispatchQueue.main.async {
-                        SwiftSpinner.hide()
+                        SwiftSpinner.hide(){
+                            self.endBackgroundTask()
+                        }
                     }
                     return
                 }
                 mailComposer.mailComposeDelegate = self
                 self.present(mailComposer, animated: true, completion: nil)
                 DispatchQueue.main.async {
-                    SwiftSpinner.hide()
+                    SwiftSpinner.hide(){
+                        self.endBackgroundTask()
+                    }
                 }
 
             }
@@ -474,13 +497,17 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
             return
         }
         let filterImage = flexGrid.hasFilters() ? UIImage(named: "Full Filters") : UIImage(named: "Clear Filters")
+        beginBackgroundTask()
         SwiftSpinner.show("Loading...", animated: false) {
             [unowned self] () -> Void in
             DispatchQueue.main.async {
                 [unowned self] in
                 self.filterGrid(self.searchBar?.text ?? "")
                 self.removeFilterButton.image = filterImage
-                SwiftSpinner.hide()
+                SwiftSpinner.hide(){
+                    [unowned self] in
+                    self.endBackgroundTask()
+                }
             }
         }
     }
@@ -560,11 +587,15 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         guard let collectionView = flexGrid.collectionView else {
             return true
         }
+        beginBackgroundTask()
         SwiftSpinner.show("Sorting...", animated: false) {
             [unowned self] in
             guard let col = self.flexGrid.columns.object(at: UInt(range.col)) as? DataGridColumn else {
                 DispatchQueue.main.async {
-                    SwiftSpinner.hide()
+                    SwiftSpinner.hide(){
+                        [unowned self] in
+                        self.endBackgroundTask()
+                    }
                 }
                 return
             }
@@ -578,14 +609,20 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
             collectionView.sortDescriptions.removeAllObjects()
             guard let sd = XuniSortDescription(property: binding, ascending: self.isSortAscending) else {
                 DispatchQueue.main.async {
-                    SwiftSpinner.hide()
+                    SwiftSpinner.hide(){
+                        [unowned self] in
+                        self.endBackgroundTask()
+                    }
                 }
                 return
             }
             collectionView.sortDescriptions.add(sd)
             self.flexGrid.setNeedsDisplay()
             DispatchQueue.main.async {
-                SwiftSpinner.hide()
+                SwiftSpinner.hide(){
+                    [unowned self] in
+                    self.endBackgroundTask()
+                }
             }
         }
         return true
@@ -687,6 +724,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         guard let collectionView = flexGrid.collectionView else {
             return
         }
+        beginBackgroundTask()
         SwiftSpinner.show("Sorting...", animated: false) {
             [unowned self] in
             if column.index == self.lastSortedColumn {
@@ -699,15 +737,22 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
             let sd: XuniSortDescription = XuniSortDescription(property: column.binding, ascending: self.isSortAscending)
             collectionView.sortDescriptions.add(sd)
             self.flexGrid.setNeedsDisplay()
-            SwiftSpinner.hide()
+            SwiftSpinner.hide(){
+                [unowned self] in
+                self.endBackgroundTask()
+            }
         }
     }
 
     func loadingData(_ isSynched: Bool) {
+        beginBackgroundTask()
         SwiftSpinner.show("Loading...", animated: false) {
             self.loadData(isSynched: isSynched)
             DispatchQueue.main.async {
-                SwiftSpinner.hide()
+                SwiftSpinner.hide(){
+                    [unowned self] in
+                    self.endBackgroundTask()
+                }
             }
         }
     }

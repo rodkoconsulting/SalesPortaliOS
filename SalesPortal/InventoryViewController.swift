@@ -60,6 +60,7 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        beginBackgroundTask()
         SwiftSpinner.show("Loading...", animated: false) {
             [unowned self] () -> Void in
             do {
@@ -163,7 +164,10 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
         isFilterChanged = false
         filterGridColumns(searchBar.text!, classType: classType)
         DispatchQueue.main.async {
-                SwiftSpinner.hide()
+            SwiftSpinner.hide(){
+                [unowned self] in
+                self.endBackgroundTask()
+            }
         }
     }
     
@@ -177,6 +181,9 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
             return
         }
         dataSettings.repState = States(rawValue: credentialState) ?? States.NY
+        if (backgroundTask == UIBackgroundTaskInvalid) {
+            beginBackgroundTask()
+        }
         SwiftSpinner.show("Syncing...", animated: false)
             let inventoryService = InventoryService(module: self.moduleType, apiCredentials: credentials, date: dataSettings.date)
             do {

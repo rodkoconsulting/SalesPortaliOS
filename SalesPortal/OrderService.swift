@@ -16,11 +16,13 @@ struct OrderService {
     let apiCredentials: [String : String]?
     let dB : FMDatabase
     
+    
     init(order: isOrderType, apiCredentials: [String : String]? = nil) {
         self.order = order
         self.apiCredentials = apiCredentials
         self.dB = FMDatabase(path: Constants.databasePath as String)
     }
+    
     
     func sendOrder(_ completion: @escaping (JSONPostCompletion) ){
         let apiService = ApiService(apiString: order.orderType.apiString)
@@ -34,6 +36,7 @@ struct OrderService {
             completion(success, errorCode)
         }
     }
+    
     
     func depleteDb() {
         depleteTransmitOrders()
