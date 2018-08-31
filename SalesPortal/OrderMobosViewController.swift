@@ -59,14 +59,14 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
             guard let mobo = row.dataItem as? MoboList else {
                 return false
             }
-            if isMoboException(moboDetail: mobo){
-                sendAlert(ErrorCode.moboException)
-                return false
-            }
-            if isBillHoldShipException(moboDetail: mobo){
-                sendAlert(ErrorCode.billHoldShipException)
-                return false
-            }
+//            if isMoboException(moboDetail: mobo){
+//                sendAlert(ErrorCode.moboException)
+//                return false
+//            }
+//            if isBillHoldShipException(moboDetail: mobo){
+//                sendAlert(ErrorCode.billHoldShipException)
+//                return false
+//            }
             guard column.isReadOnly == true else {
                 return false
             }
@@ -132,14 +132,14 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
         guard let moboDetail = flexRow.dataItem as? MoboList else {
                 return false
         }
-        if isMoboException(moboDetail: moboDetail){
-            sendAlert(ErrorCode.moboException)
-            return true
-        }
-        if isBillHoldShipException(moboDetail: moboDetail){
-            sendAlert(ErrorCode.billHoldShipException)
-            return true
-        }
+//        if isMoboException(moboDetail: moboDetail){
+//            sendAlert(ErrorCode.moboException)
+//            return true
+//        }
+//        if isBillHoldShipException(moboDetail: moboDetail){
+//            sendAlert(ErrorCode.billHoldShipException)
+//            return true
+//        }
         moboDetail.delegate = order
         activeField = panel.getCellRect(forRow: range.row, inColumn: range.col)
         return false
@@ -150,12 +150,56 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
         return false
     }
     
-    fileprivate func isMoboException(moboDetail: MoboList) -> Bool {
-        return order?.orderType != .Standard && order?.orderType != .BillHoldInvoice && moboDetail.price > 0
+    func getfilterPredicate(_ orderMobos: MoboList) -> Bool {
+        guard let order = order else {
+            return false;
+        }
+        guard (order.canDepleteMobos) else {
+            return false;
+        }
+        switch order.orderType {
+        case .Standard, .BillHoldInvoice:
+            return [.Master, .BackIn].contains(orderMobos.holdCode)
+        case .Back:
+            return orderMobos.holdCode == .BackBack && orderMobos.isMasterAccount
+        case .Master:
+            return orderMobos.orderType == .Master && orderMobos.isMasterAccount
+        case .PickUp:
+            return false;
+        case .Unsaleable:
+            return false;
+        case .BillHoldShip:
+            return orderMobos.orderType == .BillHoldHold
+        case .Sample:
+            return false;
+        }
     }
     
-    fileprivate func isBillHoldShipException(moboDetail: MoboList) -> Bool {
-        return (order?.orderType != .BillHoldShip && moboDetail.price == 0) || (order?.orderType == .BillHoldShip && moboDetail.price > 0) || (order?.orderType != .BillHoldShip && moboDetail.orderType == "BH")
+    override func filterGridColumns<T: NSObject>(_ searchText: String?, classType: T.Type, isIndex: Bool = false) {
+        guard let collectionView = flexGrid.collectionView else {
+            return
+        }
+        collectionView.filter = {(item : NSObject?) -> Bool in
+            unowned let row = item as! MoboList
+            return self.getfilterPredicate(row) && self.flexGrid.filterColumns(nil, row: row)
+            } as IXuniPredicate
+        resetGrid()
     }
+    
+    func orderTypeFilterRefresh() {
+        self.filterGrid(self.searchBar?.text ?? "")
+    }
+    
+//    fileprivate func isMoboException(moboDetail: MoboList) -> Bool {
+//        guard let order = order else {
+//            return false
+//        }
+//        //return (order.orderType == .Master || order.orderType == .Back) && !moboDetail.isMasterAccount
+//        return (order.orderType != .Standard && order.orderType != .BillHoldInvoice && moboDetail.price > 0) || (!order.canDepleteMobos)
+//    }
+//
+//    fileprivate func isBillHoldShipException(moboDetail: MoboList) -> Bool {
+//        return (order?.orderType != .BillHoldShip && moboDetail.price == 0) || (order?.orderType == .BillHoldShip && moboDetail.price > 0) || (order?.orderType != .BillHoldShip && moboDetail.orderType == .BillHoldHold)
+//    }
 
 }

@@ -84,6 +84,10 @@ class MoboList :  OrderList {
         return Int(self.quantity.truncate(0))
     }()
     
+    lazy var isMasterAccount: Bool = {
+        return customerNo.left(2) == Constants.masterAccountPrefix
+    }()
+    
     lazy var moboBottles: Int = {
         [unowned self] in
         return Int(((self.quantity - Double(self.moboCases)) * Double(self.uomInt)).roundedBottles())

@@ -138,7 +138,7 @@ extension FlexGrid {
         guard let orderList = flexRow.dataItem as? OrderList else {
                 return defaultColor
         }
-        guard orderList.holdCode == "BO" && flexCol.binding == "shipExpireDate"  else {
+        guard orderList.holdCode == .BackBack && flexCol.binding == "shipExpireDate"  else {
             return defaultColor
         }
         return nil
@@ -258,10 +258,18 @@ extension Double
     func roundToPlaces(_ places:Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
-    }
+    } 
 }
 
 extension String {
+    
+    func left(_ number: Int) -> String {
+        guard self.count > 0 else {
+            return ""
+        }
+        return String(self[self.startIndex..<self.index(self.startIndex, offsetBy: number)])
+    }
+    
     func getGridDate() -> Date? {
         if self.contains("+") {
             return DateFormatter.dateConvertedFormatter.date(from: self)

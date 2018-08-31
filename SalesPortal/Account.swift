@@ -433,6 +433,11 @@
             return self.status.gridText
         }()
         
+        lazy var isMasterAccount: Bool = {
+            [unowned self] in
+            return customerNoRaw.left(2) == Constants.masterAccountPrefix
+        }()
+        
         class func getTerritory(_ region: String) -> Territory {
             let territory = region.replacingOccurrences(of: " ", with: "")
             switch (territory) {

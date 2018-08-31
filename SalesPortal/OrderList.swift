@@ -12,6 +12,40 @@ enum OrderListFilter: String {
     
 }
 
+enum OrderListType: String {
+    case Standard = "S"
+    case Master = "MO"
+    case Back = "BO"
+    case PickUp = "P"
+    case Unsaleable = "U"
+    case BillHoldShip = "BHS"
+    case BillHoldHold = "BH"
+    case BillHoldInvoice = "BHI"
+    case BillHoldTransfer = "BHT"
+    case Sample = "SM"
+    case Invoice = "I"
+    
+    //static let allValues = [Standard.orderText, Master.orderText, Back.orderText, PickUp.orderText, Unsaleable.orderText, BillHoldShip.orderText, BillHoldInvoice.orderText]
+    //static let rawValues = [Standard.rawValue, Master.rawValue, Back.rawValue, PickUp.rawValue, Unsaleable.rawValue, BillHoldShip.rawValue, BillHoldInvoice.rawValue]
+    
+}
+
+enum OrderHoldType: String {
+    case BackIn = "IN"
+    case BackBack = "BO"
+    case Master = "MO"
+    case BillHoldHold = "BH"
+    case Note = "NOTE"
+    case Credit = "CRED"
+    case Approval = "APP"
+    case InsufficientQuantity = "NSQTY"
+    case Coop = "COOP"
+    case Sample = "SM"
+    case AmDelivery = "AM"
+    case DntDelivery = "DNT"
+    case Po = "PO"
+    case None = ""
+}
 
 extension OrderListFilter {
     
@@ -178,7 +212,7 @@ class OrderList : NSObject {
     
     lazy var expirationDate : Date? = {
         [unowned self] in
-        if ["MO", "IN"].contains(self.holdCode) {
+        if [.Master, .BackIn].contains(self.holdCode) {
             return self.shipExpireDate
         }
         return nil
@@ -201,18 +235,26 @@ class OrderList : NSObject {
         return self.orderStatus == "O" && self.holdCodeRaw == "SM"
     }()
     
-    lazy var holdCode : String = {
+    lazy var holdCode : OrderHoldType = {
         [unowned self] in
         if self.holdCodeRaw == "MOAPP" {
-            return "MO"
+            return .Master
         }
-        return self.isSampleApproved ? "" : self.holdCodeRaw
+        if self.isSampleApproved {
+            return .None
+        }
+        if let holdCode = OrderHoldType(rawValue: holdCodeRaw) {
+            return holdCode
+        } else {
+            return .None
+        }
+        //return: self.holdCodeRaw
     }()
 
     
     lazy var shipDate : Date? = {
         [unowned self] in
-        if ["MO", "BO", "IN"].contains(self.holdCode) {
+        if [.Master, .BackBack, .BackIn].contains(self.holdCode) {
             return nil
         }
         return self.shipExpireDate
@@ -220,49 +262,59 @@ class OrderList : NSObject {
     
     lazy var boEta : Date? = {
         [unowned self] in
-        guard self.holdCode == "BO" && (self.poEta?.getYearInt() ?? 0) > 2000 else {
+        guard self.holdCode == .BackBack && (self.poEta?.getYearInt() ?? 0) > 2000 else {
             return nil
         }
         return self.poEta
     }()
     
-    lazy var orderType : String = {
+    lazy var orderType : OrderListType = {
         [unowned self] in
         guard (self.comment.range(of:"BILL & HOLD INVOICE") == nil && (self.comment.range(of:"BILL & HOLD") == nil || self.total == 0 || self.orderStatus != "I")) else {
-            return "BHI"
+            return .BillHoldInvoice
         }
         guard (self.comment.range(of:"BILL & HOLD TRANSFER") == nil) else {
-            return "BHT"
+            return .BillHoldTransfer
         }
         guard !(self.total == 0 && self.comment.range(of:"B&H HOLD") == nil && ["NSQTY", "NOTE", "PO","DNT","AM",""].contains(self.holdCodeRaw)) else {
-            return "BHS"
+            return .BillHoldShip
         }
         guard !(self.total == 0 && ["NSQTY", "APP", "NOTE", "CRED","BH"].contains(self.holdCodeRaw)) else {
-            return "BH"
+            return .BillHoldHold
         }
         if self.orderStatus == "I" {
-            return self.orderStatus
+            return .Invoice
         }
         switch self.holdCodeRaw {
         case "BO", "IN":
-            return "BO"
-        case "MOAPP":
-            return "MO"
-        case "MO", "SM":
-            return self.holdCodeRaw
+            return .Back
+        case "MOAPP", "MO":
+            return .Master
+        case "SM":
+            return .Sample
         default:
-            return "S"
+            return .Standard
         }
     }()
     
+    lazy var orderTypeString: String = {
+        [unowned self] in
+        return orderType.rawValue
+    }()
+    
+    lazy var holdCodeString: String = {
+        [unowned self] in
+        return holdCode.rawValue
+        }()
+    
     lazy var isBhShip : Bool = {
         [unowned self] in
-        return self.orderType == "BHI" || self.orderType == "BHT" || self.orderType == "BHS"
+        return self.orderType == .BillHoldInvoice || self.orderType == .BillHoldTransfer || self.orderType == .BillHoldShip
     }()
     
     lazy var textColor : UIColor? = {
         [unowned self] in
-        guard self.holdCode != "BO" else {
+        guard self.holdCode != .BackBack else {
             return nil
         }
         return UIColor.black
@@ -308,7 +360,7 @@ class OrderList : NSObject {
         //if self.orderType == "I" {
         //    return true
         //}
-        if (self.orderType == "S" || self.isBhShip || self.orderType == "I") && self.shipDate?.getDateString() == Date().getDailySalesDate().getDateString() {
+        if (self.orderType == .Standard || self.isBhShip || self.orderType == .Invoice) && self.shipDate?.getDateString() == Date().getDailySalesDate().getDateString() {
             return true
         }
         return false
@@ -316,22 +368,22 @@ class OrderList : NSObject {
     
     lazy var isMoBo : Bool = {
         [unowned self] in
-        return (self.orderType == "MO" || self.orderType == "BO" || self.orderType == "BH" ) && !self.isBhShip
+        return (self.orderType == .Master || self.orderType == .Back || self.orderType == .BillHoldHold ) && !self.isBhShip
     }()
   
     lazy var isFutureOrder : Bool = {
         [unowned self] in
-        return self.orderType == "S" || self.orderType == "I" || self.isBhShip
+        return self.orderType == .Standard || self.orderType == .Invoice || self.isBhShip
     }()
     
     lazy var isSampleOrder : Bool = {
         [unowned self] in
-        return self.orderType == "SM"
+        return self.orderType == .Sample
     }()
     
     lazy var gridColor: UIColor? = {
         [unowned self] in
-        guard ["MO","IN"].contains(self.holdCode) else {
+        guard [.Master,.BackIn].contains(self.holdCode) else {
             return nil
         }
         guard let expirationDate = self.expirationDate else {

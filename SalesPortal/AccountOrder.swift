@@ -44,6 +44,27 @@ extension OrderType {
             return "Sample"
         }
     }
+        var moboPredicate: Bool{
+            switch self {
+            case .Standard:
+                return true
+            case .Master:
+                return true
+            case .Back:
+                return true
+            case .PickUp:
+                return true
+            case .Unsaleable:
+                return true
+            case .BillHoldInvoice:
+                return true
+            case .BillHoldShip:
+                return true
+            case .Sample:
+                return true
+                
+            }
+        }
     
     var apiString: String {
         switch self {
@@ -54,7 +75,6 @@ extension OrderType {
         }
         
     }
-    
     var getIndex: Int? {
         return OrderType.allValues.index(of: self.orderText)
     }
@@ -69,9 +89,6 @@ extension OrderType {
             return Date().getNextShip().shipDate
         }
     }
-    
-    
-    
 }
 
 protocol OrderTypeErrorDelegate: class {
@@ -131,6 +148,15 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         }
     }
     
+    lazy var canDepleteMobos: Bool = {
+        [unowned self] in
+        guard let account = account else {
+            return true
+        }
+        return !account.isMasterAccount && (orderType == .Standard || orderType == .BillHoldShip || orderType == .BillHoldInvoice || orderType == .Master || orderType == .Back)
+    }()
+    
+    
     private func clearCoop()
     {
         coopCases = 0;
@@ -176,6 +202,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             self.shipDate = shipDate
             minShipDate = shipDate
         }
+        
     }
     
     fileprivate func deleteMobos() {

@@ -253,8 +253,8 @@ struct ColumnData {
         [kName:"version", kValue: 16],
         [kName:"customerName", kHeader: "Account", kWidth: 250, kGroup: 0, kManagerGroup: 3],
         [kName:"orderNo", kHeader: "Order #", kWidth: 60],
-        [kName:"orderType", kHeader: "Type", kWidth: 35],
-        [kName:"holdCode", kHeader: "Hold", kWidth: 45],    
+        [kName:"orderTypeString", kHeader: "Type", kWidth: 35],
+        [kName:"holdCodeString", kHeader: "Hold", kWidth: 45],
         [kName:"orderDate", kHeader: "Order Date", kAlignment:"right", kWidth: 70, kType: "NumberDate"],
         [kName:"shipExpireDate", kHeader: "Ship/Exp Date", kAlignment:"right", kWidth: 90, kType: "NumberDate"],
         [kName:"arrivalDate", kHeader: "Arr. Date", kAlignment:"right", kWidth: 90, kType: "NumberDate"],
@@ -287,7 +287,7 @@ struct ColumnData {
     ]
     static let orderMoboColumns: [[String : Any]] = [
         [kName:"orderNo", kHeader: "Order #", kWidth: 60],
-        [kName:"orderType", kHeader: "Type", kWidth: 33],
+        [kName:"orderTypeString", kHeader: "Type", kWidth: 33],
         [kName:"expirationDate", kHeader: "Exp Date", kAlignment:"right", kWidth: 75, kType: "NumberDate"],
         [kName:"customerName", kHeader: "Account", kWidth: 200],
         [kName:"itemCode", kHeader: "Item", kWidth: 80],
