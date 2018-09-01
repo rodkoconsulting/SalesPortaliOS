@@ -80,12 +80,12 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
     }
 
     override func orderTypeChanged(orderType: OrderType) {
-        //guard let order = order as? AccountOrder else {
-        //    return
-        //}
+        guard let order = order as? AccountOrder else {
+            return
+        }
         flexGrid.finishEditing(false)
-        //toggleNonBillHoldShipViews(enabled: orderType != .BillHoldShip)
-        //toggleMoboView(enabled: order.canDepleteMobos)
+        toggleNonBillHoldShipViews(enabled: orderType != .BillHoldShip)
+        toggleMoboView(enabled: order.canDepleteMobos)
         updateMoboFilters()
         toggleShipDate()
         flexGrid.invalidate()
@@ -96,36 +96,36 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
         flexGrid.invalidate()
     }
     
-//    fileprivate func toggleNonBillHoldShipViews(enabled: Bool) {
-//        let orderTabBarController = tabBarController as! OrderTabBarController
-//        if let myViewControllers = orderTabBarController.viewControllers {
-//            for viewController in myViewControllers {
-//                if viewController.isKind(of: OrderInventoryViewController.self) {
-//                    if let myViewController = viewController as? OrderInventoryViewController {
-//                        myViewController.myTabBarItem.isEnabled = enabled
-//                    }
-//                }
-//                if viewController.isKind(of: OrderHistoryViewController.self) {
-//                    if let myViewController = viewController as? OrderHistoryViewController {
-//                        myViewController.myTabBarItem.isEnabled = enabled
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    fileprivate func toggleMoboView(enabled: Bool) {
-//        let orderTabBarController = tabBarController as! OrderTabBarController
-//        if let myViewControllers = orderTabBarController.viewControllers {
-//            for viewController in myViewControllers {
-//                if viewController.isKind(of: OrderMobosViewController.self) {
-//                    if let myViewController = viewController as? OrderMobosViewController {
-//                        myViewController.myTabBarItem.isEnabled = enabled
-//                    }
-//                }
-//            }
-//        }
-//    }
+    fileprivate func toggleNonBillHoldShipViews(enabled: Bool) {
+        let orderTabBarController = tabBarController as! OrderTabBarController
+        if let myViewControllers = orderTabBarController.viewControllers {
+            for viewController in myViewControllers {
+                if viewController.isKind(of: OrderInventoryViewController.self) {
+                    if let myViewController = viewController as? OrderInventoryViewController {
+                        myViewController.myTabBarItem.isEnabled = enabled
+                    }
+                }
+                if viewController.isKind(of: OrderHistoryViewController.self) {
+                    if let myViewController = viewController as? OrderHistoryViewController {
+                        myViewController.myTabBarItem.isEnabled = enabled
+                    }
+                }
+            }
+        }
+    }
+
+    fileprivate func toggleMoboView(enabled: Bool) {
+        let orderTabBarController = tabBarController as! OrderTabBarController
+        if let myViewControllers = orderTabBarController.viewControllers {
+            for viewController in myViewControllers {
+                if viewController.isKind(of: OrderMobosViewController.self) {
+                    if let myViewController = viewController as? OrderMobosViewController {
+                        myViewController.myTabBarItem.isEnabled = enabled
+                    }
+                }
+            }
+        }
+    }
     
     fileprivate func updateMoboFilters() {
                 let orderTabBarController = tabBarController as! OrderTabBarController

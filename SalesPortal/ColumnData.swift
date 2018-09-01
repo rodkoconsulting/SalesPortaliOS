@@ -250,7 +250,7 @@ struct ColumnData {
         [kName:"rep", kHeader: "Rep", kWidth: 45, kManagerGroup: 0],
     ]
     static let orderListColumns: [[String : Any]] = [
-        [kName:"version", kValue: 16],
+        [kName:"version", kValue: 17],
         [kName:"customerName", kHeader: "Account", kWidth: 250, kGroup: 0, kManagerGroup: 3],
         [kName:"orderNo", kHeader: "Order #", kWidth: 60],
         [kName:"orderTypeString", kHeader: "Type", kWidth: 35],
@@ -286,6 +286,7 @@ struct ColumnData {
         [kName:"rep", kHeader: "Rep", kWidth: 45, kManagerGroup: 0]
     ]
     static let orderMoboColumns: [[String : Any]] = [
+        [kName:"version", kValue: 2],
         [kName:"orderNo", kHeader: "Order #", kWidth: 60],
         [kName:"orderTypeString", kHeader: "Type", kWidth: 33],
         [kName:"expirationDate", kHeader: "Exp Date", kAlignment:"right", kWidth: 75, kType: "NumberDate"],
