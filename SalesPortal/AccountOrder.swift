@@ -44,27 +44,6 @@ extension OrderType {
             return "Sample"
         }
     }
-        var moboPredicate: Bool{
-            switch self {
-            case .Standard:
-                return true
-            case .Master:
-                return true
-            case .Back:
-                return true
-            case .PickUp:
-                return true
-            case .Unsaleable:
-                return true
-            case .BillHoldInvoice:
-                return true
-            case .BillHoldShip:
-                return true
-            case .Sample:
-                return true
-                
-            }
-        }
     
     var apiString: String {
         switch self {
@@ -137,7 +116,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
     var orderType: OrderType {
         didSet {
             checkOrderTypeLines()
-            if oldValue == .Standard || oldValue == .BillHoldShip || oldValue == .BillHoldInvoice {
+            if [.Standard, .Back, .BillHoldShip, .BillHoldInvoice].contains(oldValue) {
                 deleteMobos()
             }
             if (orderType != .Standard) {

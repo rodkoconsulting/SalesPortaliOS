@@ -85,12 +85,10 @@ class AccountOrderInventory: OrderInventory {
             return false
         }
         switch orderType {
-            case .Standard, .BillHoldInvoice:
+            case .Standard, .BillHoldInvoice, .Master:
                 return bottleTotal > bottleQuantityAvailable + moboTotal.available
-            case .Master:
-                return bottleTotal > bottleQuantityAvailable
             case .Back:
-                return bottleTotal > backOrderQuantityAvailable
+                return bottleTotal > backOrderQuantityAvailable + moboTotal.available
             case .BillHoldShip:
                 return bottleTotal > moboTotal.available
             default:

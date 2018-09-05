@@ -126,6 +126,10 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
         }
     }
     
+    override func clearItemLabels() {
+        descriptionLabel.text = ""
+    }
+    
     
     func beginningEdit(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange) -> Bool {
         let flexRow = flexGrid.rows.object(at: UInt(range.row))
@@ -150,38 +154,14 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
         return false
     }
     
-    func getfilterPredicate(_ orderMobos: MoboList) -> Bool {
-        guard let order = order else {
-            return false;
-        }
-        guard (order.canDepleteMobos) else {
-            return false;
-        }
-        switch order.orderType {
-        case .Standard, .BillHoldInvoice:
-            return [.Master, .BackIn].contains(orderMobos.holdCode)
-        case .Back:
-            return orderMobos.holdCode == .BackBack && orderMobos.isMasterAccount
-        case .Master:
-            return orderMobos.orderType == .Master && orderMobos.isMasterAccount
-        case .PickUp:
-            return false;
-        case .Unsaleable:
-            return false;
-        case .BillHoldShip:
-            return orderMobos.orderType == .BillHoldHold
-        case .Sample:
-            return false;
-        }
-    }
     
     override func filterGridColumns<T: NSObject>(_ searchText: String?, classType: T.Type, isIndex: Bool = false) {
-        guard let collectionView = flexGrid.collectionView else {
+        guard let collectionView = flexGrid.collectionView, let order = order else {
             return
         }
         collectionView.filter = {(item : NSObject?) -> Bool in
             unowned let row = item as! MoboList
-            return self.getfilterPredicate(row) && self.flexGrid.filterColumns(nil, row: row)
+            return row.getfilterPredicate(order) && self.flexGrid.filterColumns(nil, row: row)
             } as IXuniPredicate
         resetGrid()
     }

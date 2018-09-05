@@ -125,5 +125,27 @@ class MoboList :  OrderList {
         self.cases += cases
         self.bottles += bottles
     }
+    
+    func getfilterPredicate(_ order: AccountOrder) -> Bool {
+        guard (order.canDepleteMobos) else {
+            return false;
+        }
+        switch order.orderType {
+        case .Standard, .BillHoldInvoice:
+            return [.Master, .BackIn].contains(holdCode)
+        case .Back:
+            return holdCode == .BackBack && isMasterAccount
+        case .Master:
+            return (orderType == .Master || holdCode == .BackIn) && isMasterAccount
+        case .PickUp:
+            return false;
+        case .Unsaleable:
+            return false;
+        case .BillHoldShip:
+            return orderType == .BillHoldHold
+        case .Sample:
+            return false;
+        }
+    }
 
 }
