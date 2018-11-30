@@ -77,12 +77,12 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc func longPressGestureRecognized(_ gesture: UILongPressGestureRecognizer) {
-        let state: UIGestureRecognizerState = gesture.state;
+        let state: UIGestureRecognizer.State = gesture.state;
         let location: CGPoint = gesture.location(in: columnsTableView)
         let indexPath: IndexPath? = columnsTableView.indexPathForRow(at: location)
         
         switch (state) {
-        case UIGestureRecognizerState.began:
+        case UIGestureRecognizer.State.began:
             guard let indexPath = indexPath else {
                 return
             }
@@ -102,7 +102,7 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.snapshot?.alpha = 0.98
                 cell.alpha = 0.0
             })
-        case UIGestureRecognizerState.changed:
+        case UIGestureRecognizer.State.changed:
             guard let indexPath = indexPath, let superview = columnsTableView.superview  else {
                 return
             }
@@ -193,7 +193,7 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let filter = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Filter", handler: { (action, indexPath) -> Void in
+        let filter = UITableViewRowAction(style: UITableViewRowAction.Style.default, title: "Filter", handler: { (action, indexPath) -> Void in
             //self.editing = false
             self.performSegue(withIdentifier: "showFiltersViewController", sender: indexPath)
             self.columnsTableView.reloadData()
@@ -207,7 +207,7 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
     }
     

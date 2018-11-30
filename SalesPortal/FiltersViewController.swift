@@ -42,7 +42,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             let indexPath = IndexPath(row: index, section: 0)
             filtersTableView.insertRows(at: [indexPath], with: .automatic)
         }
-        filtersTableView.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.fade)
+        filtersTableView.reloadSections(IndexSet(integer: 0), with: UITableView.RowAnimation.fade)
         filterDelegate?.changedFilters(columnIndex: columnIndex)
     }
 
@@ -226,7 +226,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 dateCell.dateButton.isUserInteractionEnabled = true;
                 dateCell.dateButton.tag = row
                 let filterDate = filter.value.getGridDate() ?? Date()
-                dateCell.dateButton.setTitle(filterDate.getDateShipPrint(), for: UIControlState())
+                dateCell.dateButton.setTitle(filterDate.getDateShipPrint(), for: UIControl.State())
                 myColumnFilters.filterList[row].value = filterDate.getDateGridString()
                 return dateCell
             case .Bool:
@@ -254,7 +254,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func tableView(_ tableView: UITableView,
-        commit editingStyle: UITableViewCellEditingStyle,
+        commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath) {
             resignTextField()
             if editingStyle == .delete {
@@ -262,7 +262,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                     removeFilter(filter)
                 }
                 filtersTableView.deleteRows(at: [indexPath], with: .automatic)
-                filtersTableView.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.fade)
+                filtersTableView.reloadSections(IndexSet(integer: 0), with: UITableView.RowAnimation.fade)
                 guard let columnIndex = columnIndex else {
                         return
                 }
@@ -324,7 +324,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         let row = tag
         myColumnFilters.filterList[row].value = date
-        filtersTableView.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.fade)
+        filtersTableView.reloadSections(IndexSet(integer: 0), with: UITableView.RowAnimation.fade)
         filterDelegate?.changedFilters(columnIndex: columnIndex)
     }
     

@@ -45,7 +45,7 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
     
     override func initOrder() {
         accountLabel.text = order?.account?.customerName
-        shipDateButton.setTitle(order?.shipDate?.getShipDatePrint(), for: UIControlState())
+        shipDateButton.setTitle(order?.shipDate?.getShipDatePrint(), for: UIControl.State())
         if let orderTypeIndex = order?.orderType.getIndex {
            headerComboBox.selectedIndex = UInt(orderTypeIndex)
         }

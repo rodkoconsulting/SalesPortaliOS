@@ -15,7 +15,7 @@
         
         var window: UIWindow?
         
-        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
             XuniLicenseManager.setKey(License().key)
             let credentials = Credentials.getCredentials()
             TestFairy.setUserId(credentials?["username"] ?? "New user")

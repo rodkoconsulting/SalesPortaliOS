@@ -179,7 +179,7 @@ class AccountsViewController: DataGridViewController {
             displayLogIn()
             return
         }
-        if (backgroundTask == UIBackgroundTaskInvalid) {
+        if (backgroundTask == UIBackgroundTaskIdentifier.invalid) {
             beginBackgroundTask()
         }
         SwiftSpinner.show("Syncing...", animated: false)

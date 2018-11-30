@@ -181,7 +181,7 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
             return
         }
         dataSettings.repState = States(rawValue: credentialState) ?? States.NY
-        if (backgroundTask == UIBackgroundTaskInvalid) {
+        if (backgroundTask == UIBackgroundTaskIdentifier.invalid) {
             beginBackgroundTask()
         }
         SwiftSpinner.show("Syncing...", animated: false)

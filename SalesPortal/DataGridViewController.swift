@@ -83,7 +83,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     var isFilterIndex = false
     var isManager = false
     
-    var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
+    var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier.invalid
     
     func beginBackgroundTask() {
         backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "BackgroundTask") {
@@ -91,8 +91,8 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         }
     }
     func endBackgroundTask() {
-        UIApplication.shared.endBackgroundTask(backgroundTask)
-        backgroundTask = UIBackgroundTaskInvalid
+        UIApplication.shared.endBackgroundTask(convertToUIBackgroundTaskIdentifier(backgroundTask.rawValue))
+        backgroundTask = UIBackgroundTaskIdentifier.invalid
     }
     
     var flexGridSelectionChangingHandler: ((_ eventContainer: XuniEventContainer<GridCellRangeEventArgs>?)-> Void)!  = {
@@ -135,8 +135,8 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
     
     func addNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(DataGridViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(DataGridViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(DataGridViewController.keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(DataGridViewController.keyboardWillHide(_:)), name:UIResponder.keyboardWillHideNotification, object: nil);
     }
     
     
@@ -277,7 +277,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
 
 
     @objc func keyboardWillShow(_ sender: Notification) {
-        guard let kbFrame = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+        guard let kbFrame = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
         let keyboard = view.convert(kbFrame, from: view.window)
@@ -285,7 +285,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         guard ((keyboard.origin.y + keyboard.size.height) <= height) else {
             return
         }
-        let kbSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size
+        let kbSize = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size
         keyboardHeight = kbSize!.height
         guard let activeField = activeField else {
             return
@@ -544,7 +544,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         }
         let isSelected = panel.fillColor == flexGrid.selectionBackgroundColor ? true : false
         let backgroundColor = getBackgroundColor(range.row)
-        panel.textAttributes[NSAttributedStringKey.foregroundColor] = getTextColor(range.row, col: range.col) ?? panel.fillColor
+        panel.textAttributes[NSAttributedString.Key.foregroundColor] = getTextColor(range.row, col: range.col) ?? panel.fillColor
         if !isSelected && backgroundColor != nil {
             context.setFillColor(backgroundColor!.cgColor)
             let r = panel.getCellRect(forRow: range.row, inColumn: range.col)
@@ -792,4 +792,9 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
             segueFiltersViewController(segue: segue, sender: sender as AnyObject)
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIBackgroundTaskIdentifier(_ input: Int) -> UIBackgroundTaskIdentifier {
+	return UIBackgroundTaskIdentifier(rawValue: input)
 }

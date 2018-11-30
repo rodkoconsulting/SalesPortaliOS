@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MJS-tV-g0k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MJS-tV-g0k">
     <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -182,11 +179,11 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="qSX-4W-b6b" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="78" width="1024" height="1195"/>
+                                <rect key="frame" x="0.0" y="78" width="1024" height="1194"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qud-IT-QkY">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="refresh" id="MoJ-iq-tun">
                                         <connections>
@@ -220,7 +217,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="GHR-RF-eqs"/>
                                     <barButtonItem style="plain" id="V2Y-mj-G0M">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="bar" selectedSegmentIndex="1" id="72h-tm-hEI">
-                                            <rect key="frame" x="926" y="7" width="78" height="30"/>
+                                            <rect key="frame" x="926" y="10" width="78" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -342,7 +339,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBh-nw-7ex">
-                                <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Filter Settings" id="zO2-yx-Ets">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="aeS-wV-kh6">
@@ -359,7 +356,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iCv-I7-4gR">
-                                <rect key="frame" x="20" y="73" width="984" height="1273"/>
+                                <rect key="frame" x="20" y="79" width="984" height="1267"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FiltersTableCell" id="gKA-Id-WGC" customClass="FiltersTableViewCell" customModule="SalesPortal" customModuleProvider="target">
@@ -478,7 +475,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kio-X5-nSd" customClass="XuniComboBox">
-                                                    <rect key="frame" x="185" y="0.0" width="125" height="43"/>
+                                                    <rect key="frame" x="185" y="0.5" width="125" height="43"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="43" id="Ly1-ED-aLS"/>
@@ -557,7 +554,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="21L-RJ-Bgd">
-                                <rect key="frame" x="20" y="73" width="984" height="1249"/>
+                                <rect key="frame" x="20" y="79" width="984" height="1237"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ColumnsTableCell" id="9ll-24-Xgx" customClass="ColumnsTableViewCell" customModule="SalesPortal" customModuleProvider="target">
@@ -568,13 +565,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWQ-Kj-Mvx">
-                                                    <rect key="frame" x="40" y="12" width="40" height="19"/>
+                                                    <rect key="frame" x="40" y="12.5" width="40" height="19"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hje-dV-qtR">
-                                                    <rect key="frame" x="909" y="13" width="35" height="17"/>
+                                                    <rect key="frame" x="909" y="13.5" width="35" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -586,7 +583,7 @@
                                                     </connections>
                                                 </switch>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter_indicator" translatesAutoresizingMaskIntoConstraints="NO" id="0e4-vk-sTd">
-                                                    <rect key="frame" x="815" y="9" width="25" height="25"/>
+                                                    <rect key="frame" x="815" y="9.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="3EW-OA-NYp"/>
                                                         <constraint firstAttribute="height" constant="25" id="6pZ-JL-QY1"/>
@@ -657,7 +654,7 @@
                                 </connections>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4HL-NS-sWP">
-                                <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Column Settings" id="dtH-zo-Gw3">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="eZc-1O-If8">
@@ -669,7 +666,7 @@
                                 </items>
                             </navigationBar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdE-H1-1Xa">
-                                <rect key="frame" x="0.0" y="1322" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1316" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem title="Default View" id="2kb-cV-Vj5">
                                         <connections>
@@ -732,7 +729,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2B6-ZV-ZFP">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Inventory Data Settings" id="OT5-Sj-Lag">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="Fv0-j7-NEb">
@@ -744,7 +741,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uNW-sT-BZH">
-                                <rect key="frame" x="20" y="65" width="984" height="1281"/>
+                                <rect key="frame" x="20" y="71" width="984" height="1275"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsTableCell" id="vEG-MS-TgA" customClass="InventorySettingsTableViewCell" customModule="SalesPortal" customModuleProvider="target">
@@ -755,7 +752,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dataLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbC-wx-oFt">
-                                                    <rect key="frame" x="15" y="12" width="946" height="19"/>
+                                                    <rect key="frame" x="15" y="12.5" width="946" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="f3E-9e-Ui2"/>
                                                     </constraints>
@@ -769,7 +766,7 @@
                                                     </variation>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0iy-Ev-T4q" customClass="XuniComboBox">
-                                                    <rect key="frame" x="732" y="10" width="240" height="23"/>
+                                                    <rect key="frame" x="732" y="10" width="240" height="23.5"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="240" id="2qV-nx-B6t"/>
@@ -839,7 +836,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gr2-vL-jcw">
-                                <rect key="frame" x="0.0" y="64" width="1024" height="1302"/>
+                                <rect key="frame" x="0.0" y="70" width="1024" height="1296"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30Q-j1-Jhr">
                                         <rect key="frame" x="0.0" y="0.0" width="1024" height="500"/>
@@ -943,7 +940,7 @@
                                 </constraints>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XAK-If-ABd">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Account" id="wGQ-pK-2QX">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="H7d-ki-uFf">
@@ -1015,11 +1012,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Y0K-HD-3uN" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="74" width="1024" height="1199"/>
+                                <rect key="frame" x="0.0" y="74" width="1024" height="1198"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSQ-Lq-aHQ">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="refresh" id="d3p-Sc-bSo">
                                         <connections>
@@ -1053,7 +1050,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Hfd-AW-KHf"/>
                                     <barButtonItem style="plain" id="03o-BP-DQg">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="qXB-H3-z54">
-                                            <rect key="frame" x="923" y="7" width="81" height="30"/>
+                                            <rect key="frame" x="923" y="10" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -1178,7 +1175,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="7kB-vP-dR6" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="94" width="1024" height="1179"/>
+                                <rect key="frame" x="0.0" y="94" width="1024" height="1178"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7kB-vP-dR6" secondAttribute="height" multiplier="75:58" id="GNJ-i1-PSZ"/>
@@ -1190,7 +1187,7 @@
                                 </variation>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6z-M4-2Qg">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="3WA-l5-yhd">
                                         <connections>
@@ -1212,7 +1209,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="SYF-Ne-Y17"/>
                                     <barButtonItem style="plain" id="dmU-PJ-72l">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="qv2-Ub-TRb">
-                                            <rect key="frame" x="923" y="7" width="81" height="30"/>
+                                            <rect key="frame" x="923" y="10" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -1339,13 +1336,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Ship Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLy-h8-fuf">
-                                <rect key="frame" x="456" y="74" width="112" height="18"/>
+                                <rect key="frame" x="456" y="80" width="112" height="18"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7p-2T-5g5" customClass="XuniCalendar">
-                                <rect key="frame" x="20" y="102" width="984" height="1244"/>
+                                <rect key="frame" x="20" y="108" width="984" height="1238"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="S7p-2T-5g5" secondAttribute="height" multiplier="140:121" id="FBM-kK-zYl"/>
@@ -1357,7 +1354,7 @@
                                 </variation>
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8V-sm-iDI">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Account" id="JI5-w0-y8n">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="JgS-6w-aGk">
@@ -1475,11 +1472,11 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="oYy-dX-q0d" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="78" width="1024" height="1195"/>
+                                <rect key="frame" x="0.0" y="78" width="1024" height="1194"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBE-F5-gNd">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="bsP-tO-wOm">
                                         <connections>
@@ -1501,7 +1498,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Tpx-Xm-YBj"/>
                                     <barButtonItem style="plain" id="Lot-AP-uK3">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="zOT-BI-0vD">
-                                            <rect key="frame" x="923" y="7" width="81" height="30"/>
+                                            <rect key="frame" x="923" y="10" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -1623,7 +1620,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vQu-Op-AaB">
-                                <rect key="frame" x="50" y="74" width="924" height="175.5"/>
+                                <rect key="frame" x="50" y="80" width="924" height="175.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="g4w-MX-0XA">
                                         <rect key="frame" x="0.0" y="0.0" width="924" height="65"/>
@@ -1687,7 +1684,7 @@
                                 </subviews>
                             </stackView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7q-uo-0Zs">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Account" id="PPb-Qy-AtA">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="un3-dD-CBl">
@@ -1776,11 +1773,11 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Syr-bb-GCQ" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="78" width="1024" height="1195"/>
+                                <rect key="frame" x="0.0" y="78" width="1024" height="1194"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BdX-4s-mOl">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="bV0-E3-0Ia">
                                         <connections>
@@ -1802,7 +1799,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="CEk-Er-yBa"/>
                                     <barButtonItem style="plain" id="IbP-fb-DYP">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="Z8p-ib-g5T">
-                                            <rect key="frame" x="923" y="7" width="81" height="30"/>
+                                            <rect key="frame" x="923" y="10" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -1945,11 +1942,11 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="oOE-Rh-sMh" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="84" width="1024" height="1189"/>
+                                <rect key="frame" x="0.0" y="84" width="1024" height="1188"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yhk-Tb-0Mv">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="PMz-fm-7bH">
                                         <connections>
@@ -1971,7 +1968,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Fa4-Em-OdI"/>
                                     <barButtonItem style="plain" id="xfH-ni-p12">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="ys6-yu-lsc">
-                                            <rect key="frame" x="923" y="7" width="81" height="30"/>
+                                            <rect key="frame" x="923" y="10" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2081,11 +2078,11 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Rab-3V-Iaq" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="84" width="1024" height="1189"/>
+                                <rect key="frame" x="0.0" y="84" width="1024" height="1188"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ib-m2-H6k">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Bbx-iN-aF6"/>
                                 </constraints>
@@ -2110,7 +2107,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="gAZ-Jv-Pgl"/>
                                     <barButtonItem style="plain" id="RNh-kS-9uS">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="QPd-mU-21F">
-                                            <rect key="frame" x="923" y="7" width="81" height="30"/>
+                                            <rect key="frame" x="923" y="10" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2200,13 +2197,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Filter Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVC-iA-kOg">
-                                <rect key="frame" x="454.5" y="74" width="115" height="18"/>
+                                <rect key="frame" x="454.5" y="80" width="115" height="18"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Qx-V8-v1O" customClass="XuniCalendar">
-                                <rect key="frame" x="20" y="102" width="984" height="1244"/>
+                                <rect key="frame" x="20" y="108" width="984" height="1238"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6Qx-V8-v1O" secondAttribute="height" multiplier="140:121" id="YNP-Uw-xRP"/>
@@ -2218,7 +2215,7 @@
                                 </variation>
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fnh-He-fRf">
-                                <rect key="frame" x="0.0" y="20" width="1023" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Filter Date" id="Ok9-c5-4gv">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="PUy-Pi-5NH">
@@ -2300,11 +2297,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="U9g-Tf-YnU" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="74" width="1024" height="1199"/>
+                                <rect key="frame" x="0.0" y="74" width="1024" height="1198"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pxf-lf-Y38">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="refresh" id="gcS-F8-qWE">
                                         <connections>
@@ -2332,7 +2329,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Z3G-C7-kPf"/>
                                     <barButtonItem style="plain" id="W2N-Vs-Zf1">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="3Pv-6f-aAc">
-                                            <rect key="frame" x="923" y="7" width="81" height="30"/>
+                                            <rect key="frame" x="923" y="10" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2462,11 +2459,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Cf4-ju-4JA" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="74" width="1024" height="1199"/>
+                                <rect key="frame" x="0.0" y="74" width="1024" height="1198"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="avp-gu-atM">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="refresh" id="2fa-xM-yVD">
                                         <connections>
@@ -2494,7 +2491,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="s0Q-xK-Kkn"/>
                                     <barButtonItem style="plain" id="t3Y-4h-X0s">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="Oi2-He-0zn">
-                                            <rect key="frame" x="923" y="7" width="81" height="30"/>
+                                            <rect key="frame" x="923" y="10" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2650,7 +2647,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="QwW-B2-Djf" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="126" width="1024" height="1147"/>
+                                <rect key="frame" x="0.0" y="126" width="1024" height="1146"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QwW-B2-Djf" secondAttribute="height" multiplier="75:58" id="ZEG-l8-Mtf"/>
@@ -2662,7 +2659,7 @@
                                 </variation>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="htl-St-yBo">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="Mw9-5f-3NR">
                                         <connections>
@@ -2684,7 +2681,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="5FC-Mp-Qm2"/>
                                     <barButtonItem style="plain" id="9uO-XJ-65M">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="QeC-RO-X9l">
-                                            <rect key="frame" x="923" y="7" width="81" height="30"/>
+                                            <rect key="frame" x="923" y="10" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2846,7 +2843,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plb-SU-v3e">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Account" id="qBI-jB-tFF">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="PQs-Rd-ZZk">
@@ -2858,7 +2855,7 @@
                                 </items>
                             </navigationBar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Order Notes" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GWq-Kf-Y61">
-                                <rect key="frame" x="50" y="74" width="924" height="30"/>
+                                <rect key="frame" x="50" y="80" width="924" height="30"/>
                                 <color key="textColor" red="0.06821173036" green="0.18095899460000001" blue="0.3232520518" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
@@ -2930,11 +2927,11 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="WHe-D1-ekd" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="78" width="1024" height="1195"/>
+                                <rect key="frame" x="0.0" y="78" width="1024" height="1194"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SVL-7y-J9q">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="r63-mQ-z4O">
                                         <connections>
@@ -2956,7 +2953,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="HHd-NY-DhC"/>
                                     <barButtonItem style="plain" id="FV5-FS-cd7">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="ATm-hr-d5H">
-                                            <rect key="frame" x="923" y="7" width="81" height="30"/>
+                                            <rect key="frame" x="923" y="10" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -3110,11 +3107,11 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="cIG-Q9-kgK" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="78" width="1024" height="1195"/>
+                                <rect key="frame" x="0.0" y="78" width="1024" height="1194"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHp-qf-fvv">
-                                <rect key="frame" x="0.0" y="1273" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="1266" width="1024" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="bc3-lO-GSB">
                                         <connections>
@@ -3136,7 +3133,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="a7E-Az-foU"/>
                                     <barButtonItem style="plain" id="AQ8-9M-Hst">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="GlJ-VD-5Wa">
-                                            <rect key="frame" x="923" y="7" width="81" height="30"/>
+                                            <rect key="frame" x="923" y="10" width="81" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>

@@ -90,7 +90,7 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
             self.tableViewController!.tableView.backgroundColor = self.popoverBackgroundColor
             self.tableViewController!.tableView.separatorColor = self.seperatorColor
             self.tableViewController!.tableView.estimatedRowHeight = 89
-            self.tableViewController!.tableView.rowHeight = UITableViewAutomaticDimension
+            self.tableViewController!.tableView.rowHeight = UITableView.automaticDimension
             let frameSize = self.popoverSize
             if frameSize != CGRect.null {
                 self.tableViewController!.tableView.frame = frameSize
@@ -144,7 +144,7 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MPGResultsCell") ?? UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "MPGResultsCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MPGResultsCell") ?? UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "MPGResultsCell")
         guard let str = self.text else {
             return cell
         }

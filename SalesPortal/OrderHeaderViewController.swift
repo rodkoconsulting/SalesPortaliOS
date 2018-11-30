@@ -222,7 +222,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     func toggleShipDate() {
-        shipDateButton.setTitle(order?.shipDate?.getShipDatePrint(), for: UIControlState())
+        shipDateButton.setTitle(order?.shipDate?.getShipDatePrint(), for: UIControl.State())
         shipDateButton.isEnabled = order?.shipDate != nil
     }
     
@@ -391,7 +391,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     
     
     func syncData(orderInventoryService: OrderSyncServiceType) {
-        if (backgroundTask == UIBackgroundTaskInvalid) {
+        if (backgroundTask == UIBackgroundTaskIdentifier.invalid) {
             beginBackgroundTask()
         }
         SwiftSpinner.show("Syncing...", animated: false)
