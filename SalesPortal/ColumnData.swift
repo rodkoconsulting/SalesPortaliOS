@@ -28,7 +28,7 @@ let kManagerGroup = "groupLevelManager"
 
 struct ColumnData {
     static let inventoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 3],
+        [kName:"version", kValue: 4],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"quantityAvailable", kHeader: "Avail", kType: "Number"],
@@ -44,6 +44,7 @@ struct ColumnData {
         [kName:"onPo", kHeader: "On PO", kAlignment:"right", kWidth: 60, kType: "Number", kSort: "onPoTotal"],
         [kName:"poEta", kHeader: "PO ETA", kAlignment:"right", kWidth: 80, kType: "NumberDate", kSort: "poEtaSort"],
         [kName:"poDate", kHeader: "PO Date", kAlignment:"right", kWidth: 80, kType: "NumberDate", kSort: "poDateSort"],
+        [kName:"receiptDate", kHeader: "Rcpt Date", kAlignment:"right", kWidth: 90, kType: "NumberDate"],
         [kName:"poComment", kHeader: "Avail. Comment"],
         [kName:"restrictedList", kHeader: "Restrictions", kWidth: 100],
         [kName:"brand", kHeader: "Brand"],
@@ -63,7 +64,7 @@ struct ColumnData {
         [kName:"scoreList", kHeader:"Scores", kAlignment:"right", kWidth: 200]
     ]
     static let accountOrderInventoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 3],
+        [kName:"version", kValue: 4],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"cases", kHeader: "Cases", kType: "Number", kReadOnly: false],
@@ -81,6 +82,7 @@ struct ColumnData {
         [kName:"onPo", kHeader: "On PO", kAlignment:"right", kWidth: 60, kType: "Number", kSort: "onPoTotal"],
         [kName:"poEta", kHeader: "PO ETA", kAlignment:"right", kWidth: 80, kType: "NumberDate", kSort: "poEtaSort"],
         [kName:"poDate", kHeader: "PO Date", kAlignment:"right", kWidth: 80, kType: "NumberDate", kSort: "poDateSort"],
+        [kName:"receiptDate", kHeader: "Rcpt Date", kAlignment:"right", kWidth: 90, kType: "NumberDate"],
         [kName:"poComment", kHeader: "Avail. Comment"],
         [kName:"restrictedList", kHeader: "Restrictions", kWidth: 100],
         [kName:"brand", kHeader: "Brand"],
@@ -100,7 +102,7 @@ struct ColumnData {
         [kName:"scoreList", kHeader:"Scores", kAlignment:"right", kWidth: 200]
     ]
     static let sampleOrderInventoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 4],
+        [kName:"version", kValue: 5],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"bottles", kHeader: "Bottles", kType: "Number", kReadOnly: false],
@@ -118,6 +120,7 @@ struct ColumnData {
         [kName:"onPo", kHeader: "On PO", kAlignment:"right", kWidth: 60, kType: "Number", kSort: "onPoTotal"],
         [kName:"poEta", kHeader: "PO ETA", kAlignment:"right", kWidth: 80, kType: "NumberDate", kSort: "poEtaSort"],
         [kName:"poDate", kHeader: "PO Date", kAlignment:"right", kWidth: 80, kType: "NumberDate", kSort: "poDateSort"],
+        [kName:"receiptDate", kHeader: "Rcpt Date", kAlignment:"right", kWidth: 90, kType: "NumberDate"],
         [kName:"poComment", kHeader: "Avail. Comment"],
         [kName:"restrictedList", kHeader: "Restrictions", kWidth: 100],
         [kName:"brand", kHeader: "Brand"],
@@ -153,7 +156,7 @@ struct ColumnData {
         [kName:"comment", kHeader: "Comment", kReadOnly: false]
     ]
     static let accountOrderHistoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 3],
+        [kName:"version", kValue: 4],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"cases", kHeader: "Cases", kType: "Number", kReadOnly: false],
@@ -174,6 +177,7 @@ struct ColumnData {
         [kName:"onPo", kHeader: "On PO", kAlignment:"right", kWidth: 60, kType: "Number", kSort: "onPoTotal"],
         [kName:"poEta", kHeader: "PO ETA", kAlignment:"right", kWidth: 80, kType: "NumberDate", kSort: "poEtaSort"],
         [kName:"poDate", kHeader: "PO Date", kAlignment:"right", kWidth: 80, kType: "NumberDate", kSort: "poDateSort"],
+        [kName:"receiptDate", kHeader: "Rcpt Date", kAlignment:"right", kWidth: 90, kType: "NumberDate"],
         [kName:"poComment", kHeader: "Avail. Comment"],
         [kName:"restrictedList", kHeader: "Restrictions", kWidth: 100],
         [kName:"brand", kHeader: "Brand"],
@@ -193,7 +197,7 @@ struct ColumnData {
         [kName:"scoreList", kHeader:"Scores", kAlignment:"right", kWidth: 200]
     ]
     static let sampleOrderHistoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 5],
+        [kName:"version", kValue: 6],
         [kName:"itemDescription", kHeader: "Description",  kWidth: 300],
         [kName:"itemCode" as AnyObject, kHeader: "Item" as AnyObject],
         [kName:"bottles", kHeader: "Bottles", kType: "Number", kReadOnly: false],
@@ -213,6 +217,7 @@ struct ColumnData {
         [kName:"onPo", kHeader: "On PO", kAlignment:"right", kWidth: 60, kType: "Number", kSort: "onPoTotal"],
         [kName:"poEta", kHeader: "PO ETA", kAlignment:"right", kWidth: 80, kType: "NumberDate", kSort: "poEtaSort"],
         [kName:"poDate", kHeader: "PO Date", kAlignment:"right", kWidth: 80, kType: "NumberDate", kSort: "poDateSort"],
+        [kName:"receiptDate", kHeader: "Rcpt Date", kAlignment:"right", kWidth: 90, kType: "NumberDate"],
         [kName:"poComment", kHeader: "Avail. Comment"],
         [kName:"restrictedList", kHeader: "Restrictions", kWidth: 100],
         [kName:"brand", kHeader: "Brand"],

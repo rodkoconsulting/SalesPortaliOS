@@ -131,6 +131,7 @@ import Foundation
         let scoreBh: String?
         let scoreVm: String?
         let scoreOther: String?
+        let receiptDate: String?
         
         
         required init(dict: [String: Any]?)
@@ -169,6 +170,7 @@ import Foundation
             scoreBh = dict?["ScoreBH"] as? String
             scoreVm = dict?["ScoreVM"] as? String
             scoreOther = dict?["ScoreOther"] as? String
+            receiptDate = dict?["RcptDate"] as? String
         }
         
         lazy var getDbDelete : String? = {
@@ -214,10 +216,11 @@ import Foundation
                     let scoreIwc = self.scoreIwc,
                     let scoreBh = self.scoreBh,
                     let scoreVm = self.scoreVm,
-                    let scoreOther = self.scoreOther else {
+                    let scoreOther = self.scoreOther,
+                    let receiptDate = self.receiptDate else {
                         return nil
                 }
-                return "('" + itemCode + "', '" + description + "', '" + brand + "', '" + masterVendor + "', '" + vintage + "', '" + uom + "', '" + size + "', '" + damagedNotes + "', '" + closure + "', '" + type + "', '" + varietal + "', '" + organic + "', '" + biodynamic + "', '" + focus + "', '" + country + "', '" + region + "', '" + appellation + "', '" + restrictOffSale + "', '" + restrictOffSaleNotes + "', '" + restrictPremise + "', '" + restrictAllocate + "', '" + restrictApproval + "', '" + restrictMax + "', '" + restrictState + "', '" + restrictSample + "', '" + restrictBo + "', '" + restrictMo + "', '" + upc + "', '" + scoreWa + "', '" + scoreWs + "', '" + scoreIwc + "', '" + scoreBh + "', '" + scoreVm + "', '" + scoreOther + "')"
+                return "('" + itemCode + "', '" + description + "', '" + brand + "', '" + masterVendor + "', '" + vintage + "', '" + uom + "', '" + size + "', '" + damagedNotes + "', '" + closure + "', '" + type + "', '" + varietal + "', '" + organic + "', '" + biodynamic + "', '" + focus + "', '" + country + "', '" + region + "', '" + appellation + "', '" + restrictOffSale + "', '" + restrictOffSaleNotes + "', '" + restrictPremise + "', '" + restrictAllocate + "', '" + restrictApproval + "', '" + restrictMax + "', '" + restrictState + "', '" + restrictSample + "', '" + restrictBo + "', '" + restrictMo + "', '" + upc + "', '" + scoreWa + "', '" + scoreWs + "', '" + scoreIwc + "', '" + scoreBh + "', '" + scoreVm + "', '" + scoreOther + "', '" + receiptDate + "')"
             }()
 
     }
@@ -337,7 +340,7 @@ class Inventory : NSObject {
     let scoreBhRaw: String
     let scoreVmRaw: String
     let scoreOtherRaw: String
-    
+    let receiptDateString: String
     
     lazy var focus : Bool = {
         [unowned self] in
@@ -589,6 +592,19 @@ class Inventory : NSObject {
             return sortDate as Date
     }()
     
+    lazy var receiptDate : Date? = {
+        [unowned self] in
+        guard let receiptDate = receiptDateString.getDate() else {
+            return nil
+        }
+        let year = receiptDate.getYearInt()
+        if year > 2000 {
+            return receiptDate
+        }
+        return nil
+        }()
+    
+    
     lazy var offSale : String = {
         [unowned self] in
             guard self.restrictOffSale == "Y" else {
@@ -773,5 +789,6 @@ class Inventory : NSObject {
         scoreIwcRaw = queryResult?.string(forColumn: "score_iwc") ?? ""
         scoreBhRaw = queryResult?.string(forColumn: "score_bh") ?? ""
         scoreOtherRaw = queryResult?.string(forColumn: "score_other") ?? ""
+        receiptDateString = queryResult?.string(forColumn: "receipt_date") ?? ""
     }
 }
