@@ -135,13 +135,31 @@ extension FlexGrid {
         let defaultColor = UIColor.black
         let flexRow = self.rows.object(at: UInt(row))
         let flexCol = self.columns.object(at: UInt(col))
-        guard let orderList = flexRow.dataItem as? OrderList else {
+        guard let orderList = flexRow.dataItem as? OrderList,
+                let arrivalDate = orderList.arrivalDate else {
                 return defaultColor
         }
-        guard orderList.holdCode == .BackBack && flexCol.binding == "shipExpireDate"  else {
+        if flexCol.binding == "shipExpireDate" && orderList.holdCode == .BackBack {
+            return nil
+        }
+        if flexCol.binding == "arrivalDate" && arrivalDate.getYearInt() <= 2000 {
+            return nil
+        }
+        return defaultColor
+    }
+    
+    func getInventoryTextColor(_ row: Int32, col: Int32) -> UIColor? {
+        let defaultColor = UIColor.black
+        let flexRow = self.rows.object(at: UInt(row))
+        let flexCol = self.columns.object(at: UInt(col))
+        guard let inventory = flexRow.dataItem as? Inventory,
+            let receiptDate = inventory.receiptDate else {
             return defaultColor
         }
-        return nil
+        if flexCol.binding == "receiptDate" && receiptDate.getYearInt() <= 2000 {
+            return nil
+        }
+        return defaultColor
     }
     
     func filterIndex<T: NSObject>(_ searchText: String?, row: T, moduleType: Module) -> Bool {

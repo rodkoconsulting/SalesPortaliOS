@@ -532,10 +532,14 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
     
     func getTextColor(_ row: Int32, col: Int32) -> UIColor? {
-        guard moduleType != Module.orderList else {
+        switch moduleType {
+        case Module.orderList:
             return flexGrid.getOrderListTextColor(row, col: col)
+        case Module.accountOrderHistory, Module.accountOrderInventory, Module.inventory, Module.sampleOrderHistory, Module.sampleOrderInventory:
+            return flexGrid.getInventoryTextColor(row, col: col)
+        default:
+            return UIColor.black
         }
-        return UIColor.black
     }
     
     func formatItem(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange, in context: CGContext)  -> Bool {
@@ -544,7 +548,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         }
         let isSelected = panel.fillColor == flexGrid.selectionBackgroundColor ? true : false
         let backgroundColor = getBackgroundColor(range.row)
-        panel.textAttributes[NSAttributedString.Key.foregroundColor] = getTextColor(range.row, col: range.col) ?? panel.fillColor
+        panel.textAttributes[NSAttributedString.Key.foregroundColor] = getTextColor(range.row, col: range.col) ?? UIColor.clear
         if !isSelected && backgroundColor != nil {
             context.setFillColor(backgroundColor!.cgColor)
             let r = panel.getCellRect(forRow: range.row, inColumn: range.col)

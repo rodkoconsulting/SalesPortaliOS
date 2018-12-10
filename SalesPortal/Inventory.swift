@@ -592,18 +592,14 @@ class Inventory : NSObject {
             return sortDate as Date
     }()
     
+    
     lazy var receiptDate : Date? = {
         [unowned self] in
         guard let receiptDate = receiptDateString.getDate() else {
             return nil
         }
-        let year = receiptDate.getYearInt()
-        if year > 2000 {
-            return receiptDate
-        }
-        return nil
+        return receiptDate
         }()
-    
     
     lazy var offSale : String = {
         [unowned self] in

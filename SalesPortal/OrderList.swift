@@ -223,12 +223,9 @@ class OrderList : NSObject {
         guard let arrivalDate = arrivalDateString.getShipDate() else {
             return nil
         }
-        let year = arrivalDate.getYearInt()
-        if year > 2000 {
-            return arrivalDate
-        }
-        return nil
+        return arrivalDate
         }()
+
     
     
     lazy var isSampleApproved : Bool = {
