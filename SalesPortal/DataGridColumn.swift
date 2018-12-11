@@ -12,13 +12,14 @@ import XuniFlexGridKit
 class DataGridColumn: GridColumn {
     
     var alignment: NSTextAlignment?
-    var isSortAscending: Bool?
+    var isSortAscending: Bool
     var columnFilters: ColumnFilters
     var groupLevel: Int?
     var groupLevelManager: Int?
     
     init(myName: String, myHeader: String, myFilterType: FilterType?){
         columnFilters  = ColumnFilters(header: myHeader)
+        isSortAscending = true
         super.init()
         binding = myName
         name = myName
@@ -62,9 +63,7 @@ class DataGridColumn: GridColumn {
         if let sortMemberPath = columnDict[kSort] as? String {
             gridColumn.sortMemberPath = sortMemberPath
         }
-        if let sortAscend = columnDict[kSortAcsend] as? Bool {
-            gridColumn.isSortAscending = sortAscend
-        }
+        gridColumn.isSortAscending = columnDict[kSortAcsend] as? Bool ?? true
         if let isReadOnly = columnDict[kReadOnly] as? Bool {
             gridColumn.isReadOnly = isReadOnly
         } else {

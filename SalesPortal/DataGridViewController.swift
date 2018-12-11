@@ -604,14 +604,13 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
                 return
             }
             if range.col == self.lastSortedColumn {
-                self.isSortAscending = !self.isSortAscending
-            } else {
-                self.isSortAscending = true
+                col.isSortAscending = !self.isSortAscending
             }
+            self.isSortAscending = col.isSortAscending
             self.lastSortedColumn = range.col
             let binding = col.sortMemberPath ?? col.binding
             collectionView.sortDescriptions.removeAllObjects()
-            guard let sd = XuniSortDescription(property: binding, ascending: self.isSortAscending) else {
+            guard let sd = XuniSortDescription(property: binding, ascending: col.isSortAscending) else {
                 DispatchQueue.main.async {
                     SwiftSpinner.hide(){
                         [unowned self] in
@@ -731,14 +730,14 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         beginBackgroundTask()
         SwiftSpinner.show("Sorting...", animated: false) {
             [unowned self] in
+            
             if column.index == self.lastSortedColumn {
-                self.isSortAscending = !self.isSortAscending
-            } else {
-                self.isSortAscending = true
+                column.isSortAscending = !self.isSortAscending
             }
+            self.isSortAscending = column.isSortAscending
             self.lastSortedColumn = column.index
             collectionView.sortDescriptions.removeAllObjects()
-            let sd: XuniSortDescription = XuniSortDescription(property: column.binding, ascending: self.isSortAscending)
+            let sd: XuniSortDescription = XuniSortDescription(property: column.binding, ascending: column.isSortAscending)
             collectionView.sortDescriptions.add(sd)
             self.flexGrid.setNeedsDisplay()
             SwiftSpinner.hide(){

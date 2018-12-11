@@ -82,10 +82,10 @@ extension FlexGrid {
         guard let collectionView = self.collectionView else {
             return
         }
-        guard let isSortAscending = column.isSortAscending else {
-            return
-        }
-        guard let sd = XuniSortDescription(property: column.binding, ascending: isSortAscending) else {
+        //guard let isSortAscending = column.isSortAscending else {
+        //    return
+        //}
+        guard let sd = XuniSortDescription(property: column.binding, ascending: column.isSortAscending) else {
             return
         }
         collectionView.sortDescriptions.add(sd)
