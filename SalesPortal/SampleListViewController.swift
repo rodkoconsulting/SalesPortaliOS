@@ -114,6 +114,7 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
     }
     
     override func loadData(isSynched: Bool) {
+        super.loadData(isSynched: isSynched)
         guard let credentials = Credentials.getCredentials() else {
             displayLogIn()
             return

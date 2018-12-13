@@ -650,7 +650,11 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
     
     func loadData(isSynched: Bool) {
-        
+        resetSort()
+    }
+    
+    func resetSort() {
+        lastSortedColumn = -1
     }
 
     func showFilterActionSheet(column: DataGridColumn, rowIndex: Int32, panel: GridPanel) {

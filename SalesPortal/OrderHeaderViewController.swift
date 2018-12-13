@@ -284,6 +284,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     }
     
     override func loadData(isSynched: Bool) {
+        super.loadData(isSynched: isSynched)
         guard let order = order else {
             completionError(ErrorCode.unknownError)
             return

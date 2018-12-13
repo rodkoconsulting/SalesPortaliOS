@@ -64,6 +64,7 @@ class OrderSavedViewController: DataGridViewController {
     }
     
     override func loadData(isSynched: Bool) {
+            super.loadData(isSynched: isSynched)
             self.gridData?.removeAllObjects()
             let orderSavedQuery = OrderSavedService<AccountOrder>.queryOrderSavedList()
             self.gridData = orderSavedQuery.gridData
