@@ -18,7 +18,8 @@ let kAlignment = "alignment"
 let kColor = "color"
 let kType = "type"
 let kSort = "sort"
-let kSortAcsend = "defaultSort"
+let kSortAcsend = "sortAscend"
+let kSortDefault = "sortDefault"
 let kReadOnly = "readonly"
 let kFormat = "format"
 let kAgg = "aggregate"
@@ -28,7 +29,7 @@ let kManagerGroup = "groupLevelManager"
 
 struct ColumnData {
     static let inventoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 4],
+        [kName:"version", kValue: 5],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"quantityAvailable", kHeader: "Avail", kType: "Number"],
@@ -64,7 +65,7 @@ struct ColumnData {
         [kName:"scoreList", kHeader:"Scores", kAlignment:"right", kWidth: 200]
     ]
     static let accountOrderInventoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 4],
+        [kName:"version", kValue: 5],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"cases", kHeader: "Cases", kType: "Number", kReadOnly: false],
@@ -102,7 +103,7 @@ struct ColumnData {
         [kName:"scoreList", kHeader:"Scores", kAlignment:"right", kWidth: 200]
     ]
     static let sampleOrderInventoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 5],
+        [kName:"version", kValue: 6],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"bottles", kHeader: "Bottles", kType: "Number", kReadOnly: false],
@@ -156,14 +157,14 @@ struct ColumnData {
         [kName:"comment", kHeader: "Comment", kReadOnly: false]
     ]
     static let accountOrderHistoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 4],
+        [kName:"version", kValue: 5],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"cases", kHeader: "Cases", kType: "Number", kReadOnly: false],
         [kName:"bottles", kHeader: "Bottles", kType: "Number", kReadOnly: false],
         [kName:"lastQuantity", kHeader: "Last Qty", kType: "Number"],
         [kName:"lastPrice", kHeader: "Last Price", kType: "Number"],
-        [kName:"lastDate", kHeader: "Last Date", kType: "NumberDate", kSortAcsend: false],
+        [kName:"lastDate", kHeader: "Last Date", kType: "NumberDate", kSortAcsend: false, kSortDefault: true],
         [kName:"quantityAvailable", kHeader: "Avail", kType: "Number"],
         [kName:"priceCase", kHeader: "Price (c)", kType: "Number"],
         [kName:"priceBottle", kHeader: "Price (b)", kType: "Number"],
@@ -197,7 +198,7 @@ struct ColumnData {
         [kName:"scoreList", kHeader:"Scores", kAlignment:"right", kWidth: 200]
     ]
     static let sampleOrderHistoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 6],
+        [kName:"version", kValue: 7],
         [kName:"itemDescription", kHeader: "Description",  kWidth: 300],
         [kName:"itemCode" as AnyObject, kHeader: "Item" as AnyObject],
         [kName:"bottles", kHeader: "Bottles", kType: "Number", kReadOnly: false],

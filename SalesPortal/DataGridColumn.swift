@@ -13,6 +13,7 @@ class DataGridColumn: GridColumn {
     
     var alignment: NSTextAlignment?
     var isSortAscending: Bool
+    var isDefaultSort: Bool
     var columnFilters: ColumnFilters
     var groupLevel: Int?
     var groupLevelManager: Int?
@@ -20,6 +21,7 @@ class DataGridColumn: GridColumn {
     init(myName: String, myHeader: String, myFilterType: FilterType?){
         columnFilters  = ColumnFilters(header: myHeader)
         isSortAscending = true
+        isDefaultSort = false
         super.init()
         binding = myName
         name = myName
@@ -64,6 +66,7 @@ class DataGridColumn: GridColumn {
             gridColumn.sortMemberPath = sortMemberPath
         }
         gridColumn.isSortAscending = columnDict[kSortAcsend] as? Bool ?? true
+        gridColumn.isDefaultSort = columnDict[kSortDefault] as? Bool ?? false
         if let isReadOnly = columnDict[kReadOnly] as? Bool {
             gridColumn.isReadOnly = isReadOnly
         } else {

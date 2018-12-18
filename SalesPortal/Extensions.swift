@@ -48,8 +48,11 @@ extension FlexGrid {
     
     func sortColumns() {
         for col: UInt in 0 ..< self.columns.count {
-            if let gridCol = self.columns.object(at: col) as? DataGridColumn {
-                self.sortColumn(gridCol)
+            if let gridCol = self.columns.object(at: col) as? DataGridColumn
+            {
+                if gridCol.isDefaultSort {
+                    self.sortColumn(gridCol)
+                }
             }
         }
     }
@@ -82,9 +85,6 @@ extension FlexGrid {
         guard let collectionView = self.collectionView else {
             return
         }
-        //guard let isSortAscending = column.isSortAscending else {
-        //    return
-        //}
         guard let sd = XuniSortDescription(property: column.binding, ascending: column.isSortAscending) else {
             return
         }

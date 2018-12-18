@@ -84,6 +84,11 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
         filterGrid("")
     }
     
+    override func resetSort() {
+        super.resetSort()
+        flexGrid.sortColumns()
+    }
+    
     override func filterGridColumns<T: NSObject>(_ searchText: String?, classType: T.Type, isIndex: Bool = false) {
         guard let collectionView = flexGrid.collectionView else {
             return
