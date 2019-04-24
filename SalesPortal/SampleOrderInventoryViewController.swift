@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import XuniFlexGridKit
 
 class SampleOrderInventoryViewController: OrderInventoryViewController {
     
@@ -23,6 +24,22 @@ class SampleOrderInventoryViewController: OrderInventoryViewController {
             let orderMonth = order.shipDate?.getDate()?.getMonthString() ?? Date().getMonthString()
             titleLabel.text = stateText + " " + orderMonth
         }
+    }
+    
+    override func filterGridColumns<T: NSObject>(_ searchText: String?, classType: T.Type, isIndex: Bool = false) {
+        guard let collectionView = flexGrid.collectionView else {
+            return
+        }
+        collectionView.filter = {[unowned self](item : NSObject?) -> Bool in
+            guard let row = item as? SampleOrderInventory else {
+                return false
+            }
+            guard !isIndex else {
+                return self.flexGrid.filterIndex(searchText, row: row, moduleType: self.moduleType) && self.flexGrid.filterColumns(nil, row: row)
+            }
+            return self.flexGrid.filterColumns(searchText, row: row)
+            } as IXuniPredicate
+        resetGrid()
     }
     
 }
