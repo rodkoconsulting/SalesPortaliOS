@@ -14,7 +14,7 @@ enum SampleListFilter: String {
 extension SampleListFilter {
     
     var getIndex: Int? {
-        return SampleListFilter.rawValues.index(of: self.rawValue)
+        return SampleListFilter.rawValues.firstIndex(of: self.rawValue)
     }
     
     func isFilterMatch(_ sampleList: SampleList) -> Bool {

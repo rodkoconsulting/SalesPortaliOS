@@ -106,7 +106,7 @@ class SampleOrder: isOrderType {
             self.shipDate = shipDate < nextShipDate ? nextShipDate : shipDate
         }
         let shipToCode = queryHeaderResult?.string(forColumn: "customer_no")
-        let addressIndex = shipToList?.index{$0.code == shipToCode} ?? 0
+        let addressIndex = shipToList?.firstIndex{$0.code == shipToCode} ?? 0
         shipTo = shipToList?[addressIndex]
         notes = queryHeaderResult?.string(forColumn: "notes")
         self.savedDetailDict = detailDict

@@ -53,7 +53,7 @@ class SampleOrderHeaderViewController: OrderHeaderViewController, isOrderHeaderV
     override func initOrder() {
         accountLabel.text = "Sample Order"
         shipDateButton.setTitle(order?.shipDate?.getShipDatePrint(), for: UIControl.State())
-        if let shipToList = order?.shipToList as? [SampleOrderAddress], let shipTo = order?.shipTo as? SampleOrderAddress, let shipToIndex = shipToList.index(of: shipTo) {
+        if let shipToList = order?.shipToList as? [SampleOrderAddress], let shipTo = order?.shipTo as? SampleOrderAddress, let shipToIndex = shipToList.firstIndex(of: shipTo) {
             headerComboBox.selectedIndex = UInt(shipToIndex)
         }
     }

@@ -101,7 +101,7 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
                 return self.flexGrid.filterIndex(searchText, row: row, moduleType: self.moduleType) && self.flexGrid.filterColumns(nil, row: row)
             }
             guard row.lastQuantity > 0 else {
-                let index = self.searchData.index {
+                let index = self.searchData.firstIndex {
                     if let value = $0["DisplaySubText"], value == row.itemCode {
                         return true
                     }

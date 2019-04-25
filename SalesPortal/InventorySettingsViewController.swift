@@ -66,12 +66,12 @@ class InventorySettingsViewController: UIViewController, UITableViewDelegate, UI
         if let myDataSettings = dataSettings {
             if settingTags[row] == kMONTHTAG {
                 cell.settingsComboBox.itemsSource = ComboData.monthData(myDataSettings.monthValues)
-                if let defaultMonthIndex = myDataSettings.monthValues.index(of: myDataSettings.month) {
+                if let defaultMonthIndex = myDataSettings.monthValues.firstIndex(of: myDataSettings.month) {
                     cell.settingsComboBox.selectedIndex = UInt(myDataSettings.monthValues.distance(from: myDataSettings.monthValues.startIndex, to: defaultMonthIndex))
                 }
             } else if settingTags[row] == kSTATETAG {
                 cell.settingsComboBox.itemsSource = ComboData.stateData()
-                if let defaultStateIndex = States.allValues.index(of: myDataSettings.repState.rawValue) {
+                if let defaultStateIndex = States.allValues.firstIndex(of: myDataSettings.repState.rawValue) {
                     cell.settingsComboBox.selectedIndex = UInt(States.allValues.distance(from: States.allValues.startIndex, to: defaultStateIndex))
                 }
             }

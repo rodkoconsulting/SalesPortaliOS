@@ -55,7 +55,7 @@ extension OrderType {
         
     }
     var getIndex: Int? {
-        return OrderType.allValues.index(of: self.orderText)
+        return OrderType.allValues.firstIndex(of: self.orderText)
     }
     
     func shipDate(account: Account?) -> String? {
@@ -411,7 +411,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
             self.shipDate = shipDate < nextShipDate ? nextShipDate : shipDate
         }
         if let address = queryHeaderResult?.string(forColumn: "ship_to") {
-            let addressIndex = shipToList?.index{$0.code == address} ?? 0
+            let addressIndex = shipToList?.firstIndex{$0.code == address} ?? 0
             self.shipTo = shipToList?[addressIndex]
         }
         notes = queryHeaderResult?.string(forColumn: "notes") 

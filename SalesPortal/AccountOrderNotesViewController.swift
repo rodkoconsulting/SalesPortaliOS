@@ -84,7 +84,7 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
             HideShipTo()
             return
         }
-        index = shipToList.index(of: shipTo)
+        index = shipToList.firstIndex(of: shipTo)
         if let index = index {
             selectedIndex = UInt(shipToList.startIndex.distance(to: index))
         }
@@ -113,7 +113,7 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
         }
         let accountOrder = order as? AccountOrder
         if let coopNo = accountOrder?.coopNo {
-            index = accountOrder?.account?.coopList.index(of: coopNo)
+            index = accountOrder?.account?.coopList.firstIndex(of: coopNo)
         }
         if let index = index {
             selectedIndex = UInt(accountOrder?.account?.coopList.startIndex.distance(to: index + 1) ?? 0)

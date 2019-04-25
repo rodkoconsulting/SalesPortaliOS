@@ -50,7 +50,7 @@ enum OrderHoldType: String {
 extension OrderListFilter {
     
     var getIndex: Int? {
-        return OrderListFilter.rawValues.index(of: self.rawValue)
+        return OrderListFilter.rawValues.firstIndex(of: self.rawValue)
     }
     
     func isFilterMatch(_ orderList: OrderList) -> Bool {

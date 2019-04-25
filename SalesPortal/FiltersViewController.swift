@@ -38,7 +38,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         let newFilter = ColumnFilter(condition: columnFilters.conditionList.first!)
         columnFilters.filterList.append(newFilter)
-        if let index = columnFilters.filterList.index(of: newFilter) {
+        if let index = columnFilters.filterList.firstIndex(of: newFilter) {
             let indexPath = IndexPath(row: index, section: 0)
             filtersTableView.insertRows(at: [indexPath], with: .automatic)
         }
@@ -168,17 +168,17 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.selectedBackgroundView = backgroundView
         cell.selectionStyle = .none
         cell.textLabel?.backgroundColor = UIColor.clear
-        let defaultConditionIndex = myColumnFilters.conditionList.index{$0 == filter.condition} ?? 0
+        let defaultConditionIndex = myColumnFilters.conditionList.firstIndex{$0 == filter.condition} ?? 0
         let conditionItemsSource = ComboData.filterConditionData(myColumnFilters.conditionList)
         let conditionIndex = UInt(myColumnFilters.conditionList.startIndex.distance(to: defaultConditionIndex))
         let conditionTag = row + myColumnFilters.filterList.count * kCONDITIONTAG
         let conditionHeight = Double(conditionItemsSource.count * Constants.ComboCellHeight)
-        let defaultOperatorIndex = myColumnFilters.operatorList.index{$0 == filter.filterOperator} ?? 0
+        let defaultOperatorIndex = myColumnFilters.operatorList.firstIndex{$0 == filter.filterOperator} ?? 0
         let operatorItemsSource = ComboData.filterOperatorData(myColumnFilters.operatorList)
         let operatorIndex = UInt(myColumnFilters.conditionList.startIndex.distance(to: defaultOperatorIndex))
         let operatorTag = row + myColumnFilters.filterList.count * kOPERATORTAG
         let operatorHeight = Double(operatorItemsSource.count * Constants.ComboCellHeight)
-        let defaultBoolIndex = Constants.boolList.index{$0 == filter.value} ?? 0
+        let defaultBoolIndex = Constants.boolList.firstIndex{$0 == filter.value} ?? 0
         let boolItemsSource = ComboData.filterBoolData()
         let boolIndex = UInt(Constants.boolList.startIndex.distance(to: defaultBoolIndex))
         let boolTag = row + myColumnFilters.filterList.count * kBOOLTAG
@@ -329,7 +329,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func removeFilter(_ filter: ColumnFilter) {
-        if let index = columnFilters?.filterList.index(of: filter) {
+        if let index = columnFilters?.filterList.firstIndex(of: filter) {
             columnFilters!.filterList.remove(at: index)
         }
     }

@@ -204,7 +204,7 @@ class AccountOrderInventory: OrderInventory {
     
     fileprivate func clearMoboList(_ moboList: MoboList) {
         if moboList.orderBottleTotal == 0 {
-            if let moboIndex = moboListArray.index(of: moboList) {
+            if let moboIndex = moboListArray.firstIndex(of: moboList) {
                 moboListArray.remove(at: moboIndex)
             }
         }
