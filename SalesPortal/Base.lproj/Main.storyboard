@@ -1620,7 +1620,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vQu-Op-AaB">
-                                <rect key="frame" x="50" y="80" width="924" height="175.5"/>
+                                <rect key="frame" x="50" y="80" width="924" height="180.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="g4w-MX-0XA">
                                         <rect key="frame" x="0.0" y="0.0" width="924" height="65"/>
@@ -1660,8 +1660,8 @@
                                             <constraint firstItem="NAw-Bh-LLE" firstAttribute="width" secondItem="rlZ-Sf-1Bm" secondAttribute="width" id="G5y-Eh-2KH"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cp9-q0-6e7">
-                                        <rect key="frame" x="0.0" y="125" width="924" height="50.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cp9-q0-6e7">
+                                        <rect key="frame" x="0.0" y="125" width="924" height="55.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ship To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emY-Jd-FRP">
                                                 <rect key="frame" x="0.0" y="0.0" width="924" height="20.5"/>
@@ -1670,16 +1670,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Gl-Wn-g15" customClass="ComboBox" customModule="SalesPortal" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="20.5" width="924" height="30"/>
+                                                <rect key="frame" x="0.0" y="25.5" width="924" height="30"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="slh-oT-pal"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="4Gl-Wn-g15" firstAttribute="top" secondItem="emY-Jd-FRP" secondAttribute="bottom" constant="5" id="BuH-KP-2aY"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -1726,7 +1723,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tPT-c8-xLZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="frd-cA-9tN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4277" y="2134"/>
+            <point key="canvasLocation" x="4276.7578125" y="2133.8213762811124"/>
         </scene>
         <!--Order History-->
         <scene sceneID="fIu-xt-lKk">
