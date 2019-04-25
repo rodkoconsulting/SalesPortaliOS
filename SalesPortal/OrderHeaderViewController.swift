@@ -27,7 +27,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var shipDateButton: UIButton!
-    @IBOutlet weak var headerComboBox: XuniComboBox!
+    @IBOutlet weak var headerComboBox: ComboBox!
     
     weak var order: isOrderType?
     

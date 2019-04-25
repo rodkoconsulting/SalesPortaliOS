@@ -16,9 +16,9 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
 
 
     @IBOutlet weak var poNoTextField: UITextField!
-    @IBOutlet weak var coopNoComboBox: XuniComboBox!
+    @IBOutlet weak var coopNoComboBox: ComboBox!
     @IBOutlet weak var coopNoLabel: UILabel!
-    @IBOutlet weak var shipToComboBox: XuniComboBox!
+    @IBOutlet weak var shipToComboBox: ComboBox!
     @IBOutlet weak var shipToLabel: UILabel!
     
     override func callChildDismiss() {

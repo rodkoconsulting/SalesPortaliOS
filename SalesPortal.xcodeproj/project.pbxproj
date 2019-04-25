@@ -14,9 +14,11 @@
 		0779DE261F38FC84006BEEF2 /* LocksmithInternetAuthenticationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE201F38FC84006BEEF2 /* LocksmithInternetAuthenticationType.swift */; };
 		0779DE271F38FC84006BEEF2 /* LocksmithInternetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE211F38FC84006BEEF2 /* LocksmithInternetProtocol.swift */; };
 		0779DE281F38FC84006BEEF2 /* LocksmithSecurityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE221F38FC84006BEEF2 /* LocksmithSecurityClass.swift */; };
-		2718FD2B2270CAD600D5D550 /* upload-dsym.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2718FD292270CAD300D5D550 /* upload-dsym.sh */; };
-		2718FD2C2270CAD600D5D550 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2718FD2A2270CAD600D5D550 /* libTestFairy.a */; };
 		27881DB821CC38310053F522 /* XuniInputKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D424941D426221000BE982 /* XuniInputKit.framework */; };
+		27881DBC21CC46A70053F522 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27881DB921CC46A70053F522 /* libTestFairy.a */; };
+		27881DBD21CC46A70053F522 /* upload-dsym.sh in Resources */ = {isa = PBXBuildFile; fileRef = 27881DBB21CC46A70053F522 /* upload-dsym.sh */; };
+		278F659822720E51003115EC /* ComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278F659722720E51003115EC /* ComboBox.swift */; };
+		278F659A227217EC003115EC /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278F6599227217EC003115EC /* Calendar.swift */; };
 		C300D4B81E490D5100183B32 /* SampleOrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300D4B71E490D5100183B32 /* SampleOrderHeaderViewController.swift */; };
 		C300D4BA1E494DE700183B32 /* AccountOrderHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300D4B91E494DE700183B32 /* AccountOrderHistoryViewController.swift */; };
 		C302B98A1D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302B9891D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift */; };
@@ -127,10 +129,12 @@
 		0779DE201F38FC84006BEEF2 /* LocksmithInternetAuthenticationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithInternetAuthenticationType.swift; sourceTree = "<group>"; };
 		0779DE211F38FC84006BEEF2 /* LocksmithInternetProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithInternetProtocol.swift; sourceTree = "<group>"; };
 		0779DE221F38FC84006BEEF2 /* LocksmithSecurityClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithSecurityClass.swift; sourceTree = "<group>"; };
-		2718FD282270CAD300D5D550 /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
-		2718FD292270CAD300D5D550 /* upload-dsym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-dsym.sh"; sourceTree = "<group>"; };
-		2718FD2A2270CAD600D5D550 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
 		27881DB621CC38120053F522 /* Xuni */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Xuni; path = ../Xuni; sourceTree = "<group>"; };
+		27881DB921CC46A70053F522 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
+		27881DBA21CC46A70053F522 /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
+		27881DBB21CC46A70053F522 /* upload-dsym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-dsym.sh"; sourceTree = "<group>"; };
+		278F659722720E51003115EC /* ComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComboBox.swift; sourceTree = "<group>"; };
+		278F6599227217EC003115EC /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		C300D4B71E490D5100183B32 /* SampleOrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderHeaderViewController.swift; sourceTree = "<group>"; };
 		C300D4B91E494DE700183B32 /* AccountOrderHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderHistoryViewController.swift; sourceTree = "<group>"; };
 		C302B9891D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderHeaderViewController.swift; sourceTree = "<group>"; };
@@ -255,7 +259,7 @@
 				C33791121DAC5ADA009EA4C1 /* CoreMotion.framework in Frameworks */,
 				C33791101DAC5AD2009EA4C1 /* CoreMedia.framework in Frameworks */,
 				C309FC131D05E294002868BD /* XuniCalendarKit.framework in Frameworks */,
-				2718FD2C2270CAD600D5D550 /* libTestFairy.a in Frameworks */,
+				27881DBC21CC46A70053F522 /* libTestFairy.a in Frameworks */,
 				C37F4A7B1CF3A2E700665ED0 /* XuniFlexGridKit.framework in Frameworks */,
 				C37F4A791CF3A2CC00665ED0 /* XuniCoreKit.framework in Frameworks */,
 				C37F4A771CF3A17F00665ED0 /* libsqlite3.tbd in Frameworks */,
@@ -387,9 +391,9 @@
 		C33791091DAC5A07009EA4C1 /* TestFairy */ = {
 			isa = PBXGroup;
 			children = (
-				2718FD2A2270CAD600D5D550 /* libTestFairy.a */,
-				2718FD282270CAD300D5D550 /* TestFairy.h */,
-				2718FD292270CAD300D5D550 /* upload-dsym.sh */,
+				27881DB921CC46A70053F522 /* libTestFairy.a */,
+				27881DBA21CC46A70053F522 /* TestFairy.h */,
+				27881DBB21CC46A70053F522 /* upload-dsym.sh */,
 				070AAA7D1F6DB9440095B42B /* NSLog.swift */,
 			);
 			name = TestFairy;
@@ -541,6 +545,8 @@
 				C37F4A4E1CF352C300665ED0 /* SyncService.swift */,
 				C31F1F3C1E3BDE3300F1ACC0 /* SampleOrderService.swift */,
 				C344AF9C1E4A7C7000BB1E6D /* Order.swift */,
+				278F659722720E51003115EC /* ComboBox.swift */,
+				278F6599227217EC003115EC /* Calendar.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -588,6 +594,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -610,7 +617,7 @@
 				C36448201D02181C00A545DD /* Holidays.plist in Resources */,
 				C3ED0A911CBBECCF00B9520E /* Assets.xcassets in Resources */,
 				C3ED0A8F1CBBECCF00B9520E /* Main.storyboard in Resources */,
-				2718FD2B2270CAD600D5D550 /* upload-dsym.sh in Resources */,
+				27881DBD21CC46A70053F522 /* upload-dsym.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +711,7 @@
 				C3E386691D071779009FEB20 /* OrderInventoryViewController.swift in Sources */,
 				C37F4A541CF377A900665ED0 /* Inventory.swift in Sources */,
 				C3AE55441CC175A1000859E7 /* Account.swift in Sources */,
+				278F659A227217EC003115EC /* Calendar.swift in Sources */,
 				C37F4A6A1CF39A8300665ED0 /* ColumnData.swift in Sources */,
 				0779DE231F38FC84006BEEF2 /* Dictionary_Initializers.swift in Sources */,
 				C37F4A601CF390FF00665ED0 /* DatabaseService.swift in Sources */,
@@ -731,6 +739,7 @@
 				C3ED0AA21CBC27E200B9520E /* ErrorCode.swift in Sources */,
 				C35A73751D21A498000644F6 /* OrderHistoryViewController.swift in Sources */,
 				C33A58A41CBD90E300644ED3 /* Locksmith.swift in Sources */,
+				278F659822720E51003115EC /* ComboBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,7 +821,6 @@
 				SEPARATE_STRIP = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -867,7 +875,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
@@ -882,7 +889,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETSA5LDZGS;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = /Users/arodko/Documents/Xuni/iOS/Controls;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/arodko/Documents/Xuni/iOS/Controls,
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SalesPortal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -910,7 +920,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETSA5LDZGS;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = /Users/arodko/Documents/Xuni/iOS/Controls;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/arodko/Documents/Xuni/iOS/Controls,
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SalesPortal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -18,7 +18,7 @@ class ShipDateViewController: UIViewController, XuniCalendarDelegate {
   
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var calendar: XuniCalendar!
+    @IBOutlet weak var calendar: CalendarUI!
     
     weak var order : isOrderType?
     weak var delegate: ShipDateDelegate?

@@ -12,8 +12,8 @@ import XuniInputKit
 
 class DateFiltersTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var operatorComboBox: XuniComboBox!
-    @IBOutlet weak var conditionComboBox: XuniComboBox!
+    @IBOutlet weak var operatorComboBox: ComboBox!
+    @IBOutlet weak var conditionComboBox: ComboBox!
     @IBOutlet weak var dateButton: UIButton!
     
     

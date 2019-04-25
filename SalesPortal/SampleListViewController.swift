@@ -6,7 +6,7 @@ import XuniInputKit
 class SampleListViewController: DataGridViewController, XuniDropDownDelegate, XuniComboBoxDelegate {
     
 
-    @IBOutlet weak var sampleFilterComboBox: XuniComboBox!
+    @IBOutlet weak var sampleFilterComboBox: ComboBox!
     
     var sampleFilter = SampleListFilter.Mtd
     
@@ -89,9 +89,19 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
         let rawValue = SampleListFilter.rawValues[index]
         if let sampleFilter = SampleListFilter(rawValue: rawValue) {
             self.sampleFilter = sampleFilter
-            self.filterGrid(self.searchBar.text ?? "")
+            beginBackgroundTask()
+            SwiftSpinner.show("Loading...", animated: false) {
+                self.filterGrid(self.searchBar.text ?? "")
+                DispatchQueue.main.async {
+                    SwiftSpinner.hide() {
+                        [unowned self] in
+                        self.endBackgroundTask()
+                    }
+                }
+            }
         }
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if isFilterChanged {

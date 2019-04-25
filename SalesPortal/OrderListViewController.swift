@@ -5,7 +5,7 @@ import XuniInputKit
 
 class OrderListViewController: DataGridViewController, XuniDropDownDelegate, XuniComboBoxDelegate {
     
-    @IBOutlet weak var orderFilterComboBox: XuniComboBox!
+    @IBOutlet weak var orderFilterComboBox: ComboBox!
     var orderFilter = OrderListFilter.All
     
     required init?(coder aDecoder: NSCoder){

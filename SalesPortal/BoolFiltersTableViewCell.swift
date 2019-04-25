@@ -11,9 +11,9 @@ import XuniInputKit
 
 class BoolFiltersTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var operatorComboBox: XuniComboBox!
-    @IBOutlet weak var conditionComboBox: XuniComboBox!
-    @IBOutlet weak var boolComboBox: XuniComboBox!
+    @IBOutlet weak var operatorComboBox: ComboBox!
+    @IBOutlet weak var conditionComboBox: ComboBox!
+    @IBOutlet weak var boolComboBox: ComboBox!
     
     override func awakeFromNib() {
         super.awakeFromNib()

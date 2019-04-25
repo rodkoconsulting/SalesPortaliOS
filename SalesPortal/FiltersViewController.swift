@@ -92,7 +92,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         return columnFilters.filterList.count
     }
     
-    func initComboBox(_ comboBox: XuniComboBox) {
+    func initComboBox(_ comboBox: ComboBox) {
         comboBox.delegate = self
         comboBox.displayMemberPath = "name"
         comboBox.isEditable = false
@@ -334,7 +334,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func deinitComboBox(_ comboBox: XuniComboBox) {
+    func deinitComboBox(_ comboBox: ComboBox) {
         comboBox.selectedItem = nil
         comboBox.itemsSource.removeAllObjects()
         comboBox.collectionView.removeAllObjects()

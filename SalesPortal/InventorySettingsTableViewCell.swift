@@ -12,7 +12,7 @@ import XuniInputKit
 class InventorySettingsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var settingsLabel: UILabel!                                                                                                              
-    @IBOutlet weak var settingsComboBox: XuniComboBox!
+    @IBOutlet weak var settingsComboBox: ComboBox!
 
     override func awakeFromNib() {
         super.awakeFromNib()

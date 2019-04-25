@@ -17,7 +17,7 @@ class FilterDateViewController: UIViewController, XuniCalendarDelegate {
     
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var calendar: XuniCalendar!
+    @IBOutlet weak var calendar: CalendarUI!
     
     weak var delegate: FilterDateDelegate?
     

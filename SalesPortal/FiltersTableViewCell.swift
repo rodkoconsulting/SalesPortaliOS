@@ -11,8 +11,8 @@ import XuniInputKit
 
 class FiltersTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var conditionComboBox: XuniComboBox!
-    @IBOutlet weak var operatorComboBox: XuniComboBox!
+    @IBOutlet weak var conditionComboBox: ComboBox!
+    @IBOutlet weak var operatorComboBox: ComboBox!
     @IBOutlet weak var valueText: UITextField!
     
     override func awakeFromNib() {
