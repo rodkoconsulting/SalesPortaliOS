@@ -518,7 +518,9 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         var orderDict = [String : Any]()
         var detailArray = [[String : Any]]()
         let notes = (self.notes ?? "").replacingOccurrences(of: "'", with: "")
-        orderDict["custNo"] = account?.customerNoRaw ?? ""
+        let divisionNo = account?.divisionNo ?? "00"
+        let customerNo = account?.customerNoRaw ?? ""
+        orderDict["custNo"] = divisionNo + customerNo
         orderDict["type"] = orderType.rawValue
         orderDict["date"] = shipDate ?? ""
         orderDict["note"] = notes 
