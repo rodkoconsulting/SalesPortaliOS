@@ -31,7 +31,7 @@ class OrderMoboService: SyncService, SyncServiceType {
                     "FROM ACCOUNTS_LIST a INNER JOIN ORDER_LIST_HEADER h ON a.DIVISION_NO = h.DIVISION_NO and a.CUSTOMER_NO = h.CUSTOMER_NO " +
                     "INNER JOIN ORDER_LIST_DETAIL d ON h.ORDER_NO = d.ORDER_NO " +
             "LEFT OUTER JOIN INV_DESC i ON d.ITEM_CODE = i.ITEM_CODE " +
-            "WHERE a.DIVISION_NO = '" + self.account.divisionNo + "' and (a.CUSTOMER_NO = '" + self.account.customerNoRaw + "' OR SUBSTR(h.CUSTOMER_NO,1,2)='ZZ') and (h.HOLD = 'MO' OR h.HOLD = 'IN' OR h.HOLD = 'BO' OR h.HOLD = 'BH') " +
+            "WHERE ((a.DIVISION_NO = '" + self.account.divisionNo + "' and a.CUSTOMER_NO = '" + self.account.customerNoRaw + "') OR SUBSTR(h.CUSTOMER_NO,1,2)='ZZ') and (h.HOLD = 'MO' OR h.HOLD = 'IN' OR h.HOLD = 'BO' OR h.HOLD = 'BH') " +
             "ORDER BY a.CUSTOMER_NAME, h.ORDER_NO desc, i.DESC"
             let results: FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             while results?.next() == true {
