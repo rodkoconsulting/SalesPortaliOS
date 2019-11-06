@@ -801,6 +801,12 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         if segue.identifier == "showFiltersViewController" {
             segueFiltersViewController(segue: segue, sender: sender as AnyObject)
         }
+        if segue.identifier == "showLogin" {
+            guard let loginViewController = segue.destination as? LoginViewController else {
+                return
+            }
+            loginViewController.modalPresentationStyle = .fullScreen
+        }
     }
 }
 
