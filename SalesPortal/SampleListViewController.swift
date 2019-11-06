@@ -264,6 +264,7 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
                     return
             }
             orderTabBarController.order = SampleOrder()
+            orderTabBarController.modalPresentationStyle = .fullScreen
         }
 
     }

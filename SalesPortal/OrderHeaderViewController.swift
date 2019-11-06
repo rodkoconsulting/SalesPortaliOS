@@ -157,6 +157,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                 return
             }
             shipDateViewController.order = order
+            shipDateViewController.modalPresentationStyle = .fullScreen
             shipDateViewController.delegate = self
         }
         if segue.identifier == "showOrderNotesViewController" {

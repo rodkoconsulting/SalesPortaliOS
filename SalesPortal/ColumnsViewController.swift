@@ -52,6 +52,7 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
             filtersViewController.filterDelegate = self
             filtersViewController.columnFilters = columnFilters
             filtersViewController.columnIndex = index.row
+            filtersViewController.modalPresentationStyle = .fullScreen
         }
     }
     

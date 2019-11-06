@@ -53,6 +53,7 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
                 return
             }
             settingsViewController.dataSettings = dataSettings
+            settingsViewController.modalPresentationStyle = .fullScreen
             isSettingsChanged = false
         }
     }

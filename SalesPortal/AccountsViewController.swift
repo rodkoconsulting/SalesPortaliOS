@@ -64,6 +64,7 @@ class AccountsViewController: DataGridViewController {
                     return
             }
             orderTabBarController.order = AccountOrder(account: account)
+            orderTabBarController.modalPresentationStyle = .fullScreen
         }
         if segue.identifier == "showColumnsViewController" {
             guard let columnsViewController = segue.destination as? ColumnsViewController else {
@@ -82,6 +83,7 @@ class AccountsViewController: DataGridViewController {
                 return
             }
             accountInfoViewController.account = account
+            accountInfoViewController.modalPresentationStyle = .fullScreen
         }
     }
     

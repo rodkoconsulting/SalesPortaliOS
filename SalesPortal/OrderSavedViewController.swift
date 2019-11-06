@@ -130,12 +130,15 @@ class OrderSavedViewController: DataGridViewController {
                 return
             }
             orderTabBarController.order = OrderSavedService<AccountOrder>.queryOrderSaved(orderNo: orderNo)
+            orderTabBarController.modalPresentationStyle = .fullScreen
         }
         if segue.identifier == Constants.sampleOrderSegue {
             guard let orderTabBarController = segue.destination as? OrderTabBarController else {
                 return
             }
             orderTabBarController.order = OrderSavedService<SampleOrder>.queryOrderSaved(orderNo: orderNo)
+            orderTabBarController.modalPresentationStyle = .fullScreen
         }
+        
     }
 }

@@ -108,6 +108,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.modalPresentationStyle = .fullScreen
         loadSettings()
         initGrid()
         searchBar?.mDelegate = self
@@ -474,6 +475,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         filtersViewController.filterDelegate = self
         filtersViewController.columnFilters = column.columnFilters
         filtersViewController.columnIndex = Int(column.index)
+        filtersViewController.modalPresentationStyle = .fullScreen
     }
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
@@ -794,6 +796,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
             columnsViewController.columnsDelegate = self
             columnsViewController.columnSettings = flexGrid.columns
             columnsViewController.module = moduleType
+            columnsViewController.modalPresentationStyle = .fullScreen
         }
         if segue.identifier == "showFiltersViewController" {
             segueFiltersViewController(segue: segue, sender: sender as AnyObject)
