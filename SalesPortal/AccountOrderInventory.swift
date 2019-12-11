@@ -182,7 +182,11 @@ class AccountOrderInventory: OrderInventory {
             bottles += moboList.bottles
             quantity += moboList.orderBottleTotal
             available += moboList.moboBottleTotal
-       }
+        }
+        if (bottles > uomInt - 1) {
+            cases += bottles / uomInt
+            bottles -= cases * uomInt
+        }
         return (cases, bottles, quantity, available)
     }
     
