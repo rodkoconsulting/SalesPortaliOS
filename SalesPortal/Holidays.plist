@@ -4,14 +4,14 @@
 <dict>
 	<key>Holidays</key>
 	<array>
-		<date>2019-12-25T05:00:00Z</date>
-		<date>2019-02-18T05:00:00Z</date>
-		<date>2019-05-27T04:00:00Z</date>
-		<date>2019-07-04T04:00:00Z</date>
-		<date>2019-09-02T04:00:00Z</date>
-		<date>2019-11-28T05:00:00Z</date>
-		<date>2019-11-29T05:00:00Z</date>
-		<date>2020-01-01T05:00:00Z</date>
+		<date>2020-12-25T05:00:00Z</date>
+		<date>2020-02-17T05:00:00Z</date>
+		<date>2020-05-25T04:00:00Z</date>
+		<date>2020-07-03T04:00:00Z</date>
+		<date>2020-09-07T04:00:00Z</date>
+		<date>2020-11-26T05:00:00Z</date>
+		<date>2020-11-27T05:00:00Z</date>
+		<date>2021-01-01T05:00:00Z</date>
 	</array>
 </dict>
 </plist>
