@@ -154,16 +154,27 @@ class OrderMobosViewController: DataGridViewController, OrderInventoryErrorDeleg
         return false
     }
     
-    
     override func filterGridColumns<T: NSObject>(_ searchText: String?, classType: T.Type, isIndex: Bool = false) {
-        guard let collectionView = flexGrid.collectionView, let order = order else {
+        guard let collectionView = flexGrid.collectionView else {
             return
         }
-        collectionView.filter = {(item : NSObject?) -> Bool in
-            unowned let row = item as! MoboList
-            return row.getfilterPredicate(order) && self.flexGrid.filterColumns(nil, row: row)
+        collectionView.filter = {[unowned self](item : NSObject?) -> Bool in
+            guard let row = item as? MoboList else {
+                return false
+            }
+            guard !isIndex else {
+                return self.flexGrid.filterIndex(searchText, row: row, moduleType: self.moduleType) && self.flexGrid.filterColumns(nil, row: row) && self.getfilterPredicate(row)
+            }
+            return self.flexGrid.filterColumns(searchText, row: row) && self.getfilterPredicate(row)
             } as IXuniPredicate
         resetGrid()
+    }
+    
+    func getfilterPredicate(_ moboList: MoboList) -> Bool {
+        guard let order = order else {
+            return false
+        }
+        return moboList.getfilterPredicate(order)
     }
     
     func orderTypeFilterRefresh() {

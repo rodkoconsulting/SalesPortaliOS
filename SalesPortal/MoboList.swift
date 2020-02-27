@@ -142,7 +142,7 @@ class MoboList :  OrderList {
         case .Unsaleable:
             return false;
         case .BillHoldShip:
-            return orderType == .BillHoldHold
+            return orderType == .BillHoldHold && quantity > 0
         case .Sample:
             return false;
         }
