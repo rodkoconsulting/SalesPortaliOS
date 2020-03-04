@@ -254,6 +254,7 @@
         let rep: String?
         let region: String?
         let shipTo: String?
+        let shipVia: String?
         
         required init(dict: [String: Any]?) {
             division = dict?["Div"] as? String
@@ -281,6 +282,7 @@
             rep = dict?["Rep"] as? String
             region = dict?["Region"] as? String
             shipTo = dict?["ShipTo"] as? String
+            shipVia  = dict?["ShipVia"] as? String
         }
         
         lazy var getDbDelete: String?  = {
@@ -319,10 +321,11 @@
                 let zip = self.zip,
                 let rep = self.rep,
                 let region = self.region,
-                let shipTo = self.shipTo else {
+                let shipTo = self.shipTo,
+                let shipVia = self.shipVia else {
                     return nil
             }
-            return "('" + division + "', '" + customerNo + "', '" + customerName + "', '" + shipDays + "', '" + priceLevel + "', '" + coopList + "', '" + status + "', '" + buyer1 + "', '" + buyer2 + "', '" + buyer3 + "', '" + buyer1Email + "', '" + buyer2Email + "', '" + buyer3Email + "', '" + buyer1Phone + "', '" + buyer2Phone + "', '" + buyer3Phone + "', '" + affil + "', '" + addr1 + "', '" + addr2 + "', '" + city + "', '" + state + "', '" + zip + "', '" + rep + "', '" + region + "', '" + shipTo + "')"
+            return "('" + division + "', '" + customerNo + "', '" + customerName + "', '" + shipDays + "', '" + priceLevel + "', '" + coopList + "', '" + status + "', '" + buyer1 + "', '" + buyer2 + "', '" + buyer3 + "', '" + buyer1Email + "', '" + buyer2Email + "', '" + buyer3Email + "', '" + buyer1Phone + "', '" + buyer2Phone + "', '" + buyer3Phone + "', '" + affil + "', '" + addr1 + "', '" + addr2 + "', '" + city + "', '" + state + "', '" + zip + "', '" + rep + "', '" + region + "', '" + shipTo + "', '" + shipVia + "')"
             }()
 
     }
@@ -372,6 +375,7 @@
         let rep: String
         let region: String
         let shipTo: String
+        let shipVia: String
         
         
         init(queryResult: FMResultSet?) {
@@ -400,6 +404,7 @@
             rep = queryResult?.string(forColumn: "rep") ?? ""
             region = queryResult?.string(forColumn: "region") ?? ""
             shipTo = queryResult?.string(forColumn: "ship_to") ?? ""
+            shipVia = queryResult?.string(forColumn: "ship_via") ?? ""
         }
         
         lazy var customerNo : String = {

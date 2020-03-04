@@ -21,12 +21,12 @@ class OrderListService: SyncService, SyncServiceType {
         if dB.open() {
             let sqlQuery =
             "SELECT hoi.ORDER_NO, a.CUSTOMER_NAME, a.CUSTOMER_NO, a.AFFIL, hoi.ORDER_DATE, hoi.SHIP_DATE, hoi.ARR_DATE, hoi.PO_ETA, hoi.STATUS, hoi.HOLD, hoi.COOP, " +
-            "hoi.COMMENT, hoi.ITEM_CODE, " +
+            "hoi.COMMENT, hoi.SHIP_TO, hoi.ITEM_CODE, " +
             "i.DESC, i.BRAND, i.VINTAGE, i.UOM, i.SIZE, i.DAMAGED_NOTES, " +
             "hoi.QTY, hoi.PRICE, hoi.TOTAL, " +
             "a.REP, a.REGION " +
             "FROM (" +
-            "SELECT DISTINCT h.DIVISION_NO, h.CUSTOMER_NO, h.ORDER_NO, h.ORDER_DATE, h.SHIP_DATE, h.ARR_DATE, p.PO_ETA, h.STATUS, h.HOLD, h.COOP, h.COMMENT, " +
+            "SELECT DISTINCT h.DIVISION_NO, h.CUSTOMER_NO, h.ORDER_NO, h.ORDER_DATE, h.SHIP_DATE, h.ARR_DATE, p.PO_ETA, h.STATUS, h.HOLD, h.COOP, h.COMMENT, h.SHIP_TO, " +
             "d.ITEM_CODE, d.LINE_NO, d.QTY, d.PRICE, d.TOTAL, d.COMMENT AS LINE_COMMENT " +
             "FROM ORDER_LIST_HEADER h " +
             "INNER JOIN ORDER_LIST_DETAIL d ON h.ORDER_NO = d.ORDER_NO " +

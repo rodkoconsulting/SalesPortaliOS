@@ -81,6 +81,7 @@ extension OrderListFilter {
         let holdCode: String?
         let coopNo: String?
         let comment: String?
+        let shipTo: String?
         
         required init(dict: [String: Any]?) {
             division = dict?["Div"] as? String
@@ -93,6 +94,7 @@ extension OrderListFilter {
             holdCode = dict?["Hold"] as? String
             coopNo = dict?["Coop"] as? String
             comment = dict?["Comment"] as? String
+            shipTo = dict?["ShipTo"] as? String
         }
         
         lazy var getDbDelete: String? = {
@@ -114,10 +116,11 @@ extension OrderListFilter {
                 let orderStatus = self.orderStatus,
                 let holdCode = self.holdCode,
                 let coopNo = self.coopNo,
-                let comment = self.comment else {
+                let comment = self.comment,
+                let shipTo = self.shipTo else {
                     return nil
             }
-            return "('" + orderNo + "', '" + orderDate + "', '" + shipExpireDate + "', '" + arrivalDate + "', '" + division + "', '" + customerNo + "', '" + orderStatus + "', '" + holdCode + "', '" + coopNo + "', '" + comment + "')"
+            return "('" + orderNo + "', '" + orderDate + "', '" + shipExpireDate + "', '" + arrivalDate + "', '" + division + "', '" + customerNo + "', '" + orderStatus + "', '" + holdCode + "', '" + coopNo + "', '" + comment + "', '" + shipTo + "')"
             }()
     }
 
@@ -204,6 +207,7 @@ class OrderList : NSObject {
     let totalGroupLabel: String = "Total:"
     let rep: String
     let region: String
+    let shipTo: String
     
     lazy var territory: String = {
         [unowned self] in
@@ -425,6 +429,7 @@ class OrderList : NSObject {
         total = queryResult?.double(forColumn: "total") ?? 0
         rep = queryResult?.string(forColumn: "rep") ?? ""
         region = queryResult?.string(forColumn: "region") ?? ""
+        shipTo = queryResult?.string(forColumn: "ship_to") ?? ""
     }    
 }
 

@@ -132,6 +132,10 @@ import Foundation
         let scoreVm: String?
         let scoreOther: String?
         let receiptDate: String?
+        let regen: String?
+        let nat: String?
+        let vegan: String?
+        let hve: String?
         
         
         required init(dict: [String: Any]?)
@@ -171,6 +175,10 @@ import Foundation
             scoreVm = dict?["ScoreVM"] as? String
             scoreOther = dict?["ScoreOther"] as? String
             receiptDate = dict?["RcptDate"] as? String
+            regen = dict?["Regen"] as? String
+            nat = dict?["Nat"] as? String
+            vegan = dict?["Vegan"] as? String
+            hve = dict?["HVE"] as? String
         }
         
         lazy var getDbDelete : String? = {
@@ -217,10 +225,14 @@ import Foundation
                     let scoreBh = self.scoreBh,
                     let scoreVm = self.scoreVm,
                     let scoreOther = self.scoreOther,
-                    let receiptDate = self.receiptDate else {
+                    let receiptDate = self.receiptDate,
+                    let regen = self.regen,
+                    let nat = self.nat,
+                    let vegan = self.vegan,
+                    let hve = self.hve else {
                         return nil
                 }
-                return "('" + itemCode + "', '" + description + "', '" + brand + "', '" + masterVendor + "', '" + vintage + "', '" + uom + "', '" + size + "', '" + damagedNotes + "', '" + closure + "', '" + type + "', '" + varietal + "', '" + organic + "', '" + biodynamic + "', '" + focus + "', '" + country + "', '" + region + "', '" + appellation + "', '" + restrictOffSale + "', '" + restrictOffSaleNotes + "', '" + restrictPremise + "', '" + restrictAllocate + "', '" + restrictApproval + "', '" + restrictMax + "', '" + restrictState + "', '" + restrictSample + "', '" + restrictBo + "', '" + restrictMo + "', '" + upc + "', '" + scoreWa + "', '" + scoreWs + "', '" + scoreIwc + "', '" + scoreBh + "', '" + scoreVm + "', '" + scoreOther + "', '" + receiptDate + "')"
+                return "('" + itemCode + "', '" + description + "', '" + brand + "', '" + masterVendor + "', '" + vintage + "', '" + uom + "', '" + size + "', '" + damagedNotes + "', '" + closure + "', '" + type + "', '" + varietal + "', '" + organic + "', '" + biodynamic + "', '" + focus + "', '" + country + "', '" + region + "', '" + appellation + "', '" + restrictOffSale + "', '" + restrictOffSaleNotes + "', '" + restrictPremise + "', '" + restrictAllocate + "', '" + restrictApproval + "', '" + restrictMax + "', '" + restrictState + "', '" + restrictSample + "', '" + restrictBo + "', '" + restrictMo + "', '" + upc + "', '" + scoreWa + "', '" + scoreWs + "', '" + scoreIwc + "', '" + scoreBh + "', '" + scoreVm + "', '" + scoreOther + "', '" + receiptDate + "', '" + regen + "', '" + nat + "', '" + vegan + "', '" + hve + "')"
             }()
 
     }
@@ -341,10 +353,34 @@ class Inventory : NSObject {
     let scoreVmRaw: String
     let scoreOtherRaw: String
     let receiptDateString: String
+    let regenRaw: String
+    let natRaw: String
+    let veganRaw: String
+    let hveRaw: String
     
     lazy var focus : Bool = {
         [unowned self] in
             return self.focusRaw == "Y" ? true : false
+    }()
+    
+    lazy var regen : Bool = {
+        [unowned self] in
+            return self.regenRaw == "Y" ? true : false
+    }()
+    
+    lazy var nat : Bool = {
+        [unowned self] in
+            return self.natRaw == "Y" ? true : false
+    }()
+    
+    lazy var vegan : Bool = {
+        [unowned self] in
+            return self.veganRaw == "Y" ? true : false
+    }()
+    
+    lazy var hve : Bool = {
+        [unowned self] in
+            return self.hveRaw == "Y" ? true : false
     }()
     
     lazy var sizeDescription : String = {
@@ -786,5 +822,9 @@ class Inventory : NSObject {
         scoreBhRaw = queryResult?.string(forColumn: "score_bh") ?? ""
         scoreOtherRaw = queryResult?.string(forColumn: "score_other") ?? ""
         receiptDateString = queryResult?.string(forColumn: "receipt_date") ?? ""
+        regenRaw = queryResult?.string(forColumn: "regen") ?? ""
+        natRaw = queryResult?.string(forColumn: "nat") ?? ""
+        veganRaw = queryResult?.string(forColumn: "vegan") ?? ""
+        hveRaw = queryResult?.string(forColumn: "hve") ?? ""
     }
 }
