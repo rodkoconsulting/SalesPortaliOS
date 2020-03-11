@@ -116,7 +116,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             textCell.valueText.isUserInteractionEnabled = enable;
             textCell.conditionComboBox.dropDownHeight = enable ? conditionHeight : 0
             textCell.operatorComboBox.dropDownHeight = enable ? operatorHeight : 0
-        case .Date:
+        case .Date, .Time:
             guard let dateCell = cell as? DateFiltersTableViewCell else {
                 return
             }
@@ -158,7 +158,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         switch myColumnFilters.filterType {
             case .String, .Number:
                 cell = filtersTableView.dequeueReusableCell(withIdentifier: "FiltersTableCell", for: indexPath)
-            case .Date:
+        case .Date, .Time:
                 cell = filtersTableView.dequeueReusableCell(withIdentifier: "DateFiltersTableCell", for: indexPath)
             case .Bool:
                 cell = filtersTableView.dequeueReusableCell(withIdentifier: "BoolFiltersTableCell", for: indexPath)
@@ -210,7 +210,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 filterCell.operatorComboBox.dropDownHeight = row == 0 ? 0 : operatorHeight
                 filterCell.operatorComboBox.isHidden = row == 0
                 return filterCell
-            case .Date:
+        case .Date, .Time:
                 let dateCell = cell as! DateFiltersTableViewCell
                 initComboBox(dateCell.conditionComboBox)
                 dateCell.conditionComboBox.tag =  conditionTag

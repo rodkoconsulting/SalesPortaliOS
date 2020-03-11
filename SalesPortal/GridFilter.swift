@@ -20,6 +20,7 @@ enum FilterType : String {
     case Number = "Number"
     case Date = "NumberDate"
     case Bool = "StringBool"
+    case Time = "Time"
 }
 
 enum StringCondition : String {
@@ -161,9 +162,9 @@ class ColumnFilter : NSObject {
         }
     
     func getBoolResult(value: String) -> Bool {
-        let boolValue = (value as NSString).boolValue
+        let stringValue = value
         let filterValue = (self.value as NSString).boolValue
-        return filterValue == boolValue
+        return filterValue ? (stringValue == "X")  : (stringValue != "X")
     }
 
     
@@ -173,7 +174,7 @@ class ColumnFilter : NSObject {
                 return getStringResult(value: value)
         case .Number:
                 return getNumberResult(value: value)
-        case .Date:
+        case .Date, .Time:
             return getDateResult(value: value)
         case .Bool:
             return getBoolResult(value: value)
@@ -195,7 +196,7 @@ class ColumnFilters : NSObject {
                     return StringCondition.allValues
                 case .Number:
                     return NumberCondition.allValues
-                case .Date:
+            case .Date, .Time:
                     return DateCondition.allValues
                 case .Bool:
                     return BoolCondition.allValues

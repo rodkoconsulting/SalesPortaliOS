@@ -272,4 +272,5 @@ struct Constants {
     static let sampleOrderSegue = "showSampleOrderTabBarController"
     static let accountOrderSegue = "showAccountOrderTabBarController"
     static let masterAccountPrefix = "ZZ"
+    static let boolString = "X"
 }

@@ -104,7 +104,7 @@ extension FlexGrid {
         guard let inventory = flexRow.dataItem as? Inventory else {
                 return false
         }
-        return inventory.focus
+        return inventory.focus == Constants.boolString
     }
     
     func getAccountColor(_ row: Int32) -> UIColor? {

@@ -358,29 +358,29 @@ class Inventory : NSObject {
     let veganRaw: String
     let hveRaw: String
     
-    lazy var focus : Bool = {
+    lazy var focus : String = {
         [unowned self] in
-            return self.focusRaw == "Y" ? true : false
+        return self.focusRaw == "Y" ? Constants.boolString : ""
     }()
     
-    lazy var regen : Bool = {
+    lazy var regen : String = {
         [unowned self] in
-            return self.regenRaw == "Y" ? true : false
+            return self.regenRaw == "Y" ? Constants.boolString : ""
     }()
     
-    lazy var nat : Bool = {
+    lazy var nat : String = {
         [unowned self] in
-            return self.natRaw == "Y" ? true : false
+            return self.natRaw == "Y" ? Constants.boolString : ""
     }()
     
-    lazy var vegan : Bool = {
+    lazy var vegan : String = {
         [unowned self] in
-            return self.veganRaw == "Y" ? true : false
+            return self.veganRaw == "Y" ? Constants.boolString : ""
     }()
     
-    lazy var hve : Bool = {
+    lazy var hve : String = {
         [unowned self] in
-            return self.hveRaw == "Y" ? true : false
+            return self.hveRaw == "Y" ? Constants.boolString : ""
     }()
     
     lazy var sizeDescription : String = {

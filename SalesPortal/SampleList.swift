@@ -283,9 +283,14 @@ class SampleList : NSObject {
     
     lazy var isFocus : Bool = {
         [unowned self] in
-        return self.isFocusString == "Y"
+        return self.focus == Constants.boolString
         }()
 
+    lazy var focus : String = {
+        [unowned self] in
+        return self.isFocusString == "Y" ? Constants.boolString : ""
+    }()
+    
     lazy var isMtd : Bool = {
         [unowned self] in
         return self.shipDate?.getYearInt() == Date().getYearInt() && self.shipDate?.getMonthInt() == Date().getMonthInt()

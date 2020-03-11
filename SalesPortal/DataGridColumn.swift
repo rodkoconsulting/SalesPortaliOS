@@ -46,6 +46,9 @@ class DataGridColumn: GridColumn {
         if let alignment = columnDict[kAlignment] as? String, alignment == "right" {
                 gridColumn.dataType = XuniDataType.number
         }
+        if filterType == FilterType.Bool {
+            gridColumn.horizontalAlignment = NSTextAlignment.center
+        }
         if let format = columnDict[kFormat] as? String {
             switch format {
                 case "Time":
