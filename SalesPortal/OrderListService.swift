@@ -33,7 +33,7 @@ class OrderListService: SyncService, SyncServiceType {
             "LEFT OUTER JOIN INV_PO p ON d.ITEM_CODE = p.ITEM_CODE " +
             "WHERE (p.PO_ETA ISNULL or p.PO_ETA = (SELECT PO_ETA FROM INV_PO AS p2 WHERE p2.ITEM_CODE = p.ITEM_CODE ORDER BY PO_ETA LIMIT 1)) " +
             ") hoi " +
-            "INNER JOIN " +
+            "LEFT OUTER JOIN " +
             "(" +
             "SELECT DIVISION_NO, CUSTOMER_NO, REGION, REP, CUSTOMER_NAME, AFFIL FROM ACCOUNTS_LIST " +
             "UNION ALL " +
