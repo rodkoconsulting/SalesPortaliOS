@@ -20,7 +20,7 @@ class OrderListService: SyncService, SyncServiceType {
         var previousRep : String = ""
         if dB.open() {
             let sqlQuery =
-            "SELECT hoi.ORDER_NO, a.CUSTOMER_NAME, a.CUSTOMER_NO, a.AFFIL, hoi.ORDER_DATE, hoi.SHIP_DATE, hoi.ARR_DATE, hoi.PO_ETA, hoi.STATUS, hoi.HOLD, hoi.COOP, " +
+            "SELECT hoi.ORDER_NO, a.CUSTOMER_NAME, hoi.CUSTOMER_NO, a.AFFIL, hoi.ORDER_DATE, hoi.SHIP_DATE, hoi.ARR_DATE, hoi.PO_ETA, hoi.STATUS, hoi.HOLD, hoi.COOP, " +
             "hoi.COMMENT, hoi.SHIP_TO, hoi.ITEM_CODE, " +
             "i.DESC, i.BRAND, i.VINTAGE, i.UOM, i.SIZE, i.DAMAGED_NOTES, " +
             "hoi.QTY, hoi.PRICE, hoi.TOTAL, " +

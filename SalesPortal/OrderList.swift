@@ -403,7 +403,8 @@ class OrderList : NSObject {
     init(queryResult: FMResultSet?) {
         orderNo = queryResult?.string(forColumn: "order_no") ?? ""
         customerNo = queryResult?.string(forColumn: "customer_no") ?? ""
-        customerName = queryResult?.string(forColumn: "customer_name") ?? ""
+        let customerNameRaw = queryResult?.string(forColumn: "customer_name") ??  ""
+        customerName = (customerNameRaw == "") ? customerNo : customerNameRaw
         affiliations = queryResult?.string(forColumn: "affil") ?? ""
         let orderDateString = queryResult?.string(forColumn: "order_date") ?? ""
         orderDate = orderDateString.getShipDate()
