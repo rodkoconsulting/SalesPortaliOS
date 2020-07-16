@@ -1,0 +1,6 @@
+framework module XuniInputKit {
+  umbrella header "XuniInputKit.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module XuniGaugeKit {
+  umbrella header "XuniGaugeKit.h"
+
+  export *
+  module * { export * }
+}

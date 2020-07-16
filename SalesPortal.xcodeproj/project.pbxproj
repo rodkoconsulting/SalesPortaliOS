@@ -636,7 +636,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh \"$SRCROOT/SalesPortal/upload-dsym.sh\" ab7896c2d211ac2502176c7d04e433ba854b052c";
+			shellScript = "sh \"$SRCROOT/SalesPortal/upload-dsym.sh\" ab7896c2d211ac2502176c7d04e433ba854b052c\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -891,7 +891,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETSA5LDZGS;
 				ENABLE_BITCODE = NO;
@@ -929,7 +929,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETSA5LDZGS;
 				ENABLE_BITCODE = NO;

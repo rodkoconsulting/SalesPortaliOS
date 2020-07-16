@@ -1,0 +1,6 @@
+framework module XuniCoreDynamicKit {
+  umbrella header "XuniCoreDynamicKit.h"
+
+  export *
+  module * { export * }
+}

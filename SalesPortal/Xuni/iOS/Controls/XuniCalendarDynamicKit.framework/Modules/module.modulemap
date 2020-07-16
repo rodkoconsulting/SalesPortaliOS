@@ -1,0 +1,6 @@
+framework module XuniCalendarDynamicKit {
+  umbrella header "XuniCalendarDynamicKit.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module XuniFlexGridKit {
+  umbrella header "XuniFlexGridKit.h"
+
+  export *
+  module * { export * }
+}

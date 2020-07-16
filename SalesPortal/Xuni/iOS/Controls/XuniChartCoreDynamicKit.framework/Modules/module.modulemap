@@ -1,0 +1,6 @@
+framework module XuniChartCoreDynamicKit {
+  umbrella header "XuniChartCoreDynamicKit.h"
+
+  export *
+  module * { export * }
+}

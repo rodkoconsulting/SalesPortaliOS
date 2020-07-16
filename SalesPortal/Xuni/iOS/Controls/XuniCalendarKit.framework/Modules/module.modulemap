@@ -1,0 +1,6 @@
+framework module XuniCalendarKit {
+  umbrella header "XuniCalendarKit.h"
+
+  export *
+  module * { export * }
+}

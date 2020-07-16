@@ -1,0 +1,6 @@
+framework module XuniCoreKit {
+  umbrella header "XuniCoreKit.h"
+
+  export *
+  module * { export * }
+}

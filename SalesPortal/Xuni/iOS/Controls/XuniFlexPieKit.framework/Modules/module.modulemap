@@ -1,0 +1,6 @@
+framework module XuniFlexPieKit {
+  umbrella header "XuniFlexPieKit.h"
+
+  export *
+  module * { export * }
+}
