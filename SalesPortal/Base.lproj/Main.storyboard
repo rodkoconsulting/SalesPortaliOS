@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MJS-tV-g0k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MJS-tV-g0k">
     <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,11 +16,12 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Idb-kk-5q9">
-                                <rect key="frame" x="231" y="441" width="250" height="30"/>
+                                <rect key="frame" x="227" y="435.5" width="250" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="roa-6q-iFD"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="97" id="tFb-lR-hW0"/>
@@ -35,7 +36,8 @@
                                 </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5KY-jI-a1N">
-                                <rect key="frame" x="231" y="403" width="250" height="30"/>
+                                <rect key="frame" x="227" y="397.5" width="250" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="CNK-g3-My3"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="bUq-5d-c2N"/>
@@ -44,11 +46,11 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="eaf-su-hnY">
-                                <rect key="frame" x="337.5" y="40" width="37" height="37"/>
+                                <rect key="frame" x="333.5" y="40" width="37" height="37"/>
                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EP1-6M-STh">
-                                <rect key="frame" x="330.5" y="487" width="51" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EP1-6M-STh">
+                                <rect key="frame" x="326.5" y="481.5" width="51" height="33"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <state key="normal" title="Log In">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -169,7 +171,7 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zeU-9X-rx6">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zeU-9X-rx6">
                                 <rect key="frame" x="966" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
@@ -214,7 +216,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="GHR-RF-eqs"/>
                                     <barButtonItem style="plain" id="V2Y-mj-G0M">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="bar" selectedSegmentIndex="1" id="72h-tm-hEI">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="bar" selectedSegmentIndex="1" id="72h-tm-hEI">
                                             <rect key="frame" x="916" y="9" width="88" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
@@ -333,11 +335,11 @@
                         <viewControllerLayoutGuide type="bottom" id="QMC-0x-OxO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dPo-Ig-42h">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBh-nw-7ex">
-                                <rect key="frame" x="0.0" y="8" width="712" height="56"/>
+                                <rect key="frame" x="0.0" y="8" width="704" height="56"/>
                                 <items>
                                     <navigationItem title="Filter Settings" id="zO2-yx-Ets">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="aeS-wV-kh6">
@@ -354,30 +356,30 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iCv-I7-4gR">
-                                <rect key="frame" x="20" y="65" width="672" height="922"/>
+                                <rect key="frame" x="20" y="65" width="664" height="910.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FiltersTableCell" id="gKA-Id-WGC" customClass="FiltersTableViewCell" customModule="SalesPortal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="672" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="664" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gKA-Id-WGC" id="SLl-A8-uea">
-                                            <rect key="frame" x="0.0" y="0.0" width="672" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="664" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter filter criteria" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Ry1-ou-aZC">
-                                                    <rect key="frame" x="240" y="5" width="417" height="34"/>
+                                                    <rect key="frame" x="241" y="5" width="407" height="34"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNl-mM-nhL" customClass="ComboBox" customModule="SalesPortal" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="5" width="70" height="34"/>
+                                                    <rect key="frame" x="11" y="5" width="70" height="34"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="JiI-VU-5ey"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ey-Mk-HHv" customClass="ComboBox" customModule="SalesPortal" customModuleProvider="target">
-                                                    <rect key="frame" x="85" y="5" width="150" height="34"/>
+                                                    <rect key="frame" x="86" y="5" width="150" height="34"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="150" id="vkI-1g-dgv"/>
@@ -403,14 +405,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DateFiltersTableCell" id="Xlv-r6-FBs" customClass="DateFiltersTableViewCell" customModule="SalesPortal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="672" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="664" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xlv-r6-FBs" id="ARe-cp-c1N">
-                                            <rect key="frame" x="0.0" y="0.0" width="672" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="664" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAi-vl-pw3" customClass="ComboBox" customModule="SalesPortal" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="7" width="45" height="30"/>
+                                                    <rect key="frame" x="11" y="7" width="45" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="dYD-lS-AH4"/>
@@ -418,15 +420,15 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECP-Tp-INk" customClass="ComboBox" customModule="SalesPortal" customModuleProvider="target">
-                                                    <rect key="frame" x="60" y="7" width="125" height="30"/>
+                                                    <rect key="frame" x="61" y="7" width="125" height="30"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Bvv-Dk-bVy"/>
                                                         <constraint firstAttribute="width" constant="125" id="SZv-3p-UeW"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0f-xE-9Eo">
-                                                    <rect key="frame" x="190" y="7" width="474" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0f-xE-9Eo">
+                                                    <rect key="frame" x="191" y="7" width="465" height="30"/>
                                                     <state key="normal" title="Date"/>
                                                     <connections>
                                                         <segue destination="ODM-a0-ZFh" kind="presentation" identifier="showFilterDateViewController" id="0QR-LZ-WX4"/>
@@ -450,10 +452,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BoolFiltersTableCell" id="nCP-7c-jp2" customClass="BoolFiltersTableViewCell" customModule="SalesPortal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116" width="672" height="44"/>
+                                        <rect key="frame" x="0.0" y="116" width="664" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nCP-7c-jp2" id="BTe-pA-IB8">
-                                            <rect key="frame" x="0.0" y="0.0" width="672" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="664" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBH-1e-3Jd" customClass="ComboBox" customModule="SalesPortal" customModuleProvider="target">
@@ -548,40 +550,40 @@
                         <viewControllerLayoutGuide type="bottom" id="S7Q-1v-m3J"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DvH-X6-T3T">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="21L-RJ-Bgd">
-                                <rect key="frame" x="20" y="65" width="672" height="892"/>
+                                <rect key="frame" x="20" y="65" width="664" height="880.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ColumnsTableCell" id="9ll-24-Xgx" customClass="ColumnsTableViewCell" customModule="SalesPortal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="672" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="664" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ll-24-Xgx" id="MGL-aJ-8H8">
-                                            <rect key="frame" x="0.0" y="0.0" width="672" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="664" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWQ-Kj-Mvx">
-                                                    <rect key="frame" x="40" y="12.5" width="40" height="19"/>
+                                                    <rect key="frame" x="41" y="12.5" width="40" height="19"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hje-dV-qtR">
-                                                    <rect key="frame" x="597" y="13.5" width="35" height="17"/>
+                                                    <rect key="frame" x="588" y="13.5" width="35" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="971-HL-Ie4">
-                                                    <rect key="frame" x="538" y="9" width="51" height="26"/>
+                                                    <rect key="frame" x="529" y="9" width="51" height="26"/>
                                                     <connections>
                                                         <action selector="switchChanged:" destination="9ll-24-Xgx" eventType="valueChanged" id="FyI-Mb-wLE"/>
                                                     </connections>
                                                 </switch>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter_indicator" translatesAutoresizingMaskIntoConstraints="NO" id="0e4-vk-sTd">
-                                                    <rect key="frame" x="503" y="9.5" width="25" height="25"/>
+                                                    <rect key="frame" x="494" y="9.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="3EW-OA-NYp"/>
                                                         <constraint firstAttribute="height" constant="25" id="6pZ-JL-QY1"/>
@@ -652,7 +654,7 @@
                                 </connections>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4HL-NS-sWP">
-                                <rect key="frame" x="0.0" y="8" width="712" height="56"/>
+                                <rect key="frame" x="0.0" y="8" width="704" height="56"/>
                                 <items>
                                     <navigationItem title="Column Settings" id="dtH-zo-Gw3">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="eZc-1O-If8">
@@ -664,7 +666,7 @@
                                 </items>
                             </navigationBar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdE-H1-1Xa">
-                                <rect key="frame" x="0.0" y="957" width="712" height="50"/>
+                                <rect key="frame" x="0.0" y="945.5" width="704" height="50"/>
                                 <items>
                                     <barButtonItem title="Default View" id="2kb-cV-Vj5">
                                         <connections>
@@ -723,11 +725,11 @@
                         <viewControllerLayoutGuide type="bottom" id="MKg-ha-AkE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SzZ-fl-ofI">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2B6-ZV-ZFP">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="704" height="56"/>
                                 <items>
                                     <navigationItem title="Inventory Data Settings" id="OT5-Sj-Lag">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="Fv0-j7-NEb">
@@ -739,18 +741,18 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uNW-sT-BZH">
-                                <rect key="frame" x="20" y="57" width="672" height="930"/>
+                                <rect key="frame" x="20" y="57" width="664" height="918.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsTableCell" id="vEG-MS-TgA" customClass="InventorySettingsTableViewCell" customModule="SalesPortal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="672" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="664" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vEG-MS-TgA" id="rJh-6L-RFB">
-                                            <rect key="frame" x="0.0" y="0.0" width="672" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="664" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dataLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbC-wx-oFt">
-                                                    <rect key="frame" x="15" y="12.5" width="634" height="19"/>
+                                                    <rect key="frame" x="16" y="12.5" width="624" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="f3E-9e-Ui2"/>
                                                     </constraints>
@@ -764,7 +766,7 @@
                                                     </variation>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0iy-Ev-T4q" customClass="ComboBox" customModule="SalesPortal" customModuleProvider="target">
-                                                    <rect key="frame" x="420" y="10" width="240" height="24"/>
+                                                    <rect key="frame" x="411" y="10" width="240" height="24"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="240" id="2qV-nx-B6t"/>
@@ -830,62 +832,62 @@
                         <viewControllerLayoutGuide type="bottom" id="HGi-LG-Cu8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dda-GQ-jib">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gr2-vL-jcw">
-                                <rect key="frame" x="0.0" y="56" width="712" height="951"/>
+                                <rect key="frame" x="0.0" y="56" width="704" height="939.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30Q-j1-Jhr">
-                                        <rect key="frame" x="0.0" y="0.0" width="712" height="500"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="704" height="500"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2H-Wr-mhK" userLabel="Address Label">
-                                                <rect key="frame" x="8" y="20" width="696" height="21"/>
+                                                <rect key="frame" x="8" y="20" width="688" height="21"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qTU-TP-sUM" userLabel="Address Text View">
-                                                <rect key="frame" x="8" y="51" width="696" height="37"/>
+                                                <rect key="frame" x="8" y="51" width="688" height="37"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" address="YES"/>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wine Buyer 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cys-Cp-EW7" userLabel="Wine Buyer 1 Label">
-                                                <rect key="frame" x="8" y="108" width="696" height="21"/>
+                                                <rect key="frame" x="8" y="108" width="688" height="21"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8Q7-Ek-Mn5" userLabel="Wine Buyer 1 Text View">
-                                                <rect key="frame" x="8" y="139" width="696" height="37"/>
+                                                <rect key="frame" x="8" y="139" width="688" height="37"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" calendarEvent="YES"/>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wine Buyer 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzb-7S-sWO" userLabel="Wine Buyer 2 Label">
-                                                <rect key="frame" x="8" y="196" width="696" height="21"/>
+                                                <rect key="frame" x="8" y="196" width="688" height="21"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Yjo-Qn-Xah" userLabel="Wine Buyer 2 Text View">
-                                                <rect key="frame" x="8" y="227" width="696" height="37"/>
+                                                <rect key="frame" x="8" y="227" width="688" height="37"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wine Buyer 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uz-Mr-pg6" userLabel="Wine Buyer 3 Label">
-                                                <rect key="frame" x="8" y="284" width="696" height="21"/>
+                                                <rect key="frame" x="8" y="284" width="688" height="21"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="w5N-qy-ueN" userLabel="Wine Buyer 3 Text View">
-                                                <rect key="frame" x="8" y="315" width="696" height="37"/>
+                                                <rect key="frame" x="8" y="315" width="688" height="37"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -938,7 +940,7 @@
                                 </constraints>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XAK-If-ABd">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="704" height="56"/>
                                 <items>
                                     <navigationItem title="Account" id="wGQ-pK-2QX">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="H7d-ki-uFf">
@@ -996,7 +998,7 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJ8-pV-5Tt">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJ8-pV-5Tt">
                                 <rect key="frame" x="966" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
@@ -1047,7 +1049,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Hfd-AW-KHf"/>
                                     <barButtonItem style="plain" id="03o-BP-DQg">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="qXB-H3-z54">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="qXB-H3-z54">
                                             <rect key="frame" x="913" y="9" width="91" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
@@ -1134,16 +1136,16 @@
                         <viewControllerLayoutGuide type="bottom" id="5PH-nw-eVb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Q44-ck-Uor">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkE-0Q-l6o">
-                                <rect key="frame" x="20" y="5" width="672" height="21"/>
+                                <rect key="frame" x="20" y="5" width="664" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okH-n5-Njy">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="okH-n5-Njy">
                                 <rect key="frame" x="12" y="36" width="66" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Ship Date"/>
@@ -1152,7 +1154,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mb2-kr-fkZ" customClass="ComboBox" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="286" y="36" width="140" height="30"/>
+                                <rect key="frame" x="282" y="36" width="140" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="140" id="Ash-Nt-DUt"/>
                                     <constraint firstAttribute="height" constant="100" id="dLb-0b-66s"/>
@@ -1164,8 +1166,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwW-UZ-N3U">
-                                <rect key="frame" x="652" y="36" width="40" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwW-UZ-N3U">
+                                <rect key="frame" x="644" y="36" width="40" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Notes"/>
                                 <connections>
@@ -1173,7 +1175,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="7kB-vP-dR6" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="74" width="712" height="839"/>
+                                <rect key="frame" x="0.0" y="74" width="704" height="827.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7kB-vP-dR6" secondAttribute="height" multiplier="75:58" id="GNJ-i1-PSZ"/>
@@ -1185,7 +1187,7 @@
                                 </variation>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6z-M4-2Qg">
-                                <rect key="frame" x="0.0" y="907" width="712" height="50"/>
+                                <rect key="frame" x="0.0" y="895.5" width="704" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="3WA-l5-yhd">
                                         <connections>
@@ -1206,8 +1208,8 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="SYF-Ne-Y17"/>
                                     <barButtonItem style="plain" id="dmU-PJ-72l">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="qv2-Ub-TRb">
-                                            <rect key="frame" x="601" y="9" width="91" height="32"/>
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="qv2-Ub-TRb">
+                                            <rect key="frame" x="593" y="9" width="91" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -1330,17 +1332,17 @@
                         <viewControllerLayoutGuide type="bottom" id="sYt-X3-yEr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9xX-dg-I5b">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Ship Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLy-h8-fuf">
-                                <rect key="frame" x="300" y="66" width="112" height="18"/>
+                                <rect key="frame" x="296" y="66" width="112" height="18"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7p-2T-5g5" customClass="CalendarUI" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="94" width="672" height="893"/>
+                                <rect key="frame" x="20" y="94" width="664" height="881.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="S7p-2T-5g5" secondAttribute="height" multiplier="140:121" id="FBM-kK-zYl"/>
@@ -1352,7 +1354,7 @@
                                 </variation>
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8V-sm-iDI">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="704" height="56"/>
                                 <items>
                                     <navigationItem title="Account" id="JI5-w0-y8n">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="JgS-6w-aGk">
@@ -1434,17 +1436,17 @@
                         <viewControllerLayoutGuide type="bottom" id="uiW-kg-oy5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9HH-Ha-ZMT">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkU-f8-sjO">
-                                <rect key="frame" x="12" y="50" width="692" height="0.0"/>
+                                <rect key="frame" x="12" y="50" width="684" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fN-ay-Vun">
-                                <rect key="frame" x="12" y="46" width="672" height="0.0"/>
+                                <rect key="frame" x="12" y="46" width="664" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1456,25 +1458,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="2Za-HT-2Ge" customClass="MPGTextField_Swift" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="8" width="632" height="30"/>
+                                <rect key="frame" x="20" y="8" width="624" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="73m-f9-Pns"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9al-GD-QaR">
-                                <rect key="frame" x="654" y="8" width="36" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9al-GD-QaR">
+                                <rect key="frame" x="646" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clearFilter" destination="BOm-8X-6CS" eventType="touchUpInside" id="XdP-ML-336"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="oYy-dX-q0d" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="58" width="712" height="855"/>
+                                <rect key="frame" x="0.0" y="58" width="704" height="843.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBE-F5-gNd">
-                                <rect key="frame" x="0.0" y="907" width="712" height="50"/>
+                                <rect key="frame" x="0.0" y="895.5" width="704" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="bsP-tO-wOm">
                                         <connections>
@@ -1495,8 +1497,8 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Tpx-Xm-YBj"/>
                                     <barButtonItem style="plain" id="Lot-AP-uK3">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="zOT-BI-0vD">
-                                            <rect key="frame" x="601" y="9" width="91" height="32"/>
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="zOT-BI-0vD">
+                                            <rect key="frame" x="593" y="9" width="91" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -1614,23 +1616,23 @@
                         <viewControllerLayoutGuide type="bottom" id="xv6-pe-RfE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jWL-kk-Lcw">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vQu-Op-AaB">
-                                <rect key="frame" x="50" y="66" width="612" height="188.5"/>
+                                <rect key="frame" x="50" y="66" width="604" height="188.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="g4w-MX-0XA">
-                                        <rect key="frame" x="0.0" y="0.0" width="612" height="73"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="604" height="73"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Order Notes" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fUR-Oj-hek">
-                                                <rect key="frame" x="0.0" y="0.0" width="612" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="604" height="34"/>
                                                 <color key="textColor" red="0.06821173036" green="0.18095899460000001" blue="0.3232520518" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PO #" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L9H-ft-beS">
-                                                <rect key="frame" x="0.0" y="39" width="612" height="34"/>
+                                                <rect key="frame" x="0.0" y="39" width="604" height="34"/>
                                                 <color key="textColor" red="0.06821173036" green="0.18095899460000001" blue="0.3232520518" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
@@ -1638,16 +1640,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="VlS-rE-RfC">
-                                        <rect key="frame" x="0.0" y="88" width="612" height="30"/>
+                                        <rect key="frame" x="0.0" y="88" width="604" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COOP #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAw-Bh-LLE">
-                                                <rect key="frame" x="0.0" y="0.0" width="296" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="292" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlZ-Sf-1Bm" customClass="ComboBox" customModule="SalesPortal" customModuleProvider="target">
-                                                <rect key="frame" x="316" y="0.0" width="296" height="30"/>
+                                                <rect key="frame" x="312" y="0.0" width="292" height="30"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="ynm-Nc-N16"/>
@@ -1659,16 +1661,16 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cp9-q0-6e7">
-                                        <rect key="frame" x="0.0" y="133" width="612" height="55.5"/>
+                                        <rect key="frame" x="0.0" y="133" width="604" height="55.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ship To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emY-Jd-FRP">
-                                                <rect key="frame" x="0.0" y="0.0" width="612" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="604" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Gl-Wn-g15" customClass="ComboBox" customModule="SalesPortal" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="25.5" width="612" height="30"/>
+                                                <rect key="frame" x="0.0" y="25.5" width="604" height="30"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="slh-oT-pal"/>
@@ -1679,7 +1681,7 @@
                                 </subviews>
                             </stackView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7q-uo-0Zs">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="704" height="56"/>
                                 <items>
                                     <navigationItem title="Account" id="PPb-Qy-AtA">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="un3-dD-CBl">
@@ -1732,17 +1734,17 @@
                         <viewControllerLayoutGuide type="bottom" id="HKX-jB-ReD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="f2K-97-dw6">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qaa-vF-boe">
-                                <rect key="frame" x="12" y="50" width="692" height="0.0"/>
+                                <rect key="frame" x="12" y="50" width="684" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vn3-1L-l4i">
-                                <rect key="frame" x="12" y="46" width="672" height="0.0"/>
+                                <rect key="frame" x="12" y="46" width="664" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1754,25 +1756,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="kTt-O9-3Gq" customClass="MPGTextField_Swift" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="8" width="632" height="30"/>
+                                <rect key="frame" x="20" y="8" width="624" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ERX-pa-gMX"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQy-2u-HNm">
-                                <rect key="frame" x="654" y="8" width="36" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQy-2u-HNm">
+                                <rect key="frame" x="646" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clearFilter" destination="5T6-BQ-E7z" eventType="touchUpInside" id="MYn-ZY-6M7"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Syr-bb-GCQ" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="58" width="712" height="855"/>
+                                <rect key="frame" x="0.0" y="58" width="704" height="843.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BdX-4s-mOl">
-                                <rect key="frame" x="0.0" y="907" width="712" height="50"/>
+                                <rect key="frame" x="0.0" y="895.5" width="704" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="bV0-E3-0Ia">
                                         <connections>
@@ -1793,8 +1795,8 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="CEk-Er-yBa"/>
                                     <barButtonItem style="plain" id="IbP-fb-DYP">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="Z8p-ib-g5T">
-                                            <rect key="frame" x="601" y="9" width="91" height="32"/>
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="Z8p-ib-g5T">
+                                            <rect key="frame" x="593" y="9" width="91" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -1913,35 +1915,35 @@
                         <viewControllerLayoutGuide type="bottom" id="MhD-lE-diI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eZq-yU-xSx">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xix-XJ-flT">
-                                <rect key="frame" x="12" y="46" width="672" height="10"/>
+                                <rect key="frame" x="12" y="46" width="664" height="10"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="DJq-yI-hVE" customClass="MPGTextField_Swift" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="8" width="632" height="30"/>
+                                <rect key="frame" x="20" y="8" width="624" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="YE3-D3-7WT"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dM-wt-L4T">
-                                <rect key="frame" x="654" y="8" width="36" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dM-wt-L4T">
+                                <rect key="frame" x="646" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clearFilter" destination="R59-hB-s8F" eventType="touchUpInside" id="h8s-7k-rWj"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="oOE-Rh-sMh" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="64" width="712" height="849"/>
+                                <rect key="frame" x="0.0" y="64" width="704" height="837.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yhk-Tb-0Mv">
-                                <rect key="frame" x="0.0" y="907" width="712" height="50"/>
+                                <rect key="frame" x="0.0" y="895.5" width="704" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="PMz-fm-7bH">
                                         <connections>
@@ -1962,8 +1964,8 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Fa4-Em-OdI"/>
                                     <barButtonItem style="plain" id="xfH-ni-p12">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="ys6-yu-lsc">
-                                            <rect key="frame" x="601" y="9" width="91" height="32"/>
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="ys6-yu-lsc">
+                                            <rect key="frame" x="593" y="9" width="91" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2065,7 +2067,7 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6q-iJ-Rj9">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6q-iJ-Rj9">
                                 <rect key="frame" x="966" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
@@ -2101,7 +2103,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="gAZ-Jv-Pgl"/>
                                     <barButtonItem style="plain" id="RNh-kS-9uS">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="QPd-mU-21F">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="QPd-mU-21F">
                                             <rect key="frame" x="913" y="9" width="91" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
@@ -2188,17 +2190,17 @@
                         <viewControllerLayoutGuide type="bottom" id="eZe-fa-6jI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1Mn-PE-fVo">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Filter Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVC-iA-kOg">
-                                <rect key="frame" x="298.5" y="66" width="115" height="18"/>
+                                <rect key="frame" x="294.5" y="66" width="115" height="18"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Qx-V8-v1O" customClass="CalendarUI" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="94" width="672" height="893"/>
+                                <rect key="frame" x="20" y="94" width="664" height="881.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6Qx-V8-v1O" secondAttribute="height" multiplier="140:121" id="YNP-Uw-xRP"/>
@@ -2210,7 +2212,7 @@
                                 </variation>
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fnh-He-fRf">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="704" height="56"/>
                                 <items>
                                     <navigationItem title="Filter Date" id="Ok9-c5-4gv">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="PUy-Pi-5NH">
@@ -2278,7 +2280,7 @@
                                 <rect key="frame" x="160" y="8" width="804" height="30"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUj-ts-I3l">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUj-ts-I3l">
                                 <rect key="frame" x="966" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
@@ -2323,7 +2325,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Z3G-C7-kPf"/>
                                     <barButtonItem style="plain" id="W2N-Vs-Zf1">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="3Pv-6f-aAc">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="3Pv-6f-aAc">
                                             <rect key="frame" x="913" y="9" width="91" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
@@ -2440,7 +2442,7 @@
                                 <rect key="frame" x="160" y="8" width="804" height="30"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z68-sm-8Vd">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z68-sm-8Vd">
                                 <rect key="frame" x="966" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
@@ -2485,7 +2487,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="s0Q-xK-Kkn"/>
                                     <barButtonItem style="plain" id="t3Y-4h-X0s">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="Oi2-He-0zn">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="Oi2-He-0zn">
                                             <rect key="frame" x="913" y="9" width="91" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
@@ -2616,16 +2618,16 @@
                         <viewControllerLayoutGuide type="bottom" id="vYU-10-Dge"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CoS-ih-pl2">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sq1-5X-f8u">
-                                <rect key="frame" x="20" y="5" width="672" height="21"/>
+                                <rect key="frame" x="20" y="5" width="664" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJY-h3-ngb">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJY-h3-ngb">
                                 <rect key="frame" x="12" y="36" width="66" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Ship Date"/>
@@ -2633,8 +2635,8 @@
                                     <segue destination="RNy-vE-4aD" kind="presentation" identifier="showShipDateViewController" id="VE3-RF-sBK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnJ-mJ-hjR">
-                                <rect key="frame" x="652" y="36" width="40" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnJ-mJ-hjR">
+                                <rect key="frame" x="644" y="36" width="40" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Notes"/>
                                 <connections>
@@ -2642,7 +2644,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="QwW-B2-Djf" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="106" width="712" height="807"/>
+                                <rect key="frame" x="0.0" y="106" width="704" height="795.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QwW-B2-Djf" secondAttribute="height" multiplier="75:58" id="ZEG-l8-Mtf"/>
@@ -2654,7 +2656,7 @@
                                 </variation>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="htl-St-yBo">
-                                <rect key="frame" x="0.0" y="907" width="712" height="50"/>
+                                <rect key="frame" x="0.0" y="895.5" width="704" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="Mw9-5f-3NR">
                                         <connections>
@@ -2675,8 +2677,8 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="5FC-Mp-Qm2"/>
                                     <barButtonItem style="plain" id="9uO-XJ-65M">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="QeC-RO-X9l">
-                                            <rect key="frame" x="601" y="9" width="91" height="32"/>
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="QeC-RO-X9l">
+                                            <rect key="frame" x="593" y="9" width="91" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -2691,7 +2693,7 @@
                                 </items>
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F9L-Eg-mdx" customClass="ComboBox" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="8" y="68" width="696" height="30"/>
+                                <rect key="frame" x="8" y="68" width="688" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="03p-Vr-MFQ"/>
                                     <constraint firstAttribute="height" constant="100" id="AX1-Mi-a5J"/>
@@ -2834,11 +2836,11 @@
                         <viewControllerLayoutGuide type="bottom" id="qzw-xx-rqL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wD8-hC-9mp">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plb-SU-v3e">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="704" height="56"/>
                                 <items>
                                     <navigationItem title="Account" id="qBI-jB-tFF">
                                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="PQs-Rd-ZZk">
@@ -2850,7 +2852,7 @@
                                 </items>
                             </navigationBar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Order Notes" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GWq-Kf-Y61">
-                                <rect key="frame" x="50" y="66" width="612" height="34"/>
+                                <rect key="frame" x="50" y="66" width="604" height="34"/>
                                 <color key="textColor" red="0.06821173036" green="0.18095899460000001" blue="0.3232520518" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
@@ -2886,17 +2888,17 @@
                         <viewControllerLayoutGuide type="bottom" id="eQS-Wc-QOo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Zck-yS-r91">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTZ-OB-Jfc">
-                                <rect key="frame" x="12" y="50" width="692" height="0.0"/>
+                                <rect key="frame" x="12" y="50" width="684" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDk-Cn-5Nb">
-                                <rect key="frame" x="12" y="46" width="672" height="0.0"/>
+                                <rect key="frame" x="12" y="46" width="664" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2908,25 +2910,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="ZZX-MS-OMQ" customClass="MPGTextField_Swift" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="8" width="632" height="30"/>
+                                <rect key="frame" x="20" y="8" width="624" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3vv-Zg-817"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJp-fC-djM">
-                                <rect key="frame" x="654" y="8" width="36" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJp-fC-djM">
+                                <rect key="frame" x="646" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clearFilter" destination="l9F-vy-MHT" eventType="touchUpInside" id="Gf0-xZ-zna"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="WHe-D1-ekd" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="58" width="712" height="855"/>
+                                <rect key="frame" x="0.0" y="58" width="704" height="843.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SVL-7y-J9q">
-                                <rect key="frame" x="0.0" y="907" width="712" height="50"/>
+                                <rect key="frame" x="0.0" y="895.5" width="704" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="r63-mQ-z4O">
                                         <connections>
@@ -2947,8 +2949,8 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="HHd-NY-DhC"/>
                                     <barButtonItem style="plain" id="FV5-FS-cd7">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="ATm-hr-d5H">
-                                            <rect key="frame" x="601" y="9" width="91" height="32"/>
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="ATm-hr-d5H">
+                                            <rect key="frame" x="593" y="9" width="91" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -3066,17 +3068,17 @@
                         <viewControllerLayoutGuide type="bottom" id="hVy-7q-j9s"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Yaw-pJ-81G">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSb-JR-lF2">
-                                <rect key="frame" x="12" y="50" width="692" height="0.0"/>
+                                <rect key="frame" x="12" y="50" width="684" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-ThinItalic" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9a-L5-6s9">
-                                <rect key="frame" x="12" y="46" width="672" height="0.0"/>
+                                <rect key="frame" x="12" y="46" width="664" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -3088,25 +3090,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="g9h-zC-lEw" customClass="MPGTextField_Swift" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="8" width="632" height="30"/>
+                                <rect key="frame" x="20" y="8" width="624" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="cxo-ex-trS"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLn-oK-I5M">
-                                <rect key="frame" x="654" y="8" width="36" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLn-oK-I5M">
+                                <rect key="frame" x="646" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clearFilter" destination="4v9-H1-keZ" eventType="touchUpInside" id="fdQ-hI-jh0"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="cIG-Q9-kgK" customClass="FlexGrid">
-                                <rect key="frame" x="0.0" y="58" width="712" height="855"/>
+                                <rect key="frame" x="0.0" y="58" width="704" height="843.5"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHp-qf-fvv">
-                                <rect key="frame" x="0.0" y="907" width="712" height="50"/>
+                                <rect key="frame" x="0.0" y="895.5" width="704" height="50"/>
                                 <items>
                                     <barButtonItem systemItem="organize" id="bc3-lO-GSB">
                                         <connections>
@@ -3127,8 +3129,8 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="a7E-Az-foU"/>
                                     <barButtonItem style="plain" id="AQ8-9M-Hst">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="GlJ-VD-5Wa">
-                                            <rect key="frame" x="601" y="9" width="91" height="32"/>
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="GlJ-VD-5Wa">
+                                            <rect key="frame" x="593" y="9" width="91" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Row"/>
@@ -3238,6 +3240,14 @@
             <point key="canvasLocation" x="2710" y="-3292"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="51u-vf-aKD"/>
+        <segue reference="6d6-nC-Exh"/>
+        <segue reference="gPt-uJ-Ar3"/>
+        <segue reference="BSS-Cz-DJv"/>
+        <segue reference="wQZ-MD-GC1"/>
+        <segue reference="0YZ-6o-49A"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Clear Filters" width="25" height="25"/>
         <image name="Info" width="25" height="25"/>
@@ -3252,12 +3262,4 @@
         <image name="search_property" width="32" height="32"/>
         <image name="wooden_beer_keg" width="32" height="32"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="51u-vf-aKD"/>
-        <segue reference="6d6-nC-Exh"/>
-        <segue reference="gPt-uJ-Ar3"/>
-        <segue reference="BSS-Cz-DJv"/>
-        <segue reference="wQZ-MD-GC1"/>
-        <segue reference="Fp9-9l-jb8"/>
-    </inferredMetricsTieBreakers>
 </document>
