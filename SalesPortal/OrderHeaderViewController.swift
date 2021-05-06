@@ -557,7 +557,7 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         if flexGrid.selection.row >= 0 {
             actionSheet.addAction(copyButton)
         }
-        if flexGrid.rows.count > 0 {
+        if order?.orderTotal ?? 0 > 0 {
             actionSheet.addAction(emailButton)
             actionSheet.addAction(transmitButton)
             actionSheet.addAction(saveButton)

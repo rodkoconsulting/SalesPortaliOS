@@ -183,10 +183,11 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
     }
     
     override func clearAllGridSource() {
+        order?.orderTotal = 0
         guard let accountOrder = order as? AccountOrder else {
                 return
         }
-        accountOrder.orderTotal = 0
+        //accountOrder.orderTotal = 0
         accountOrder.mixPriceDict.removeAll()
         super.clearAllGridSource()
     }

@@ -11,7 +11,6 @@ import Foundation
 typealias SampleOrderSavedResults = (headerResults: FMResultSet, detailResults: [FMResultSet])?
 
 class SampleOrder: isOrderType {
-    
     var orderNo: Int?
     let account: Account? = nil
     var isSaved: Bool = false
@@ -41,6 +40,15 @@ class SampleOrder: isOrderType {
         }
         let deviceId = UIDevice.current.identifierForVendor!.uuidString
         return "S\(deviceId)\(Constants.dbVersion)\(orderNo)"
+    }
+    
+    var orderTotal: Double {
+        get {
+            return casesBottlesTotal.cases
+        }
+        set {
+            
+        }
     }
     
     var casesBottlesTotal: (cases: Double, bottles: Int) {

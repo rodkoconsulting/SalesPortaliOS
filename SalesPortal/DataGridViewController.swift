@@ -122,6 +122,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         shortcut.leadingBarButtonGroups = []
         shortcut.trailingBarButtonGroups = []
         clearSelectedCells()
+        
     }
     
     func addHandlers() {

@@ -22,6 +22,7 @@ protocol isOrderType : class {
     var orderInventory: NSMutableArray? { get set }
     var searchData: [[String : String]] { get set }
     var overSoldItems: String { get set }
+    var orderTotal: Double { get set }
     func saveOrder() throws
     func deleteOrder() throws
     func getDbDetailInsert(orderNo: Int?) -> String?
