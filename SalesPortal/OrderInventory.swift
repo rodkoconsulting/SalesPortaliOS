@@ -23,6 +23,7 @@ class OrderInventory: Inventory, isOrderInventory {
     
     let lastQuantity: Double
     let lastDate: Date
+    var lastInvoice: String
     var comment: String?
     let groupKey: String = ""
     var isReversal: Bool = false
@@ -68,6 +69,7 @@ class OrderInventory: Inventory, isOrderInventory {
         self.lastQuantity = queryResult?.double(forColumn: "last_qty") ?? 0
         let lastDateString = queryResult?.string(forColumn: "last_date")
         self.lastDate = lastDateString?.getShipDate() ??  Date.defaultPoDate()
+        self.lastInvoice = queryResult?.string(forColumn: "last_invoice") ?? ""
         super.init(queryResult: queryResult, poDict: poDict)
     }
     

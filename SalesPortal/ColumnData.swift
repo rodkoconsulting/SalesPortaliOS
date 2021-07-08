@@ -169,7 +169,7 @@ struct ColumnData {
         [kName:"comment", kHeader: "Comment", kReadOnly: false]
     ]
     static let accountOrderHistoryColumns: [[String : Any]] = [
-        [kName:"version", kValue: 8],
+        [kName:"version", kValue: 9],
         [kName:"itemDescription", kHeader: "Description", kWidth: 300],
         [kName:"itemCode", kHeader: "Item"],
         [kName:"cases", kHeader: "Cases", kType: FilterType.Number.rawValue, kReadOnly: false],
@@ -177,6 +177,7 @@ struct ColumnData {
         [kName:"lastQuantity", kHeader: "Last Qty", kType: FilterType.Number.rawValue],
         [kName:"lastPrice", kHeader: "Last Price", kType: FilterType.Number.rawValue],
         [kName:"lastDate", kHeader: "Last Date", kType: FilterType.Date.rawValue, kSortAcsend: false, kSortDefault: true],
+        [kName:"lastInvoice", kHeader: "Last Invoice"],
         [kName:"quantityAvailable", kHeader: "Avail", kType: FilterType.Number.rawValue],
         [kName:"priceCase", kHeader: "Price (c)", kType: FilterType.Number.rawValue],
         [kName:"priceBottle", kHeader: "Price (b)", kType: FilterType.Number.rawValue],
