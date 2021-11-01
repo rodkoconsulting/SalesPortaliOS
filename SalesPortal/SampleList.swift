@@ -3,11 +3,12 @@
 import Foundation
 
 enum SampleListFilter: String {
+    case Current = "Current"
     case Mtd = "MTD"
     case Ytd = "YTD"
     case oneYear = "1 Year"
     
-    static let rawValues = [Mtd.rawValue, Ytd.rawValue, oneYear.rawValue]
+    static let rawValues = [Current.rawValue, Mtd.rawValue, Ytd.rawValue, oneYear.rawValue]
 }
 
 
@@ -19,12 +20,14 @@ extension SampleListFilter {
     
     func isFilterMatch(_ sampleList: SampleList) -> Bool {
         switch self {
+        case .Current:
+            return sampleList.isCurrent
         case .Mtd:
             return sampleList.isMtd
         case .Ytd:
             return sampleList.isYtd
         case .oneYear:
-            return true
+            return sampleList.isOneYear
         }
     }
 }
@@ -35,12 +38,15 @@ class SampleHeader: SyncRows {
     let shipDate: String?
     let rep: String?
     let shipTo: String?
+    let isPosted: Bool?
+    
     
     required init(dict: [String: Any]?) {
         orderNo = dict?["OrderNo"] as? String
         shipDate = dict?["Date"] as? String
         rep = dict?["Rep"] as? String
         shipTo = dict?["ShipTo"] as? String
+        isPosted = dict?["isPosted"] as? Bool
     }
     
     lazy var getDbDelete: String? = {
@@ -56,10 +62,11 @@ class SampleHeader: SyncRows {
         guard let orderNo = self.orderNo,
             let shipDate = self.shipDate,
             let rep = self.rep,
-            let shipTo = self.shipTo else {
+            let shipTo = self.shipTo,
+            let isPosted = self.isPosted else {
                 return nil
         }
-        return "('" + orderNo + "', '" + shipDate + "', '" + rep + "', '" + shipTo + "')"
+        return "('" + orderNo + "', '" + shipDate + "', '" + rep + "', '" + shipTo + "', '\(isPosted)')"
         }()
 }
 
@@ -232,6 +239,7 @@ class SampleList : NSObject {
     let shipDate: Date?
     let damagedNotes: String
     let quantity: Double
+    let isPosted: Bool
     let rep: String
     let region: String
     let isFocusString: String
@@ -291,14 +299,24 @@ class SampleList : NSObject {
         return self.isFocusString == "Y" ? Constants.boolString : ""
     }()
     
+    lazy var isCurrent : Bool = {
+        [unowned self] in
+        return self.isPosted == false
+        }()
+    
     lazy var isMtd : Bool = {
         [unowned self] in
-        return self.shipDate?.getYearInt() == Date().getYearInt() && self.shipDate?.getMonthInt() == Date().getMonthInt()
+        return self.shipDate?.getYearInt() == Date().getYearInt() && self.shipDate?.getMonthInt() == Date().getMonthInt() && self.isPosted
         }()
     
     lazy var isYtd : Bool = {
         [unowned self] in
-        return self.shipDate?.getYearInt() == Date().getYearInt()
+        return self.shipDate?.getYearInt() == Date().getYearInt() && self.isPosted
+        }()
+    
+    lazy var isOneYear : Bool = {
+        [unowned self] in
+        return self.isPosted
         }()
 
     lazy var gridColor: UIColor? = {
@@ -313,6 +331,8 @@ class SampleList : NSObject {
         orderNo = queryResult?.string(forColumn: "order_no") ?? ""
         let shipDateString = queryResult?.string(forColumn: "ship_date") ?? ""
         shipDate = shipDateString.getShipDate()
+        let isPostedString = queryResult?.string(forColumn: "is_posted") ?? "true"
+        isPosted = isPostedString == "true"
         isFocusString = queryResult?.string(forColumn: "focus") ?? ""
         itemCode = queryResult?.string(forColumn: "item_code") ?? ""
         itemDescriptionRaw = queryResult?.string(forColumn: "desc") ?? ""

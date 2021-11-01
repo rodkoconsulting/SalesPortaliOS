@@ -27,7 +27,7 @@ class SampleListService: SyncService, SyncServiceType {
                 "SELECT ITEM_CODE, DESC, BRAND, MASTER_VENDOR, VINTAGE, UOM, SIZE, DAMAGED_NOTES, FOCUS, COUNTRY, REGION, APPELLATION FROM SAMPLE_ITEMS_INACTIVE " +
                 "WHERE ITEM_CODE IN (SELECT DISTINCT ITEM_CODE FROM SAMPLE_LIST_DETAIL)" +
                 ") " +
-                "SELECT h.SHIP_DATE, h.REP, " +
+                "SELECT h.ORDER_NO, h.SHIP_DATE, h.REP, h.IS_POSTED, " +
                 "d.ITEM_CODE, d.QTY, d.COMMENT, " +
                 "a.NAME, " +
                 "i.DESC, i.BRAND, i.MASTER_VENDOR, i.VINTAGE, i.UOM, i.SIZE, i.DAMAGED_NOTES, i.FOCUS, i.COUNTRY, i.REGION, i.APPELLATION " +
