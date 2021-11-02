@@ -37,7 +37,7 @@ class SampleListService: SyncService, SyncServiceType {
                 "ON h.SHIP_TO = a.CODE " +
                 "LEFT OUTER JOIN ITEMS i " +
                 "ON d.ITEM_CODE = i.ITEM_CODE " +
-                "ORDER BY h.REP, h.SHIP_DATE desc, i.DESC"
+                "ORDER BY h.REP, h.SHIP_DATE desc, h.ORDER_NO, i.BRAND, i.DESC"
             let results: FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             while results?.next() == true {
                 let sampleList = SampleList(queryResult: results!)

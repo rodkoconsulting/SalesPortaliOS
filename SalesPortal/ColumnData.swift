@@ -299,8 +299,9 @@ struct ColumnData {
         [kName:"territory", kHeader: "Territory", kWidth: 45, kManagerGroup: 1]
     ]
     static let sampleListColumns: [[String : Any]] = [
-        [kName:"version", kValue: 5],
+        [kName:"version", kValue: 6],
         [kName:"shipDate", kHeader: "Date", kAlignment:"right", kWidth: 70, kType: FilterType.Date.rawValue],
+        [kName:"orderNo", kHeader: "Order #", kWidth: 60],
         [kName:"itemCode", kHeader: "Item", kWidth: 70],
         [kName:"itemDescription", kHeader: "Description", kWidth: 250],
         [kName:"quantityBottle", kHeader: "Qty (b)", kType: FilterType.Number.rawValue, kAgg: "Sum", kWidth: 50],
