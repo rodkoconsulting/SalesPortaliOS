@@ -66,15 +66,15 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     @IBAction func defaultView(_ sender: AnyObject) {
-        guard let module = module else {
-            return
-        }
-        columnSettings?.removeAllObjects()
-        let (columns, _) = DataGridColumn.generateColumns(nil, module: module)
-        for column in columns {
-            columnSettings?.add(column)
-        }
-        changedAllFilters()
+            guard let module = module else {
+                return
+            }
+            columnSettings?.removeAllObjects()
+            let (columns, _) = DataGridColumn.generateColumns(nil, module: module)
+            for column in columns {
+                columnSettings?.add(column)
+            }
+            changedAllFilters()
     }
     
     @objc func longPressGestureRecognized(_ gesture: UILongPressGestureRecognizer) {

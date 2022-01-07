@@ -103,7 +103,7 @@ struct DataExport {
         }
         guard MFMailComposeViewController.canSendMail() else {
             return nil
-        }
+        }   
         let mailComposer = MFMailComposeViewController()
         mailComposer.setSubject(moduleType.mailSubject)
         mailComposer.setMessageBody(moduleType.mailBody, isHTML: true)
