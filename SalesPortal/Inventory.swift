@@ -409,7 +409,7 @@ class Inventory : NSObject {
     
     lazy var mixDescription : String = {
         [unowned self] in
-        return self.brand + self.descriptionRaw + self.vintage
+        return self.brand + self.descriptionRaw.removeBrackets() + self.vintage
         }()
     
     lazy var priceArray : [String] = {

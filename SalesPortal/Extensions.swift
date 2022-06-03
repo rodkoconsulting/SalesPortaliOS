@@ -322,6 +322,11 @@ extension String {
     func getShipMonth() -> String? {
         return self.getDate()?.getMonthString()
     }
+    
+    func removeBrackets() -> String {
+        let pattern = "\\s?\\[[\\w\\s]*\\]"
+        return self.replacingOccurrences(of: pattern, with: "", options: .regularExpression)
+    }
 }
 
 extension DateFormatter {
