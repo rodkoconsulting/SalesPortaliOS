@@ -22,6 +22,7 @@ struct GridSettings {
     static let colorPastDue = UIColor(red: 255/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
     static let colorMoboHasExpired = UIColor(red: 255/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1.0)
     static let colorMoboWillExpire = UIColor(red: 255/255.0, green: 255/255.0, blue: 102/255.0, alpha: 1.0)
+    static let colorAllocated = UIColor(red: 255/255.0, green: 128/255.0, blue: 0/255.0, alpha: 0.5)
     static let textColorSelected = UIColor.white
     static let alternatingRowBackgroundColor = UIColor(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1.0)
     static let gridLinesVisibility = GridLinesVisibility.vertical

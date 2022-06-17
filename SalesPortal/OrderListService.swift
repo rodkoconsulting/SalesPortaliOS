@@ -22,7 +22,7 @@ class OrderListService: SyncService, SyncServiceType {
             let sqlQuery =
             "SELECT hoi.ORDER_NO, a.CUSTOMER_NAME, hoi.CUSTOMER_NO, a.AFFIL, hoi.ORDER_DATE, hoi.SHIP_DATE, hoi.ARR_DATE, hoi.PO_ETA, hoi.STATUS, hoi.HOLD, hoi.COOP, " +
             "hoi.COMMENT, hoi.SHIP_TO, hoi.ITEM_CODE, " +
-            "i.DESC, i.BRAND, i.VINTAGE, i.UOM, i.SIZE, i.DAMAGED_NOTES, " +
+            "i.DESC, i.BRAND, i.VINTAGE, i.UOM, i.SIZE, i.DAMAGED_NOTES, i.RESTRICT_ALLOCATED, " +
             "hoi.QTY, hoi.PRICE, hoi.TOTAL, " +
             "a.REP, a.REGION " +
             "FROM (" +
@@ -42,9 +42,9 @@ class OrderListService: SyncService, SyncServiceType {
             "ON hoi.DIVISION_NO = a.DIVISION_NO AND hoi.CUSTOMER_NO = a.CUSTOMER_NO " +
             "LEFT OUTER JOIN " +
             "(" +
-            "SELECT ITEM_CODE, DESC, BRAND, VINTAGE, UOM, SIZE, DAMAGED_NOTES FROM INV_DESC " +
+            "SELECT ITEM_CODE, DESC, BRAND, VINTAGE, UOM, SIZE, DAMAGED_NOTES, RESTRICT_ALLOCATED FROM INV_DESC " +
             "UNION " +
-            "SELECT ITEM_CODE, DESC, BRAND, VINTAGE, UOM, SIZE, DAMAGED_NOTES FROM ACCOUNTS_ITEMS_INACTIVE " +
+            "SELECT ITEM_CODE, DESC, BRAND, VINTAGE, UOM, SIZE, DAMAGED_NOTES, RESTRICT_ALLOCATED FROM ACCOUNTS_ITEMS_INACTIVE " +
             ") i " +
             "ON hoi.ITEM_CODE = i.ITEM_CODE " +
             "ORDER BY a.REGION, a.REP, a.CUSTOMER_NAME, hoi.ORDER_DATE desc"

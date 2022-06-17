@@ -208,10 +208,16 @@ class OrderList : NSObject {
     let rep: String
     let region: String
     let shipTo: String
+    let restrictAllocated: String
     
     lazy var territory: String = {
         [unowned self] in
         return Account.getTerritory(self.region).rawValue
+    }()
+    
+    lazy var isAllocated : Bool = {
+        [unowned self] in
+            return self.restrictAllocated == "Y"
     }()
     
     lazy var expirationDate : Date? = {
@@ -235,6 +241,7 @@ class OrderList : NSObject {
     lazy var isSampleApproved : Bool = {
         return self.orderStatus == "O" && self.holdCodeRaw == "SM"
     }()
+    
     
     lazy var holdCode : OrderHoldType = {
         [unowned self] in
@@ -384,20 +391,23 @@ class OrderList : NSObject {
     
     lazy var gridColor: UIColor? = {
         [unowned self] in
+        var color: UIColor? = nil
+        if isAllocated {
+            color = GridSettings.colorAllocated
+        }
         guard [.Master,.BackIn].contains(self.holdCode) else {
-            return nil
+            return color
         }
         guard let expirationDate = self.expirationDate else {
-            return nil
-        }
-
-        if expirationDate.isLessThanDate(Date()) {
-            return GridSettings.colorMoboHasExpired
+            return color
         }
         if expirationDate.isLessThanDate((Date().getDailySalesDate())) {
-            return GridSettings.colorMoboWillExpire
+            color = GridSettings.colorMoboWillExpire
         }
-        return nil
+        if expirationDate.isLessThanDate(Date()) {
+            color = GridSettings.colorMoboHasExpired
+        }
+        return color
     }()
     
     init(queryResult: FMResultSet?) {
@@ -431,6 +441,7 @@ class OrderList : NSObject {
         rep = queryResult?.string(forColumn: "rep") ?? ""
         region = queryResult?.string(forColumn: "region") ?? ""
         shipTo = queryResult?.string(forColumn: "ship_to") ?? ""
+        restrictAllocated = queryResult?.string(forColumn: "restrict_allocated") ?? ""
     }    
 }
 
