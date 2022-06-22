@@ -1,10 +1,3 @@
-//
-//  SettingsViewController.swift
-//  InventoryPortal
-//
-//  Created by administrator on 10/7/15.
-//  Copyright © 2015 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 import XuniInputKit
@@ -34,7 +27,6 @@ class InventorySettingsViewController: UIViewController, UITableViewDelegate, UI
         exitVc()
     }
 
-    
     func exitVc() {
         for row in 0 ..< settingsTableView.numberOfRows(inSection: 0) {
             let cell = settingsTableView.cellForRow(at: IndexPath(row: row, section: 0)) as! InventorySettingsTableViewCell
@@ -89,5 +81,4 @@ class InventorySettingsViewController: UIViewController, UITableViewDelegate, UI
             }
         }
     }
-
 }

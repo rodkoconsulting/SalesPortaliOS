@@ -1,10 +1,3 @@
-//
-//  OrderNotesViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 6/14/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 import XuniInputKit
@@ -13,7 +6,6 @@ let kSHIPTOTAG = 0
 let kCOOPTAG = 1
 
 class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDelegate, XuniComboBoxDelegate, isOrderNotesVc {
-
 
     @IBOutlet weak var poNoTextField: UITextField!
     @IBOutlet weak var coopNoComboBox: ComboBox!
@@ -73,7 +65,6 @@ class AccountOrderNotesViewController: OrderNotesViewController, XuniDropDownDel
         poNoTextField.text = accountOrder.poNo
         initCoopNo()
         initShipTo()
-
     }
     
     func initShipTo() {

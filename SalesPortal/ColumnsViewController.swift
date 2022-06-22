@@ -1,10 +1,3 @@
-//
-//  ColumnsViewController.swift
-//  InventoryPortal
-//
-//  Created by administrator on 10/16/15.
-//  Copyright © 2015 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 import XuniFlexGridKit
@@ -130,7 +123,6 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 self.snapshot?.transform = CGAffineTransform.identity
                 self.snapshot?.alpha = 0.0
-                // Undo fade out.
                 cell.alpha = 1.0
                 }, completion: { [unowned self] (finished) in
                     self.sourceIndexPath = nil
@@ -195,7 +187,6 @@ class ColumnsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let filter = UITableViewRowAction(style: UITableViewRowAction.Style.default, title: "Filter", handler: { (action, indexPath) -> Void in
-            //self.editing = false
             self.performSegue(withIdentifier: "showFiltersViewController", sender: indexPath)
             self.columnsTableView.reloadData()
         })

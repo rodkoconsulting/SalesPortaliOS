@@ -1,7 +1,5 @@
 
-
 import Foundation
-
 
 class SampleOrderInventoryService: SyncService, OrderSyncServiceType {
     typealias poDictType = [(onPo: Double, poEta: String, poDate: String, poComment: String)]
@@ -73,8 +71,6 @@ class SampleOrderInventoryService: SyncService, OrderSyncServiceType {
         return poDict
     }
     
-    
-    
     func getApi(_ timeSyncDict: [String : String], completion: @escaping (_ data: InvSync?, _ error: ErrorCode?) -> Void) {
         let apiService = ApiService(apiString: module.apiInit)
         apiService.getApiInv(timeSyncDict, credentialDict: self.apiCredentials){
@@ -91,7 +87,6 @@ class SampleOrderInventoryService: SyncService, OrderSyncServiceType {
             completion(InvSync(qtyDict: qtyDict, descDict: descDict, priceDict: priceDict, poDict: poDict), nil)
         }
     }
-    
     
     func updateDb(_ invSync: InvSync) throws {
         let inventoryQtyService = DatabaseService(tableName: DatabaseTable.InventoryQuantity)
@@ -110,7 +105,6 @@ class SampleOrderInventoryService: SyncService, OrderSyncServiceType {
             throw ErrorCode.dbError
         }
     }
-    
 }
 
 

@@ -41,8 +41,6 @@ enum ErrorCode: CustomStringConvertible, Error {
         case .billHoldShipException:
             return "Can only ship Bill and Hold items on B&H ship orders"
         }
-        
-
     }
     
     var isAuthError: Bool {

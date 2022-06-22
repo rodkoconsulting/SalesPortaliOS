@@ -1,10 +1,4 @@
-//
-//  ExcelExport.swift
-//  InventoryPortal
-//
-//  Created by administrator on 4/20/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
+
 
 import Foundation
 import XuniFlexGridKit

@@ -1,10 +1,3 @@
-//
-//  OrderService .swift
-//  SalesPortal
-//
-//  Created by administrator on 7/19/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 
@@ -62,5 +55,4 @@ struct SampleOrderService {
         let sqlUpdateInventory = "UPDATE INV_QTY SET QTY_AVAIL=\(quantityAvailable) WHERE ITEM_CODE='\(itemCode)'"
         dB.executeUpdate(sqlUpdateInventory, withArgumentsIn: nil)
     }
-    
 }

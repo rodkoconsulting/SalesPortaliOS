@@ -1,10 +1,3 @@
-//
-//  ShipDateViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 6/6/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 import XuniCalendarKit
@@ -25,7 +18,6 @@ class ShipDateViewController: UIViewController, XuniCalendarDelegate {
     var currentDate: Date?
     var dateText: String = "Ship"
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let order = order else {
@@ -74,7 +66,6 @@ class ShipDateViewController: UIViewController, XuniCalendarDelegate {
         guard let order = order else {
             return daySlot
         }
-        
         let shipIcon = date.isShipDay(order.account?.shipDays) ? UIImage(named: "shipDay") : UIImage(named: "nonShipDay")
         let rect = daySlot.frame
         let size = rect.size

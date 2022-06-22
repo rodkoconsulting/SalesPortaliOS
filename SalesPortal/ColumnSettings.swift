@@ -1,10 +1,3 @@
-//
-//  ColumnSettings.swift
-//  InventoryPortal
-//
-//  Created by administrator on 11/22/15.
-//  Copyright © 2015 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 

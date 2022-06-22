@@ -30,13 +30,9 @@ public class SwiftSpinner: UIView {
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = UIColor.white
-        
-        
         blurView.contentView.addSubview(titleLabel)
         blurView.contentView.addSubview(vibrancyView)
-        
         outerCircleView.frame.size = frameSize
-        
         outerCircle.path = UIBezierPath(ovalIn: CGRect(x: 0.0, y: 0.0, width: frameSize.width, height: frameSize.height)).cgPath
         outerCircle.lineWidth = 8.0
         outerCircle.strokeStart = 0.0
@@ -45,7 +41,6 @@ public class SwiftSpinner: UIView {
         outerCircle.fillColor = UIColor.clear.cgColor
         outerCircle.strokeColor = outerCircleDefaultColor
         outerCircleView.layer.addSublayer(outerCircle)
-        
         outerCircle.strokeStart = 0.0
         outerCircle.strokeEnd = 1.0
         
@@ -74,7 +69,6 @@ public class SwiftSpinner: UIView {
     public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         return self
     }
-    
     
     public lazy var titleLabel = UILabel()
     public var subtitleLabel: UILabel?
@@ -398,7 +392,6 @@ public class SwiftSpinner: UIView {
             SwiftSpinner.sharedInstance.frame = containerView.bounds
         }
     }
-    
     
     func delay(_ seconds: Double, completion:@escaping ()->()) {
         let popTime = DispatchTime.now() + Double(Int64( Double(NSEC_PER_SEC) * seconds )) / Double(NSEC_PER_SEC)

@@ -1,10 +1,3 @@
-//
-//  LoginViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 4/11/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 
@@ -15,7 +8,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.stopAnimating()
@@ -25,7 +17,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         userNameField.text = ""
         passwordField.text = ""
     }
-    
     
     func performSegue() {
         self.performSegue(withIdentifier: "unwindFromLogin", sender: self)
@@ -52,7 +43,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 credentials.saveCredentials(userDict)
-                //self.dismissViewControllerAnimated(true, completion: nil)
                 self.performSegue()
         }
     }

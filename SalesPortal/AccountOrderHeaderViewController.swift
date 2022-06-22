@@ -1,10 +1,3 @@
-//
-//  OrderViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 6/3/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 import XuniFlexGridKit
@@ -23,7 +16,6 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
         super.exitVc()
     }
     
-    
     fileprivate func exitOrder() {
         if let accountOrder = order as? AccountOrder {
             accountOrder.orderDelegate = nil
@@ -41,7 +33,6 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
         headerComboBox.delegate = self
         headerComboBox.itemsSource = ComboData.orderTypeData()
     }
-
     
     override func initOrder() {
         accountLabel.text = order?.account?.customerName
@@ -128,21 +119,21 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
     }
     
     fileprivate func updateMoboFilters() {
-                let orderTabBarController = tabBarController as! OrderTabBarController
-                if let myViewControllers = orderTabBarController.viewControllers {
-                    for viewController in myViewControllers {
-                        if viewController.isKind(of: OrderMobosViewController.self) {
-                            if let myViewController = viewController as? OrderMobosViewController {
-                                    guard (myViewController.flexGrid != nil) else
-                                    {
-                                        return
-                                    }
-                                myViewController.orderTypeFilterRefresh()
-                            }
+        let orderTabBarController = tabBarController as! OrderTabBarController
+        if let myViewControllers = orderTabBarController.viewControllers {
+            for viewController in myViewControllers {
+                if viewController.isKind(of: OrderMobosViewController.self) {
+                    if let myViewController = viewController as? OrderMobosViewController {
+                        guard (myViewController.flexGrid != nil) else
+                        {
+                            return
                         }
+                        myViewController.orderTypeFilterRefresh()
                     }
                 }
             }
+        }
+    }
 
     override func getfilterPredicate(_ orderInventory: OrderInventory) -> Bool {
         return orderInventory.cases > 0 || orderInventory.bottles > 0
@@ -187,7 +178,6 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
         guard let accountOrder = order as? AccountOrder else {
                 return
         }
-        //accountOrder.orderTotal = 0
         accountOrder.mixPriceDict.removeAll()
         super.clearAllGridSource()
     }
@@ -199,5 +189,4 @@ class AccountOrderHeaderViewController: OrderHeaderViewController, OrderDelegate
         accountOrder.saveCurrentLines()
         accountOrder.saveMoboList()
     }
-
 }

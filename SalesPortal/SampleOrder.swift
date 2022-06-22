@@ -1,10 +1,3 @@
-//
-//  Order.swift
-//  SalesPortal
-//
-//  Created by administrator on 6/3/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 
@@ -79,7 +72,6 @@ class SampleOrder: isOrderType {
             savedDetailDict[item.itemCode] = (bottles:item.bottleTotal, comment: item.comment)
         }
     }
-
     
     func loadSavedLines() {
         guard let orderInventory = orderInventory else {
@@ -168,7 +160,6 @@ class SampleOrder: isOrderType {
         }
     }
 
-    
     func deleteOrder() throws {
         do {
             guard orderNo != nil else {

@@ -1,15 +1,7 @@
-//
-//  AccountService.swift
-//  SalesPortal
-//
-//  Created by administrator on 5/23/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 
 class SampleListService: SyncService, SyncServiceType {
-
     
     func queryDb() -> (gridData:NSMutableArray?, searchData: [[String : String]]?, isManager: Bool) {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
@@ -94,8 +86,7 @@ class SampleListService: SyncService, SyncServiceType {
         } catch {
             throw ErrorCode.dbError
         }
-    }
-    
+    }    
 }
 
 

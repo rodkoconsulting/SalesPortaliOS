@@ -1,10 +1,3 @@
-//
-//  CalendarModalWindow.swift
-//  SalesPortal
-//
-//  Created by administrator on 9/12/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 import UIKit

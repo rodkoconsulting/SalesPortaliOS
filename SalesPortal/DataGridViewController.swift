@@ -1,15 +1,7 @@
-//
-//  DataGridViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 6/8/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 import XuniFlexGridKit
 import MessageUI
-
 
 class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate, MPGTextFieldDelegate, FlexGridDelegate {
    
@@ -21,8 +13,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     @IBOutlet weak var removeFilterButton: UIBarButtonItem! = nil
     @IBOutlet weak var selectModeSegment: UISegmentedControl! = nil
     @IBOutlet weak var titleLabel: UILabel! = nil
-    
-
     
     @IBAction func clearFilter() {
             self.searchBar.text = ""
@@ -64,7 +54,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         changedColumnFilters()
         filterRefresh()
     }
-
     
     var moduleType = Module.inventory
     var classType: NSObject.Type = Inventory.self
@@ -122,7 +111,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         shortcut.leadingBarButtonGroups = []
         shortcut.trailingBarButtonGroups = []
         clearSelectedCells()
-        
     }
     
     func addHandlers() {
@@ -140,7 +128,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         NotificationCenter.default.addObserver(self, selector: #selector(DataGridViewController.keyboardWillShow(_:)), name:UIResponder.keyboardWillShowNotification, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(DataGridViewController.keyboardWillHide(_:)), name:UIResponder.keyboardWillHideNotification, object: nil);
     }
-    
     
     func dataForPopoverInTextField(_ textfield: MPGTextField_Swift) -> [[String : String]]
     {   
@@ -171,7 +158,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
     
     func searchBarTextBeganEditing() {
-        //self.view.endEditing(true)
         flexGrid.finishEditing(false)
     }
     
@@ -197,7 +183,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     func filterGrid(_ filterText: String?) {
         filterGridColumns(filterText, classType: classType, isIndex: isFilterIndex)
         isFilterChanged = false
-        
     }
     
     func filterGridColumns<T: NSObject>(_ searchText: String?, classType: T.Type, isIndex: Bool = false) {
@@ -272,11 +257,9 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         flexGrid.selection = GridCellRange(row: -1, col: -1)
     }
     
-    
     func setItemLabels(selectedRow: Int32) {
         
     }
-
 
     @objc func keyboardWillShow(_ sender: Notification) {
         guard let kbFrame = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
@@ -356,7 +339,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         flexGrid.removeFromSuperview()
         flexGrid = nil
     }
-    
     
     fileprivate func exitAllVc() {
         exitVc()
@@ -439,11 +421,9 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
                         self.endBackgroundTask()
                     }
                 }
-
             }
         }
     }
-
     
     func showShareActionSheet(flexGrid: FlexGrid, moduleType: Module, sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "Copy / Email Data", message: nil, preferredStyle: .actionSheet)
@@ -634,7 +614,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         return true
     }
     
-
     func cellDoubleTapped(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange?) -> Bool {
         guard let range = range else {
             return false
@@ -707,7 +686,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         }
         present(actionSheet, animated: true, completion: nil)
     }
-
     
     func groupRows() {
         var groupDict = [Int : String]()
@@ -728,7 +706,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
             }
         }
     }
-    
     
     func sortGroup(_ column: DataGridColumn) {
         guard let collectionView = flexGrid.collectionView else {
@@ -811,7 +788,6 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
     }
 }
 
-// Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToUIBackgroundTaskIdentifier(_ input: Int) -> UIBackgroundTaskIdentifier {
 	return UIBackgroundTaskIdentifier(rawValue: input)
 }

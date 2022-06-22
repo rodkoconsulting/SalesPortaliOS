@@ -17,11 +17,9 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
         displayView()
     }
     
-    
     @IBAction func unwindFromSettings(_ segue: UIStoryboardSegue) {
         
     }
-    
     
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
@@ -112,7 +110,6 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
         restrictionLabel.text = ""
     }
     
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         flexGrid.saveUserDefaults(moduleType)
@@ -123,12 +120,10 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
         super.touchesBegan(touches, with: event)
     }
     
-    
     func displayView() {
         loadData(isSynched: false)
     }
 
-    
     override func loadData(isSynched: Bool) {
         super.loadData(isSynched: isSynched)
         guard let credentials = Credentials.getCredentials() else {

@@ -96,12 +96,10 @@ class AccountsViewController: DataGridViewController {
         }
         return true
     }
-
   
     @IBAction func refreshGrid(_ sender: AnyObject) {
         syncAccounts()
     }
-    
     
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
@@ -134,7 +132,7 @@ class AccountsViewController: DataGridViewController {
             
             }
         return false
-        }
+    }
     
     override func loadData(isSynched: Bool) {
         super.loadData(isSynched: isSynched)
@@ -174,7 +172,6 @@ class AccountsViewController: DataGridViewController {
                 self.endBackgroundTask()
             }
         }
-        
     }
     
     func syncAccounts() {

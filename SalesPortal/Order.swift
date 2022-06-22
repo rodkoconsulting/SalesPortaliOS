@@ -1,10 +1,3 @@
-//
-//  Order.swift
-//  SalesPortal
-//
-//  Created by administrator on 2/7/17.
-//  Copyright © 2017 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 

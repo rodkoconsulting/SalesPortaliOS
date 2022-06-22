@@ -1,10 +1,3 @@
-//
-//  OrderInventory.swift
-//  SalesPortal
-//
-//  Created by administrator on 2/6/17.
-//  Copyright © 2017 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 
@@ -76,6 +69,4 @@ class OrderInventory: Inventory, isOrderInventory {
     func getDbDetailInsert(_ orderNo: Int) -> String {
         return "(\(orderNo), '" + itemCode + "', \(bottles))"
     }
-
-    
 }

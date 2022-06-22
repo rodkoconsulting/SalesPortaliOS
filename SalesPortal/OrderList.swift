@@ -24,10 +24,6 @@ enum OrderListType: String {
     case BillHoldTransfer = "BHT"
     case Sample = "SM"
     case Invoice = "I"
-    
-    //static let allValues = [Standard.orderText, Master.orderText, Back.orderText, PickUp.orderText, Unsaleable.orderText, BillHoldShip.orderText, BillHoldInvoice.orderText]
-    //static let rawValues = [Standard.rawValue, Master.rawValue, Back.rawValue, PickUp.rawValue, Unsaleable.rawValue, BillHoldShip.rawValue, BillHoldInvoice.rawValue]
-    
 }
 
 enum OrderHoldType: String {
@@ -256,7 +252,6 @@ class OrderList : NSObject {
         } else {
             return .None
         }
-        //return: self.holdCodeRaw
     }()
 
     
@@ -365,9 +360,6 @@ class OrderList : NSObject {
     
     lazy var isDailySale : Bool = {
         [unowned self] in
-        //if self.orderType == "I" {
-        //    return true
-        //}
         if (self.orderType == .Standard || self.isBhShip || self.orderType == .Invoice) && self.shipDate?.getDateString() == Date().getDailySalesDate().getDateString() {
             return true
         }

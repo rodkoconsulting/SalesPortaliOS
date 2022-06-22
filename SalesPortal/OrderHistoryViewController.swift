@@ -136,6 +136,4 @@ class OrderHistoryViewController: DataGridViewController, OrderInventoryErrorDel
         activeField = nil
         return false
     }
-    
-    
 }

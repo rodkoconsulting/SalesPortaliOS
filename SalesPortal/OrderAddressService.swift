@@ -1,10 +1,3 @@
-//
-//  SampleOrderAddressService.swift
-//  SalesPortal
-//
-//  Created by administrator on 1/23/17.
-//  Copyright © 2017 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 

@@ -1,10 +1,3 @@
-//
-//  FiltersViewController.swift
-//  InventoryPortal
-//
-//  Created by administrator on 11/19/15.
-//  Copyright © 2015 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 import XuniFlexGridKit
@@ -21,10 +14,8 @@ protocol FiltersDelegate: class {
 
 class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, XuniDropDownDelegate, XuniComboBoxDelegate, FilterDateDelegate {
 
-    
     @IBOutlet weak var filtersNavigationItem: UINavigationItem!
     @IBOutlet weak var filtersTableView: UITableView!
-    
     
     weak var columnFilters: ColumnFilters?
     var columnIndex: Int?
@@ -61,7 +52,6 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             filtersNavigationItem.title = "Filters - " + columnFilters.header
         }
     }
-
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
@@ -135,18 +125,17 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     
-        func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-            toggleFilterCellUi(indexPath: indexPath, enable: false)
-        }
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        toggleFilterCellUi(indexPath: indexPath, enable: false)
+    }
         
-        func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?)  {
-            guard let indexPath = indexPath else {
-                return
-            }
-            toggleFilterCellUi(indexPath: indexPath, enable: true)
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?)  {
+        guard let indexPath = indexPath else {
+            return
         }
+        toggleFilterCellUi(indexPath: indexPath, enable: true)
+    }
 
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         guard let myColumnFilters = columnFilters else {
@@ -290,7 +279,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             let cell = filtersTableView.cellForRow(at: IndexPath(row:row, section:0)) as? FiltersTableViewCell {
                 cell.valueText.resignFirstResponder()
             }
-        }
+    }
     
     func isComboBox(_ comboTag: Int, constantTag: Int, rowCount: Int) -> Bool {
         return comboTag >=  rowCount * constantTag && comboTag < rowCount * constantTag + rowCount
@@ -364,7 +353,6 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                     deinitComboBox(cell.boolComboBox)
                 }
             }
-            
         }
     }
 }

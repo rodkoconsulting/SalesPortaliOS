@@ -1,16 +1,12 @@
 
 import Foundation
 
-
-
-
 protocol SyncServiceBaseType {
     var module: Module { get }
     var apiCredentials: [String : String] { get }
     var queryLastSync : String? { get }
     func queryAllLastSync() throws -> [String : String]
     func updateLastSync()
-    
 }
 
 protocol SyncServiceType : SyncServiceBaseType {
@@ -63,7 +59,6 @@ struct Sync<T: SyncRows> {
         }
     }
 }
-
 
 class SyncService : SyncServiceBaseType {
     

@@ -1,10 +1,3 @@
-//
-//  AccountOrderInventoryViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 2/7/17.
-//  Copyright © 2017 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 
@@ -15,7 +8,6 @@ class AccountOrderInventoryViewController: OrderInventoryViewController, isOrder
         moduleType = Module.accountOrderInventory
         classType = AccountOrderInventory.self
     }
-
     
     override func setTitleLabel() {
         if let order = order, let account = order.account {
@@ -32,5 +24,4 @@ class AccountOrderInventoryViewController: OrderInventoryViewController, isOrder
             accountOrderInventory.orderType = order?.orderType
         }
     }
-    
 }

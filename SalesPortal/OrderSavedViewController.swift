@@ -139,6 +139,5 @@ class OrderSavedViewController: DataGridViewController {
             orderTabBarController.order = OrderSavedService<SampleOrder>.queryOrderSaved(orderNo: orderNo)
             orderTabBarController.modalPresentationStyle = .fullScreen
         }
-        
     }
 }

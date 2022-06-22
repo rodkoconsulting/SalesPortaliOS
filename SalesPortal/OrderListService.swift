@@ -1,10 +1,3 @@
-//
-//  AccountService.swift
-//  SalesPortal
-//
-//  Created by administrator on 5/23/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 
@@ -103,7 +96,6 @@ class OrderListService: SyncService, SyncServiceType {
             throw ErrorCode.dbError
         }
     }
-
 }
 
 

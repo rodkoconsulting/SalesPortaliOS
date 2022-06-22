@@ -1,10 +1,3 @@
-//
-//  SampleOrderHeaderViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 2/6/17.
-//  Copyright © 2017 Polaner Selections. All rights reserved.
-//
 
 import XuniInputKit
 
@@ -75,5 +68,4 @@ class SampleOrderHeaderViewController: OrderHeaderViewController, isOrderHeaderV
         let shipDate = order.shipDate ?? OrderType.Standard.shipDate(account: nil)
         return SampleOrderInventoryService(module: moduleType, apiCredentials: credentials, date: shipDate!)
     }
-    
 }

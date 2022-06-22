@@ -31,7 +31,6 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
         orderFilterComboBox.isEditable = false
         orderFilterComboBox.dropDownBehavior = XuniDropDownBehavior.headerTap
         orderFilterComboBox.dropDownHeight = Double(self.orderFilterComboBox.itemsSource.count * Constants.ComboCellHeight)
-        
     }
     
     override func setItemLabels(selectedRow: Int32) {
@@ -116,7 +115,6 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
         super.groupRows()
     }
     
-    
     @IBAction func refreshGrid(_ sender: AnyObject) {
         syncOrderList()
     }
@@ -136,7 +134,6 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
             searchData = orderListSearchData
         }
         let orderListLastSync = orderListService.queryLastSync
-        //guard orderListLastSync != nil && gridData != nil else {
         guard orderListLastSync != nil else {
             guard !isSynched else {
                 completionError(ErrorCode.dbError)
@@ -197,9 +194,7 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
         }
         return false
     }
-    
-    
-    
+
     func syncOrderList() {
         guard let credentials = Credentials.getCredentials(), let _ = credentials["state"] else {
             displayLogIn()
@@ -209,24 +204,10 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
             beginBackgroundTask()
         }
         SwiftSpinner.show("Syncing...", animated: false)
-        //let accountService = AccountService(module: Module.accounts, apiCredentials: credentials)
         let orderListService = OrderListService(module: Module.orderList, apiCredentials: credentials)
         do {
-            //let lastAccountSync = try accountService.queryAllLastSync()
             let lastOrderListSync = try orderListService.queryAllLastSync()
-            //accountService.getApi(lastAccountSync) {
-                //[unowned self](accountSyncCompletion, error) in
-                //guard let accountSync = accountSyncCompletion else  {
-                    //self.completionError(error ?? ErrorCode.unknownError)
-                    //return
-                //}
-                //do {
-                //    try accountService.updateDb(accountSync)
-                //} catch {
-                //    self.completionError(ErrorCode.dbError)
-                //}
-                //accountService.updateLastSync()
-                orderListService.getApi(lastOrderListSync) {
+            orderListService.getApi(lastOrderListSync) {
                     (orderListSyncCompletion, error) in
                     guard let orderListSync = orderListSyncCompletion else  {
                         self.completionError(error ?? ErrorCode.unknownError)
@@ -239,7 +220,6 @@ class OrderListViewController: DataGridViewController, XuniDropDownDelegate, Xun
                     }
                     orderListService.updateLastSync()
                     self.loadData(isSynched: true)
-                //}
             }
         } catch {
             completionError(ErrorCode.dbError)

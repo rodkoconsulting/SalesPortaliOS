@@ -1,10 +1,3 @@
-//
-//  OrderViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 6/3/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 import XuniFlexGridKit
@@ -31,13 +24,10 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
     
     weak var order: isOrderType?
     
-    
     @IBAction func unwindToOrderHeader(_ sender: UIStoryboardSegue){
         
     }
-    
 
-    
     func setComboBoxItemsSource() {
         // implement in child
     }
@@ -219,7 +209,8 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
                         _ = viewController.view
                     }
                 }
-            }}
+            }
+        }
     }
     
     func toggleShipDate() {
@@ -391,7 +382,6 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
         // implement in child
     }
     
-    
     func syncData(orderInventoryService: OrderSyncServiceType) {
         if (backgroundTask == UIBackgroundTaskIdentifier.invalid) {
             beginBackgroundTask()
@@ -416,7 +406,6 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
             completionError(ErrorCode.dbError)
         }
     }
-    
     
     fileprivate func transmitOrder() {
         guard let order = order else {
@@ -542,7 +531,6 @@ class OrderHeaderViewController: DataGridViewController, ShipDateDelegate, XuniD
             [unowned self] (alert) -> Void in
             self.saveOrder()
         }
-        
         let deleteButton = UIAlertAction(title: "Delete", style: .destructive) {
             [unowned self] (alert) -> Void in
             self.cancelDeleteOrderWarning(title: "Delete Warning", message: "Delete Order?", handler: {[unowned self] (action) -> Void in self.deleteOrder()})

@@ -1,10 +1,3 @@
-//
-//  SampleOrderInventoryViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 2/13/17.
-//  Copyright © 2017 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 import XuniFlexGridKit
@@ -41,5 +34,4 @@ class SampleOrderInventoryViewController: OrderInventoryViewController {
             } as IXuniPredicate
         resetGrid()
     }
-    
 }

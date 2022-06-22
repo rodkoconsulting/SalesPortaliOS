@@ -1,10 +1,3 @@
-//
-//  AccountInfoViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 11/7/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 
@@ -20,7 +13,6 @@ class AccountInfoViewController: UIViewController {
     @IBOutlet weak var wineBuyer1TextView: UITextView!
     @IBOutlet weak var wineBuyer2TextView: UITextView!
     @IBOutlet weak var wineBuyer3TextView: UITextView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

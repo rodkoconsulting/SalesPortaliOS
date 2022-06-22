@@ -1,19 +1,9 @@
-//
-//  OrderInventory.swift
-//  SalesPortal
-//
-//  Created by administrator on 6/7/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 
 protocol OrderInventoryDelegate: class {
     func updateOrderPricing(mixDesc: String, quantityDelta: Double)
 }
-
-
-
 
 class AccountOrderInventory: OrderInventory {
     

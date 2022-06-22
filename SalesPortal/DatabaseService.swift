@@ -1,10 +1,4 @@
-//
-//  DatabaseService.swift
-//  InventoryPortal
-//
-//  Created by administrator on 4/18/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
+
 
 import Foundation
 
@@ -98,8 +92,6 @@ struct DatabaseService: DatabaseServiceType {
                     syncReset(dB)
                     throw ErrorCode.dbError
                 }
-                //sqlInsert = "\(sqlInsert)\(dbInsert),"
-                //sqlInsert = sqlInsert + dbInsert + ","
                 sqlInsert.append(dbInsert)
                 sqlInsert.append(",")
             }

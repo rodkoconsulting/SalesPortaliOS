@@ -1,10 +1,4 @@
-//
-//  GridFilter.swift
-//  InventoryPortal
-//
-//  Created by administrator on 11/20/15.
-//  Copyright © 2015 Polaner Selections. All rights reserved.
-//
+
 
 import Foundation
 
@@ -221,5 +215,4 @@ class ColumnFilters : NSObject {
         }
         return filterResults
     }
-
 }

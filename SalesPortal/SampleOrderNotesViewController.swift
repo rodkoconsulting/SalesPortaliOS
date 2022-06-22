@@ -1,10 +1,3 @@
-//
-//  OrderNotesViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 6/14/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 import XuniInputKit

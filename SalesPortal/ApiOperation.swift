@@ -44,12 +44,6 @@ class ApiOperation : NSObject, URLSessionDelegate {
                 completion(false, ErrorCode.serverError)
                 return
             }
-//            guard let jsonDictionary = (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves)) as? [String: AnyObject],
-//                let _ = jsonDictionary["success"] as? Bool else {
-//                    completion(false, ErrorCode.serverError)
-//                    return
-//            }
-//            completion(true, nil)
             switch(httpResponse.statusCode){
             case 200:
                 completion(true, nil)

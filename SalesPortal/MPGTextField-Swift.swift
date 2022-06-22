@@ -1,10 +1,3 @@
-//
-//  MPGTextField-Swift.swift
-//  MPGTextField-Swift
-//
-//  Created by Gaurav Wadhwani on 08/06/14.
-//  Copyright (c) 2014 Mappgic. All rights reserved.
-//
 
 import UIKit
 
@@ -26,13 +19,10 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
     @IBInspectable var popoverSize : CGRect = CGRect.null
     @IBInspectable var seperatorColor : UIColor = UIColor(white: 0.95, alpha: 1.0)
 
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.delegate = self
     }
-    
-    
     
     required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
@@ -46,7 +36,6 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
             }
         }
     }
-    
     
     override func layoutSubviews(){
         if self.delegate == nil {
@@ -231,7 +220,5 @@ class MPGTextField_Swift: UISearchBar, UISearchBarDelegate, UITableViewDelegate,
             }
             mDelegate?.textFieldDidEndEditing?(self, isIndex: isIndex )
         }
-
     }
-
 }

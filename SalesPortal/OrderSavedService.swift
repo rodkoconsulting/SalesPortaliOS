@@ -1,16 +1,5 @@
-//
-//  MoboListService.swift
-//  SalesPortal
-//
-//  Created by administrator on 7/11/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import Foundation
-
-
-
-
 
 typealias DetailDictType = [String : (bottles: Int, comment: String?)]
 typealias MoboDictType = [String : (list: String, bottles: Int)]
@@ -237,13 +226,4 @@ struct OrderSavedService<T: isOrderType> {
             throw ErrorCode.dbError
         }
     }
-    
-    
-    
-   
-    
-    
-    
-
-    
 }

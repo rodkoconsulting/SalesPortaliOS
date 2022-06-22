@@ -1,5 +1,4 @@
 
-
 import Foundation
 
 enum SampleListFilter: String {
@@ -10,7 +9,6 @@ enum SampleListFilter: String {
     
     static let rawValues = [Current.rawValue, Mtd.rawValue, Ytd.rawValue, oneYear.rawValue]
 }
-
 
 extension SampleListFilter {
     
@@ -39,7 +37,6 @@ class SampleHeader: SyncRows {
     let rep: String?
     let shipTo: String?
     let isPosted: Bool?
-    
     
     required init(dict: [String: Any]?) {
         orderNo = dict?["OrderNo"] as? String
@@ -179,7 +176,6 @@ class SampleItemsInactive: SyncRows {
         region = dict?["Region"] as? String
         appellation = dict?["App"] as? String
     }
-
     
     lazy var getDbDelete : String? = {
         [unowned self] in
@@ -207,9 +203,7 @@ class SampleItemsInactive: SyncRows {
         }
         return "('" + itemCode + "', '" + description + "', '" + brand + "', '" + masterVendor + "', '" + vintage + "', '" + uom + "', '" + size + "', '" + damagedNotes + "', '" + focus + "', '" + country + "', '" + region + "', '" + appellation + "')"
         }()
-
 }
-
 
 struct SampleListSync {
     let sampleHeaderSync: Sync<SampleHeader>
@@ -247,8 +241,6 @@ class SampleList : NSObject {
     let masterVendor: String?
     let country: String?
     let appellation: String?
-
-    
     
     lazy var quantityMas : Double = {
         [unowned self] in

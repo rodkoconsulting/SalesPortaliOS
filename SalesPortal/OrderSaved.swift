@@ -32,6 +32,4 @@ class OrderSavedList : NSObject {
         let orderType = OrderType(rawValue: self.orderTypeRaw) ?? OrderType.Standard
         return orderType.orderText
     }()
-
-    
 }

@@ -1,10 +1,3 @@
-//
-//  moboList.swift
-//  SalesPortal
-//
-//  Created by administrator on 7/13/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import Foundation
 
@@ -147,5 +140,4 @@ class MoboList :  OrderList {
             return false;
         }
     }
-
 }

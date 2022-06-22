@@ -4,7 +4,6 @@ import MessageUI
 import XuniInputKit
 
 class SampleListViewController: DataGridViewController, XuniDropDownDelegate, XuniComboBoxDelegate {
-    
 
     @IBOutlet weak var sampleFilterComboBox: ComboBox!
     
@@ -266,9 +265,5 @@ class SampleListViewController: DataGridViewController, XuniDropDownDelegate, Xu
             orderTabBarController.order = SampleOrder()
             orderTabBarController.modalPresentationStyle = .fullScreen
         }
-
     }
-
-    
-    
 }

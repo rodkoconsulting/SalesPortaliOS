@@ -1,10 +1,3 @@
-//
-//  BoolFiltersTableViewCell.swift
-//  InventoryPortal
-//
-//  Created by administrator on 12/16/15.
-//  Copyright © 2015 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 import XuniInputKit
@@ -22,5 +15,4 @@ class BoolFiltersTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
 }

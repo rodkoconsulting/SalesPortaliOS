@@ -1,10 +1,3 @@
-//
-//  ShipDateViewController.swift
-//  SalesPortal
-//
-//  Created by administrator on 6/6/16.
-//  Copyright © 2016 Polaner Selections. All rights reserved.
-//
 
 import UIKit
 import XuniCalendarKit
@@ -51,5 +44,4 @@ class FilterDateViewController: UIViewController, XuniCalendarDelegate {
         date = calendar.selectedDate
         updateDateLabel()
     }
-    
 }
