@@ -185,9 +185,24 @@ class AccountsViewController: DataGridViewController {
         SwiftSpinner.show("Syncing...", animated: false)
         let accountService = AccountService(module: moduleType, apiCredentials: credentials)
         let orderListService = OrderListService(module: Module.orderList, apiCredentials: credentials)
+        let holidayListService = HolidayListService(module: Module.holidayList, apiCredentials: credentials)
         do {
             let lastAccountSync = try accountService.queryAllLastSync()
             let lastOrderListSync = try orderListService.queryAllLastSync()
+            let lastHolidayListSync = try holidayListService.queryAllLastSync()
+            holidayListService.getApi(lastHolidayListSync) {
+                (holidayListSyncCompletion, error) in
+                guard let holidayListSync = holidayListSyncCompletion else  {
+                    self.completionError(error ?? ErrorCode.unknownError)
+                    return
+                }
+                do {
+                    try holidayListService.updateDb(holidayListSync)
+                } catch {
+                    self.completionError(ErrorCode.dbError)
+                }
+                holidayListService.updateLastSync()
+            }
             accountService.getApi(lastAccountSync) {
                 [unowned self](accountSyncCompletion, error) in
                 guard let accountSync = accountSyncCompletion else  {

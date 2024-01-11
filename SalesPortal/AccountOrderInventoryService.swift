@@ -22,7 +22,6 @@ class AccountOrderInventoryService: SyncService, OrderSyncServiceType {
         var inventorySearch = [[String : String]]()
         var poList: [InventoryPo] = []
         var poDict: [String:poDictType]
-        //let state = repState.characters.last!
         if dB.open() {
             let poQuery = "SELECT ITEM_CODE, ON_PO, PO_NO, PO_ETA, PO_DATE, PO_CMT FROM INV_PO ORDER BY ITEM_CODE, PO_ETA, PO_DATE"
             let poResults:FMResultSet? = dB.executeQuery(poQuery, withArgumentsIn: nil)

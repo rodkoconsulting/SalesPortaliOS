@@ -15,6 +15,7 @@ enum Module {
     case orderMobos
     case orderSaved
     case sampleList
+    case holidayList
 }
 
 extension Module {
@@ -44,6 +45,8 @@ extension Module {
             return "iOS Saved Orders Excel file"
         case .sampleList:
             return "iOS Sample List Excel file"
+        case .holidayList:
+            return ""
         }
     }
 
@@ -73,6 +76,8 @@ extension Module {
             return "Attached is the Excel Saved Orders data from the iOS Sales Portal."
         case .sampleList:
             return "Attached is the Excel Sample List data from the iOS Sales Portal."
+        case .holidayList:
+            return ""
         }
     }
     
@@ -102,6 +107,8 @@ extension Module {
             return "OrderSavedPortalExport.csv"
         case .sampleList:
             return "SampleListPortalExport.csv"
+        case .holidayList:
+            return ""
         }
     }
     
@@ -131,6 +138,8 @@ extension Module {
             return ColumnData.orderSavedColumns
         case .sampleList:
             return ColumnData.sampleListColumns
+        case .holidayList:
+            return [[:]]
         }
     }
     
@@ -160,6 +169,8 @@ extension Module {
             return "columnSettingsOrderSaved"
         case .sampleList:
             return "columnSettingsSampleList"
+        case .holidayList:
+            return ""
         }
     }
     
@@ -185,7 +196,8 @@ extension Module {
             return "orders/"
         case .sampleList:
             return "samples/"
-
+        case .holidayList:
+            return "holidays/"
         }
     }
     
@@ -211,6 +223,8 @@ extension Module {
             return "ORDERS"
         case .sampleList:
             return "SAMPLES"
+        case .holidayList:
+            return "HOLIDAYS"
         }
     }
     
@@ -222,6 +236,8 @@ extension Module {
             return ["itemCode", "customerNo"]
         case .accounts:
             return ["customerNo"]
+        case .holidayList:
+            return ["date"]
         }
     }
     
@@ -239,7 +255,8 @@ extension Module {
                 return ["H":"ORDER_HEADER", "D":"ORDER_DETAIL"]
             case .sampleList:
                 return ["H":"SAMPLE_LIST_HEADER", "D":"SAMPLE_LIST_DETAIL", "A":"SAMPLE_ADDRESSES", "I":"SAMPLE_ITEMS_INACTIVE"]
-
+            case .holidayList:
+                return ["HOLIDAYS_DATES":"HOLIDAYS_DATES"]
         }
     }
 }
@@ -260,8 +277,8 @@ struct Constants {
     static let noCoopText = "None"
     static let njCaseThreshold = 5
     static let ComboCellHeight = 45
-    static let dbVersionPrevious = 61
-    static let dbVersion = 62
+    static let dbVersionPrevious = 62
+    static let dbVersion = 71
     static let sampleOrderSegue = "showSampleOrderTabBarController"
     static let accountOrderSegue = "showAccountOrderTabBarController"
     static let masterAccountPrefix = "ZZ"

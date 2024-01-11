@@ -14,12 +14,14 @@
 		0779DE261F38FC84006BEEF2 /* LocksmithInternetAuthenticationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE201F38FC84006BEEF2 /* LocksmithInternetAuthenticationType.swift */; };
 		0779DE271F38FC84006BEEF2 /* LocksmithInternetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE211F38FC84006BEEF2 /* LocksmithInternetProtocol.swift */; };
 		0779DE281F38FC84006BEEF2 /* LocksmithSecurityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0779DE221F38FC84006BEEF2 /* LocksmithSecurityClass.swift */; };
+		272C0CBC2AE9A23A00AC8887 /* HolidayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272C0CBB2AE9A23A00AC8887 /* HolidayList.swift */; };
 		27881DB821CC38310053F522 /* XuniInputKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D424941D426221000BE982 /* XuniInputKit.framework */; };
 		278F659822720E51003115EC /* ComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278F659722720E51003115EC /* ComboBox.swift */; };
 		278F659A227217EC003115EC /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278F6599227217EC003115EC /* Calendar.swift */; };
 		27A9BB3027889252002E8E48 /* strip-architectures.sh in Resources */ = {isa = PBXBuildFile; fileRef = 27A9BB2C27889250002E8E48 /* strip-architectures.sh */; };
 		27A9BB3127889252002E8E48 /* upload-dsym.sh in Resources */ = {isa = PBXBuildFile; fileRef = 27A9BB2D27889251002E8E48 /* upload-dsym.sh */; };
 		27A9BB3227889252002E8E48 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A9BB2F27889252002E8E48 /* libTestFairy.a */; };
+		27D155972B2B69C700C4B96D /* HolidayListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D155962B2B69C700C4B96D /* HolidayListService.swift */; };
 		C300D4B81E490D5100183B32 /* SampleOrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300D4B71E490D5100183B32 /* SampleOrderHeaderViewController.swift */; };
 		C300D4BA1E494DE700183B32 /* AccountOrderHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300D4B91E494DE700183B32 /* AccountOrderHistoryViewController.swift */; };
 		C302B98A1D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C302B9891D01BC6B00B04DB6 /* AccountOrderHeaderViewController.swift */; };
@@ -130,6 +132,7 @@
 		0779DE201F38FC84006BEEF2 /* LocksmithInternetAuthenticationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithInternetAuthenticationType.swift; sourceTree = "<group>"; };
 		0779DE211F38FC84006BEEF2 /* LocksmithInternetProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithInternetProtocol.swift; sourceTree = "<group>"; };
 		0779DE221F38FC84006BEEF2 /* LocksmithSecurityClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithSecurityClass.swift; sourceTree = "<group>"; };
+		272C0CBB2AE9A23A00AC8887 /* HolidayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayList.swift; sourceTree = "<group>"; };
 		27881DB621CC38120053F522 /* Xuni */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Xuni; path = ../Xuni; sourceTree = "<group>"; };
 		278F659722720E51003115EC /* ComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComboBox.swift; sourceTree = "<group>"; };
 		278F6599227217EC003115EC /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
@@ -137,6 +140,7 @@
 		27A9BB2D27889251002E8E48 /* upload-dsym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-dsym.sh"; sourceTree = "<group>"; };
 		27A9BB2E27889251002E8E48 /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
 		27A9BB2F27889252002E8E48 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
+		27D155962B2B69C700C4B96D /* HolidayListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayListService.swift; sourceTree = "<group>"; };
 		27D5F3512388A4C900638DF0 /* SalesPortal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SalesPortal.entitlements; sourceTree = "<group>"; };
 		C300D4B71E490D5100183B32 /* SampleOrderHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleOrderHeaderViewController.swift; sourceTree = "<group>"; };
 		C300D4B91E494DE700183B32 /* AccountOrderHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountOrderHistoryViewController.swift; sourceTree = "<group>"; };
@@ -552,6 +556,8 @@
 				C344AF9C1E4A7C7000BB1E6D /* Order.swift */,
 				278F659722720E51003115EC /* ComboBox.swift */,
 				278F6599227217EC003115EC /* Calendar.swift */,
+				272C0CBB2AE9A23A00AC8887 /* HolidayList.swift */,
+				27D155962B2B69C700C4B96D /* HolidayListService.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -648,6 +654,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				272C0CBC2AE9A23A00AC8887 /* HolidayList.swift in Sources */,
 				C3D45EC71D0ECC1F0023E234 /* InitialViewController.swift in Sources */,
 				C3ED0AAE1CBD8DEC00B9520E /* ApiOperation.swift in Sources */,
 				C3EAC00F1CF8846A0054D031 /* MainTabBarController.swift in Sources */,
@@ -743,6 +750,7 @@
 				C3ED0AA21CBC27E200B9520E /* ErrorCode.swift in Sources */,
 				C35A73751D21A498000644F6 /* OrderHistoryViewController.swift in Sources */,
 				C33A58A41CBD90E300644ED3 /* Locksmith.swift in Sources */,
+				27D155972B2B69C700C4B96D /* HolidayListService.swift in Sources */,
 				278F659822720E51003115EC /* ComboBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -821,7 +829,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -877,7 +885,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
@@ -898,7 +906,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VQYK72F9MJ;
 				ENABLE_BITCODE = NO;
@@ -916,7 +924,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SalesPortal",
 				);
-				MARKETING_VERSION = 1.23;
+				MARKETING_VERSION = 1.25;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polanerselections.PolSalesPortal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -939,7 +947,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = VQYK72F9MJ;
 				ENABLE_BITCODE = NO;
@@ -957,7 +965,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SalesPortal",
 				);
-				MARKETING_VERSION = 1.23;
+				MARKETING_VERSION = 1.25;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polanerselections.PolSalesPortal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

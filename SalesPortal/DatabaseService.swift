@@ -19,6 +19,7 @@ enum DatabaseTable: String {
     case SampleListDetail = "SAMPLE_LIST_DETAIL"
     case SampleAddress = "SAMPLE_ADDRESSES"
     case SampleItemsInactive = "SAMPLE_ITEMS_INACTIVE"
+    case HolidayList = "HOLIDAYS_DATES"
 }
 
 

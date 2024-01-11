@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MJS-tV-g0k">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MJS-tV-g0k">
     <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -360,7 +360,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FiltersTableCell" id="gKA-Id-WGC" customClass="FiltersTableViewCell" customModule="SalesPortal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="664" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="664" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gKA-Id-WGC" id="SLl-A8-uea">
                                             <rect key="frame" x="0.0" y="0.0" width="664" height="44"/>
@@ -405,7 +405,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DateFiltersTableCell" id="Xlv-r6-FBs" customClass="DateFiltersTableViewCell" customModule="SalesPortal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="88.5" width="664" height="44"/>
+                                        <rect key="frame" x="0.0" y="94" width="664" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xlv-r6-FBs" id="ARe-cp-c1N">
                                             <rect key="frame" x="0.0" y="0.0" width="664" height="44"/>
@@ -452,7 +452,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BoolFiltersTableCell" id="nCP-7c-jp2" customClass="BoolFiltersTableViewCell" customModule="SalesPortal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="132.5" width="664" height="44"/>
+                                        <rect key="frame" x="0.0" y="138" width="664" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nCP-7c-jp2" id="BTe-pA-IB8">
                                             <rect key="frame" x="0.0" y="0.0" width="664" height="44"/>
@@ -558,7 +558,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ColumnsTableCell" id="9ll-24-Xgx" customClass="ColumnsTableViewCell" customModule="SalesPortal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="664" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="664" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ll-24-Xgx" id="MGL-aJ-8H8">
                                             <rect key="frame" x="0.0" y="0.0" width="664" height="44"/>
@@ -745,7 +745,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsTableCell" id="vEG-MS-TgA" customClass="InventorySettingsTableViewCell" customModule="SalesPortal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="664" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="664" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vEG-MS-TgA" id="rJh-6L-RFB">
                                             <rect key="frame" x="0.0" y="0.0" width="664" height="44"/>
@@ -1167,7 +1167,7 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwW-UZ-N3U">
-                                <rect key="frame" x="644" y="36" width="40" height="30"/>
+                                <rect key="frame" x="664" y="36" width="40" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Notes"/>
                                 <connections>
@@ -1446,7 +1446,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fN-ay-Vun">
-                                <rect key="frame" x="12" y="46" width="664" height="0.0"/>
+                                <rect key="frame" x="12" y="46" width="684" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1458,14 +1458,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="2Za-HT-2Ge" customClass="MPGTextField_Swift" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="8" width="624" height="30"/>
+                                <rect key="frame" x="20" y="8" width="644" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="73m-f9-Pns"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9al-GD-QaR">
-                                <rect key="frame" x="646" y="8" width="36" height="30"/>
+                                <rect key="frame" x="666" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clearFilter" destination="BOm-8X-6CS" eventType="touchUpInside" id="XdP-ML-336"/>
@@ -1744,7 +1744,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vn3-1L-l4i">
-                                <rect key="frame" x="12" y="46" width="664" height="0.0"/>
+                                <rect key="frame" x="12" y="46" width="684" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1756,14 +1756,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="kTt-O9-3Gq" customClass="MPGTextField_Swift" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="8" width="624" height="30"/>
+                                <rect key="frame" x="20" y="8" width="644" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ERX-pa-gMX"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQy-2u-HNm">
-                                <rect key="frame" x="646" y="8" width="36" height="30"/>
+                                <rect key="frame" x="666" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clearFilter" destination="5T6-BQ-E7z" eventType="touchUpInside" id="MYn-ZY-6M7"/>
@@ -1919,20 +1919,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xix-XJ-flT">
-                                <rect key="frame" x="12" y="46" width="664" height="10"/>
+                                <rect key="frame" x="12" y="46" width="684" height="10"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="DJq-yI-hVE" customClass="MPGTextField_Swift" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="8" width="624" height="30"/>
+                                <rect key="frame" x="20" y="8" width="644" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="YE3-D3-7WT"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dM-wt-L4T">
-                                <rect key="frame" x="646" y="8" width="36" height="30"/>
+                                <rect key="frame" x="666" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clearFilter" destination="R59-hB-s8F" eventType="touchUpInside" id="h8s-7k-rWj"/>
@@ -2636,7 +2636,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnJ-mJ-hjR">
-                                <rect key="frame" x="644" y="36" width="40" height="30"/>
+                                <rect key="frame" x="664" y="36" width="40" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Notes"/>
                                 <connections>
@@ -2898,7 +2898,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDk-Cn-5Nb">
-                                <rect key="frame" x="12" y="46" width="664" height="0.0"/>
+                                <rect key="frame" x="12" y="46" width="684" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2910,14 +2910,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="ZZX-MS-OMQ" customClass="MPGTextField_Swift" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="8" width="624" height="30"/>
+                                <rect key="frame" x="20" y="8" width="644" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3vv-Zg-817"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJp-fC-djM">
-                                <rect key="frame" x="646" y="8" width="36" height="30"/>
+                                <rect key="frame" x="666" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clearFilter" destination="l9F-vy-MHT" eventType="touchUpInside" id="Gf0-xZ-zna"/>
@@ -3078,7 +3078,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9a-L5-6s9">
-                                <rect key="frame" x="12" y="46" width="664" height="0.0"/>
+                                <rect key="frame" x="12" y="46" width="684" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -3090,14 +3090,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="g9h-zC-lEw" customClass="MPGTextField_Swift" customModule="SalesPortal" customModuleProvider="target">
-                                <rect key="frame" x="20" y="8" width="624" height="30"/>
+                                <rect key="frame" x="20" y="8" width="644" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="cxo-ex-trS"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLn-oK-I5M">
-                                <rect key="frame" x="646" y="8" width="36" height="30"/>
+                                <rect key="frame" x="666" y="8" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                                 <connections>
                                     <action selector="clearFilter" destination="4v9-H1-keZ" eventType="touchUpInside" id="fdQ-hI-jh0"/>
@@ -3240,51 +3240,13 @@
             <point key="canvasLocation" x="2710" y="-3292"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="7kB-vP-dR6">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-        <designable name="Cf4-ju-4JA">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-        <designable name="QwW-B2-Djf">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-        <designable name="Rab-3V-Iaq">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-        <designable name="Syr-bb-GCQ">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-        <designable name="U9g-Tf-YnU">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-        <designable name="WHe-D1-ekd">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-        <designable name="Y0K-HD-3uN">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-        <designable name="cIG-Q9-kgK">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-        <designable name="oOE-Rh-sMh">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-        <designable name="oYy-dX-q0d">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-        <designable name="qSX-4W-b6b">
-            <size key="intrinsicContentSize" width="640" height="863"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="51u-vf-aKD"/>
         <segue reference="6d6-nC-Exh"/>
-        <segue reference="gPt-uJ-Ar3"/>
-        <segue reference="vdV-1O-ZbQ"/>
-        <segue reference="MLr-4O-WGx"/>
-        <segue reference="0YZ-6o-49A"/>
+        <segue reference="VE3-RF-sBK"/>
+        <segue reference="L2H-40-xOX"/>
+        <segue reference="Lst-PL-vaL"/>
+        <segue reference="oPF-NX-9wd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Clear Filters" width="25" height="25"/>

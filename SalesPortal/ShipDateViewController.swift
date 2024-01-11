@@ -49,7 +49,6 @@ class ShipDateViewController: UIViewController, XuniCalendarDelegate {
             }
         }
         self.dismiss(animated: false, completion: nil)
-        //performSegue(withIdentifier: "unwindToOrderHeader", sender: self) 8/16/17
     }
     
     func updateDateLabel() {

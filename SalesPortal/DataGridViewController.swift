@@ -525,7 +525,7 @@ class DataGridViewController: UIViewController, FiltersDelegate, ColumnsDelegate
         }
     }
     
-    func formatItem(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange, in context: CGContext)  -> Bool {
+   func formatItem(_ sender: FlexGrid, panel: GridPanel, for range: GridCellRange, in context: CGContext)  -> Bool {
         guard panel.cellType == GridCellType.cell else {
             return false
         }

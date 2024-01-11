@@ -12,11 +12,31 @@ struct ApiService {
     
     init(apiString: String) {
         apiInit = apiString
-        apiBaseURL = URL(string: "https://api.polanerselections.com:8443/" + apiInit)
+        //apiBaseURL = URL(string: "https://api.polanerselections.com:8443/" + apiInit)
+        apiBaseURL = URL(string: "https://dev.api.polanerselections.com:8443/" + apiInit)
     }
     
     func getApiUser(_ credentialDict: CredentialDict, completion: @escaping (JSONDictionaryCompletion)) {
         let apiOperation = ApiOperation(url: apiBaseURL!, credentials: credentialDict)
+        apiOperation.downloadJSONFromURL {
+            (JSONDictionary, error) in
+            completion(JSONDictionary, error)
+        }
+    }
+    
+    func getApiHolidays(_ timeSyncDict: [String : String], credentialDict: CredentialDict, completion: @escaping (JSONDictionaryCompletion)) {
+        guard let holidayDateTime = timeSyncDict["HOLIDAYS_DATES"]
+            else {
+                completion(nil, ErrorCode.dbError)
+                return
+            }
+        let holidaySyncArray = holidayDateTime.split{$0 == " "}.map { String($0) }
+        let apiString = holidaySyncArray[0] + "/" + holidaySyncArray[1] + "/"
+        guard let apiURL = URL(string: apiString, relativeTo: apiBaseURL) else {
+            completion(nil, ErrorCode.unknownError)
+            return
+        }
+        let apiOperation = ApiOperation(url: apiURL, credentials: credentialDict)
         apiOperation.downloadJSONFromURL {
             (JSONDictionary, error) in
             completion(JSONDictionary, error)

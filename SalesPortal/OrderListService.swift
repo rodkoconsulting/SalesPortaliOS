@@ -80,6 +80,7 @@ class OrderListService: SyncService, SyncServiceType {
                     completion(nil, errorCode)
                     return
             }
+        
             completion(OrderListSync(orderHeaderDict: orderHeaderDict, orderDetailDict: orderDetailDict), nil)
         }
     }
