@@ -34,16 +34,30 @@ struct HolidayListSync {
     }
 }
 
-class HolidayList {
-    let dateString: String
+struct Holidays {
     
-    init(queryResult: FMResultSet) {
-        dateString = queryResult.string(forColumn: "date")
+    let storageName: String
+    
+    init() {
+        self.storageName = "Holidays"
     }
     
-    lazy var holidayDate : Date? = {
-        [unowned self] in
-        return self.dateString.getShipDate()
-    }()
+    func getHolidays() -> [Date]? {
+        guard let holidays = Locksmith.loadDataForUserAccount(userAccount: storageName) as? [String: [Date]] else {
+            return nil
+        }
+        return holidays[storageName]
+    }
+    
+    func saveHolidays(_ holidayList: NSMutableArray) {
+        let holidayArray = holidayList as NSArray as? [Date]
+        let dict = [storageName : holidayArray]
+        do {
+            try Locksmith.deleteDataForUserAccount(userAccount: storageName)
+        } catch {
+            
+        }
+        try! Locksmith.saveData(data: dict as [String : Any], forUserAccount: storageName)
+    }
 }
 

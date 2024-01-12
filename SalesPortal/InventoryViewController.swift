@@ -136,14 +136,18 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
         }
         gridData?.removeAllObjects()
         let inventoryService = InventoryService(module: moduleType, apiCredentials: credentials, date: dataSettings.date)
+        let holidayService = HolidayListService(module: Module.holidayList, apiCredentials: credentials)
         let inventoryQuery = inventoryService.queryDb()
+        let holidayQuery = holidayService.queryDb()
         gridData = inventoryQuery.gridData
         isManager = inventoryQuery.isManager
+        let holidayData = holidayQuery.gridData
         if let inventorySearchData = inventoryQuery.searchData {
             searchData = inventorySearchData
         }
         let invLastSync = inventoryService.queryLastSync
-        guard invLastSync != nil && gridData != nil else {
+        let holidayLastSync = holidayService.queryLastSync
+        guard invLastSync != nil && gridData != nil && holidayLastSync != nil && holidayData != nil else {
             guard !isSynched else {
                 completionError(ErrorCode.dbError)
                 return
@@ -160,6 +164,10 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
         flexGrid.itemsSource = gridData
         isFilterChanged = false
         filterGridColumns(searchBar.text!, classType: classType)
+        let holidays = Holidays()
+        if let holidayData = holidayData {
+            holidays.saveHolidays(holidayData)
+        }
         DispatchQueue.main.async {
             SwiftSpinner.hide(){
                 [unowned self] in
@@ -183,8 +191,10 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
         }
         SwiftSpinner.show("Syncing...", animated: false)
             let inventoryService = InventoryService(module: self.moduleType, apiCredentials: credentials, date: dataSettings.date)
+            let holidayListService = HolidayListService(module: Module.holidayList, apiCredentials: credentials)
             do {
                 let lastAllSync = try inventoryService.queryAllLastSync()
+                let lastHolidayListSync = try holidayListService.queryAllLastSync()
                 inventoryService.getApi(lastAllSync) {
                     [unowned self](inventorySyncCompletion, error) in
                     guard let inventorySync = inventorySyncCompletion else  {
@@ -197,6 +207,19 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
                         self.completionError(ErrorCode.dbError)
                     }
                     inventoryService.updateLastSync()
+                    holidayListService.getApi(lastHolidayListSync) {
+                        (holidayListSyncCompletion, error) in
+                        guard let holidayListSync = holidayListSyncCompletion else  {
+                            self.completionError(error ?? ErrorCode.unknownError)
+                            return
+                        }
+                        do {
+                            try holidayListService.updateDb(holidayListSync)
+                        } catch {
+                            self.completionError(ErrorCode.dbError)
+                        }
+                        holidayListService.updateLastSync()
+                    }
                     self.loadData(isSynched: true)
                 }
             } catch {

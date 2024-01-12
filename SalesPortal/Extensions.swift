@@ -402,12 +402,11 @@ extension Date
     }
     
     func isHoliday() -> Bool {
-        guard let path = Bundle.main.path(forResource: "Holidays", ofType: "plist"),
-            let holidayDict = NSDictionary(contentsOfFile: path),
-            let holidays = holidayDict["Holidays"] as? [Date] else {
+        let holidays = Holidays()
+        guard let holidayList = holidays.getHolidays() else {
                 return false
         }
-        for holiday in holidays {
+        for holiday in holidayList {
             if Calendar.current.isDate(self, inSameDayAs: holiday) {
                 return true
             }

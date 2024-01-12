@@ -12,8 +12,8 @@ class HolidayListService: SyncService, SyncServiceType {
             let sqlQuery = "SELECT DATE FROM HOLIDAYS_DATES"
             let results: FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             while results?.next() == true {
-                let holidayList = HolidayList(queryResult: results!)
-                holidayListArray.add(holidayList)
+                let holiday = results!.string(forColumn: "date").getShipDate()
+                holidayListArray.add(holiday as Any)
             }
             dB.close()
         }
