@@ -219,8 +219,8 @@ class InventoryViewController: DataGridViewController, InventoryDataSettingsDele
                             self.completionError(ErrorCode.dbError)
                         }
                         holidayListService.updateLastSync()
+                        self.loadData(isSynched: true)
                     }
-                    self.loadData(isSynched: true)
                 }
             } catch {
                 self.completionError(ErrorCode.dbError)
