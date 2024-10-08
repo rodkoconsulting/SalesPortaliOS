@@ -94,6 +94,8 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
     var searchData: [[String : String]] = [[String : String]]()
     var moboSearchData: [[String : String]] = [[String : String]]()
     var overSoldItems = ""
+    var brandList = ["Caterwaul", "Poppy", "Spoken West", "Time Place Wine Co."]
+    var brandDict: [String : Double]
     
     weak var errorDelegate: OrderTypeErrorDelegate?
     weak var orderDelegate: OrderDelegate?
@@ -145,10 +147,12 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         let shipToTuple = AccountOrderAddressService.getAddressList(account: account)
         self.shipToList = shipToTuple.list
         self.shipTo = shipToTuple.primary
+        self.brandDict = brandList.reduce(into: [String: Double]()) { $0[$1] = 0.0}
     }
     
-    func updateOrderPricing(mixDesc: String, quantityDelta: Double) {
+    func updateOrderPricing(mixDesc: String, brand: String, quantityDelta: Double) {
         orderTotal += quantityDelta
+        
         guard orderType != OrderType.BillHoldShip else {
             return
         }
@@ -157,6 +161,9 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         }
         switch priceLevel {
             case States.NJ:
+                if brandDict.keys.contains(brand) {
+                    brandDict[brand]! += quantityDelta
+                }
                 repriceNJ()
             case States.NY:
                 repriceMix(mixDesc: mixDesc, quantityDelta: quantityDelta)
@@ -213,20 +220,17 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         guard let orderInventory = self.orderInventory else {   
             return
         }
-        let orderTotal = Int(self.orderTotal.roundedCases())
         let coopTotal = orderType == .Standard ? (self.coopCases ?? 0) : 0;
         let caseThreshold = Constants.njCaseThreshold
+        let brandThreshold = Constants.njBrandThreshold
+        let orderTotal = min(Int(self.orderTotal.roundedCases()), caseThreshold)
         var totalPricing: Int;
         for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 {
             guard let line = line as? AccountOrderInventory else {
                 continue
             }
-            if (orderTotal > caseThreshold)
-            {
-                totalPricing = line.cases > caseThreshold ? line.cases : caseThreshold
-            } else {
-                totalPricing = orderTotal > coopTotal ? orderTotal : coopTotal
-            }
+            let brandTotal = min(Int(brandDict[line.brand]?.roundedCases() ?? 0), brandThreshold)
+            totalPricing = max(line.cases, brandTotal, orderTotal, coopTotal)
             setPrice(quantity: Double(totalPricing), item: line)
         }
     }
