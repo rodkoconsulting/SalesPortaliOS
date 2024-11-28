@@ -2,7 +2,7 @@
 import Foundation
 
 protocol OrderInventoryDelegate: class {
-    func updateOrderPricing(mixDesc: String, quantityDelta: Double)
+    func updateOrderPricing(mixDesc: String, brand: String, quantityDelta: Double)
 }
 
 class AccountOrderInventory: OrderInventory {
@@ -155,7 +155,7 @@ class AccountOrderInventory: OrderInventory {
             return
         }
         unitPrice = orderType != .BillHoldShip ? linePricing : 0
-        delegate?.updateOrderPricing(mixDesc: mixDescription, quantityDelta: quantityDelta)
+        delegate?.updateOrderPricing(mixDesc: mixDescription, brand: brand, quantityDelta: quantityDelta)
     }
     
     var linePricing: Double {
