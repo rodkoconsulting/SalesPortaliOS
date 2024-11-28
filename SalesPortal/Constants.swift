@@ -276,6 +276,7 @@ struct Constants {
     static let coopCaseList = [5,10]
     static let noCoopText = "None"
     static let njCaseThreshold = 5
+    static let njBrandThreshold = 10
     static let ComboCellHeight = 45
     static let dbVersionPrevious = 62
     static let dbVersion = 71
