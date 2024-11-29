@@ -7,6 +7,7 @@ class InventoryService: SyncService, SyncServiceType {
     let date: String
     
     init(module: Module, apiCredentials: [String : String], date: String) {
+        print("InventoryService::init date \(date)")
         self.date = date
         super.init(module: module, apiCredentials: apiCredentials)
     }

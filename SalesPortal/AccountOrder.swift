@@ -167,7 +167,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
                 }
                 repriceNJ()
             case States.NY:
-                repriceMix(mixDesc: mixDesc, quantityDelta: quantityDelta)
+                repriceNY(mixDesc: mixDesc, quantityDelta: quantityDelta)
             default:
                 return
         }
@@ -227,7 +227,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         }
     }
     
-    fileprivate func repriceMix(mixDesc: String, quantityDelta: Double) {
+    fileprivate func repriceNY(mixDesc: String, quantityDelta: Double) {
         print("repriceNY called with mixDesc: \(mixDesc), quantityDelta: \(quantityDelta)")
         guard let orderInventory = orderInventory else {
             return
