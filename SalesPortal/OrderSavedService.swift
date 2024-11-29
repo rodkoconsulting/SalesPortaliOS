@@ -13,12 +13,12 @@ struct OrderSavedService<T: isOrderType> {
     }
     
     fileprivate func insertOrderDetail(_ dB: FMDatabase) throws {
-        print("OrderSavedService::insertOrderDetail")
         var sqlInsertDetail = "INSERT INTO ORDER_DETAIL VALUES"
         guard let sqlInsertValues = order.getDbDetailInsert(orderNo: order.orderNo) else {
             return
         }
         sqlInsertDetail += sqlInsertValues
+        print("OrderSavedService::insertOrderDetail")
         let isInsertedDetail = dB.executeUpdate(sqlInsertDetail, withArgumentsIn: nil)
         guard isInsertedDetail else {
             throw ErrorCode.dbError
