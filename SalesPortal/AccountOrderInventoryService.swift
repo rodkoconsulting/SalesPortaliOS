@@ -24,7 +24,7 @@ class AccountOrderInventoryService: SyncService, OrderSyncServiceType {
         var poList: [InventoryPo] = []
         var poDict: [String:poDictType]
         if dB.open() {
-            print("AccountOrderInventoryService")
+            print("AccountOrderInventoryService::InventoryPo")
             let poQuery = "SELECT ITEM_CODE, ON_PO, PO_NO, PO_ETA, PO_DATE, PO_CMT FROM INV_PO ORDER BY ITEM_CODE, PO_ETA, PO_DATE"
             let poResults:FMResultSet? = dB.executeQuery(poQuery, withArgumentsIn: nil)
             while poResults?.next() == true {
@@ -35,6 +35,7 @@ class AccountOrderInventoryService: SyncService, OrderSyncServiceType {
         }
         poDict = self.poListToDict(poList)
         if dB.open() {
+            print("AccountOrderInventoryService::AccountOrderInventoryList")
             let sqlQuery = "WITH INVOICES AS (" +
                 "SELECT d.ITEM_CODE, h.INVOICE_DATE, h.INVOICE_NO, d.Price, SUM(d.QUANTITY) AS QUANTITY FROM ACCOUNTS_INV_HEAD h INNER JOIN ACCOUNTS_INV_DET d ON h.INVOICE_NO = d.INVOICE_NO and h.HEADER_SEQ_NO = d.HEADER_SEQ_NO WHERE d.Price > 0 and h.DIVISION_NO = '" + self.account.divisionNo + "' and h.CUSTOMER_NO = '" + self.account.customerNoRaw + "'" +
                 "GROUP BY h.INVOICE_DATE, d.ITEM_CODE " +
