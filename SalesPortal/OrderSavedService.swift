@@ -69,6 +69,7 @@ struct OrderSavedService<T: isOrderType> {
         guard let orderNo = order.orderNo else {
             throw ErrorCode.dbError
         }
+        print("OrderSavedService::deleteOrderHeader")
         let sqlDeleteHeader = "DELETE FROM ORDER_HEADER WHERE ORDER_NO=\(orderNo)"
         let isDeletedHeader = dB.executeUpdate(sqlDeleteHeader, withArgumentsIn: nil)
         guard isDeletedHeader else {
@@ -133,6 +134,7 @@ struct OrderSavedService<T: isOrderType> {
         let orderSavedArray = NSMutableArray()
         var orderSavedSearch = [[String : String]]()
         if dB.open() {
+            print("OrderSavedService::queryOrderSavedList")
             let sqlQuery =
                 "SELECT h.ORDER_NO, h.TYPE, h.SAVE_TIME, h.SHIP_DATE, h.TOTAL_QTY, h.TOTAL_PRICE, h.SHIP_TO, " +
                     "a.CUSTOMER_NAME " +
@@ -220,6 +222,7 @@ struct OrderSavedService<T: isOrderType> {
         defer {
             dB.close()
         }
+        print("OrderSavedService::OrderSavedService")
         let sqlDeleteHeader = "DELETE FROM ORDER_HEADER WHERE ORDER_NO=\(orderNo)"
         let isDeletedHeader = dB.executeUpdate(sqlDeleteHeader, withArgumentsIn: nil)
         guard isDeletedHeader else {

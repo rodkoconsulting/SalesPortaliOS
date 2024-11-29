@@ -27,6 +27,7 @@ class InventoryService: SyncService, SyncServiceType {
         var poList: [InventoryPo] = []
         var poDict: [String:poDictType]
         if dB.open() {
+            print("InventoryService::InventoryPo")
             let poQuery = "SELECT ITEM_CODE, ON_PO, PO_NO, PO_ETA, PO_DATE, PO_CMT FROM INV_PO ORDER BY ITEM_CODE, PO_ETA, PO_DATE"
             let poResults:FMResultSet? = dB.executeQuery(poQuery, withArgumentsIn: nil)
             while poResults?.next() == true {
@@ -37,6 +38,7 @@ class InventoryService: SyncService, SyncServiceType {
         }
         poDict = self.poListToDict(poList)
         if dB.open() {
+            print("InventoryService::Inventory")
             let sqlQuery = "SELECT q.ITEM_CODE, DATE, QTY_AVAIL, QTY_OH, ON_SO, ON_MO, ON_BO, DESC, BRAND, MASTER_VENDOR, VINTAGE, UOM, SIZE, DAMAGED_NOTES, CLOSURE, TYPE, VARIETAL, ORGANIC, BIODYNAMIC, FOCUS, COUNTRY, REGION, APPELLATION, RESTRICT_OFFSALE, RESTRICT_OFFSALE_NOTES, RESTRICT_PREMISE, RESTRICT_ALLOCATED, RESTRICT_APPROVAL, RESTRICT_MAX, RESTRICT_STATE, RESTRICT_SAMPLE, RESTRICT_BO, RESTRICT_MO, UPC, SCORE_WA, SCORE_WS, SCORE_IWC, SCORE_BH, SCORE_VM, SCORE_OTHER, PRICE_DESC, RECEIPT_DATE, REGEN, NAT, VEGAN, HVE FROM INV_QTY q INNER JOIN INV_DESC d ON q.ITEM_CODE = d.ITEM_CODE INNER JOIN INV_PRICE p ON p.ITEM_CODE = q.ITEM_CODE WHERE p.PRICE_LEVEL = '" + repState + "' AND p.DATE = (SELECT DATE FROM INV_PRICE AS p2 WHERE p2.ITEM_CODE = p.ITEM_CODE and p2.PRICE_LEVEL = p.PRICE_LEVEL AND p2.DATE <= '" + self.date + "' ORDER BY DATE DESC LIMIT 1) ORDER BY BRAND, DESC"
             let results:FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             while results?.next() == true {

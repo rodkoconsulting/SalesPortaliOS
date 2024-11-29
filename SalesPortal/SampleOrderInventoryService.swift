@@ -21,6 +21,7 @@ class SampleOrderInventoryService: SyncService, OrderSyncServiceType {
         var poList: [InventoryPo] = []
         var poDict: [String:poDictType]
         if dB.open() {
+            print("SampleOrderInventoryService")
             let poQuery = "SELECT ITEM_CODE, ON_PO, PO_NO, PO_ETA, PO_DATE, PO_CMT FROM INV_PO ORDER BY ITEM_CODE, PO_ETA, PO_DATE"
             let poResults:FMResultSet? = dB.executeQuery(poQuery, withArgumentsIn: nil)
             while poResults?.next() == true {

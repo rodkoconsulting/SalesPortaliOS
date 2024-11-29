@@ -89,6 +89,7 @@ class SyncService : SyncServiceBaseType {
         dB.traceExecution = true
         var lastSyncResult: String?
         if dB.open() {
+            print("SyncService::queryLastSync")
             let sqlQuery = "SELECT LAST_SYNC FROM LAST_SYNC WHERE table_name='" + self.module.moduleTable + "'"
             let results:FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             if results?.next() == true {
@@ -109,6 +110,7 @@ class SyncService : SyncServiceBaseType {
         var lastSyncs: [String : String] = [:]
         if dB.open() {
             for (name, table) in module.syncTable {
+                print("SyncService::queryAllLastSync")            
                 let qryLastSync = "SELECT last_sync FROM LAST_SYNC WHERE table_name = '" + table + "'"
                 let results:FMResultSet? = dB.executeQuery(qryLastSync, withArgumentsIn: nil)
                 if results?.next() == true {

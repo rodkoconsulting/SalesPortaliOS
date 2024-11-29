@@ -15,6 +15,7 @@ class AccountService: SyncService, SyncServiceType {
         let accountList = NSMutableArray()
         var accountSearch = [[String : String]]()
         if dB.open() {
+            print("AccountService::AccountList")
             let sqlQuery = "SELECT DIVISION_NO, CUSTOMER_NO, CUSTOMER_NAME, SHIP_DAYS, PRICE_LEVEL, COOP_LIST, STATUS, BUYER1, BUYER2, BUYER3, BUYER1EMAIL, BUYER2EMAIL, BUYER3EMAIL, BUYER1PHONE, BUYER2PHONE, BUYER3PHONE, AFFIL, ADDR1, ADDR2, CITY, STATE, ZIP, REP, REGION, SHIP_TO, SHIP_VIA FROM ACCOUNTS_LIST ORDER BY CUSTOMER_NAME"
             let results: FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             while results?.next() == true {

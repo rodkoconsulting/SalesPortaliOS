@@ -10,6 +10,7 @@ class HolidayListService: SyncService, SyncServiceType {
         dB.traceExecution = true
         let holidayListArray = NSMutableArray()
         if dB.open() {
+            print("HolidayListService")
             let sqlQuery = "SELECT DATE FROM HOLIDAYS_DATES"
             let results: FMResultSet? = dB.executeQuery(sqlQuery, withArgumentsIn: nil)
             while results?.next() == true {

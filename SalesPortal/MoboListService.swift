@@ -17,6 +17,7 @@ class OrderMoboService: SyncService, SyncServiceType {
         let moboListArray = NSMutableArray()
         var moboListSearch = [[String : String]]()
         if dB.open() {
+            print("OrderMoboService::MoboList")
             let sqlQuery =
                 "SELECT h.ORDER_NO, h.ORDER_DATE, h.SHIP_DATE, h.STATUS, h.HOLD, h.COOP, h.COMMENT, " +
                     "d.ITEM_CODE, d.QTY, d.PRICE, d.TOTAL, " +
