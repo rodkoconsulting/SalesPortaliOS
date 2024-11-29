@@ -13,6 +13,7 @@ struct OrderSavedService<T: isOrderType> {
     }
     
     fileprivate func insertOrderDetail(_ dB: FMDatabase) throws {
+        print("OrderSavedService::insertOrderDetail")
         var sqlInsertDetail = "INSERT INTO ORDER_DETAIL VALUES"
         guard let sqlInsertValues = order.getDbDetailInsert(orderNo: order.orderNo) else {
             return
@@ -28,6 +29,7 @@ struct OrderSavedService<T: isOrderType> {
         guard let orderNo = order.orderNo else {
             throw ErrorCode.dbError
         }
+        print("OrderSavedService::deleteOrderDetail")
         let sqlDeleteDetail = "DELETE FROM ORDER_DETAIL WHERE ORDER_NO=\(orderNo)"
         let isDeletedDetail = dB.executeUpdate(sqlDeleteDetail, withArgumentsIn: nil)
         guard isDeletedDetail else {
@@ -36,6 +38,7 @@ struct OrderSavedService<T: isOrderType> {
     }
     
     fileprivate func insertOrderHeader(_ dB: FMDatabase) throws {
+        print("OrderSavedService::insertOrderHeader")
         var sqlInsertHeader = "INSERT INTO ORDER_HEADER "
         sqlInsertHeader += order.getDbHeaderInsert
         let isInsertedHeader = dB.executeUpdate(sqlInsertHeader, withArgumentsIn: nil)
@@ -54,6 +57,7 @@ struct OrderSavedService<T: isOrderType> {
     }
     
     fileprivate func updateOrderHeader(_ dB: FMDatabase) throws {
+        print("OrderSavedService::updateOrderHeader")
         var sqlUpdateHeader = "UPDATE ORDER_HEADER SET "
         guard let sqlUpdateValues = order.getDbHeaderUpdate() else {
             throw ErrorCode.dbError
