@@ -68,6 +68,7 @@ class SyncService : SyncServiceBaseType {
     init(module: Module, apiCredentials: [String : String]) {
         self.module = module
         self.apiCredentials = apiCredentials
+        print("DB PATH: \(Constants.databasePath)")
     }
     
     func updateLastSync() {
