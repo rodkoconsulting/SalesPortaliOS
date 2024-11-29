@@ -13,6 +13,7 @@ class OrderMoboService: SyncService, SyncServiceType {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return (nil, nil, false)
         }
+        dB.traceExecution = true
         let moboListArray = NSMutableArray()
         var moboListSearch = [[String : String]]()
         if dB.open() {

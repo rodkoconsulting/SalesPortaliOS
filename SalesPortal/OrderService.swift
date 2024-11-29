@@ -14,6 +14,7 @@ struct OrderService {
         self.order = order
         self.apiCredentials = apiCredentials
         self.dB = FMDatabase(path: Constants.databasePath as String)
+        self.dB.traceExecution = true
     }
     
     
@@ -78,6 +79,7 @@ struct OrderService {
         guard let dB = FMDatabase(path: Constants.databasePath as String) else {
             return
         }
+        dB.traceExecution = true
         guard dB.open() else {
             return
         }
@@ -89,6 +91,7 @@ struct OrderService {
         guard let dB = FMDatabase(path: Constants.databasePath as String) else {
             return
         }
+        dB.traceExecution = true
         guard dB.open() else {
             return
         }

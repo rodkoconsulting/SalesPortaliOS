@@ -7,6 +7,7 @@ class OrderListService: SyncService, SyncServiceType {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return (nil, nil, false)
         }
+        dB.traceExecution = true
         let orderListArray = NSMutableArray()
         var orderListSearch = [[String : String]]()
         var isMultipleReps = false

@@ -217,6 +217,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
     }
 
     fileprivate func repriceNJ() {
+        print("repriceNJ")
         guard let orderInventory = self.orderInventory else {   
             return
         }
@@ -266,6 +267,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
     }
     
     fileprivate func repriceAll(_ total: Double) {
+        print("repriceAll")
         guard let orderInventory = orderInventory else {
             return
         }
@@ -275,6 +277,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
     }
     
     fileprivate func repriceMix(mixDesc: String, quantityDelta: Double) {
+        print("repriceMix called with mixDesc: \(mixDesc), quantityDelta: \(quantityDelta)")
         guard let orderInventory = orderInventory else {
             return
         }

@@ -14,6 +14,7 @@ class SampleOrderInventoryService: SyncService, OrderSyncServiceType {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return (nil, nil, false)
         }
+        dB.traceExecution = true
         let state = apiCredentials["state"] ?? "Y"
         let sampleOrderInventoryList = NSMutableArray()
         var inventorySearch = [[String : String]]()

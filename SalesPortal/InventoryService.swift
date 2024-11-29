@@ -21,6 +21,7 @@ class InventoryService: SyncService, SyncServiceType {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return (nil, nil, false)
         }
+        dB.traceExecution = true
         let inventoryList = NSMutableArray()
         var inventorySearch = [[String : String]]()
         var poList: [InventoryPo] = []

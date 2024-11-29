@@ -66,6 +66,7 @@ struct DatabaseService: DatabaseServiceType {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return
         }
+        dB.traceExecution = true
         guard dB.open() else {
             throw ErrorCode.dbError
         }

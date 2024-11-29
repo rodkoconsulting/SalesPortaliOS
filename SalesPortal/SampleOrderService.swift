@@ -13,6 +13,7 @@ struct SampleOrderService {
         self.sampleOrder = sampleOrder
         self.apiCredentials = apiCredentials
         self.dB = FMDatabase(path: Constants.databasePath as String)
+        self.dB.traceExecution = true
     }
     
     func sendOrder(_ completion: @escaping (JSONPostCompletion) ){
@@ -49,6 +50,7 @@ struct SampleOrderService {
         guard let dB = FMDatabase(path: Constants.databasePath as String) else {
             return
         }
+        dB.traceExecution = true
         guard dB.open() else {
             return
         }

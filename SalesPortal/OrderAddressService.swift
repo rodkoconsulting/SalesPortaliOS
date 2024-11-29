@@ -7,6 +7,7 @@ class SampleOrderAddressService {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return nil
         }
+        dB.traceExecution = true
         var addressList = [SampleOrderAddress]()
         if dB.open() {
             let sqlQuery =
@@ -27,6 +28,7 @@ class AccountOrderAddressService {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return (nil, nil)
         }
+        dB.traceExecution = true
         var addressList = [AccountOrderAddress]()
         var primaryAddress : AccountOrderAddress?
         if dB.open() {

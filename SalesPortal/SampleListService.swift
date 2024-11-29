@@ -7,6 +7,7 @@ class SampleListService: SyncService, SyncServiceType {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return (nil, nil, false)
         }
+        dB.traceExecution = true
         let sampleListArray = NSMutableArray()
         var sampleListSearch = [[String : String]]()
         var isMultipleReps = false

@@ -80,6 +80,7 @@ struct OrderSavedService<T: isOrderType> {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             throw ErrorCode.dbErrorSave
         }
+        dB.traceExecution = true
         guard dB.open() else {
             throw ErrorCode.dbErrorSave
         }
@@ -109,6 +110,7 @@ struct OrderSavedService<T: isOrderType> {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             throw ErrorCode.dbErrorSave
         }
+        dB.traceExecution = true
         guard dB.open() else {
             throw ErrorCode.dbError
         }
@@ -127,6 +129,7 @@ struct OrderSavedService<T: isOrderType> {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return (nil, nil)
         }
+        dB.traceExecution = true
         let orderSavedArray = NSMutableArray()
         var orderSavedSearch = [[String : String]]()
         if dB.open() {
@@ -157,6 +160,7 @@ struct OrderSavedService<T: isOrderType> {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return nil
         }
+        dB.traceExecution = true
         var savedDetailDict: DetailDictType = [:]
         var savedMoboDict: MoboDictType = [:]
         var order: isOrderType?
@@ -209,6 +213,7 @@ struct OrderSavedService<T: isOrderType> {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             throw ErrorCode.dbError
         }
+        dB.traceExecution = true
         guard dB.open() else {
             throw ErrorCode.dbError
         }

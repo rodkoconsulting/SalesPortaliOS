@@ -9,6 +9,7 @@ struct DbOperation {
         guard let dB = FMDatabase(path: Constants.databasePath as String) else {
             throw ErrorCode.dbError
         }
+        dB.traceExecution = true
         guard dB.open() else {
             throw ErrorCode.dbError
         }
@@ -36,6 +37,7 @@ struct DbOperation {
         guard let dB = FMDatabase(path: Constants.databasePath as String) else {
             return nil
         }
+        dB.traceExecution = true
         guard dB.open() else {
             throw ErrorCode.dbError
         }

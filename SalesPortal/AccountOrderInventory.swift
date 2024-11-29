@@ -69,7 +69,9 @@ class AccountOrderInventory: OrderInventory {
     var unitPrice: Double = 0.0
     
     var isPriceOverride: Bool {
-        return isBottlePricing ? unitPrice != priceBottle : unitPrice != linePricing
+        let override = isBottlePricing ? unitPrice != priceBottle : unitPrice != linePricing
+        print("isPriceOverride calculated: \(override)")
+        return override
     }
     
     override func isOverSold(_ bottleTotal: Int) -> Bool  {
@@ -95,6 +97,7 @@ class AccountOrderInventory: OrderInventory {
     }
     
     var shipAvailable: (cases: Int, bottles: Int) {
+        print("Calculating shipAvailable.")
         guard let orderType = orderType else {
             return (0, 0)
         }
@@ -155,6 +158,7 @@ class AccountOrderInventory: OrderInventory {
             return
         }
         unitPrice = orderType != .BillHoldShip ? linePricing : 0
+        print("Updating line pricing with unitPrice: \(unitPrice) \(quantityDelta)")
         delegate?.updateOrderPricing(mixDesc: mixDescription, brand: brand, quantityDelta: quantityDelta)
     }
     
@@ -249,7 +253,9 @@ class AccountOrderInventory: OrderInventory {
     }
     
     override func getDbDetailInsert(_ orderNo: Int) -> String {
+        print("getDbDetailInsert: orderNo \(orderNo)")
         let isPriceOverrideInt = isPriceOverride ? 1 : 0
-        return "(\(orderNo), '" + itemCode + "', \(bottleTotal), \(unitPrice), '" + moboString + "', \(moboTotal.quantity), \(isPriceOverrideInt), '')"
+        print("getDbDetailInsert: isPriceOverride \(isPriceOverrideInt)")
+        return "(\(orderNo), '" + itemCode + "', \(bottleTotal), \(unitPrice), '" + moboString + "', \(moboTotal.quantity), \(isPriceOverride), '')"
     }
 }

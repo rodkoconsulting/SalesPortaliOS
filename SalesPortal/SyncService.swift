@@ -74,6 +74,7 @@ class SyncService : SyncServiceBaseType {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return
         }
+        dB.traceExecution = true
         if dB.open() {
             let sqlInsert = "UPDATE LAST_SYNC SET last_sync='" + Date().getDateTimeString() + "' WHERE table_name='" + module.moduleTable + "'"
             dB.executeUpdate(sqlInsert, withArgumentsIn: nil)
@@ -85,6 +86,7 @@ class SyncService : SyncServiceBaseType {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             return nil
         }
+        dB.traceExecution = true
         var lastSyncResult: String?
         if dB.open() {
             let sqlQuery = "SELECT LAST_SYNC FROM LAST_SYNC WHERE table_name='" + self.module.moduleTable + "'"
@@ -103,6 +105,7 @@ class SyncService : SyncServiceBaseType {
         guard let dB = FMDatabase(path: Constants.databasePath) else {
             throw ErrorCode.dbError
         }
+        dB.traceExecution = true
         var lastSyncs: [String : String] = [:]
         if dB.open() {
             for (name, table) in module.syncTable {
