@@ -158,7 +158,7 @@ class AccountOrderInventory: OrderInventory {
             return
         }
         unitPrice = orderType != .BillHoldShip ? linePricing : 0
-        print("Updating line pricing with unitPrice:\(unitPrice) quantityDelta\(quantityDelta)")
+        print("Updating line pricing with unitPrice:\(unitPrice) quantityDelta:\(quantityDelta)")
         delegate?.updateOrderPricing(mixDesc: mixDescription, brand: brand, quantityDelta: quantityDelta)
     }
     

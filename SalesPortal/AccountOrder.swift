@@ -159,6 +159,7 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         guard let priceLevel = account?.priceLevel else {
             return
         }
+        
         switch priceLevel {
             case States.NJ:
                 if brandDict.keys.contains(brand) {
@@ -216,6 +217,33 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         }
     }
 
+    fileprivate func repriceAll(_ total: Double) {
+        print("repriceAll")
+        guard let orderInventory = orderInventory else {
+            return
+        }
+        for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 {
+            setPrice(quantity: total, item: line as AnyObject)
+        }
+    }
+    
+    fileprivate func repriceMix(mixDesc: String, quantityDelta: Double) {
+        print("repriceNY called with mixDesc: \(mixDesc), quantityDelta: \(quantityDelta)")
+        guard let orderInventory = orderInventory else {
+            return
+        }
+        guard let mixItem = mixPriceDict[mixDesc] else {
+            mixPriceDict[mixDesc] = quantityDelta
+            return
+        }
+        let total = mixItem + quantityDelta
+        mixPriceDict[mixDesc] = total
+        let totalRounded = total.roundedCases()
+        for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 && ((line as? OrderInventory)?.mixDescription ?? "") == mixDesc {
+            setPrice(quantity: totalRounded, item: line as AnyObject)
+        }
+    }
+
     fileprivate func repriceNJ() {
         print("repriceNJ")
         guard let orderInventory = self.orderInventory else {   
@@ -266,32 +294,6 @@ class AccountOrder: isOrderType, OrderInventoryDelegate, MoboListDelegate {
         return "\(deviceId)\(Constants.dbVersion)\(orderNo)"
     }
     
-    fileprivate func repriceAll(_ total: Double) {
-        print("repriceAll")
-        guard let orderInventory = orderInventory else {
-            return
-        }
-        for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 {
-            setPrice(quantity: total, item: line as AnyObject)
-        }
-    }
-    
-    fileprivate func repriceMix(mixDesc: String, quantityDelta: Double) {
-        print("repriceMix called with mixDesc: \(mixDesc), quantityDelta: \(quantityDelta)")
-        guard let orderInventory = orderInventory else {
-            return
-        }
-        guard let mixItem = mixPriceDict[mixDesc] else {
-            mixPriceDict[mixDesc] = quantityDelta
-            return
-        }
-        let total = mixItem + quantityDelta
-        mixPriceDict[mixDesc] = total
-        let totalRounded = total.roundedCases()
-        for line in orderInventory where ((line as? AccountOrderInventory)?.bottleTotal ?? 0 ) > 0 && ((line as? OrderInventory)?.mixDescription ?? "") == mixDesc {
-            setPrice(quantity: totalRounded, item: line as AnyObject)
-        }
-    }
     
     func saveCurrentLines() {
         guard let orderInventory = orderInventory else {
