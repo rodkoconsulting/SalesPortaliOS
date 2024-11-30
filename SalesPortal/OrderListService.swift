@@ -12,6 +12,7 @@ class OrderListService: SyncService, SyncServiceType {
         var orderListSearch = [[String : String]]()
         var isMultipleReps = false
         var previousRep : String = ""
+        print("OrderListService:OrderList")
         if dB.open() {
             let sqlQuery =
             "SELECT hoi.ORDER_NO, a.CUSTOMER_NAME, hoi.CUSTOMER_NO, a.AFFIL, hoi.ORDER_DATE, hoi.SHIP_DATE, hoi.ARR_DATE, hoi.PO_ETA, hoi.STATUS, hoi.HOLD, hoi.COOP, " +
